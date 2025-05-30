@@ -10,6 +10,8 @@ import json
 import re
 
 CACHE_DEST = "file-link-cache.json"
+# match abc.abc, not abc.def
+TYPE_CONSTRUCTOR_HEURISTIC = re.compile(r"([^.]+)\.\1$")
 
 class ReferenceContainer:
     def applicable_links(self, start_line, end_line):
@@ -81,6 +83,22 @@ try:
         return "#" + ".".join(reversed(names))
 
     def find_doc_link(node):
+        if node.name() in ("localSlice", "rows", "colsAndVals"):
+            # Generally, we don't rule out nodoc'ed things because they have
+            # doc'ed overloads. However, some things really are nodoc'ed and have
+            # no links.
+            return None
+
+        if node.name() == "_dom":
+            # ._dom calls -- written as .domain in user code -- are not
+            # listed in the documentation
+            return None
+
+        if node.name() == "Block":
+            # in the standard modules, Block is in blockDist but fixDistDocs
+            # removes it, so skip it.
+            return None
+
         file = pathlib.Path(node.location().path())
         root = file
         internal = False
@@ -102,20 +120,25 @@ try:
             relpath = str(file.parent.relative_to(root.parent)) + "/"
 
 
+        anchor = build_anchor(node)
+        if TYPE_CONSTRUCTOR_HEURISTIC.search(anchor):
+            # type constructors are not documentedby chpldoc.
+            return None
+
         module = parent_module(node)
         if module.name() == "String" and internal:
-            url = ROOT_URL + "language/spec/strings.html" + build_anchor(node)
+            url = ROOT_URL + "language/spec/strings.html" + anchor
             return url.replace("_string", "string")
         if module.name() == "ChapelRange" and internal:
-            url = ROOT_URL + "language/spec/ranges.html" + build_anchor(node)
+            url = ROOT_URL + "language/spec/ranges.html" + anchor
             return url.replace("_range", "range")
         if module.name() == "ChapelArray" and internal:
-            url = ROOT_URL + "language/spec/arrays.html" + build_anchor(node)
+            url = ROOT_URL + "language/spec/arrays.html" + anchor
             return url.replace("_array", "array").replace("array.", "")
         elif internal:
             return None
 
-        return ROOT_URL + relpath + build_url(module) + build_anchor(node)
+        return ROOT_URL + relpath + build_url(module) + anchor
 
     ### End copied from chapel-py
 
@@ -173,11 +196,6 @@ try:
                 res = _resolve_call(call)
                 if res is None: continue
                 sig, fn = res
-
-                # callable var invocations are confusing when they link to the 'this' method,
-                # skip them.
-                if fn.name() == "this": continue
-
                 self.references.append((_extract_location(call), fn))
                 self.get_inst(sig, fn)
 
@@ -232,6 +250,15 @@ try:
             # out things without links.
             converted_references = []
             for (location, node) in self.references:
+                if not isinstance(node, NamedDecl):
+                    continue
+
+                if node.name() == "this" and isinstance(node, Function):
+                    # invoking a variable as a callable means calling its
+                    # 'this' method, but that looks confusing when linked.
+                    # so, skip it
+                    continue
+
                 found_link = find_doc_link(node)
                 if found_link is None:
                     continue
