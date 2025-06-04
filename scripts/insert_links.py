@@ -122,7 +122,7 @@ try:
 
         anchor = build_anchor(node)
         if TYPE_CONSTRUCTOR_HEURISTIC.search(anchor):
-            # type constructors are not documentedby chpldoc.
+            # type constructors are not documented by chpldoc.
             return None
 
         module = parent_module(node)
