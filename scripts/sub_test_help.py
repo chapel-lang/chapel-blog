@@ -12,7 +12,7 @@ def get_current_chpl_version(compiler):
         print("Please set 'CHPL_HOME' and try again")
         exit(1)
     version_stdout = subprocess.run([compiler, "--version"], capture_output=True, text=True)
-    return version.parse(re.search("chpl version (\d+\.\d+\.\d+)", version_stdout.stdout).group(1))
+    return version.parse(re.search(r"chpl version (\d+\.\d+\.\d+)", version_stdout.stdout).group(1))
 
 # return a list of paths to all the '.chpl' files in a directory
 def chpl_files_in_dir(dir):
@@ -26,7 +26,7 @@ def chpl_files_in_dir(dir):
 # determine if a file has a 'chplVersion: X.X.X' line matching 'chpl_version'
 def version_matches(file_path, chpl_version):
     with open(file_path) as f:
-        if (version_line_match := re.search("chplVersion: (\d+\.\d+\.?\d*)", f.read())) is not None:
+        if (version_line_match := re.search(r"chplVersion: (\d+\.\d+\.?\d*)", f.read())) is not None:
             # does the version match?
             return chpl_version == version.parse(version_line_match.group(1))
         else:
