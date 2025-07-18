@@ -1,0 +1,44 @@
+{{ $largeHeader := default false (.Params.largeHeader) }}
+<header>
+    {{ if $largeHeader }}
+    <div class="container">
+        <div id="Header" class="large">
+            <a class="site-title" href="{{ .Site.BaseURL | relLangURL }}">
+                <!-- TODO: with this structure, the image doens't cause the header to change color when hovered over.
+                     It's a small difference, but now you, like me, know it's there. -->
+                <img alt="Chapel logo" width="112" height="112" src="{{ absLangURL "img/logo.png" }}">
+            </a>
+            <div>
+                <a class="site-title {{ cond $largeHeader "large" "" }}" href="{{ absLangURL "" }}"><h1>{{ .Site.Title }}</h1></a>
+                <nav class="button-list">
+                    <a href="{{ absLangURL "about" }}">About</a>
+                    <a href="https://chapel-lang.org">Chapel Website</a>
+                    <a href="{{ absLangURL "featured" }}">Featured</a>
+                    <a href="{{ absLangURL "series" }}">Series</a>
+                    <a href="{{ absLangURL "tags" }}">Tags</a>
+                    <a href="{{ absLangURL "authors" }}">Authors</a>
+                    <a href="{{ absLangURL "posts" }}">All Posts</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+    {{ else }}
+    <div class="container">
+        <a class="site-title" href="{{ .Site.BaseURL | relLangURL }}">
+            <img alt="Chapel logo" width="50" height="50" src="{{ absLangURL "img/logo.png" }}">
+            <h1>{{ .Site.Title }}</h1>
+        </a>
+    </div>
+    <nav id="Header">
+        <div class="container">
+            <a href="{{ absLangURL "about" }}">About</a>
+            <a href="https://chapel-lang.org">Chapel Website</a>
+            <a href="{{ absLangURL "featured" }}">Featured</a>
+            <a href="{{ absLangURL "series" }}">Series</a>
+            <a href="{{ absLangURL "tags" }}">Tags</a>
+            <a href="{{ absLangURL "authors" }}">Authors</a>
+            <a href="{{ absLangURL "posts" }}">All Posts</a>
+        </div>
+    </nav>
+    {{ end }}
+</header>

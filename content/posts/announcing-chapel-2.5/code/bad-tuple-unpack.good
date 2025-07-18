@@ -1,0 +1,1 @@
+bad-tuple-unpack.chpl:1: error: tuple size mismatch in split tuple declaration

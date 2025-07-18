@@ -1,0 +1,20 @@
+{{ $static_path := path.Join (.Page.File.Dir) "/code/" (.Get "fname") }}
+{{ $dynamic_path := path.Join "code/" (.Get "fname")}}
+{{ $chpl_version := .Page.Param "chplVersion"}}
+{{ $highlight := .Get "highlight" }}
+
+<div class="file" data-code-type="main" data-code-path="code/{{ .Get "fname" }}" data-start-line=1>
+    <div class="file-header">
+        <a href={{ $dynamic_path }} download="{{ .Get "fname" }}">{{ .Get "fname" }}</a>
+        {{ if (not (eq nil $chpl_version ) ) }}
+            <div class="tooltip">
+                Chapel {{ $chpl_version }}
+                <span class="tooltiptext">Warning: this code is only tested up to Chapel version {{ $chpl_version }}</span>
+            </div>
+        {{ end }}
+    </div>
+
+    {{ $file := readFile $static_path | safeHTML }}
+    {{ highlight $file (.Get "lang") (printf "lineNos=true,hl_lines=%s" $highlight)}}
+
+</div>

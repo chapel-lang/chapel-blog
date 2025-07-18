@@ -1,0 +1,57 @@
+{{ .Inner }}
+
+{{ $start := .Get "lstart" }}
+{{ $end := .Get "lstop" }}
+{{ $numlines := add (sub $end $start) 1 }}
+{{ $section := .Get "section" }}
+
+{{ $static_path := path.Join (.Page.File.Dir) "/code/" (.Get "fname") }}
+
+{{ $file := readFile ($static_path | safeHTML) }}
+{{ $file := split $file "\n" }}
+{{ $file := first $numlines (after (sub $start 1) $file) }}
+
+{{ $composedLines := newScratch }}
+
+{{ range $rawLineNum, $lineText := $file }}
+    {{ $realLineNum := (string (add (add $rawLineNum $start) 1 )) }}
+    {{ $composedLines.SetInMap $realLineNum "code" $lineText }}
+{{ end }}
+
+{{ range $lineNum, $comm := (.Scratch.Get "above") }}
+    {{ $composedLines.SetInMap (string $lineNum) "ab" $comm }}
+{{ end }}
+
+{{ range $lineNum, $comm := (.Scratch.Get "online") }}
+    {{ $composedLines.SetInMap (string $lineNum) "on" $comm }}
+{{ end }}
+
+{{ range $lineNum, $comm := (.Scratch.Get "below") }}
+    {{ $composedLines.SetInMap (string $lineNum) "be" $comm }}
+{{ end }}
+
+{{ $fileLinesOut := slice }}
+{{ range $ln := (seq (add $start 1) $end) }}
+    {{ $ln := string $ln}}
+    {{ $cats := $composedLines.Get $ln }}
+
+    {{ with (index $cats "ab") }}
+        {{ $nTabs := (index $cats "code") | strings.Count "  " }}
+        {{ $fileLinesOut = $fileLinesOut | append (printf "%s// %s" (strings.Repeat $nTabs "  ") . ) }}
+    {{ end }}
+
+    {{ with (index $cats "on") }}
+        {{ $fileLinesOut = $fileLinesOut | append (print (index $cats "code") (string " // ") . )}}
+    {{ else }}
+        {{ $fileLinesOut = $fileLinesOut | append (index $cats "code") }}
+    {{ end }}
+
+    {{ with (index $cats "be") }}
+        {{ $fileLinesOut = $fileLinesOut | append (print (string "// ") . ) }}
+    {{end}}
+{{ end }}
+
+{{ $file := delimit $fileLinesOut "\n" }}
+<div data-code-type="main" data-code-section="{{$section}}">
+{{ highlight $file (.Get "lang") (printf "linenos=true,lineNoStart=%d" $start)}}
+</div>

@@ -1,0 +1,14 @@
+{{ $start := .Get "lstart" }}
+{{ $numlines := add (sub (.Get "lstop") $start) 1 }}
+{{ $section := .Get "section" }}
+
+{{ $static_path := path.Join (.Page.File.Dir) "/code/" (.Get "fname") }}
+
+{{ $file := readFile $static_path}}
+{{ $file := split $file "\n" }}
+{{ $file := first $numlines (after (sub $start 1) $file) }}
+{{ $file := delimit $file "\n" }}
+
+<div data-code-type="main" data-code-section="{{$section}}" data-code-path="code/{{ .Get "fname" }}" data-start-line="{{ $start }}">
+{{ highlight $file (.Get "lang") (printf "linenos=true,lineNoStart=%d" $start)}}
+</div>

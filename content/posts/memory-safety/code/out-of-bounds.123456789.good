@@ -1,0 +1,2 @@
+out-of-bounds.chpl:5: error: halt reached - array index out of bounds
+note: index was 123456789 but array bounds are 0..9

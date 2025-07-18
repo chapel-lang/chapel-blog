@@ -1,0 +1,7 @@
+{{- if eq ($.Page.Scratch.Get "sidenote") nil -}}
+  {{- $.Page.Scratch.Set "sidenote" 0 -}}
+{{- end -}}
+{{- $currentId := $.Page.Scratch.Get "sidenote" -}}
+{{- $.Page.Scratch.Add "sidenote" 1 -}}
+<span class="sidenote"><label class="sidenote-label" for="sidenote-{{ $currentId }}">{{ .Get 1 | markdownify }}</label><input class="sidenote-checkbox" type="checkbox" id="sidenote-{{ $currentId }}"></input><span class="sidenote-content sidenote-{{ .Get 0 }}" {{- with (.Get 2) }} style="margin-top: {{ sub . 1.5 }}rem"{{ end }}><span class="sidenote-delimiter">[note:</span>{{ replace (replace (replace (.Inner | page.RenderString (dict "display" "block")) "</p>\n<p>" "<br><br>") "<p>" "") "</p>" "" | chomp | safeHTML }}<span class="sidenote-delimiter">]</span></span></span>
+{{- /* This file is all on one line (and this comment exists) to remove spaces from the end of sidenote labels. There can't be any space after the label, including newlines. */ -}}

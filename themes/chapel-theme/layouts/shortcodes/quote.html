@@ -1,0 +1,8 @@
+<blockquote class="compound" {{ with (.Get "url") }} cite="{{ . }}" {{ end }}>
+  <p>{{ .Inner | markdownify }}</p>
+  <footer>
+    — {{ .Get "person" | markdownify }}
+    {{ with .Get "position" }}<br>{{ . | markdownify }}{{ end }}
+    {{ with .Get "source" }}<br><cite>{{ . | markdownify }}</cite>{{ end }}
+  </footer>
+</blockquote>

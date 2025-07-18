@@ -1,0 +1,43 @@
+relativeURLs = true
+languageCode = 'en-us'
+title = 'Chapel Language Blog'
+theme = 'chapel-theme'
+
+[markup]
+  [markup.highlight]
+    style = "solarized-light"
+    noClasses = false
+
+  [markup.tableOfContents]
+    startLevel = 3
+    endLevel = 4
+    ordered = false
+
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)'], ['$', '$']]
+
+    [markup.goldmark.parser]
+      [markup.goldmark.parser.attribute]
+        block = true
+        title = true
+
+[module]
+  [[module.mounts]]
+    source = 'content-gen'
+    target = 'content'
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+
+[taxonomies]
+  tag = "tags"
+  series = "series"
+  author = "authors"

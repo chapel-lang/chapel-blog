@@ -1,0 +1,19 @@
+{{ $fname := printf "%s.chpl" .Page.File.ContentBaseName }}
+{{ $static_path := path.Join (.Page.File.Dir) "/code/" $fname }}
+{{ $chpl_version := .Page.Param "chplVersion"}}
+
+<div class="file" data-code-type="main">
+    <details>
+        <summary class="file-header">
+            <a href="./code/{{ $fname }}" download="{{ $fname }}">{{ $fname }}</a>
+            {{ if (not (eq nil $chpl_version ) ) }}
+                <div class="tooltip">
+                    Chapel {{ $chpl_version }}
+                    <span class="tooltiptext">Warning: this code is only tested up to Chapel version {{ $chpl_version }}</span>
+                </div>
+            {{ end }}
+        </summary>
+        {{ $file := readFile $static_path | safeHTML }}
+        {{ highlight $file "chpl" "lineNos=true"}}
+    </details>
+</div>

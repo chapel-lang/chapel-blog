@@ -1,0 +1,19 @@
+<nav class="paging-navigation">
+    <div class="button-placeholder prev">
+        {{ if .paginator.Prev -}}
+        <a class="button prev" href="{{ .paginator.Prev.URL }}">
+            {{- partial "icon.html" "chevrons-left" }}
+            <span class="pagination-button-text">{{ .previous | default "Previous Page" }}</span>
+        </a>
+        {{- end -}}
+    </div>
+    <span>Page {{ .paginator.PageNumber }}</span>
+    <div class="button-placeholder next">
+        {{ if .paginator.Next -}}
+        <a class="button next" href="{{ .paginator.Next.URL }}">
+            <span class="pagination-button-text">{{ .next | default "Next Page" }}</span>
+            {{- partial "icon.html" "chevrons-right" }}
+        </a>
+        {{- end -}}
+    </div>
+</nav>

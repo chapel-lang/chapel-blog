@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+outfile=$2
+
+sed -e "s/in [0-9]*\.[0-9]* seconds/in x.xxx seconds/g" $outfile > $outfile.tmp
+mv $outfile.tmp $outfile

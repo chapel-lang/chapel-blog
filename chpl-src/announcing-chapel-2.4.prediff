@@ -1,0 +1,5 @@
+#!/bin/bash
+
+head -n 27 $2 > $2.tmp
+tail -n 1 $2 | sed "s/{/ 'a', /" | sed 's/}/, z/' | tr ',' '\n' | sort | tr '\n' ',' | sed "s/ 'a', /{/" | sed 's/, z,/}\n/' >> $2.tmp
+mv $2.tmp $2

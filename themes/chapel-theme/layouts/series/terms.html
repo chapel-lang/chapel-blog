@@ -1,0 +1,10 @@
+{{ define "main" }}
+<h2>{{ .Title }}</h2>
+{{ .Content }}
+
+<ul class="post-list">
+    {{ range sort (.Pages.ByTitle) "Weight" "asc" }}
+    {{ partial "post.html" . }}
+    {{ end }}
+</ul>
+{{ end }}

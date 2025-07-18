@@ -1,0 +1,3 @@
+# the output includes warnings about the GPU module being under active development
+# skip this test when in a GPU config
+CHPL_LOCALE_MODEL==gpu

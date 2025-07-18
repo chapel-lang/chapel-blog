@@ -1,0 +1,13 @@
+Line 1: Hi
+Line 2: Hello
+Line 3: Greetings
+Line 4: Howzit?
+Line 5, Alright, mate?
+Line 6: Good day!
+Line 7: Ciao
+Line 8: Farewell
+Line 9: Ta ta
+Line 10: Goodbye
+Line 11: See ya!
+Line 12: I'm out
+Line 13: Laters

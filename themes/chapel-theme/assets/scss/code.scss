@@ -1,0 +1,179 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+$code-color-lineno: grey;
+$code-color-keyword: black;
+$code-color-type: black;
+$code-color-comment: grey;
+
+.highlight-label {
+    padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+    border-bottom: none;
+
+    a {
+        font-family: $font-code;
+    }
+}
+
+.highlight-group pre {
+    margin: 0;
+}
+
+code, pre.code {
+  font-family: $font-code;
+  padding: 0 0.25rem 0 0.25rem;
+}
+
+pre code, pre.code {
+    display: block;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    overflow: auto;
+}
+
+code, .code, .chroma .lntable {
+    @include bordered-block;
+    box-shadow: 0 0 1rem rgba(black, 0.08);
+    background-color: white;
+
+    div[data-code-type="main"] & {
+        border-style: solid;
+        border-width: $standard-border-width;
+        background-color: #eee8d5; /* copied for syntax.css, will break if it changes */
+    }
+
+    div[data-code-section="first"] & {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-style: dashed;
+        padding-bottom: 1rem;
+    }
+
+    div[data-code-section="last"] & {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-top-style: dashed;
+        padding-top: 1rem;
+    }
+
+    div[data-code-section="middle"] & {
+        border-radius: 0;
+        border-bottom-style: dashed;
+        border-top-style: dashed;
+        padding-bottom: 1rem;
+        padding-top: 1rem;
+    }
+}
+
+.terminal-command {
+    .language-bash:first-child::before {
+        content: "$>";
+        float: left;
+        margin-right: 1ch;
+    }
+}
+
+.chroma {
+    border-radius: $standard-border-radius;
+
+    // Within syntax-highlighted code blocks, lines will have their own
+    // pading to make highlighting look better.
+    &, code, pre {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .line {
+        padding-left: .5rem;
+        padding-right: 0.5rem;
+    }
+
+    .lnt {
+        border-right: $standard-border;
+        margin-right: 0;
+    }
+
+    .lntable {
+        border-spacing: 0;
+        padding: 0.5rem 0 0.5rem 0;
+        display: block;
+        overflow: auto;
+        margin-bottom: 1rem;
+
+        td {
+            padding: 0;
+        }
+
+        code, pre {
+            border: none;
+            box-shadow: none;
+        }
+
+        code {
+            padding: 0;
+        }
+
+        pre {
+            margin: 0;
+        }
+
+        .lntd:last-child {
+            width: 100%;
+        }
+
+        .line {
+            // In line tables, the line numbers have bigger padding to give
+            // the numbers room to breathe. Bump the padding on the line as
+            // well so that the end of the number and the beginning of the code
+            // are equidistant from the divider.
+            padding-left: 1rem;
+        }
+    }
+
+    .lntr {
+        display: table-row;
+    }
+
+    .lnt {
+        display: block;
+        padding: 0 1rem 0 1rem;
+        color: $code-color-lineno;
+
+        &::before {
+            content: " ";
+        }
+    }
+
+    .hl {
+        background-color: #fffd99; 
+
+        .lnt {
+            background-color: #fffd99; 
+            border-color: darken(#fffd99, 40%);
+            &::before {
+                content: "*";
+            }
+        }
+    }
+}
+
+.file {
+    text-align: center;
+
+    pre, .lntable {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+
+.file-header {
+    @include bordered-block;
+    padding: 0.5rem;
+
+    // Keep styling for closed summaries
+    &:not(details:not([open]) summary) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+    }
+}

@@ -1,0 +1,1 @@
+no-matching-init.chpl:8: error: unable to resolve call to 'init': no matching candidates

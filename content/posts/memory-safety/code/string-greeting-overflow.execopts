@@ -1,0 +1,2 @@
+--idx=1 # string-greeting-overflow.1.good
+--idx=123456789 # string-greeting-overflow.123456789.good

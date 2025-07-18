@@ -1,0 +1,40 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#00cbff">
+    {{ if .Description }}
+    <meta name="description" content="{{ .Description }}">
+    {{ else if .Summary }}
+    <meta name="description" content="{{ .Summary }}">
+    {{ end }}
+    {{- with .Params.externalURL -}}
+    <meta http-equiv="refresh" content="0; url={{ . }}">
+    {{- end }}
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" media="screen,print">
+    {{ $noop := .WordCount -}}
+    {{- if .Page.Store.Get "hasMath" -}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
+    {{- end }}
+    {{ range .AlternativeOutputFormats -}}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}">
+    {{ end -}}
+    {{ $style := resources.Get "scss/style.scss" | css.Sass | resources.Minify }}
+    {{ $sidenotes := resources.Get "scss/sidenotes.scss" | css.Sass | resources.Minify }}
+    {{ $code := resources.Get "scss/code.scss" | css.Sass | resources.Minify }}
+    {{ $syntax := resources.Get "css/syntax.css" | resources.Minify }}
+    {{ $syntaxTerminal := resources.Get "scss/syntax-terminal.scss" | css.Sass | resources.Minify }}
+    {{ $icon := resources.Get "img/favicon.ico" }}
+    <style>.sidenote-checkbox { display: none; }</style>
+    <style>.feather { width: 1rem; height: 1rem; }</style>
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" media="screen,print">
+    <link rel="stylesheet" href="{{ $sidenotes.RelPermalink }}" media="screen,print">
+    <link rel="stylesheet" href="{{ $syntax.RelPermalink }}" media="screen,print">
+    <link rel="stylesheet" href="{{ $syntaxTerminal.RelPermalink }}" media="screen,print">
+    <link rel="stylesheet" href="{{ $code.RelPermalink }}" media="screen,print">
+    <link rel="icon" type="image/png" href="{{ $icon.Permalink }}">
+
+    <script src="{{ absLangURL "js/dropdown-menu.js" }}" defer></script>
+
+    <title>{{ default "Chapel Language Blog" .Title }}</title>
+</head>

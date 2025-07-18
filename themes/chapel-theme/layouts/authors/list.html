@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{ if .Params.photo }}
+<img width=160 height=160 alt="Picture of {{ .Title }}" class="author-img" src={{ .Params.photo }}></img>
+{{ end }}
+
+{{ if .Content }}
+<h2>{{ .Title }}</h2>
+{{ .Content }}
+{{ end }}
+
+<h2>Articles by {{ .Title }}</h2>
+<ul class="post-list">
+    {{ range .Pages.ByDate.Reverse }}
+    {{ partial "post.html" . }}
+    {{ end }}
+</ul>
+{{ end }}

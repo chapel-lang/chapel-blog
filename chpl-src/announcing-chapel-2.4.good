@@ -1,0 +1,28 @@
+announcing-chapel-2.4.chpl:261: warning: 'importModule' with a 'moduleContents' argument is deprecated. Use createModule instead.
+announcing-chapel-2.4.chpl:334: warning: 'importModule' with a 'moduleContents' argument is deprecated. Use createModule instead.
+2.4
+2.4
+2.4
+Got array:
+2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0
+Declared over indices {1..10}
+
+Got array:
+1.4 2.4 3.4 4.4 5.4 6.4 7.4 8.4 9.4 10.4
+Declared over indices {1..10}
+
+Got array:
+5.5 5.6
+6.5 6.6
+Declared over indices {5..6, 5..6}
+
+Got array:
+2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.0
+Declared over indices {1..10}
+
+Got array:
+2.5 2.6
+Declared over indices {5..6}
+
+The sum of the numbers from 1 to 10 is 55
+{'hello', 'world', 1, 2, 3, 4}

@@ -1,0 +1,2 @@
+{{ $my_id := string (.Get "line") }}
+{{ .Parent.Scratch.SetInMap "above" $my_id (.Inner | markdownify ) }}

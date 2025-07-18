@@ -1,0 +1,47 @@
+@import "variables.scss";
+@import "mixins.scss";
+
+$margin-width: 20rem;
+$margin-inner-offset: 0.5rem;
+$margin-outer-offset: 1rem;
+
+@mixin below-two-margins {
+    @media screen and
+        (max-width: $container-width-threshold +
+            2 * ($margin-width + $margin-inner-offset + $margin-outer-offset)) {
+        @content;
+    }
+}
+
+@mixin below-one-margin {
+    @media screen and
+        (max-width: $container-width-threshold +
+            ($margin-width + $margin-inner-offset + $margin-outer-offset)) {
+        @content;
+    }
+}
+
+@mixin margin-content {
+    display: block;
+    position: absolute;
+    width: $margin-width;
+    box-sizing: border-box;
+}
+
+@mixin margin-content-left {
+    left: 0;
+    margin-left: -($margin-width + $container-min-padding + $margin-inner-offset);
+
+    @include below-two-margins {
+        display: none;
+    }
+}
+
+@mixin margin-content-right {
+    right: 0;
+    margin-right: -($margin-width + $container-min-padding + $margin-inner-offset);
+
+    @include below-one-margin {
+        display: none;
+    }
+}

@@ -1,0 +1,14 @@
+.hugo_build.lock
+!.gitignore
+content-gen/
+.DS_Store
+__pycache__/
+*.out.tmp
+*~
+
+# Ignore editor specific directories
+.idea/
+.vscode/
+
+# Ignore the public directory because it gets generated
+public/

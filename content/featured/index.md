@@ -1,0 +1,4 @@
+---
+title: "Featured"
+type: "featured"
+---

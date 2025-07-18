@@ -1,0 +1,5 @@
+$ gcc string-greeting.c
+$ ./a.out abcdefghijklmnopqrstuv
+Hello abcdefghijklmnopqrstuv
+*** stack smashing detected ***: terminated
+Aborted (core dumped)

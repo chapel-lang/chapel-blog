@@ -1,0 +1,26 @@
+Version,N,Time (s)
+Sequential,100,0.003573
+Threaded,100,0.000395
+Distributed 2 Nodes,100,0.000378
+Distributed 4 Nodes,100,0.001471
+Distributed 8 Nodes,100,0.000319
+Sequential,200,0.022013
+Threaded,200,0.001904
+Distributed 2 Nodes,200,0.00103
+Distributed 4 Nodes,200,0.00076
+Distributed 8 Nodes,200,0.000555
+Sequential,400,0.169041
+Threaded,400,0.05008
+Distributed 2 Nodes,400,0.012631
+Distributed 4 Nodes,400,0.004474
+Distributed 8 Nodes,400,0.001964
+Sequential,800,1.33959
+Threaded,800,0.414623
+Distributed 2 Nodes,800,0.102542
+Distributed 4 Nodes,800,0.05194
+Distributed 8 Nodes,800,0.026742
+Sequential,1000,2.6136
+Threaded,1000,0.809662
+Distributed 2 Nodes,1000,0.204041
+Distributed 4 Nodes,1000,0.101821
+Distributed 8 Nodes,1000,0.051343

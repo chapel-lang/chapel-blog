@@ -1,0 +1,19 @@
+Version,N,Time (s)
+Sequential,100,6.5e-05
+Threaded,100,8.6e-05
+Sequential,200,7.2e-05
+Threaded,200,0.000172
+Sequential,400,0.000286
+Threaded,400,0.000215
+Sequential,800,0.001153
+Threaded,800,0.000361
+Sequential,1600,0.004763
+Threaded,1600,0.001007
+Sequential,3200,0.015762
+Threaded,3200,0.004735
+Sequential,6400,0.062166
+Threaded,6400,0.011069
+Sequential,12800,0.246315
+Threaded,12800,0.033509
+Sequential,25600,0.994708
+Threaded,25600,0.138206

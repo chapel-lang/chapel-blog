@@ -1,0 +1,15 @@
+{{ define "main" }}
+<h2>{{ .Title }}</h2>
+{{ .Content }}
+
+<ul class="author-list">
+    {{ range sort .Pages "Title" }}
+    <li class="author">
+        <a href="{{ .Permalink }}">
+            <img width=80 height=80 alt="Picture of {{ .Title }}" class="author-img" src="{{ .Permalink }}/{{ .Params.photo }}">
+            {{ .Title }}
+        </a>
+    </li>
+    {{ end }}
+</ul>
+{{ end }}

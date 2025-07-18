@@ -1,0 +1,4 @@
+release-2.4-interfaces.chpl:10: In 'implements contextManager' statement:
+release-2.4-interfaces.chpl:10: error: when checking this implements statement
+release-2.4-interfaces.chpl:10: note: the associated type contextReturnType is not implemented
+$CHPL_HOME/modules/internal/ChapelContext.chpl:29: note: the associated type contextReturnType in the interface contextManager is declared here

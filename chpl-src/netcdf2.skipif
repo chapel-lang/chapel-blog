@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+
+# The NetCDF package requires the netCDF library.
+#
+# On systems with Cray modules, this finds the library inside a module even
+# though the module is not loaded.  Avoid those "false positive" systems.
+
+import subprocess
+from contextlib import suppress
+from os import getenv
+
+Ok = False
+
+with suppress(Exception):
+    sub = subprocess.run(['pkg-config', '--exists', 'netcdf'], stderr=subprocess.DEVNULL)
+    if sub.returncode == 0:
+        Ok = True
+isXC = getenv('CHPL_TARGET_PLATFORM') == 'cray-xc'
+isCS = getenv('CHPL_TARGET_PLATFORM') == 'cray-cs'
+print((not Ok) or isXC or isCS)

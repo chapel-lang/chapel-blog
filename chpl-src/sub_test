@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+## call the local 'sub_test.py' to filter tests based on version
+../scripts/sub_test_chpl_src.py "$@"

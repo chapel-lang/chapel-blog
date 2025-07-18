@@ -1,0 +1,2 @@
+# https://github.com/chapel-lang/chapel/issues/26202
+CHPL_LOCALE_MODEL==gpu
