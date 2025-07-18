@@ -208,10 +208,14 @@ Once you have all the dependencies installed (see [Setting Up Your Environment](
 you should be able to start a Hugo server using either of the following commands:
 
 ```Bash
-make preview
+make preview-drafts  # to preview the blog, including any draft articles
 ```
 
-or:
+```Bash
+make preview  # to only preview non-draft articles
+```
+
+or a more explicit command like:
 
 ```Bash
 ./scripts/chpl_blog.py serve --fast -D -F
@@ -225,13 +229,13 @@ Here’s what the arguments in the manual option mean:
 * `-F` -- render not-yet-published articles (you probably want this if you’re drafting)
 
 After this, you should be able to see the complete blog at [`localhost:1313`](http://localhost:1313/). Try
-visiting the demo page, which should be visible at: http://localhost:1313/posts/demo/
+visiting the demo page, which should be visible at: http://localhost:1313/posts/demo/ (assuming you enabled draft articles).
 
 ## Authoring Articles
 Currently, there are two modes of writing a Chapel blog post:
 * Chapel-driven -- a single `.chpl` file with code whose comments contain blog
   text. A Markdown file is generated from the comments.
-* Markdown-driven -- a Markdown file together with any number of `.chpl` files
+* Markdown-driven -- a Markdown file together with any number of supporting `.chpl` files
   for code. Markdown is written by hand.
 
 In practice, the first mode tends to be best when the blog article is
@@ -378,8 +382,8 @@ would result in an article appearing at
 `https://chapel-lang.org/blog/posts/article-name/`.
 
 The `index.md` file contains the article Markdown, while the files in
-`code` contain the Chapel source file associated with the article.  By
-default, this directory will be tested nightly by Chapel's regression
+`code` contain the Chapel source files associated with the article.
+This `code` directory will be tested nightly by Chapel's regression
 testing system once the article is merged to ensure that things
 continue working over time.  Authors should ensure that the tests work
 properly by running `start_test content/posts/article-name/code`
@@ -388,7 +392,7 @@ not already familiar with Chapel's testing system, refer to the
 [Chapel Testing
 System](https://chapel-lang.org/docs/developer/bestPractices/TestSystem.html)
 documentation for details, or reach out to the developer community
-iwth questions.
+with questions.
 
 The blog repository provides an easy way to create a new Markdown-driven
 article.
