@@ -1,0 +1,27 @@
+<li>
+    {{- $url := .Permalink -}}
+    {{- with .Params.externalURL -}}
+    {{- $url = . -}}
+    {{- end }}
+    <a href="{{ $url }}" class="post-title">
+        {{- if .Params.featured }}{{ partial "icon.html" "star" }}{{ end }}
+        {{- " " -}}{{ .Title }}
+        {{- if .Params.externalURL -}}
+        <span class="external-marker">
+            External Article {{ partial "icon.html" "external-link" }}
+        </span>
+        {{- end -}}
+    </a>
+    {{ if .Params.date }}
+    <p class="post-date">Posted on {{ .Date.Format "January 2, 2006" }}</p>
+    {{ end }}
+    {{ if .Summary }}
+    <hr class="post-divider">
+    <p class="post-preview">
+        {{ .Summary }}
+        {{ if .Truncated }}
+        . . .
+        {{ end }}
+    </p>
+    {{ end }}
+</li>

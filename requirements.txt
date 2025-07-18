@@ -1,0 +1,5 @@
+watchdog==2.1.9
+packaging==23.0
+beautifulsoup4==4.13.4
+soupsieve==2.7
+typing_extensions==4.13.2

@@ -1,0 +1,2 @@
+--idx=1 # out-of-bounds-dist.1.good
+--idx=123456789 # out-of-bounds-dist.123456789.good

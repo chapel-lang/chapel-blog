@@ -1,0 +1,77 @@
+@import "variables.scss";
+@import "mixins.scss";
+@import "margin.scss";
+
+$sidenote-padding: 1rem;
+$sidenote-highlight-border-width: .2rem;
+
+.sidenote {
+    &:hover {
+        .sidenote-label {
+            background-color: $primary-color;
+            color: white;
+        }
+
+        .sidenote-content {
+            border: $sidenote-highlight-border-width dashed;
+            padding: $sidenote-padding -
+                ($sidenote-highlight-border-width - $standard-border-width);
+            border-color: $primary-color;
+        }
+    }
+}
+
+.sidenote-label {
+    border-bottom: .2rem dashed $primary-color;
+}
+
+.sidenote-checkbox {
+    display: none;
+}
+
+.sidenote-content {
+    @include margin-content;
+    @include bordered-block;
+    margin-top: -1.5rem;
+    padding: $sidenote-padding;
+    text-align: left;
+
+    &.sidenote-right {
+        @include margin-content-right;
+    }
+
+    &.sidenote-left {
+        @include margin-content-left;
+    }
+}
+
+.sidenote-delimiter {
+    display: none;
+}
+
+@mixin hidden-sidenote {
+    position: static;
+    /* use of !important here to override HTML styling created by sidenote
+       shortcode from markdown content. */
+    margin-top: 1rem !important;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    .sidenote-checkbox:checked ~ & {
+        display: block;
+    }
+}
+
+@include below-two-margins {
+    .sidenote-content.sidenote-left {
+        @include hidden-sidenote;
+        margin-left: 0rem;
+    }
+}
+
+@include below-one-margin {
+    .sidenote-content.sidenote-right {
+        @include hidden-sidenote;
+        margin-right: 0rem;
+    }
+}

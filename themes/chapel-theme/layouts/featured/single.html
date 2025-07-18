@@ -1,0 +1,13 @@
+{{ define "main" }}
+{{ .Content }}
+
+<h2>Featured Articles</h2>
+<ul class="post-list">
+    {{ range ((where (where .Site.Pages "Section" "posts") "Params.Featured" true).GroupBy "Weight" "asc") }}
+    {{ range .Pages.ByDate }}
+    {{ partial "post.html" . }}
+    {{ end }}
+    {{ end }}
+</ul>
+
+{{ end }}

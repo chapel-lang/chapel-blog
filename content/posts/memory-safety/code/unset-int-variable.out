@@ -1,0 +1,3 @@
+$ chpl unset-int-variable.chpl
+$ ./unset-int-variable
+0

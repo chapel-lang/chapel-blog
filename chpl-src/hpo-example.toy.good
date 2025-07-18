@@ -1,0 +1,14 @@
+Target program was: python3 ../content/posts/hpo-example/toy.py
+Combos checked were:
+(args = [(x, 7)], result = 28.0)
+(args = [(x, 25)], result = 325.0)
+(args = [(x, 2)], result = 3.0)
+(args = [(x, 2)], result = 3.0)
+(args = [(x, 2)], result = 3.0)
+(args = [(x, 10)], result = 55.0)
+(args = [(x, 27)], result = 378.0)
+(args = [(x, 25)], result = 325.0)
+(args = [(x, 3)], result = 6.0)
+(args = [(x, 27)], result = 378.0)
+Best found was:
+[(x, 2)]

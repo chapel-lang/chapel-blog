@@ -1,0 +1,2 @@
+I'm running on locale 0, but x is stored on 1
+I'm running on locale 1, and x is too (1), but only for this on-clause's scope

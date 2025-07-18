@@ -1,0 +1,7 @@
+<details>
+    <summary{{ with .Get "id" }} id="{{.}}" {{ end }}>{{ .Get "summary" | markdownify | default "..." }}</summary>
+
+    <div style="padding-left: 2vw; padding-right: 2vw; padding-bottom: 2ch;">
+        {{ .Inner | markdownify }}
+    </div>
+</details>

@@ -1,0 +1,6 @@
+shadowing.chpl:16: In function 'main':
+shadowing.chpl:18: warning: potentially surprising shadowing for 'N'
+shadowing.chpl:17: note: it refers to a symbol found through the 'use' of 'M' here
+shadowing.chpl:2: note: leading to 'N' defined here
+shadowing.chpl:9: note: but, there is a shadowed symbol 'N' defined here
+In M.N.foo

@@ -1,0 +1,52 @@
+name: Post Preview
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Clone Blog
+        uses: actions/checkout@v4
+        with:
+          path: ./blog
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Clone Chapel
+        uses: actions/checkout@v4
+        with:
+          repository: chapel-lang/chapel
+          path: ./chapel
+          fetch-depth: 1
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.141.0'
+          extended: true
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Python Dependencies
+        run: pip install -r ./blog/requirements.txt
+
+      - name: Build Blog
+        run: |
+          export CHPL_HOME=$(pwd)/chapel
+          cd ./blog
+          ./scripts/chpl_blog.py build --fast -D -F
+          for file in $(find public -name "*.html"); do ./scripts/insert_links.py $file; done
+
+      - name: Archive Generated HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-html
+          path: ./blog/public

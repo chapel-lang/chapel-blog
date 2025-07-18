@@ -1,0 +1,10 @@
+<blockquote class="pull-quote">
+    <div class="quote-wrapper">
+        <div class="quote-container"><span class="open-quote">“</span></div>
+            <div class="quote-content">
+                <p>{{ .Inner }}</p>
+            </div>
+        <div class="quote-container"><span class="close-quote">”</span></div>
+    </div>
+    {{ with .Get "attribution" }}<footer>{{ . | markdownify }}</footer> {{ end }}
+</blockquote>

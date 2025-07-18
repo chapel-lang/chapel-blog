@@ -1,0 +1,18 @@
+$ rustc unset-variable-rust.rs
+
+error[E0381]: used binding `x` isn't initialized
+ --> unset-variable.rs:3:13
+  |
+2 |     let mut x: i64; // OOPS! forgot to initialize x
+  |         ----- binding declared here but left uninitialized
+3 |     let y = x;
+  |             ^ `x` used here but it isn't initialized
+  |
+help: consider assigning a value
+  |
+2 |     let mut x: i64 = 42; // OOPS! forgot to initialize x
+  |                    ++++
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0381`.

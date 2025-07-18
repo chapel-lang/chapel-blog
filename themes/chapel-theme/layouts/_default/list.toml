@@ -1,0 +1,12 @@
+[input]
+base_directory = "content/"
+title_boost = "Large"
+files = [
+    {{ range $index , $e := .Site.RegularPages }}{{ if $index }}, {{end}}{ filetype = "PlainText", contents = {{ $e.Plain | jsonify }}, title = {{ $e.Title | jsonify }}, url = {{ $e.Permalink | jsonify }} }
+    {{ end }}
+]
+
+[output]
+filename = "index.st"
+excerpts_per_result = 2
+displayed_results_count = 5

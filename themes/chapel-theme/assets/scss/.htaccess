@@ -1,0 +1,3 @@
+<FilesMatch "\.(scss)$">
+Header set Cache-Control "no-cache"
+</FilesMatch>

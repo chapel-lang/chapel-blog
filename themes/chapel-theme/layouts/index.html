@@ -1,0 +1,32 @@
+{{ define "main" }}
+{{ $paginator := .Paginate (where (where .Site.Pages.ByDate.Reverse "Section" "posts") ".Kind" "!=" "section") 10 }}
+
+{{ if (eq $paginator.PageNumber 1) }}
+{{ .Content }}
+{{ end }}
+
+{{ if not (eq $paginator.PageNumber 1) }}
+<h2>Previous posts</h2>
+Page {{ $paginator.PageNumber }}
+{{ else }}
+{{ $featuredPosts := (where (where .Site.Pages "Section" "posts") "Params.featured" true).ByDate.Reverse }}
+{{ with (index $featuredPosts 0) }}
+{{/*
+<h2>Featured Article</h2>
+<ul class="post-list">
+    {{ partial "post.html" . }}
+</ul>
+*/}}
+{{ end }}
+<h2>Latest posts</h2>
+{{ end }}
+
+<ul class="post-list">
+    {{ range $paginator.Pages }}
+    {{ partial "post.html" . }}
+    {{ end }}
+</ul>
+
+{{ partial "pagination-nav.html" (dict "paginator" $paginator "previous" "Newer Posts" "next" "Older Posts") }}
+
+{{ end }}

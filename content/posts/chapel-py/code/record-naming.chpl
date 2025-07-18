@@ -1,0 +1,2 @@
+record fine {}
+record NotFine {}

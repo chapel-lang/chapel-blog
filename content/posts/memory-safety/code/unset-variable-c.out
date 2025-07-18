@@ -1,0 +1,3 @@
+$ gcc unset-variable-c.c 
+$ ./a.out
+x is 32764

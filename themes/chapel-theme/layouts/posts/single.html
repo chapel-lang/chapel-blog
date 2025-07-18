@@ -1,0 +1,103 @@
+{{ define "main" }}
+{{ if .Params.interviewee_photo -}}
+<div class="author-side-by-side">
+{{ $authorPage := .Resources.Get .Params.interviewee_photo }}
+<div class="interview-img-wrapper">
+    <div class="interview-img-shadow">
+        <img class="interview-img" src="{{ $authorPage.Permalink }}" alt="Interviewee Photo">
+    </div>
+</div>
+<div class="post-info">
+{{- end -}}
+
+<h2>{{ .Title }}</h2>
+<div class="post-subscript">
+    <p>Posted on {{ .Date.Format "January 2, 2006" }}.</p>
+    <p>
+        Tags:
+        {{ range .Params.tags }}
+        <a class="button" href="{{ urls.JoinPath ( $.Site.BaseURL | relLangURL ) "tags" ( . | urlize ) }}">{{ . }}</a>
+        {{ end }}
+    </p>
+    <p>
+    By:
+    {{ range $i, $e := .Params.authors -}}
+    {{ if $i }}, {{ end -}}
+    <a href="{{ urls.JoinPath ( $.Site.BaseURL | relLangURL ) "authors" ($e | urlize) }}">{{ $e }}</a>
+    {{- end }}
+    </p>
+</div>
+{{  if .Params.interviewee_photo -}}
+</div>
+</div>
+{{- end }}
+<div class="post-content">
+    {{ if not (eq .TableOfContents "<nav id=\"TableOfContents\"></nav>") }}
+    <div class="table-of-contents">
+        <div class="wrapper">
+            <span class="header">Table of Contents</span>
+            {{ .TableOfContents }}
+        </div>
+    </div>
+    {{ end }}
+
+    {{ if .Draft }}
+    <div class="warning draft-warning">
+        <em>Warning!</em> This post is a draft. At best, it may contain grammar mistakes;
+        at worst, it can include significant errors and bugs. Please
+        use your best judgement!
+    </div>
+    {{ end }}
+
+    {{ .Content }}
+</div>
+{{ end }}
+{{ define "after" }}
+<div class="container">
+    <div class="share-view">
+        <h3>Share this article:</h3>
+        <div class="share-buttons">
+        {{ $text := printf "Check out this post entitled \"%s\" on the Chapel Programming Language blog:" .Title }}
+        {{ $url := printf "%s%s" "https://chapel-lang.org/blog" .RelPermalink }}
+        {{ $both := printf "%s %s" $text $url }}
+        {{ partial "share.html" (dict "base" "https://bsky.app/intent/compose" "query" (querify "text" $both ) "service" "BlueSky" "color" "#6cb0f9" "colorlight" "white" "filetype" "jpg") }}
+        {{ partial "share.html" (dict "base" "https://www.facebook.com/sharer/sharer.php" "query" (querify "description" $text "u" $url) "service" "Facebook" "color" "#3a559f" "colorlight" "white" "filetype" "png") }}
+        {{ partial "share.html" (dict "base" "https://linkedin.com/share" "query" (querify "text" $text "url" $url) "service" "LinkedIn" "color" "#2867b2" "colorlight" "white" "filetype" "png") }}
+        {{ partial "share.html" (dict "base" "https://new.reddit.com/submit" "query" (querify "url" $url "title" .Title) "service" "Reddit" "color" "#ff4500" "colorlight" "white" "filetype" "svg") }}
+        {{ partial "share.html" (dict "base" "http://x.com/share" "query" (querify "text" $text "url" $url) "service" "X" "color" "#000000" "colorlight" "#7a7a7a" "filetype" "svg") }}
+        </div>
+    </div>
+</div>
+{{ if .Params.series }}
+    {{ $series_name := (index .Params.series 0) }}
+    {{ $series := .Site.Taxonomies.series.Get $series_name }}
+    <nav class="container series-navigation">
+        {{ with $series.Pages.ByDate.Reverse.Prev . }}
+        <div class="series-button-wrapper prev">
+            <a class="button" href={{ .Permalink }}>
+                {{ partial "icon.html" "chevrons-left" }}
+                <span>
+                    Previous in series
+                    <span class="series-button-name">
+                        {{ partial "series-item-name" (dict "series" $series_name "name" .Title) }}
+                    </span>
+                </span>
+            </a>
+        </div>
+        {{ end }}
+        {{ with $series.Pages.ByDate.Reverse.Next . }}
+        <div class="series-button-wrapper next">
+            <a class="button" href={{ .Permalink }}>
+                <span>
+                    Next in series
+                    <span class="series-button-name">
+                        {{ partial "series-item-name" (dict "series" $series_name "name" .Title) }}
+                    </span>
+                </span>
+                {{ partial "icon.html" "chevrons-right" }}
+            </a>
+        </div>
+        {{ end }}
+    </nav>
+{{ end }}
+{{ end }}

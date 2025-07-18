@@ -1,0 +1,28 @@
+The whole array A is: 2 4 6 8 10
+A[1] = 2
+A[2] = 4
+A[3] = 6
+A[4] = 8
+A[5] = 10
+__BREAK__
+2 4 6 8 10
+__BREAK__
+0.0 0.587785 0.951057 0.951057 0.587785 1.22465e-16 -0.587785 -0.951057 -0.951057 -0.587785
+__BREAK__
+1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181 6765
+__BREAK__
+Original array:
+11 12 13 14 15
+21 22 23 24 25
+31 32 33 34 35
+41 42 43 44 45
+51 52 53 54 55
+__BREAK__
+Column sums:
+155 160 165 170 175
+__BREAK__
+Even numbers computed on LOCALE0-GPU0: 2 4 6 8 10
+Even numbers computed on LOCALE0-GPU1: 2 4 6 8 10
+Even numbers computed on LOCALE1-GPU0: 2 4 6 8 10
+Even numbers computed on LOCALE1-GPU1: 2 4 6 8 10
+__BREAK__

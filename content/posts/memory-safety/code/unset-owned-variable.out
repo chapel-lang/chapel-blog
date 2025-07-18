@@ -1,0 +1,6 @@
+$ chpl unset-owned-variable.chpl
+unset-owned-variable.chpl:2: In function 'main':
+unset-owned-variable.chpl:3: error: cannot default-initialize x: owned C
+unset-owned-variable.chpl:4: error: use here prevents split-init
+note: non-nilable class type 'borrowed C' does not support default initialization
+note: Consider using the type owned C? instead

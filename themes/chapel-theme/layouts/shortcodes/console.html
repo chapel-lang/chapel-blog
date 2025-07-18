@@ -1,0 +1,4 @@
+{{ $static_path := path.Join (.Page.File.Dir) "/code/" (.Get "fname") }}
+
+{{ $file := readFile ($static_path | safeHTML) }}
+{{ highlight $file "console"}}

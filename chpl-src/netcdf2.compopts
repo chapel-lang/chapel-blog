@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ccflags=$(pkg-config --cflags netcdf)
+ldflags=$(pkg-config --libs netcdf)
+
+echo "${ccflags:+--ccflags '$ccflags'} ${ldflags:+--ldflags '$ldflags'}"

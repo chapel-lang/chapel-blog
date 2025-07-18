@@ -1,0 +1,13 @@
+@import "variables.scss";
+
+@mixin bordered-block {
+    border: $standard-border;
+    border-radius: $standard-border-radius;
+}
+
+@mixin below-container-width {
+    @media screen and (max-width: $container-width-threshold){
+        @content;
+    }
+}
+

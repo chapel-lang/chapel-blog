@@ -1,0 +1,2 @@
+release-2.4-compiler.chpl:4: warning: This is bad, chief!
+release-2.4-compiler.chpl:5: error: It's so over. Error in file release-2.4-compiler.chpl

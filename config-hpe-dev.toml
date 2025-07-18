@@ -1,0 +1,8 @@
+[outputFormats]
+  [outputFormats.Md]
+    name = "md"
+    mediaType = "text/markdown"
+    isHTML = false
+
+[outputs]
+page = ["md"]

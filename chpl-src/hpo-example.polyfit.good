@@ -1,0 +1,14 @@
+Target program was: python3 ../content/posts/hpo-example/polyfit.py
+Combos checked were:
+(args = [(degree, 5), (alpha_order, -1)], result = 0.293474)
+(args = [(degree, 4), (alpha_order, -2)], result = 0.171898)
+(args = [(degree, 2), (alpha_order, 1)], result = 0.511856)
+(args = [(degree, 4), (alpha_order, 0)], result = 0.437057)
+(args = [(degree, 3), (alpha_order, 0)], result = 0.459447)
+(args = [(degree, 4), (alpha_order, 0)], result = 0.437057)
+(args = [(degree, 4), (alpha_order, -2)], result = 0.171898)
+(args = [(degree, 3), (alpha_order, -1)], result = 0.413248)
+(args = [(degree, 3), (alpha_order, -2)], result = 0.252334)
+(args = [(degree, 5), (alpha_order, 0)], result = 0.411147)
+Best found was:
+[(degree, 4), (alpha_order, -2)]

@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# This prediff was necessary to remove single quotes from the output file
+# because running with start_test in configurations that use a launcher was
+# interfering with the single quotes in the argument string, and therefore the
+# output file is missing the single quotes, but on other configurations without
+# the launcher, the single quotes are present in the output file.
+testname=$1
+outfile=$2
+sed -e "s/'//g" $outfile > $outfile.tmp
+mv $outfile.tmp $outfile

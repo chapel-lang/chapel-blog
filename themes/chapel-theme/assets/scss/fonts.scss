@@ -1,0 +1,31 @@
+@mixin lora-font($weight) {
+  @font-face {
+    font-family: "Lora";
+    font-weight: $weight;
+    font-display: swap;
+    src: local("Lora"),
+         url("../font/Lora/Lora-VariableFont_wght.ttf"),
+         url("../font/Lora/Lora-Italic-VariableFont_wght.ttf");
+  }
+}
+@include lora-font(400);
+@include lora-font(700);
+
+@mixin raleway-font($weight) {
+  @font-face {
+    font-family: "Raleway";
+    font-weight: $weight;
+    font-display: swap;
+    src: url("../font/Raleway/Raleway-VariableFont_wght.ttf"),
+         url("../font/Raleway/Raleway-Italic-VariableFont_wght.ttf");
+  }
+}
+@include raleway-font(400);
+@include raleway-font(500);
+@include raleway-font(700);
+
+@font-face {
+  font-family: "Inconsolata";
+  font-display: swap;
+  src: url("../font/Inconsolata/Inconsolata-VariableFont_wdth,wght.ttf");
+}

@@ -1,0 +1,20 @@
+{{/* To simplify code, ask parent shortcodes for options when they are not
+     given to console_single itself. */}}
+{{ .Scratch.Set "chunk" (.Get "chunk") }}
+{{ if eq "" (.Get "chunk") }}
+    {{ .Scratch.Set "chunk" (.Parent.Parent.Get "chunk") }}
+{{ end }}
+{{ .Scratch.Set "suffix" (.Get "suffix") }}
+{{ if and (eq "" (.Get "suffix")) (not (eq nil (.Parent.Get "suffix"))) }}
+    {{/* .Get returns an empty string when an argument is not found, but
+         an empty string is a valid suffix. Ask the parent for it, but only
+         use the parent's suffix if it's not nil */}}
+    {{ .Scratch.Set "suffix" (.Parent.Get "suffix") }}
+{{ end }}
+
+{{ $path := path.Join "content-gen" (path.Join .Page.File.Dir (printf "output%v.%v" (.Scratch.Get "suffix") (.Scratch.Get "chunk"))) }}
+{{ if eq $.Site.Params.skipoutput "skip" }}
+{{ highlight "Program output disabled" "console" }}
+{{ else }}
+{{ highlight ($path | readFile | safeHTML) "console" }}
+{{ end }}

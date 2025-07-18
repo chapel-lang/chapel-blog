@@ -1,0 +1,6 @@
+# Fails under gcc: this example needs to use the LLVM backend because it uses
+# the AtomicObjects module, which itself needs to use the LLVM backend
+CHPL_LLVM==none
+CHPL_TARGET_COMPILER==gnu
+# Atomics are not supported in GPU testing and this test fails to compile in GPU configs
+CHPL_LOCALE_MODEL==gpu

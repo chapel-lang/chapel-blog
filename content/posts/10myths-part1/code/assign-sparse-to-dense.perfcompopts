@@ -1,0 +1,2 @@
+-sn=10000 -sprintArrays=false -soptimizeAssign=false  # assign-sparse-to-dense
+-sn=10000 -sprintArrays=false -soptimizeAssign=true   # assign-sparse-to-dense-opt

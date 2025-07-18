@@ -1,0 +1,2 @@
+hi there
+string-greeting-overflow.chpl:8: error: halt reached - index 123456789 out of bounds for string with length 8

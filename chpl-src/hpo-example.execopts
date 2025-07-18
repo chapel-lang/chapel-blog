@@ -1,0 +1,2 @@
+--targetProgram="\"python3 ../content/posts/hpo-example/toy.py\"" --argsString="\"('x', (0, 30))\"" # hpo-example.toy.good
+#--targetProgram="\"python3 ../content/posts/hpo-example/polyfit.py\"" --argsString="\"('degree', (2,5));('alpha_order',(-2,2))\"" # hpo-example.polyfit.good
