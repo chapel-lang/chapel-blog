@@ -62,13 +62,23 @@ article in Word or Google Docs and have an editor transliterate it to
 the hugo markdown format we use.
 
 
-## Quick (Re)start
+## Quick Restart
 If you've already set up your environment (installed Hugo etc.), the following
 commands, executed in the `chapel-blog` folder, should get your workspace ready
 for continuing to work on the blog again:
 
+```bash
+# Set up the Chapel environment to get CHPL_HOME set
+source /path/to/chapel/util/setchplenv.bash
+
+# Launch the preview server
+make preview
+```
+
+Or, more manually:
+
 ```Bash
-# Set up the Chapel environment
+# Set up the Chapel environment to get CHPL_HOME set
 source /path/to/chapel/util/setchplenv.bash
 
 # Enable Python packages installed in virtual environment
@@ -78,7 +88,9 @@ source ./venv/bin/activate
 ./scripts/chpl_blog.py serve --fast -D -F
 ```
 
-The last command will launch a web server reachable at `http://localhost:1313`.
+The last command will launch a web server reachable at
+`http://localhost:1313` (or possibly another port if 1313 is already
+in use... check the output to be sure).
 
 ## Table of Contents
 - [Setting Up Your Environment](#setting-up-your-environment)
@@ -141,48 +153,32 @@ website.
 To install the blog's Python dependencies, we recommend using Python's virtual
 environments feature. By creating a virtual Python environment for the blog and 
 installing packages into it, your global Python installation is left intact.
-To create a virtual environment, you will need to have the `virtualenv`
-command installed; this can be done as follows:
+
+If you use the `Makefile` in this directory, then commands like `make
+preview` (which launches a local webserver that gives you a preview of
+the blog) will automatically create, set up, and activate the Python
+virtual environment for you, and you can skip ahead to the next
+section.
+
+If you would prefer to do it manually, the following command will
+create a Python virtual environment for you called `venv`:
 
 ```Bash
-python3 -m pip install --user virtualenv
+python3 -m virtualenv venv
+# or: virtualenv venv
 ```
 
-In some cases, you may get a warning that `virtualenv` has been installed
-in a place not available via `$PATH`. This will prevent you from running
-the `virtualenv` command.
-
-```
-WARNING: The script virtualenv is installed in '/some/path/Python/3.11/bin' which is not on PATH.
-Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-```
-
-This can be fixed with adding the following line to your `bashrc` / `zshrc` file:
-
-```bash
-export PATH="/some/path/Python/3.11/bin":$PATH
-#           ----------------------------
-#            the path from the warning
-```
-
-After that, the following command will create a Python virtual environment
-called `venv`:
-
-```Bash
-virtualenv venv
-# or python3 -m virtualenv venv
-```
-
-Python virtual environments need to be _activated_. Activating an environment
-switches the `python` command to use the virtual environment's Python interpreter,
-which can use the environment's installed packages.
+You will then need to _active_ the environment, which switches the
+`python` command to use the virtual environment's Python interpreter,
+which can use the environment's installed packages.  This can be
+done using:
 
 ```Bash
 source ./venv/bin/activate
 ```
 
 This last command needs to be run once per terminal session; it's not a one-time
-step. For this reason, it's also listed in the _Quick (Re)start_ section above.
+step. For this reason, it's also listed in the _Quick Restart_ section above.
 
 Finally, you can install the required dependencies into the virtual environment
 using the following command:
@@ -209,32 +205,46 @@ blog scripts.
 ## Launching the Preview Server
 
 Once you have all the dependencies installed (see [Setting Up Your Environment](#setting-up-your-environment)),
-you should be able to start a Hugo server using the following command:
+you should be able to start a Hugo server using either of the following commands:
+
+```Bash
+make preview
+```
+
+or:
 
 ```Bash
 ./scripts/chpl_blog.py serve --fast -D -F
 ```
 
-Here’s what the arguments in the above command mean:
+Here’s what the arguments in the manual option mean:
 * `serve` -- start a web server to preview the site (default URL is `localhost:1313`)
 * `--fast` -- disable slow parts of the build (currently: computing program output)
 * `-D` -- render drafts (the demo post is a draft, but it's a good demonstration
   of blog features, so it's nice to render it)
 * `-F` -- render not-yet-published articles (you probably want this if you’re drafting)
 
-After this, you should be able to see the blog on `localhost:1313`. Try
-visiting the demo page, which should be visible: http://localhost:1313/posts/demo/
+After this, you should be able to see the complete blog at [`localhost:1313`](http://localhost:1313/). Try
+visiting the demo page, which should be visible at: http://localhost:1313/posts/demo/
 
 ## Authoring Articles
 Currently, there are two modes of writing a Chapel blog post:
-* Chapel-driven -- a single `.chpl` file with code, and comments containing blog
+* Chapel-driven -- a single `.chpl` file with code whose comments contain blog
   text. A Markdown file is generated from the comments.
-* Markdown-driven -- a Markdown file together with any number of .chpl files
+* Markdown-driven -- a Markdown file together with any number of `.chpl` files
   for code. Markdown is written by hand.
 
-In both cases, the end product is a Markdown file, which Hugo interprets
-to create an HTML page. However, the two supported modes are fairly different,
-and are covered separately in the following sections.
+In practice, the first mode tends to be best when the blog article is
+describing a single Chapel program, e.g., walking a user through the
+code bit by bit in the body of the article.  The second mode is far
+more general-purpose and can be used for anything (including cases
+that are a good fit for the first mode, if you choose).
+
+In both cases, the end product is a Markdown file, which Hugo
+interprets to create an HTML page. However, the two supported modes
+are fairly different, and are covered separately in the following
+sections.  Examples of articles in both styles can be found in
+`./chpl-src/*.chpl` or `./content/posts/*/index.md`, respectively.
 
 ### Chapel-Driven Articles
 
@@ -251,10 +261,10 @@ Chapel-driven articles have two strong points:
 However, they may not be a good fit in the following situations:
 * The code being presented requires multiple files
 * The project has code in other languages (e.g. C++ or Python for comparison with Chapel)
-* Article requires figures (though it can be done)
+* The article requires figures (it can be done, but just requires a bit more directory management)
 
 If the above limitations are undesirable, consider a Markdown-driven article,
-described in the _Markdown-Driven Articles_ section.
+described in the [Markdown-Driven Articles](#markdown-driven-articles) section.
 
 Below is a miniature example of an article in this form:
 
@@ -273,6 +283,11 @@ proc f() {
 }
 ```
 
+The base filename of the `.chpl` source file will also serve as the
+article's unique slug in its URL.  For example, if the article above
+were saved as `myArticle.chpl`, it would appear on the Chapel website
+as `https://chapel-lang.org/blog/posts/myArticle/`.
+
 The comments at the beginning of the file have special meanings. The very
 first comment should be a single-line comment with the article name
 (here: "Blog post title"). The next zero or more lines are expected to be
@@ -280,6 +295,20 @@ in the format `// property: value`; these lines can be used to configure
 the [Hugo front matter variables](https://gohugo.io/content-management/front-matter/)
 of the article. In the example above, the `draft` property is set to `true`,
 marking the article as a draft.
+
+Once merged, Chapel-driven articles will be tested nightly by the
+project's regression testing system to ensure that they continue to
+work over time.  As a result, an article named `myArticle.chpl` must
+also have a file named `myArticle.good` storing the expected compiler
+and execution output for the program when compiled and run.  Articles
+can and should be tested by authors by running `start_test
+myArticle.chpl`.  They can also support other features from the
+testing system like `*.compopts`, `*.execopts`, or `*.prediff` files.
+If you are not already familiar with Chapel's testing system, refer to
+the [Chapel Testing
+System](https://chapel-lang.org/docs/developer/bestPractices/TestSystem.html)
+documentation for details, or reach out to the developer community
+iwth questions.
 
 Note that an article's Chapel version can be specified in the front matter using
 the `chplVersion` tag. When set to a particular version (e.g., 1.33.0), the
@@ -295,7 +324,7 @@ maintained as features evolve. This strategy is beneficial as it prevents code f
 becoming stale, which requires effort from readers to get it running.
 
 <details>
-<summary>Here's a more realistic list of front matter properties.</summary>
+<summary>Here's a more detailed example of front matter properties.</summary>
 
 ```
 // Advent of Code 2022: Twelve Days of Chapel
@@ -335,18 +364,31 @@ content/posts/article-name
 ├── index.md
 └── code
     ├── file1.chpl
+    ├── file1.good
     ├── ...
     ├── fileN.chpl
-    └── sub_test
+    └── fileN.good
 ```
 
 Notice that unlike Chapel-driven articles, which go in `chpl-src`,
-Markdown-driven articles should be placed into the `content` folder.
+Markdown-driven articles should be placed into the `content/posts/`
+folder, where each article has its own folder.  This folder name forms
+the article's "slug" in its URL.  For example, the example just above
+would result in an article appearing at
+`https://chapel-lang.org/blog/posts/article-name/`.
 
 The `index.md` file contains the article Markdown, while the files in
-`code` contain the Chapel source file associated with the article. The
-additional `sub_test` file is required by the testing infrastructure; you
-can read more about this in the __Testing Infrastructure__ section.
+`code` contain the Chapel source file associated with the article.  By
+default, this directory will be tested nightly by Chapel's regression
+testing system once the article is merged to ensure that things
+continue working over time.  Authors should ensure that the tests work
+properly by running `start_test content/posts/article-name/code`
+before handing the article off for its final editing pass.  If you are
+not already familiar with Chapel's testing system, refer to the
+[Chapel Testing
+System](https://chapel-lang.org/docs/developer/bestPractices/TestSystem.html)
+documentation for details, or reach out to the developer community
+iwth questions.
 
 The blog repository provides an easy way to create a new Markdown-driven
 article.
@@ -397,8 +439,14 @@ By default, links starting with `http` are considered "external links" and will 
 Note: this section is only relevant to people managing https://chapel-lang.org/blog.
 If you're simply trying to contribute an article, you do not need this section.
 
-To generate the HTML page and move it to `$CHPL_WWW/chapel-lang.org/blog`, use
-the `build` command of the script, as well as the `--copy` option.
+To generate the HTML page and move it to `$CHPL_WWW/chapel-lang.org/blog`, use:
+
+```bash
+make www
+```
+
+or, alternatively, the `build` command of the script, as well as the
+`--copy` option.
 
 ```Bash
 ./scripts/chpl_blog.py build --copy
