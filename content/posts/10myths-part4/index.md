@@ -15,11 +15,11 @@ Community on Scalable Computing&nbsp;(TCSC) blog.  In it, I described
 discouraging attitudes that our team encountered when talking about
 developing a language like Chapel, and I gave my personal rebuttal to
 them.  That series has generally been unavailable for many years, so
-on this, its 13th anniversary, we're reprinting the original series
-here on the Chapel blog, along with new commentary about how well or
-poorly the ideas have held up over time.  For a more detailed
-introduction to both the original series and this updated one, please
-see [the first article]({{< relref 10myths-part1 >}}) in this series.
+for its 13th anniversary, we're reprinting the original series here on
+the Chapel blog, along with new commentary about how well or poorly
+the ideas have held up over time.  For a more detailed introduction to
+both the original series and this updated one, please see [the first
+article]({{< relref 10myths-part1 >}}) in this series.
 
 
 This month, we're reprinting the fourth article in the original
@@ -91,17 +91,22 @@ language easier to learn, as compared to sticking with an established
 syntax merely for the sake of familiarity.
 
 As I mentioned last month, in Chapel’s design, we have generally
-followed C’s lead syntactically, but have also felt free to depart
-from it in cases where we believe the benefits outweigh the learning
-curve of the departure.  One very obvious case is our declaration
-syntax, which tends to take more of a Modula-style, keyword-based,
-left-to-right approach rather than adopting C’s “inside-out”
-declaration style.  As an example, let’s consider the creation of a
-_skyline array_—an array of arrays in which the sizes of the inner
-arrays vary from element to element of the outer array.  As a
-particularly simple example, let’s consider declaring an array of
-arrays that represents a triangular index space.  In C, we might
-declare such an array as follows:
+{{<sidenote "right" "followed C’s lead syntactically">}}Re-reading
+this today, it's interesting to me that I characterized Chapel as
+being so C-oriented when writing this series.  Today, I tend to
+describe Chapel as taking ideas and syntax from a number of languages
+without necessarily placing special emphasis on C.  Maybe because
+Python and other languages have become so much more
+prominent?{{</sidenote>}}, but have also felt free to depart from it
+in cases where we believe the benefits outweigh the learning curve of
+the departure.  One very obvious case is our declaration syntax, which
+tends to take more of a Modula-style, keyword-based, left-to-right
+approach rather than adopting C’s “inside-out” declaration style.  As
+an example, let’s consider the creation of a _skyline array_—an array
+of arrays in which the sizes of the inner arrays vary from element to
+element of the outer array.  As a particularly simple example, let’s
+consider declaring an array of arrays that represents a triangular
+index space.  In C, we might declare such an array as follows:
 
 ```c
 float* tri[n];
@@ -138,10 +143,15 @@ the point of this example.{{</sidenote>}}.
 
 So, does this declaration syntax provide any new semantic power over
 what we could do in C?  No, in both cases, the result is a fairly
-straightforward array of arrays.  Does it require a learning curve for
-the C programmer?  Sure.  But the result is something that is more
-concise while also arguably being more readable and elegant.  For this
-reason, we believe that the syntactic divergence from C will
+straightforward {{<sidenote "left" "array of arrays">}}A current
+colleague, reading this for the first time, asserts that C doesn't
+really have proper arrays.  I'd agree with that, both today and when I
+wrote the original article, but didn't necessarily want to get into
+that debate with C enthusiasts in the original article, so gave it the
+benefit of the doubt.{{</sidenote>}}.  Does it require a learning
+curve for the C programmer?  Sure.  But the result is something that
+is more concise while also arguably being more readable and elegant.
+For this reason, we believe that the syntactic divergence from C will
 ultimately benefit programmers more than adhering to C would.
 
 These benefits become even more significant when moving to
@@ -167,20 +177,24 @@ var OSgFn: [lvl in 1..nLvls] [SpsCubes[lvl]] [SgFns[lvl]] [1..3] complex;
 In this declaration, _SpsCubes_ is a 1D array of 3D sparse, strided
 _domains_ (index sets) while _SgFns_ is a 1D array of 2D domains—I’ve
 omitted these supporting declarations for {{<sidenote "right"
-"reasons of space">}}Since space is not as much of a concern in this
-reprint series as it was in the original article, I've added the
+"reasons of space" -4>}}Since space is not as much of a concern in
+this reprint series as it was in the original article, I've added the
 supporting declarations in the discussion sections that follow this
 reprint.{{</sidenote>}}.  Thus, the resulting declaration creates a 1D
 array of sparse, strided 3D arrays of 2D arrays of 3-element vectors
 of complex values.  I would argue that even a novice Chapel programmer
-who reads these declarations could easily figure this out.  In
-contrast, the C version of this data structure was based on 1D arrays
-with lots of indirect indexing, making the conceptual view of the data
-structure virtually incomprehensible.  In fact, I’d wager that if a
-programmer was handed both codes and asked to draw the data structure
-on a whiteboard, that a beginning Chapel programmer could do so within
-a few minutes while expert C programmers would likely require days to
-reach the same conclusion from the C version, if they ever could.
+who reads these declarations could {{<sidenote "right" "easily"
+4>}}Hmm, "easily" seems like an overstatement in retrospect—this is by
+no means a trivial variable declaration.  But it's definitely far
+easier to figure out than the original reference version
+was.{{</sidenote>}} figure this out.  In contrast, the C version of
+this data structure was based on 1D arrays with lots of indirect
+indexing, making the conceptual view of the data structure virtually
+incomprehensible.  In fact, I’d wager that if a programmer was handed
+both codes and asked to draw the data structure on a whiteboard, that
+a beginning Chapel programmer could do so within a few minutes while
+expert C programmers would likely require days to reach the same
+conclusion from the C version, if they ever could.
 
 As evidence of this conjecture, after writing the FMM computation in
 an early draft of Chapel, I showed the code to the Boeing engineer who
@@ -263,11 +277,11 @@ patterns that were largely independent of the scalable parallel
 computing context for which Chapel was originally developed.  Perhaps
 this was due to the fact that scalable parallel computing is
 traditionally done in languages like Fortran, C, and C++ using
-libraries like MPI or directives like OpenMP to express the
-parallelism and locality considerations required at scale.  And since
-those languages were traditionally sequential and constrained to a
-single process, perhaps focusing only on local computations made
-sense.
+libraries like MPI or directive-based approaches like OpenMP to
+express the parallelism and locality considerations required at scale.
+And since those languages were traditionally sequential and
+constrained to a single process, perhaps focusing only on local
+computations made sense to me at the time.
 
 However, if we think of common `notations for scalable parallel
 computing—like MPI or OpenMP—as being pseudo-languages in and of
