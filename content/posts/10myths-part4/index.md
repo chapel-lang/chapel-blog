@@ -247,9 +247,13 @@ than computational, languages, I believe that his conjecture applies
 to programming as well as natural languages.  In particular, I would
 argue that a programming language with improved syntax (and semantics)
 permits users to spend more time working on the computations that they
-are writing and the problems they are solving rather than on
-lower-level details that can be abstracted by languages and
-implemented by compilers.
+are writing and {{<sidenote "right" "the problems they are solving">}}
+I think our [recent interview with Scott Bachman]({{<relref
+7qs-bachman>}})) is a good example of this principle.  He talks about
+how, in translating his computation from Matlab to Chapel, he obtained
+a 10,000x speedup, noting that some of this was algorithmic and
+enabled by Chapel.{{</sidenote>}} rather than on lower-level details
+that can be abstracted by languages and implemented by compilers.
 
 #### Counterpoint #4: Syntax does matter and can greatly impact a programmer’s productivity and creativity in a language as well as their ability to read, maintain, and modify code written in that language.
 
