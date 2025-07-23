@@ -1,7 +1,7 @@
 // the problem size, overridable by running the executable with `--n=...`
 config const n = 10;
 
-// a way of creating a triangular array value that works today
+// a pattern for creating a triangular array value that works today
 var A = for i in 1..n do [1..i] 0.0;
 
 // initialize the triangular array
