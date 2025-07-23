@@ -24,8 +24,8 @@ article]({{< relref 10myths-part1 >}}) in this series.
 
 This month, we're reprinting the fourth article in the original
 series, originally published on July 23, 2012.  Comments in the
-sidebar and in [sections that follow the reprint]({{<relref
-"#reflections-on-the-original-article">}}) reflect current thoughts
+sidebar and in [the sections that follow the reprint]({{<relref
+"#reflections-on-the-original-article">}}) contain current thoughts
 and reflections on it:
 
 
@@ -96,22 +96,24 @@ this today, it's interesting to me that I characterized Chapel as
 being so C-oriented when writing this series.  Today, I tend to
 describe Chapel as taking ideas and syntax from a number of languages
 without necessarily placing special emphasis on C.  Maybe because
-Python and other languages have become so much more
-prominent?{{</sidenote>}}, but have also felt free to depart from it
-in cases where we believe the benefits outweigh the learning curve of
-the departure.  One very obvious case is our declaration syntax, which
-tends to take more of a Modula-style, keyword-based, left-to-right
-approach rather than adopting C’s “inside-out” declaration style.  As
-an example, let’s consider the creation of a _skyline array_—an array
-of arrays in which the sizes of the inner arrays vary from element to
-element of the outer array.  As a particularly simple example, let’s
-consider declaring an array of arrays that represents a triangular
-index space.  In C, we might declare such an array as follows:
+Python and other languages have become so much more prominent, whereas
+at the time of Chapel's inception most popular languages all had
+fairly strong syntactic ties to C?{{</sidenote>}}, but have also felt
+free to depart from it in cases where we believe the benefits outweigh
+the learning curve of the departure.  One very obvious case is our
+declaration syntax, which tends to take more of a Modula-style,
+keyword-based, left-to-right approach rather than adopting C’s
+“inside-out” declaration style.  As an example, let’s consider the
+creation of a _skyline array_—an array of arrays in which the sizes of
+the inner arrays vary from element to element of the outer array.  As
+a particularly simple example, let’s consider declaring an array of
+arrays that represents a triangular index space.  In C, we might
+declare such an array as follows:
 
 ```c
 float* tri[n];
 
-for (i=0; i<n; i++) {
+for (int i=0; i<n; i++) {
   tri[i] = (float*)malloc((i+1)*sizeof(float));
 }
 ```
@@ -131,35 +133,34 @@ over the index set <small>$1…i$</small>, of real floating point
 variables (`real`).  Once you learn to read `:` as “is of type” and
 square brackets as array type specifiers, the declaration is fairly
 {{<sidenote "right" "easy to understand">}}Regrettably, despite
-this support for skyline array types being part of Chapel's syntax
-since its inception, it has not yet been implemented.  While Chapel
-supports arrays of arrays, like<br> `var A: [1..n] [1..m] real;`,
-currently, the inner arrays of such nestings must share the same index
-set.  Thus, it is not yet possible to declare array-of-array types in
-which the inner array's indices are parameterized based on the outer
-array index.  As I'll demonstrate later in this article, there are
-workarounds that can be used in the meantime, which further support
-the point of this example.{{</sidenote>}}.
+designing Chapel's syntax to support closed-form skyline array
+declarations like this one, such declarations have not yet been
+implemented due to lack of prioritization.  However, both this example
+and the current workarounds for it in Chapel support the argument that
+better syntax can improve code clarity and maintainability.  I'll come
+back to this [in the comments below]({{<relref
+"#skyline-array-examples">}}).{{</sidenote>}}
+
 
 So, does this declaration syntax provide any new semantic power over
 what we could do in C?  No, in both cases, the result is a fairly
 straightforward {{<sidenote "left" "array of arrays">}}A current
 colleague, reading this for the first time, asserts that C doesn't
 really have proper arrays.  I'd agree with that, both today and when I
-wrote the original article, but didn't necessarily want to get into
-that debate with C enthusiasts in the original article, so gave it the
-benefit of the doubt.{{</sidenote>}}.  Does it require a learning
-curve for the C programmer?  Sure.  But the result is something that
-is more concise while also arguably being more readable and elegant.
-For this reason, we believe that the syntactic divergence from C will
-ultimately benefit programmers more than adhering to C would.
+wrote the original article, but I didn't necessarily want to get into
+that debate with C enthusiasts at the time, so gave it the benefit of
+the doubt.{{</sidenote>}}.  Does it require a learning curve for the C
+programmer?  Sure.  But the result is something that is more concise
+while also arguably being more readable and elegant.  For this reason,
+we believe that the syntactic divergence from C will ultimately
+benefit programmers more than adhering to C would.
 
 These benefits become even more significant when moving to
 higher-dimensional and more complex array-of-array data structures.
 One of the early computations we studied when designing Chapel was a
 Fast Multipole Method (FMM) benchmark that was developed by Boeing for
 DARPA’s Data-Intensive Systems (DIS) program of the late 1990’s/early
-2000’s [1].  The primary data structure in this mini-application is a
+2000’s [[1]({{<relref "#bibliography">}})].  The primary data structure in this mini-application is a
 collection of signature functions stored using a hierarchy of 3D
 sparse arrays. Each signature function is a 2D discretization of a
 spherical function in which the elements are 3-element vectors of
@@ -178,23 +179,22 @@ In this declaration, _SpsCubes_ is a 1D array of 3D sparse, strided
 _domains_ (index sets) while _SgFns_ is a 1D array of 2D domains—I’ve
 omitted these supporting declarations for {{<sidenote "right"
 "reasons of space" -4>}}Since space is not as much of a concern in
-this reprint series as it was in the original article, I've added the
-supporting declarations in the discussion sections that follow this
-reprint.{{</sidenote>}}.  Thus, the resulting declaration creates a 1D
-array of sparse, strided 3D arrays of 2D arrays of 3-element vectors
-of complex values.  I would argue that even a novice Chapel programmer
-who reads these declarations could {{<sidenote "right" "easily"
-4>}}Hmm, "easily" seems like an overstatement in retrospect—this is by
-no means a trivial variable declaration.  But it's definitely far
-easier to figure out than the original reference version
-was.{{</sidenote>}} figure this out.  In contrast, the C version of
-this data structure was based on 1D arrays with lots of indirect
-indexing, making the conceptual view of the data structure virtually
-incomprehensible.  In fact, I’d wager that if a programmer was handed
-both codes and asked to draw the data structure on a whiteboard, that
-a beginning Chapel programmer could do so within a few minutes while
-expert C programmers would likely require days to reach the same
-conclusion from the C version, if they ever could.
+this reprint series, I've added the supporting declarations in the
+discussion sections below.{{</sidenote>}}.  Thus, the resulting
+declaration creates a 1D array of sparse, strided 3D arrays of 2D
+arrays of 3-element vectors of complex values.  I would argue that
+even a novice Chapel programmer who reads these declarations could
+{{<sidenote "right" "easily" 1>}}In retrospect, "easily" seems like an
+overstatement—this is by no means a trivial variable declaration.  But
+it's definitely far easier to figure out than the original reference
+version was.{{</sidenote>}} figure this out.  In contrast, the C
+version of this data structure was based on 1D arrays with lots of
+indirect indexing, making the conceptual view of the data structure
+virtually incomprehensible.  In fact, I’d wager that if a programmer
+was handed both codes and asked to draw the data structure on a
+whiteboard, that a beginning Chapel programmer could do so within a
+few minutes while expert C programmers would likely require days to
+reach the same conclusion from the C version, if they ever could.
 
 As evidence of this conjecture, after writing the FMM computation in
 an early draft of Chapel, I showed the code to the Boeing engineer who
@@ -248,14 +248,15 @@ to programming as well as natural languages.  In particular, I would
 argue that a programming language with improved syntax (and semantics)
 permits users to spend more time working on the computations that they
 are writing and {{<sidenote "right" "the problems they are solving">}}
-I think our [recent interview with Scott Bachman]({{<relref
-7qs-bachman>}})) is a good example of this principle.  He talks about
-how, in translating his computation from Matlab to Chapel, he obtained
-a 10,000x speedup, noting that some of this was algorithmic and
-enabled by Chapel.{{</sidenote>}} rather than on lower-level details
-that can be abstracted by languages and implemented by compilers.
+I think Scott Bachman's work in Chapel as described in our [recent
+interview with him]({{<relref 7qs-bachman>}}) is a good example of
+this principle.  He has described how switching from Matlab to Chapel
+resulted in a 10,000x speedup for his code where some of that was
+algorithmic changes that were enabled by Chapel's syntax and
+features.{{</sidenote>}} rather than on lower-level details that can
+be abstracted by languages and implemented by compilers.
 
-#### Counterpoint #4: Syntax does matter and can greatly impact a programmer’s productivity and creativity in a language as well as their ability to read, maintain, and modify code written in that language.
+#### Counterpoint #4: Syntax does matter and can greatly impact a programmer’s productivity and creativity in a language, as well as their ability to read, maintain, and modify code written in that language.
 
 Tune in next time for more myths about scalable parallel programming
 languages.
@@ -272,6 +273,14 @@ June 1999.
 
 ### Reflections on the Original Article
 
+Like last month's myth, I feel like the "syntax doesn't matter!"
+attitude isn't as prevalent today as it was back then.  It may be that
+languages with attractive syntax like Python, Go, or Swift have become
+more prevalent such that people are more aware of how syntax can help
+them, or help popularize a language.  Or it may just be that I don't
+hang out in academic computer science circles as much these days.  In
+any case, while the myth may not be as relevant, I think my response
+still is.  Let's look at a couple of aspects of it.
 
 #### Syntax and Scalable Parallel Computing
 
@@ -279,15 +288,15 @@ Re-reading this article today, it's interesting to me that the
 examples I focused on when arguing that syntax matters dealt only with
 patterns that were largely independent of the scalable parallel
 computing context for which Chapel was originally developed.  Perhaps
-this was due to the fact that scalable parallel computing is
-traditionally done in languages like Fortran, C, and C++ using
-libraries like MPI or directive-based approaches like OpenMP to
-express the parallelism and locality considerations required at scale.
-And since those languages were traditionally sequential and
-constrained to a single process, perhaps focusing only on local
-computations made sense to me at the time.
+this was due to the fact that scalable parallel computing is typically
+done in (traditionally) sequential languages like Fortran, C, and C++,
+where the parallelism and locality elements required to scale were
+expressed using libraries like MPI or directive-based approaches like
+OpenMP.  So, since the syntax was determined by the base languages and
+those languages only focused on local computations, maybe that's where
+I focused?
 
-However, if we think of common `notations for scalable parallel
+However, if we think of common notations for scalable parallel
 computing—like MPI or OpenMP—as being pseudo-languages in and of
 themselves, then perhaps I should've also compared Chapel's syntax to
 the library calls and directives used in such systems.
@@ -303,23 +312,27 @@ Contrast it with the equivalent Chapel program:
 {{< file_download fname=hello.chpl lang="chapel" >}}
 
 The Chapel program is notably shorter and arguably easier to read by
-virtue of it being a language designed for parallel computing and
-scalability.  Specifically, syntactic elements like `here` to refer to
-the locale (system resources) on which we're currently running,
-`coforall` loops to create parallel tasks, and `on` clauses to specify
-where tasks should execute result in a much more succinct expression
-of the computation.
+virtue of it being a more modern language that was designed for
+parallel computing and scalability.  Specifically, the use of
+syntactic elements like:
+
+* `here` to refer to the _locale_ (system resources) on which we're
+currently running,
+* `coforall` loops to create parallel tasks, and
+* `on` clauses to specify where tasks should execute
+
+result in a much more succinct expression of the computation.
 
 In addition, the Chapel program's syntax is subtly benefitting from
 its post-SPMD programming model by having the program start as a
 single task running on locale 0 rather than requiring the programmer
 to write a `main()` procedure that is intended to be run once per
-process.  It's also benefitting from Chapel's support of a global
-address space, by having arbitrary locales write to a single console
-output stream associated with locale 0.  Such benefits would become
-even more apparent for a more complex program that did any sort of
-data transfer between the distinct processes executing the MPI or
-Chapel program.
+compute node or processor core.  It's also benefitting from Chapel's
+support of a global address space, by having arbitrary locales write
+to a single console output stream associated with locale 0.  Such
+benefits would become even more dramatic for a more complex program
+that did any kind of data transfer between the distinct processes
+executing the MPI or Chapel programs.
 
 Similar comparisons could be made between Chapel and other HPC
 programming notations like CUDA, HIP, SYCL, Kokkos, etc., but that
@@ -332,37 +345,51 @@ simple or complex.
 
 #### Skyline Array Examples
 
-As mentioned in the sidebar above, the original article's initial
-examples illustrating how Chapel's left-to-right declaration syntax
-supports intuitive skyline arrays, rely on a Chapel feature that has
-not been implemented to date, in which an inner array's indices can be
-parameterized using the index of an outer array.
+
+As mentioned in the sidebar above, this article's examples that
+illustrate how Chapel's left-to-right declaration syntax supports
+intuitive skyline arrays, rely on a Chapel feature that has not yet
+been implemented due to competing priorities.  Chapel does support
+arrays of arrays, like:
+
+```chapel
+var A: [1..n, 1..n] [1..k] real;
+```
+
+However, currently the inner arrays of such nestings must share the
+same index set.  Thus, it is not yet possible to declare an
+array-of-arrays in which an inner array's index set is parameterized
+by the indices of its outer arrays.  However, workarounds exist.
 
 In practice, when users need this ability in Chapel as it stands
 today, they often wrap the inner arrays in a record which acts
 array-like.  Here's a very simple example of how this can be done to
-create the triangular array atype from the original article:
+create the triangular array from the original article:
 
 {{< file_download fname=skyline-record.chpl lang="chapel" >}}
 
-Even though such workarounds
+In addition, by leaning on Chapel's type inference, it's possible to
+create a triangular array of arrays by skipping the type declaration
+altogether:
 
-are sufficient, it's regrettable to me that we haven't yet implemented
-the ability to declare `A` as `var A: [i in 1..n] [1..i] real;`,
-obviating the need for such helper records.  While this current lack
-of support undermines the practicality of the original article's point
-("Look how easy it is to declare skyline arrays in Chapel!"), the
-workaround also emphasizes the article's argument—that better syntax
-can support the pattern more directly and attractively.  {{<sidenote
-"right" "directly and attractively">}}Current Chapel programmers
-needing skyline arrays should also note that Chapel currently supports
-the ability to create certain skyline arrays in type-inferred
-settings.  For example, [this program](code/skyline-value.chpl) writes
-the triangular array example using this approach.{{</sidenote>}}.
+{{< file_download fname=skyline-value.chpl lang="chapel" >}}
 
-For the more complex Fast Multipole Method example, here are the
-supporting declarations for the `OSgFn` variable that I omitted from
-the original article due to space constraints:
+Even though such workarounds are possible, it's still regrettable to
+me that we haven't yet implemented the ability to declare such arrays
+as `var A: [i in 1..n] [1..i] real;`, obviating the need for such
+helper records or inferred types.
+
+While the lack of such declarations means that the examples in the
+original article won't compile today, these workarounds emphasize the
+article's point—that better syntax can support the patterns more
+directly and attractively.  Specifically, I would say that the
+workarounds above are not as attractive as the original syntax; and
+they become even less manageable in the face of the complex array
+declaration from the FMM computation.
+
+Speaking of the FMM example, here are the supporting declarations for
+the `OSgFn` variable that I omitted from the original article due to
+space constraints:
 
 ```chapel
 // the number of levels in the FMM hierarchy and the size of the finest level
@@ -379,27 +406,29 @@ const DnsCubes = [lvl in 1..nLvls] {1..n, 1..n, 1..n} by 2**lvl,
 // at each level of the hierarchy
 const SgFns = [lvl in 1..nLvls] {1..sgFnSize(lvl), 1..2*sgFnSize(lvl)};
 
-// the array representing the complete set of outer signature functions:
-// - a 1D array over the levels of the hierarchy
-// - of sparse 3D arrays representing the elements at that level
-// - of dense 2D arrays representing an element's discretized signature function
-// - of 3-element vectors
-// - of complex values
+// the array representing the complete set of outer signature functions, made up of:
+//   * a 1D array over the levels of the hierarchy
+//   * of sparse 3D arrays representing the elements at that level
+//   * of dense 2D arrays representing an element's discretized signature function
+//   * of 3-element vectors
+//   * of complex values
 var OSgFn: [lvl in 1..nLvls] [SpsCubes[lvl]] [SgFns[lvl]] [1..3] complex;
 ```
 
 Note that in this code, only the declarations of `SpsCubes` and
-`OSgFn` are unsupported in Chapel today since they are the only cases
-that rely on using an array type's indices to parameterize its
-elements' indices.
+`OSgFn` are unsupported in Chapel today since they are the two cases
+that rely on using an outer array's indices to parameterize an inner
+array's domain.
 
 
 #### Wrapping Up
 
 That concludes this month's myth about whether syntax matters when
-designing scalable parallel programming languages, where I believe
-that it does matter and can significantly improve how clearly a
-program is expressed and how programmers think about their code.  Next
-month, we'll revisit the fifth article in this series, which addresses
-the concept that productive languages require a magic compiler.  See
-you then!
+designing scalable parallel programming languages.  I definitely
+believe that syntax does matter, and that it can significantly improve
+how clearly a program is expressed and how programmers think about
+their code.
+
+Next month, we'll revisit the fifth article in this series, which
+addresses the myth that productive languages require a magic compiler.
+See you then!
