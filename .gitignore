@@ -12,3 +12,4 @@ __pycache__/
 
 # Ignore the public directory because it gets generated
 public/
+public-server/
