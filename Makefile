@@ -34,10 +34,11 @@ www-future: $(ACTIVATE)
 
 copy-to-www:
 	cd public/posts/hpo-example/code && ln -s hpo-example.chpl tune.chpl
+	start_test --clean-only
 	rsync -avh --no-times --checksum public/* $(CHPL_WWW)/chapel-lang.org/blog/ --delete
 
 test: check-env
-	cd chpl-src && start_test
+	start_test chpl-src content/posts/*/code
 
 check-env:
 ifndef CHPL_HOME
