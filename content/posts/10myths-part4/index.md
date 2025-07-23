@@ -82,13 +82,13 @@ about their favorite language.  This was essentially the theme of
 here.
 
 {{<pullquote>}}
-Syntax can markedly improve the readability, writeability, clarity,
+Syntax can markedly improve the readability, writability, clarity,
 and maintainability of a program.
 {{</pullquote>}}
 
 In contrast, when I said “yes, syntax matters!” what I was saying is
 that I believe syntax can markedly improve the readability,
-writeability, clarity, and maintainability of a program; and that the
+writability, clarity, and maintainability of a program; and that the
 benefits of an improved syntax can easily be worth the effort that it
 may take a C, Java, or Fortran programmer to adjust to its novelty.
 Moreover, I believe that a well-designed syntax can often make a novel
@@ -334,11 +334,11 @@ currently running,
 
 result in a much more succinct expression of the computation.
 
-In addition, the Chapel program's syntax is subtly benefitting from
+In addition, the Chapel program's syntax is subtly benefiting from
 its post-SPMD programming model by having the program start as a
 single task running on locale 0 rather than requiring the programmer
 to write a `main()` procedure that is intended to be run once per
-compute node, socket, or processor core.  It's also benefitting from
+compute node, socket, or processor core.  It's also benefiting from
 Chapel's support of a global address space, by having arbitrary
 locales write to a single console output stream associated with locale
 0.  Such benefits would become even more dramatic for a more complex
