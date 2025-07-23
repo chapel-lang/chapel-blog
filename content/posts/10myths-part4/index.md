@@ -314,7 +314,7 @@ the library calls and directives used in such systems.
 
 Googling "hybrid MPI OpenMP hello world", the first hit I get is the
 following program by Joseph Steinberg at [Stack
-Overflow](https://mpitutorial.com/tutorials/mpi-hello-world/):
+Overflow](https://stackoverflow.com/questions/35246774/hello-world-c-program-using-hybrid-of-openmp-and-mpi):
 
 {{< file_download fname=hello.c lang="c" >}}
 
