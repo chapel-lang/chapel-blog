@@ -81,6 +81,11 @@ about their favorite language.  This was essentially the theme of
 >}}#the-original-article-reprinted), so I won’t repeat those arguments
 here.
 
+{{<pullquote>}}
+Syntax can markedly improve the readability, writeability, clarity,
+and maintainability of a program.
+{{</pullquote>}}
+
 In contrast, when I said “yes, syntax matters!” what I was saying is
 that I believe syntax can markedly improve the readability,
 writeability, clarity, and maintainability of a program; and that the
@@ -210,6 +215,12 @@ the hierarchy.  In contrast, when he had taught me the FMM computation
 a few weeks prior, we used the whiteboard exclusively, never even
 bothering to look at the C code because it was so unclear as to not be
 the slightest bit illuminating.  Syntax matters.
+
+{{<pullquote>}}
+A programming language with improved syntax permits users to spend
+more time working on the computations that they are writing and the
+problems they are solving.
+{{</pullquote>}}
 
 As one last example, consider the following Chapel expression, which
 refers to a subset of an array’s values using a slicing operator:
@@ -379,6 +390,11 @@ Though such workarounds exist, it's still regrettable to me that we
 haven't yet implemented the ability to declare such arrays directly as
 `var A: [i in 1..n] [1..i] real;`, obviating the need for such helper
 records or inferred types.
+
+{{<pullquote>}}
+These workarounds also emphasize the article’s point—that better
+syntax can support patterns more directly and attractively.
+{{</pullquote>}}
 
 While the lack of such declarations means that the skyline array
 examples in the original article won't compile today, these
