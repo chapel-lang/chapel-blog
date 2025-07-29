@@ -1,6 +1,6 @@
 ---
 title: "7 Questions with Tiago Carneiro and Guillaume Helbecque: Combinatorial Optimization in Chapel"
-date: 2025-07-22
+date: 2025-07-30
 tags: ["User Experiences", "Interviews"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with the two principal developers of ChOp, the Chapel-based Optimization Project"
