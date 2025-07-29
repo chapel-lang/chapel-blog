@@ -10,11 +10,11 @@ interviewee_photo: "tiago-guillaume.jpg"
 
 This installment of our [7 Questions for Chapel Users]({{<relref
 7-questions-for-chapel-users>}}) series represents our first tag-team
-interview, in which we talk with not one.  Tiago Carneiro and
-Guillaume Helbecque are the principal developers of ChOp—the Chapel
-Optimization Project—which focuses on solving branch-and-bound
-computations using Chapel.  Read on to learn more about their work and
-experiences with Chapel!
+interview, in which we talk with not one but two Chapel users.  Tiago
+Carneiro and Guillaume Helbecque are the principal developers of
+ChOp—the Chapel-based Optimization Project—which focuses on solving
+combinatorial branch-and-bound computations.  Read on to learn more
+about their work and experiences with Chapel!
 
 
 #### 1. Who are you?
@@ -22,7 +22,7 @@ experiences with Chapel!
 **Tiago:** My name is Tiago Carneiro, and I specialize in
 High-Performance Computing (HPC), having gained experience at research
 institutions such as INRIA, Huawei, and Imec.  In late 2018, I
-initiated a research project with Prof. Nouredine Melab at
+initiated a research project with Professor Nouredine Melab at
 INRIA-Lille, France, which eventually grew into the Chapel-based
 Optimization Project ([ChOp](https://github.com/tcarneirop/ChOp)).
 
@@ -30,16 +30,16 @@ Optimization Project ([ChOp](https://github.com/tcarneirop/ChOp)).
 postdoctoral researcher in France, working within the INRIA BONUS
 research team (Big Optimization aNd Ultra-Scale Computing). I hold an
 academic background in applied mathematics and high-performance
-computing, and I recently completed my Ph.D. at the University of Lille,
-under the partial supervision of Prof. Nouredine Melab.
+computing, and I recently completed my Ph.D. at the University of
+Lille, under the partial supervision of Professor Nouredine Melab.
 
 
 #### 2. What do you do? What problems are you trying to solve?
 
 **Tiago:** Since the late 2000s, I've been dedicated to researching
 parallel computing for solving combinatorial optimization
-problems. Initially, my work focused on P2P networks, primarily
-utilizing Java and the JXTA protocol.
+problems. Initially, my work focused on peer-to-peer networks,
+primarily utilizing Java and the JXTA protocol.
 
 Later, during my undergraduate years, as CUDA-capable GPUs became more
 accessible in Brazil, I shifted my research. I began exploring the
@@ -51,7 +51,7 @@ More recently, my research addressed the challenge of finding a
 trade-off between performance and productivity in distributed
 heterogeneous combinatorial search. This also involved tackling
 critical issues of heterogeneity, portability, and scalability within
-such systems — the very foundation of the Chapel-based Optimization
+such systems—the very foundation of the Chapel-based Optimization
 Project (ChOp) that I mentioned.
 
 In my most recent position, I was part of a multidisciplinary group
@@ -115,8 +115,8 @@ This traditional approach requires a significant amount of effort
 dedicated to managing the low-level complexities of parallelism and
 load balancing/distribution.
 
-A primary benefit in my research comes from features like
-DistributedIters modules. These modules abstract away and manages many
+A primary benefit in my research comes from features like the
+`DistributedIters` module. These modules abstract away and manage many
 of the traditionally complex components that we'd have to code
 manually, such as:
 
@@ -128,7 +128,7 @@ manually, such as:
 In short, Chapel truly stands out because it effectively unifies the
 different parallel levels of modern GPU-powered clusters, handling
 everything from inter-node communication to intra-node parallelism
-across both CPUs and GPUs – with GPU portability. This significantly
+across both CPUs and GPUs—with GPU portability. This significantly
 frees us from implementing the most complex and error-prone aspects of
 a distributed combinatorial search, allowing us to focus more on the
 optimization problem itself, rather than the intricate details of
@@ -148,28 +148,28 @@ use.
 
 #### 4. What initially drew you to Chapel?
 
-**Tiago:** Back in 2018, my supervisor, Prof. Melab, gave me a task:
-to research programming languages for the 'Exascale-era' and identify
-candidates for parallel and distributed combinatorial search. We
-didn't have the exact terminology then, but the goal was to explore
-languages from projects like HPCS and figure out how they could
-benefit exact optimization.
+**Tiago:** Back in 2018, my supervisor, Professor Melab, gave me a
+task: to research programming languages for the 'Exascale-era' and
+identify candidates for parallel and distributed combinatorial
+search. We didn't have the exact terminology then, but the goal was to
+explore languages from projects like HPCS and figure out how they
+could benefit exact optimization.
 
 After looking into several options, UPC and Chapel were the top
 ones. But it was Chapel's distributed iterators built on top of PGAS
-that really caught my eye – they seemed to perfectly fit our specific
+that really caught my eye—they seemed to perfectly fit our specific
 needs. Chapel also stood out as the only language with a truly active
 community and direct support from its development team.
 
 Initially, after I presented Chapel's features to the group, some
 members were a bit skeptical. However, after I implemented some proofs
 of concept, I was able to demonstrate Chapel’s potential: I got a
-single-node Chapel version as fast as C-OpenMP, and developed a first
+single-node Chapel version as fast as C+OpenMP, and developed a first
 distributed application that was competitive with MPI+OpenMP in terms
 of performance, but with significantly fewer lines of code.
 
 **Guillaume:** I started working with Chapel at the beginning of my
-Ph.D. in 2021, when I joined the research project initiated by Tiago
+Ph.D. in 2021 when I joined the research project initiated by Tiago
 Carneiro and Nouredine Melab. The opportunity to work with a promising
 high-level PGAS-based language designed specifically for exascale
 computing—offering an alternative to traditional MPI+X
@@ -182,18 +182,19 @@ approaches—immediately appealed to me.
 
 First, we achieved unified parallel programming across an entire
 large-scale GPU cluster. This means we can program all levels of
-parallelism — CPU cores, GPUs, and inter-node communication — all with
-a single language. This dramatically simplifies development by letting
+parallelism—CPU cores, GPUs, and inter-node communication—all with a
+single language. This dramatically simplifies development by letting
 us avoid the complex mix of different programming languages and
 libraries typically needed for each parallel level. For instance, we
 no longer had to manually program intricate MPI-based load balancing
-schemes (see Fig1 [Link to this paper](https://www.sciencedirect.com/science/article/pii/S0167739X1930946X)). This significantly higher
-productivity in combinatorial search was achieved with minor parallel
-performance losses.
+schemes (see the figure below as well as [this
+paper](https://www.sciencedirect.com/science/article/pii/S0167739X1930946X)). This
+significantly higher productivity in combinatorial search was achieved
+with minor parallel performance losses.
 
 Another success came with Chapel's native GPU support. Before its
 official support, our code was quite complex and difficult to maintain
-because we had to mix Chapel with CUDA-C via an interoperability
+because we had to mix Chapel with CUDA C via an interoperability
 layer. That meant maintaining separate kernel versions for each GPU
 library, plus their C wrappers, and the Chapel calls. By switching to
 Chapel's native GPU capabilities, we achieved a significant
@@ -207,11 +208,13 @@ distributed GPU search vs. its hybrid counterparts that mixed Chapel
 with CUDA (for NVIDIA) and HIP (for AMD). The Chapel-only version
 consistently achieved similar parallel performance to its hybrid
 rivals and showed similar strong scaling on up to 1024 GPUs, which
-really validated its capability across diverse hardware vendors. ([Link
-to this paper](https://link.springer.com/chapter/10.1007/978-3-031-69583-4_27)).
+really validated its capability across diverse hardware vendors (see
+[this
+paper](https://link.springer.com/chapter/10.1007/978-3-031-69583-4_27)
+for details).
 
 {{< figure src="figure.png" class="fullwide left-caption"
-    caption="**The distributed search is a master-worker application that starts serially, generating a pool&nbsp;(Pd) of subproblems. However, all the communication aspects rely on Chapel’s distributed iterators, e.g., load distribution, metrics and  reduction and termination criteria. We focus on the enumerative aspects of the search.**"
+    caption="**The distributed search is a master-worker application that starts serially, generating a pool&nbsp;(P<sup>d</sup>) of subproblems. However, all the communication aspects rely on Chapel’s distributed iterators, e.g., load distribution, metrics, and  reduction and termination criteria. We focus on the enumerative aspects of the search.**"
 >}}
 
 **Guillaume:** As Tiago pointed out, one of the major achievements of
@@ -225,7 +228,7 @@ effort, debugging complexity, and long-term maintenance.
 Another particularly satisfying outcome is the successful deployment
 of our Chapel-based codes across a wide range of platforms—from a
 simple laptop to (pre-)exascale supercomputers featured in the TOP500
-list (e.g., Frontier, LUMI)—including both Nvidia and AMD GPU
+list (e.g., Frontier and LUMI)—including both NVIDIA and AMD GPU
 architectures. Remarkably, this has been achieved with minimal effort
 dedicated to portability. We have already scaled our applications to
 more than 51,200 CPU cores and 1,024 GPU accelerators, leading to many
@@ -256,10 +259,10 @@ Beyond that, something I've personally been wishing for since 2018 is
 a distributed work-stealing iterator. Honestly, maybe that's even
 something I could have tried to program myself.  =)
 
-**Guillaume:** One point that often comes up in interview series—and
-that I personally agree with—is that Chapel's compilation times are
-noticeably slower than those of its counterparts, such as C or
-C++. However, I’m aware that the development team has already made
+**Guillaume:** One point that often comes up in this interview
+series—and that I personally agree with—is that Chapel's compilation
+times are noticeably slower than those of its counterparts, such as C
+or C++. However, I’m aware that the development team has already made
 significant efforts to improve this and continues to work actively on
 it, and I’m grateful for their ongoing commitment.
 
@@ -272,13 +275,42 @@ it, and I’m grateful for their ongoing commitment.
 the strong support the Chapel team provides to its users.
 
 In 2018, it was technically difficult to use the language on the
-infrastructure I had access to and some features we needed were
+infrastructure I had access to, and some features we needed were
 sometimes experimental or not officially supported. Without this close
-support, our research might have n a different path or faced
-significant delays
+support, our research might have taken a different path or faced
+significant delays.
 
 **Guillaume:** I completely agree with that, and I would even add that
 the many efforts dedicated to the Chapel ecosystem (such as ChapelCon,
 formerly CHIUW) are highly beneficial to the users. A concluding
-message for readers would be “try it yourself!”.
+message for readers would be “Try it yourself!”.
 
+<br>
+
+---
+
+<br>
+
+Thanks very much to Tiago and Guillaume for taking part in this
+interview series and for being our first joint participants!  If you'd
+like to learn more about ChOp and their work, use Ctrl-F/Cmd-F to
+search the [Papers](https://chapel-lang.org/papers/) page on the
+Chapel website for their names, or check out their talks from
+ChapelCon '24:
+
+* [_Investigating Portability for Tree-based Optimization on
+GPU-powered
+Clusters_](https://www.youtube.com/watch?v=Zh0YrGDZV1o&t=1s) by Tiago
+
+* [_Unbalanced Tree-Search at Scale Using Chapel's DistributedBag
+Module_](https://www.youtube.com/watch?v=jMQ-WYRz-AQ&t=2s) by
+Guillaume
+
+If you have other talks for Tiago and Guillaume, or comments on this
+series, please direct them to the [7&nbsp;Questions for Chapel
+Users](https://chapel.discourse.group/t/7-questions-for-chapel-users-series-questions-comments/37200)
+thread on Discourse.  And if you're a Chapel user and would like to
+participate in this series or write some other article for the blog,
+it's now easier than ever, as we have recently made the repository
+that powers this blog
+[open-source](https://github.com/chapel-lang/chapel-blog#readme) on GitHub!
