@@ -321,10 +321,8 @@ message for readers would be “Try it yourself!”.
 
 Thanks very much to Tiago and Guillaume for taking part in this
 interview series and for being our first joint participants!  If you'd
-like to learn more about ChOp and their work, use Ctrl-F/Cmd-F to
-search the [Papers](https://chapel-lang.org/papers/) page on the
-Chapel website for their names, or check out their talks from
-ChapelCon '24:
+like to learn more about ChOp and their work, check out their talks
+from ChapelCon '24:
 
 * [_Investigating Portability for Tree-based Optimization on
 GPU-powered
@@ -334,11 +332,16 @@ Clusters_](https://www.youtube.com/watch?v=Zh0YrGDZV1o&t=1s) by Tiago
 Module_](https://www.youtube.com/watch?v=jMQ-WYRz-AQ&t=2s) by
 Guillaume
 
-If you have other talks for Tiago and Guillaume, or comments on this
-series, please direct them to the [7&nbsp;Questions for Chapel
+or use Ctrl-F/Cmd-F on the Chapel website's
+[Papers](https://chapel-lang.org/papers/) page to search for their
+names and find publications they've authored.
+
+If you have other questions for Tiago and Guillaume, or comments on
+this series, please direct them to the [7&nbsp;Questions for Chapel
 Users](https://chapel.discourse.group/t/7-questions-for-chapel-users-series-questions-comments/37200)
 thread on Discourse.  And if you're a Chapel user and would like to
-participate in this series or write some other article for the blog,
+participate in this series or write some other article for this blog,
 it's now easier than ever, as we have recently made the repository
-that powers this blog
-[open-source](https://github.com/chapel-lang/chapel-blog#readme) on GitHub!
+that powers the blog
+[open-source](https://github.com/chapel-lang/chapel-blog#readme) on
+GitHub!
