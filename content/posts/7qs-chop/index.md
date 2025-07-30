@@ -234,6 +234,12 @@ really validated its capability across diverse hardware vendors (see
 paper](https://link.springer.com/chapter/10.1007/978-3-031-69583-4_27)
 for details).
 
+To give an idea of how the project has evolved, in 2020 we were using
+a few dozen GPUs, mixing CUDA+Chapel, and solving smaller instances—up
+to Queens21. Today, with a Chapel-only code, we can solve an instance
+around 80x bigger (e.g., Queens23) in less than an hour using more than
+1000 GPUs.
+
 {{< figure src="figure.png" class="fullwide left-caption"
     caption="**The distributed search is a master-worker application that starts serially, generating a pool&nbsp;(P<sup>d</sup>) of subproblems. However, all the communication aspects rely on Chapel’s distributed iterators, e.g., load distribution, metrics, and  reduction and termination criteria. We focus on the enumerative aspects of the search.**"
 >}}
