@@ -47,6 +47,12 @@ application of GPUs to exact optimization methods like Backtracking
 and Branch-and-Bound, adapting traditional optimization algorithms for
 these new architectures.
 
+{{%pullquote%}}
+These problems lie at the heart of many industrial and decision-making
+processes, with direct applications in areas such as logistics,
+production, scheduling, and network design.
+{{%/pullquote%}}
+
 More recently, my research addressed the challenge of finding a
 trade-off between performance and productivity in distributed
 heterogeneous combinatorial search. This also involved tackling
@@ -115,6 +121,14 @@ This traditional approach requires a significant amount of effort
 dedicated to managing the low-level complexities of parallelism and
 load balancing/distribution.
 
+{{%pullquote%}}
+Chapel truly stands out because it effectively unifies the different
+parallel levels of modern GPU-powered clusters, handling everything
+from inter-node communication to intra-node parallelism across both
+CPUs and GPUs.
+{{%/pullquote%}}
+
+
 A primary benefit in my research comes from features like the
 `DistributedIters` module. These modules abstract away and manage many
 of the traditionally complex components that we'd have to code
@@ -160,6 +174,13 @@ ones. But it was Chapel's distributed iterators built on top of PGAS
 that really caught my eye—they seemed to perfectly fit our specific
 needs. Chapel also stood out as the only language with a truly active
 community and direct support from its development team.
+
+{{%pullquote%}}
+I got a single-node Chapel version as fast as C+OpenMP, and developed
+a first distributed application that was competitive with MPI+OpenMP
+in terms of performance, but with significantly fewer lines of code.
+{{%/pullquote%}}
+
 
 Initially, after I presented Chapel's features to the group, some
 members were a bit skeptical. However, after I implemented some proofs
@@ -216,6 +237,13 @@ for details).
 {{< figure src="figure.png" class="fullwide left-caption"
     caption="**The distributed search is a master-worker application that starts serially, generating a pool&nbsp;(P<sup>d</sup>) of subproblems. However, all the communication aspects rely on Chapel’s distributed iterators, e.g., load distribution, metrics, and  reduction and termination criteria. We focus on the enumerative aspects of the search.**"
 >}}
+
+{{%pullquote%}}
+Chapel stands in sharp contrast to the C+MPI+OpenMP+CUDA approaches
+commonly found in the literature, which typically involve a
+significantly higher cost in terms of learning curve, implementation
+effort, debugging complexity, and long-term maintenance.
+{{%/pullquote%}}
 
 **Guillaume:** As Tiago pointed out, one of the major achievements of
 our research is the successful implementation of massively parallel
