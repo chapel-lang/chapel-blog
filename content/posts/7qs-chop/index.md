@@ -309,9 +309,10 @@ support, our research might have taken a different path or faced
 significant delays.
 
 **Guillaume:** I completely agree with that, and I would even add that
-the many efforts dedicated to the Chapel ecosystem (such as ChapelCon,
-formerly CHIUW) are highly beneficial to the users. A concluding
-message for readers would be “Try it yourself!”.
+the many efforts dedicated to the Chapel ecosystem (such as
+[ChapelCon](https://chapel-lang.org/ChapelCon.html), formerly CHIUW)
+are highly beneficial to the users. A concluding message for readers
+would be “Try it yourself!”.
 
 <br>
 
