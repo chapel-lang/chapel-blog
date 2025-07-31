@@ -35,7 +35,8 @@ www-future: $(ACTIVATE)
 copy-to-www:
 	cd public/posts/hpo-example/code && ln -s hpo-example.chpl tune.chpl
 	start_test --clean-only
-	rsync -avh --no-times --checksum public/* $(CHPL_WWW)/chapel-lang.org/blog/ --delete
+	rsync -avh --no-times --checksum --exclude CLEANFILES --exclude "*.tmp" --exclude "*.bad" --exclude "*.future" --exclude "*.compopts" --exclude COMPOPTS --exclude "*.execopts" --exclude "EXECOPTS" --exclude "*.noexec" --exclude "sub_test" --exclude "*.notest" --exclude "*.skipif" --exclude PRECOMP --exclude "*.numlocales" --exclude "*.suppressif" --exclude Makefile --exclude NUMLOCALES --delete-excluded public/* $(CHPL_WWW)/chapel-lang.org/blog/
+	find $(CHPL_WWW)/chapel-lang.org/blog/
 
 test: check-env
 	start_test chpl-src content/posts/*/code
