@@ -264,11 +264,17 @@ of our Chapel-based codes across a wide range of platforms—from a
 simple laptop to (pre-)exascale supercomputers featured in the TOP500
 list (e.g., Frontier and LUMI)—including both NVIDIA and AMD GPU
 architectures. Remarkably, this has been achieved with minimal effort
-dedicated to portability. We have already scaled our applications to
+dedicated to portability.  We have already scaled our applications to
 more than 51,200 CPU cores and 1,024 GPU accelerators, leading to many
 outcomes in terms of solving hard problem instances, validating our
 approach at scale, and demonstrating the viability of PGAS-based
-designs on state-of-the-art heterogeneous platforms.
+designs on state-of-the-art heterogeneous platforms. For example, we
+confirmed the optimality of some very hard flowshop scheduling problem
+instances in under two hours using CPUs only, which required the
+exploration of approximately <small>$95×10^{15}$</small> tree
+nodes. This is particularly notable, as such a result would have been
+inconceivable just a few years ago without relying on hundreds of GPU
+accelerators.
 
 
 #### 6. If you could improve Chapel with a finger snap, what would you do?
@@ -318,7 +324,7 @@ significant delays.
 the many efforts dedicated to the Chapel ecosystem (such as
 [ChapelCon](https://chapel-lang.org/ChapelCon.html), formerly CHIUW)
 are highly beneficial to the users. A concluding message for readers
-would be “Try it yourself!”.
+would be “Try Chapel yourself!”.
 
 <br>
 
