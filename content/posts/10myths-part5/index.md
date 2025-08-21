@@ -198,7 +198,7 @@ framework for unstructured computational fluid dynamics is an example
 of an SPMD MPI-style Chapel application whose authors felt they got
 great benefit by expressing inter-node transfers using array copies
 rather than message passing calls.  I also think that many programmers
-like the CHAMPS team and [Professor Nelson Luis Diaz]({{<relref
+like the CHAMPS team and [Professor Nelson Luís Dias]({{<relref
 7qs-dias>}}) consider Chapel's base language features to be a
 significant improvement over C++—i.e., that having "a more programmable base
 language" is nothing to sniff at.  {{</sidenote>}} other than a more
