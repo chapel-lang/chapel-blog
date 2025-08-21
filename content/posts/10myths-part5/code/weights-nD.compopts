@@ -1,0 +1,3 @@
+-srank=2  # weights-2D.good
+-srank=3  # weights-3D.good
+-srank=4  # weights-4D.good
