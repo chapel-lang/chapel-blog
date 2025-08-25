@@ -28,7 +28,7 @@ the original article turned into a series of eight that were published
 between April and November of 2012 and ended up addressing ten myths.
 I don't recall whether I had any sense of how large the series'
 audience was, but I did receive appreciative comments from readers and
-IEEE leadership..
+IEEE leadership.
 
 Over time, the IEEE TCSC blog fell into disrepair, and with it, the
 series {{< sidenote "right" "became unavailable to the public" >}}
