@@ -1,21 +1,21 @@
 ---
-title: "Experimenting with the Model Context Protocol for Chapel"
-date: 2025-06-04T10:56:45-07:00
-draft: true
-tags: ["Tools", "AI/ML"]
+title: "Experimenting with the Model Context Protocol and Chapel"
+date: 2025-08-28
+tags: ["AI/ML", "Tools", "How-To"]
 summary: "A report on developing MCP-based integrations for the Chapel programming language"
 authors: ["Daniel Fedorin"]
+featured: true
 ---
 
 Developer tooling built on Large Language Models (LLMs) is a popular, if
 controversial, topic nowadays. Generative models have proven themselves capable
-of generating code in a variety of languages, and can help newcomers
+of generating code in a variety of languages, and they can help newcomers
 and experts alike. We have been intrigued to explore the possibilities of using
 LLMs for writing Chapel code. For a novel language like Chapel, however, there are some
 challenges when it comes to working with LLM-based tools.
 
 * Chapel aims to advance the state of the art when it comes to parallel
-  computing. This means -- almost by definition -- that far less Chapel code is
+  computing. This means --- almost by definition --- that far less Chapel code is
   available, compared to "conventional" languages like Python and C++, in
   training datasets that power LLMs.
 * Prior to its [2.0 release]({{< relref "announcing-chapel-2.0" >}}), Chapel
@@ -33,22 +33,27 @@ Fortunately, LLMs and their surrounding tools are continuously becoming more cap
 and we had some luck supplementing them with up-to-date and accurate information
 about Chapel. To do so, we leaned on the The Model Context
 Protocol (MCP), which is a standardized way for LLM-based tooling to go beyond token
-prediction, and interact in various ways with "the outside world". The
+prediction, and interact in various ways with "the outside world." The
 protocol is supported by Visual Studio Code, Anthropic's Claude and Claude Code, Zed,
 and a variety of other software. This post details our recent experiments with
 using MCP to help address the challenges I've outlined above.
 
-This post can be read in two ways. In one sense, it describes what user
+This post can be read in two ways. In one sense, it describes what users
 writing Chapel might be able to do to improve their LLM-enabled workflow.
 At the same time, the challenges above would be shared by any other smaller,
 novel language. Thus, in another sense, this post is an LLM experience report
 by us as language developers for anyone else who is seeking to push the landscape
-of programming languages forward as we are.
+of programming languages forward, as we are.
+
+{{<pullquote>}}
+Even if the training of Claude were to permanently stop right now, an
+MCP-based tool could provide it accurate information in perpetuity.
+{{</pullquote>}}
 
 ### MCP and Large Language Models
 
 The [Model Context Protocol](https://modelcontextprotocol.io) provides a way to populate an LLM-based assistant's
-toolbox with actions it can take. Each action is typically called a "tool".
+toolbox with actions it can take. Each action is typically called a _tool_.
 For instance, in the image below, I've configured [Claude](https://claude.ai/)
 to use the experimental [Chapel MCP server](https://github.com/DanilaFe/chapel-support).
 As a result, it has access to five Chapel-specific tools that I'll describe
@@ -69,7 +74,7 @@ Eventually, it arrives at the answer:
 
 This is indeed the case.
 
-Actions performed in this way are more resillient against hallucinations or
+Actions performed in this way are more resilient against hallucinations or
 {{< sidenote "right" "knowledge cut-offs," -6 >}}
 A _knowledge cut-off_ is the point in time after which no information has
 been used to train the language model. In practice, this means the model
@@ -77,7 +82,7 @@ hasn't seen anything that has occurred or been created after that point.
 {{< /sidenote >}}
 since they provide grounded information that is not simply encoded in the model's
 weights. Even if the training of Claude (e.g.) were to permanently stop
-right now, an MCP-based tool could provide it accurate informtion in perpetuity.
+right now, an MCP-based tool could provide it accurate information in perpetuity.
 
 When working with a smaller language like Chapel, the ability to access
 documentation in the form of primers (via the MCP's `get_primer` action), saves
@@ -107,17 +112,17 @@ runtime errors. A coding _agent_ would not be subject to such limitations;
 we'll talk about those in a little bit.
 
 In a more exciting example, I asked Claude to generate a "Conway's Game of Life"
-program. Mostly, I just wanted something that lended itself to pretty visuals.
+program. Mostly, I just wanted something that lent itself to pretty visuals.
 I did so as part of [a public demonstration](https://www.youtube.com/watch?v=zOxD4VmSE5o)
 that covers much of the same content that
 we've discussed here. There too, Claude used the primers (it requested the `forallLoops`
 primer), compiled the program, found an error, fixed it, recompiled, and
 even linted the resulting code. The result was notable for two reasons:
 
-* Although Chapel has a test case around Game of Life, it was clear that Claude
-  did not simply regurgitate it while writing the code (there were numerous
-  significant differences).
-* In some of my runs -- depending on my prompt -- claude generated an animated
+* Although Chapel has a test case implementing the Game of Life, it was clear that Claude
+  did not simply regurgitate it while writing the code --- there were numerous
+  significant differences.
+* In some of my runs --- depending on my prompt --- Claude generated an animated
   visualization of the cells. The prettiest one (they were all different)
   included borders generated with Unicode characters. Here's what that looked like:
 
@@ -127,7 +132,7 @@ even linted the resulting code. The result was notable for two reasons:
 
 In my screenshots and links I've been showcasing my MCP server prototype that
 I wrote while playing with Chapel and LLMs. It is open source, so you
-can install and try it our yourself.
+can install it and try it out yourself.
 
 {{< details summary="**(How do I set up the MCP prototype on my machine?)**" >}}
 The repository for Chapel's prototype MCP server is [here at the time of writing](https://github.com/DanilaFe/chapel-support). Please refer  to its `README.md` file for installation instructions. In
@@ -135,7 +140,7 @@ short, you can use `uv` to set up the project and install the necessary
 dependencies.
 
 From there, you must configure the MCP server within your LLM-enabled tools.
-I've set it up in Visual Studio Code, Claude and Claude Code. In pretty
+I've set it up in Visual Studio Code, Claude, and Claude Code. In pretty
 much all of these, you need to write some sort of JSON configuration.
 
 * **VSCode**: I had to look up `mcp` in the Settings search box, where I
@@ -175,7 +180,7 @@ much all of these, you need to write some sort of JSON configuration.
       }
   }
   ```
-* **Claude Code**: I had to modify `~/.claude.json`. The relevant piece:
+* **Claude Code**: I had to modify `~/.claude.json`. The relevant piece is:
   ```
   "mcpServers": {
       "chapel-support": {
@@ -205,7 +210,7 @@ detailed description of the tools I've provided at the time of writing, and
 give some rationale for including them.
 
 * `list_primers` and `get_primers` serve to provide the model with up-to-date
-  examples of Chapel code. This approach is very valuable for languages which are
+  examples of Chapel code. This approach is very valuable for languages that are
   relatively underrepresented in a model's training dataset. It also
   helps decouple the language's evolution from model updates on the side
   of the LLM provider: if Chapel's best practices were to change the day
@@ -234,16 +239,16 @@ give some rationale for including them.
   the user experience improvement is worthwhile.
 * `list_chapel_lint_rules` and `lint_chapel_code` help catch stylistic issues
   in code produced by the LLM, almost like an early stage in code review.
-  If not all of the Chapel code in LLMs' data set is valid in modern Chapel,
+  If not all of the Chapel code in an LLM's data set is valid in modern Chapel,
   even less of all such code fits the recommended stylistic conventions.
   
-  These tools leverage [`chplcheck`](https://chapel-lang.org/docs/main/tools/chplcheck/chplcheck)
+  These tools leverage [`chplcheck`](https://chapel-lang.org/docs/tools/chplcheck/chplcheck.html)
   to serve a similar function to `compile_program` above.
 
   {{< figure src="./lint-program.png" caption="Claude finding linter warnings in its code" class="fullwide" >}}
 
-  As with `compile_program`, this reduced the effort a user needs to take on
-  to update, clean up, or integrate genrated code. Since the LLM will tend to keep
+  As with `compile_program`, this reduced the effort required from a user
+  to update, clean up, or integrate generated code. Since the LLM will tend to keep
   working on its code as long as it has linter warnings to address, the
   final product will be in better shape for human review.
 
@@ -255,7 +260,7 @@ autonomously work towards some goal. [Claude Code](https://www.anthropic.com/cla
 which I've mentioned a few times in this post, and which is not the same
 as regular Claude, is one agent I've played with. It sits in your terminal
 and interacts with it like a human does: it types commands, browses the
-file system, writes some code, compiles it... For such an agent, there is
+file system, writes some code, compiles it, etc. For such an agent, there is
 no need to perform an MCP call to `compile_program`, because it can just
 run `chpl` (the compiler) from the terminal. Better yet, since it's working
 in your project directory, such an agent could figure out that you use
@@ -270,7 +275,7 @@ and started using it.
 {{< /sidenote >}}
 It could also invoke the `chplcheck`
 linter, read its output, and fix the necessary warnings. This is what I meant
-earlier by agents "not needing" `compile_program` etc..
+earlier by agents "not needing" `compile_program` and the like.
 
 For such agents, I still believe the `list_primers` and `get_primer` commands,
 along with any future documentation-retrieval features, are useful. General
@@ -284,7 +289,7 @@ One might argue that providing documentation like the primers via a special
 MCP server is just a special case of [Retrieval-Augmented Generation](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) (RAG) or internet search. The primers are available via search engines,
 after all, so why bother developing an MCP server?
 
-I concede that in the future, agents' may simply search
+I concede that in the future, agents may simply search
 the web as humans do for relevant documentation. It's plausible to me that
 they will distinguish "official" documentation from unofficial resources,
 find the appropriate pages, and so on. In a move reminiscent of
@@ -302,9 +307,9 @@ advantages to the current, MCP-based approach:
   for your query are provided and ranked by the search engine's heuristics.
   This makes it possible to manipulate what data a model will get back. If
   you're using local search, perhaps via [vector embeddings](https://www.ibm.com/think/topics/vector-embedding),
-  the argument is symmetric -- only the heuristic changes.
-* __Uniformity__: Search-based systems today are a propriatary tools
-  that augment langauge models. This means that their behavior can vary according
+  the argument is symmetric --- only the heuristic changes.
+* __Uniformity__: Search-based systems today are proprietary tools
+  that augment language models. This means that their behavior can vary according
   to the provider (OpenAI, Anthropic, GitHub, etc.). A single MCP server, on
   the other hand, will provide the same results to all models, and thus work
   more consistently.
@@ -322,17 +327,17 @@ and agentic LLM tools.
 There are still areas within MCP for Chapel's server to explore. As I demonstrated
 above, in all of my experiments, I had given instructions to the LLM to use
 tools like `get_primer` (though at times, the model chose to do so on its own).
-MCP allows servers to provide pre-written prompts to its users. Rather than
+MCP allows servers to provide pre-written prompts to their users. Rather than
 having to read my post and know to say "use the Chapel tools you have", a
 user might be able to leverage pre-written prompts that include such instructions.
 
-Another intesting area within MCP is to provide the model with the same
+Another interesting area within MCP is to provide the model with the same
 IntelliSense that editors enable for their users. Both Visual Studio Code
 and Zed have support for feeding diagnostics into the LLM:
 
 {{< figure src="./zed-diagnostics.png" caption="Claude accessing errors and warnings in a file using Zed's diagnostic tool" class="fullwide" >}}
 
-This support is not universal (it depends on the editor, LLM provider, etc.).
+This support is not universal --- it depends on the editor, LLM provider, etc.
 In the future, it would be interesting to explore using Chapel's MCP server
 to provide this information to MCP-compatible clients, using [`chpl-language-server`](https://chapel-lang.org/docs/tools/chpl-language-server/chpl-language-server.html). Other potentially-useful aspects
 of Chapel programs, such as go-to-definition and on-hover documentation, could

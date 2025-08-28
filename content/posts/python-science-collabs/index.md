@@ -5,7 +5,6 @@ date: 2024-04-30
 tags: [Community, User Experiences]
 summary: "A call for computational science collaborations around Chapel and Python"
 authors: [Brad Chamberlain]
-featured: True
 weight: 5
 ---
 

@@ -4,7 +4,6 @@ date: 2024-07-01
 tags: ["ChapelCon", "Community"]
 series: []
 summary: "This post is a retrospective on ChapelCon '24"
-featured: true
 weight: 15
 authors: ["Engin Kayraklioglu"]
 ---
