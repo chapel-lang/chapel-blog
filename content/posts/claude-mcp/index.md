@@ -1,9 +1,10 @@
 ---
 title: "Experimenting with the Model Context Protocol and Chapel"
 date: 2025-08-28
-tags: ["Tools", "AI/ML"]
+tags: ["AI/ML", "Tools", "How-To"]
 summary: "A report on developing MCP-based integrations for the Chapel programming language"
 authors: ["Daniel Fedorin"]
+featured: true
 ---
 
 Developer tooling built on Large Language Models (LLMs) is a popular, if
@@ -44,6 +45,11 @@ novel language. Thus, in another sense, this post is an LLM experience report
 by us as language developers for anyone else who is seeking to push the landscape
 of programming languages forward, as we are.
 
+{{<pullquote>}}
+Even if the training of Claude were to permanently stop right now, an
+MCP-based tool could provide it accurate information in perpetuity.
+{{</pullquote>}}
+
 ### MCP and Large Language Models
 
 The [Model Context Protocol](https://modelcontextprotocol.io) provides a way to populate an LLM-based assistant's
@@ -76,7 +82,7 @@ hasn't seen anything that has occurred or been created after that point.
 {{< /sidenote >}}
 since they provide grounded information that is not simply encoded in the model's
 weights. Even if the training of Claude (e.g.) were to permanently stop
-right now, an MCP-based tool could provide it accurate informtion in perpetuity.
+right now, an MCP-based tool could provide it accurate information in perpetuity.
 
 When working with a smaller language like Chapel, the ability to access
 documentation in the form of primers (via the MCP's `get_primer` action), saves
