@@ -242,7 +242,7 @@ give some rationale for including them.
   If not all of the Chapel code in an LLM's data set is valid in modern Chapel,
   even less of all such code fits the recommended stylistic conventions.
   
-  These tools leverage [`chplcheck`](https://chapel-lang.org/docs/main/tools/chplcheck/chplcheck)
+  These tools leverage [`chplcheck`](https://chapel-lang.org/docs/tools/chplcheck/chplcheck.html)
   to serve a similar function to `compile_program` above.
 
   {{< figure src="./lint-program.png" caption="Claude finding linter warnings in its code" class="fullwide" >}}
