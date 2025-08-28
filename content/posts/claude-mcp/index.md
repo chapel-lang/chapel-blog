@@ -74,7 +74,7 @@ Eventually, it arrives at the answer:
 
 This is indeed the case.
 
-Actions performed in this way are more resillient against hallucinations or
+Actions performed in this way are more resilient against hallucinations or
 {{< sidenote "right" "knowledge cut-offs," -6 >}}
 A _knowledge cut-off_ is the point in time after which no information has
 been used to train the language model. In practice, this means the model
@@ -112,7 +112,7 @@ runtime errors. A coding _agent_ would not be subject to such limitations;
 we'll talk about those in a little bit.
 
 In a more exciting example, I asked Claude to generate a "Conway's Game of Life"
-program. Mostly, I just wanted something that lended itself to pretty visuals.
+program. Mostly, I just wanted something that lent itself to pretty visuals.
 I did so as part of [a public demonstration](https://www.youtube.com/watch?v=zOxD4VmSE5o)
 that covers much of the same content that
 we've discussed here. There too, Claude used the primers (it requested the `forallLoops`
@@ -122,7 +122,7 @@ even linted the resulting code. The result was notable for two reasons:
 * Although Chapel has a test case implementing the Game of Life, it was clear that Claude
   did not simply regurgitate it while writing the code --- there were numerous
   significant differences.
-* In some of my runs --- depending on my prompt --- claude generated an animated
+* In some of my runs --- depending on my prompt --- Claude generated an animated
   visualization of the cells. The prettiest one (they were all different)
   included borders generated with Unicode characters. Here's what that looked like:
 
@@ -309,7 +309,7 @@ advantages to the current, MCP-based approach:
   you're using local search, perhaps via [vector embeddings](https://www.ibm.com/think/topics/vector-embedding),
   the argument is symmetric --- only the heuristic changes.
 * __Uniformity__: Search-based systems today are proprietary tools
-  that augment langauge models. This means that their behavior can vary according
+  that augment language models. This means that their behavior can vary according
   to the provider (OpenAI, Anthropic, GitHub, etc.). A single MCP server, on
   the other hand, will provide the same results to all models, and thus work
   more consistently.
@@ -331,7 +331,7 @@ MCP allows servers to provide pre-written prompts to their users. Rather than
 having to read my post and know to say "use the Chapel tools you have", a
 user might be able to leverage pre-written prompts that include such instructions.
 
-Another intesting area within MCP is to provide the model with the same
+Another interesting area within MCP is to provide the model with the same
 IntelliSense that editors enable for their users. Both Visual Studio Code
 and Zed have support for feeding diagnostics into the LLM:
 
