@@ -1,7 +1,7 @@
 ---
 title: "7 Questions for Marjan Asgari: Optimizing Hydrological Models with Chapel"
 date: 2025-09-15
-tags: ["User Experiences", "Interviews", "Hydrology"]
+tags: ["User Experiences", "Interviews", "Earth Sciences"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with Dr. Marjan Asgari about her use
 of Chapel for hydrological research"
@@ -84,17 +84,19 @@ straightforward. Relying heavily on SSH as the start-up method can be
 insufficient, as many HPC systems don't permit SSH between compute nodes.  I
 put in a lot of effort to {{% sidenote right "install Chapel on the HPC systems" -10 %}}
 After Marjan completed this work, we developed a <a
-href="https://chapel-lang.org/docs/main/usingchapel/QUICKSTART.html#building-from-source-via-spack">Spack
+href="https://chapel-lang.org/download/#spack">Spack
 package for Chapel</a>, which should significantly simplify the process of
 installing Chapel on HPC systems.  Sorry we didn't have it at that time, Marjan!
 {{% /sidenote %}} we had, but unfortunately, it didn’t work in the end.
 
-Another item on my wish list is that Chapel would support geospatial data. If
-Chapel could work with data structures {{% sidenote right "like NumPy arrays or XArrays" %}}
-Chapel doesn't natively support NumPy arrays or XArrays. However,
-<a href="https://arkouda-www.github.io/">Arkouda</a> does!  We recommend
-checking Arkouda out if you are interested in a NumPy-like interface for big
-datasets, including <a href="youtube.com/watch?v=v8p0T-RJTCU&embeds_referring_euri=https%3A%2F%2Fdiscourse.pangeo.io%2F&source_ve_path=Mjg2NjY">multi-dimensional ones</a>.
+Another item on my wish list is that Chapel would support geospatial
+data. If Chapel could work with data structures {{% sidenote right
+"like NumPy arrays or XArrays" %}} Chapel doesn't natively support
+NumPy arrays or XArrays. However, <a
+href="https://arkouda-www.github.io/">Arkouda</a> does!  We recommend
+checking Arkouda out if you are interested in using such technologies
+[interactively at HPC
+scales]("https://youtube.com/watch?v=v8p0T-RJTCU&embeds_referring_euri=https%3A%2F%2Fdiscourse.pangeo.io%2F&source_ve_path=Mjg2NjY").
 
 {{% /sidenote %}}
 , it would be
