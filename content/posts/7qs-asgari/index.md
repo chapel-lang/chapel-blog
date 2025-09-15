@@ -87,7 +87,7 @@ After Marjan completed this work, we developed a <a
 href="https://chapel-lang.org/download/#spack">Spack
 package for Chapel</a>, which should significantly simplify the process of
 installing Chapel on HPC systems.  Sorry we didn't have it at that time, Marjan!
-{{% /sidenote %}} we had, but unfortunately, it didn’t work in the end.
+{{% /sidenote %}} we had, but unfortunately, it didn’t always work in the end.
 
 Another item on my wish list is that Chapel would support geospatial
 data. If Chapel could work with data structures {{% sidenote right
@@ -95,11 +95,11 @@ data. If Chapel could work with data structures {{% sidenote right
 NumPy arrays or XArrays. However, <a
 href="https://arkouda-www.github.io/">Arkouda</a> does!  We recommend
 checking Arkouda out if you are interested in using such technologies
-[interactively at HPC
-scales]("https://youtube.com/watch?v=v8p0T-RJTCU&embeds_referring_euri=https%3A%2F%2Fdiscourse.pangeo.io%2F&source_ve_path=Mjg2NjY").
+<a href =
+"https://youtube.com/watch?v=v8p0T-RJTCU&embeds_referring_euri=https%3A%2F%2Fdiscourse.pangeo.io%2F&source_ve_path=Mjg2NjY">interactively
+at HPC scales</a>.
 
-{{% /sidenote %}}
-, it would be
+{{% /sidenote %}}, it would be
 a game-changer. In the field of Geomatics, there is immense potential for using
 parallel computing with languages like Chapel, which are not difficult for
 Python programmers to learn. The lack of spatial data support is a significant
