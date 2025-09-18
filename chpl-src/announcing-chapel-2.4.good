@@ -1,5 +1,3 @@
-announcing-chapel-2.4.chpl:261: warning: 'importModule' with a 'moduleContents' argument is deprecated. Use createModule instead.
-announcing-chapel-2.4.chpl:334: warning: 'importModule' with a 'moduleContents' argument is deprecated. Use createModule instead.
 2.4
 2.4
 2.4
