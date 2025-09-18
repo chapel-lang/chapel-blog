@@ -1,4 +1,4 @@
-// stopgap helper module until 'writeln' is available with --dyno. See above.
+// stopgap helper module until 'writeln' is available with --dyno. See below.
 use Print;
 
 record R {
