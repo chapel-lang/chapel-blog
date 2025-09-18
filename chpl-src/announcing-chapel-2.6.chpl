@@ -221,9 +221,12 @@ on Locales.last {
 
   {{<file_download fname="multiloc/example.chpl" lang="Chapel">}}
 
-  This session shows the program running on two locales, where we step
-  through breakpoints on the distinct locales, switching between them
-  using a custom `on` command to mirror the Chapel syntax..
+  This session shows the program running on two locales, where we
+  switch between them using a custom `on` command that mirrors the
+  Chapel syntax.  To get each locale running, we use a `c` (continue)
+  command, and then are notified once we hit one of the breakpoints.
+  Note that the `up` command is performed automatically by the tooling
+  for us to ensure that we're in the user-level Chapel code.
 
   {{< figure class="fullwide" src="parallel-dbg.png" >}}
 
