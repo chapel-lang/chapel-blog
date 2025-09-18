@@ -4,6 +4,7 @@
 // tags: ["Release Announcements", "Python", "Dyno"]
 // date: 2025-03-20
 // weight: 90
+// chplVersion: 2.4
 
 /*
 
