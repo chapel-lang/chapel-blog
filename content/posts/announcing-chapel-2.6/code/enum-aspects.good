@@ -1,0 +1,4 @@
+[frontend/lib/resolution/prims.cpp:1093 in primIsProcType] Unimplemented: PRIM_IS_PROC_TYPE
+enum-aspects.chpl:25: warning: cyan
+enum-aspects.chpl:25: warning: blue
+enum-aspects.chpl:25: warning: red
