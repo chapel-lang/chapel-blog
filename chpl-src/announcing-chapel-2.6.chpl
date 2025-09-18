@@ -79,9 +79,7 @@ time of publication {{</todo>}}
   example, we'll create and call into a toy library defined as
   follows:
 
-{{<todo>}} Why is this double-spaced? {{</todo>}}
-
-  {{<file_download fname="MyAdd.c" lang="C">}}
+{{<file_download fname="MyAdd.c" lang="C">}}
 
   The compiler invocation to create a dynamic library from the C code
   above should look something like the following, where details may
