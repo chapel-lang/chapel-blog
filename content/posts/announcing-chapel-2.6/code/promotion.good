@@ -1,0 +1,28 @@
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/prims.cpp:1093 in primIsProcType] Unimplemented: PRIM_IS_PROC_TYPE
+[frontend/lib/resolution/prims.cpp:1093 in primIsProcType] Unimplemented: PRIM_IS_PROC_TYPE
+[frontend/lib/resolution/prims.cpp:1093 in primIsProcType] Unimplemented: PRIM_IS_PROC_TYPE
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:901 in resolveDeinit] Unimplemented: Warning: omitting tuple deinit
+[frontend/lib/resolution/call-init-deinit.cpp:816 in resolveMoveInit] Unimplemented: value = copy init from ref
+[frontend/lib/resolution/call-init-deinit.cpp:816 in resolveMoveInit] Unimplemented: value = copy init from ref
