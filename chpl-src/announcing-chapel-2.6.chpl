@@ -238,13 +238,12 @@ on Locales.last {
 
   ### Unit testing Improvements for Mason and VSCode
 
-  This release also includes many significant improvements to `mason`,
-  [Chapel's package
-  manager](https://chapel-lang.org/docs/2.6/tools/mason/mason.html),
-  primarily focused on improving the developer experience when
-  testing.  We fixed many bugs with mason itself and added some new
-  testing features.  For example, suppose we have a simple program
-  defining some unit tests:
+  This release also includes many significant improvements to
+  [`mason`](https://chapel-lang.org/docs/2.6/tools/mason/mason.html),
+  Chapel's package manager, primarily focused on improving the
+  developer experience when testing.  We fixed many bugs with mason
+  itself and added some new testing features.  For example, suppose we
+  have a simple program defining some unit tests:
 
   {{<file_download fname="myTest.chpl" lang="Chapel">}}
 
