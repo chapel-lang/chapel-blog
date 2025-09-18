@@ -64,8 +64,6 @@ proc print(x: ?t) {
   } else if t == string {
     printStr(x.c_str());
   } else if isTupleType(t) {
-    // TODO: Param loop this...
-    // TODO: Move this to 'print'...
     if x.size >= 1 then print(x[0]);
     if x.size >= 2 { doPrintSpace(); print(x[1]); }
     if x.size >= 3 { doPrintSpace(); print(x[2]); }
