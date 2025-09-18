@@ -1,12 +1,4 @@
-//
-// TODO: Wishlist writing this:
-//
-//  * assert()
-//  * param for loop()
-//  * halt()
-//  * write 'print(x: ?t) where isTupleType(t)' using recursion
-use Types;
-use CTypes;
+use Types, CTypes;
 
 extern {
   #include <stdint.h>
