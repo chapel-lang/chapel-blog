@@ -53,7 +53,7 @@ time of publication {{</todo>}}
     Chapel, including support for:
     - Chapel's cpu-as-device GPU emulation mode
     - support for multi-locale executions with Homebrew installs
-    - support for both the LLVM or C-based back-ends from Linux
+    - support for both the LLVM and C-based back-ends in Linux
       packages
 
     In addition, where past Linux packages supported a binary download
@@ -69,15 +69,15 @@ time of publication {{</todo>}}
 
   ### Dynamic Loading Support
 
-  This release of Chapel offers improved support for calling into
-  dynamically loaded libraries.  This feature was introduced in a
-  prototypical form for the 2.5 release, but in 2.6 it is now
-  supported by all compiler back-ends and has improved stability.
+  This release of Chapel offers improved support for calling
+  procedures from dynamically loaded libraries.  This feature was
+  introduced in a prototypical form for the 2.5 release, but in 2.6 it
+  is now supported by all compiler back-ends and has improved
+  stability.
 
-  To use this feature, you must first have a _shared library_ (using
-  Linux terminology) that you wish to dynamically load.  As a simple
-  example, we'll create and call into a toy library defined as
-  follows:
+  To use this feature, you must first have a shared library that you
+  wish to dynamically load.  As a simple example, we'll create and
+  call into a toy library defined as follows:
 
 {{<file_download fname="MyAdd.c" lang="C">}}
 
@@ -96,13 +96,13 @@ time of publication {{</todo>}}
 
 */
 
- use DynamicLoading;
+use DynamicLoading;
 
- const lib = binary.load('./libMyAdd.so'),
-       add = lib.retrieve('myAdd', proc(x: int, y: int): int);
+const lib = binary.load('./libMyAdd.so'),
+      add = lib.retrieve('myAdd', proc(x: int, y: int): int);
 
- const n = add(2, 2);
- writeln(n);
+const n = add(2, 2);
+writeln(n);
 
 /*
 
@@ -120,9 +120,9 @@ on Locales.last {
 /*
 
   In order to use dynamic loading in Chapel at present, the
-  `useProcedurePointers` `config param` must be set to true during
-  Chapel compilation. This requirement will be relaxed in future
-  releases.  For example, to compile this example and run it on four
+  `useProcedurePointers` `config param` must be set to `true` during
+  Chapel compilation (this requirement will be relaxed in future
+  releases).  As a result, to compile this example and run it on four
   locales, you could use:
 
   ```console
@@ -133,16 +133,16 @@ on Locales.last {
   ```
 
   In addition to supporting traditional shared libraries like this
-  sample C library, this feature also supports loading and calling
-  into dynamic Chapel libraries whose exported routines are pure and
-  C-like—for example, ones that don't rely on Chapel's runtime or
-  modules.  In future releases, we plan to expand these features to
-  support arbitrary Chapel code.
+  sample C library, this feature also provides initial support for
+  loading and calling into dynamic Chapel libraries whose exported
+  procedures are pure and C-like—for example, ones that don't rely on
+  Chapel's runtime or modules.  In future releases, we plan to expand
+  loading of dynamic libraries to support arbitrary Chapel procedures.
 
 
   ### Debugging Enhancements
 
-  Debugging Chapel programs gets even better in version 2.6 with
+  Debugging Chapel programs gets even better in version 2.6, with
   better debug information and new pretty-printers.  Historically,
   debugging Chapel programs has meant interacting with the generated C
   code.  This meant that when inspecting Chapel variables, you would
@@ -150,28 +150,29 @@ on Locales.last {
   release, we added pretty-printers for LLDB when using Chapel's C
   back-end that make it possible to view Chapel data structures using
   formats that are much more intuitive and user-oriented.  This
-  improvement can be seen through the following sample debugging
-  session involving arrays.
+  improvement can be seen in the following sample debugging session
+  involving arrays.
 
   In this example, we'll debug the following simple Chapel program:
 
   {{<file_download fname="example.chpl" lang="Chapel">}}
 
-  We have used the `Debugger.breakpoint` {{<sidenote "right"
-  "pseudo-statement" -5>}}This is actually a parentheses-less
-  procedure in Chapel, which supports statement-like
-  syntax.{{</sidenote>}} to automatically stop execution at the place
-  of interest in our program when running within a debugger.  To
-  {{<sidenote "right" "compile this program" 1>}}Note that we are
-  working on a more ergonomic way to disable optimizations and code
-  transformations when debugging, which is being discussed in issue
+  We have used the
+  [`Debugger`](https://chapel-lang.org/docs/modules/standard/Debugger.html)
+  module's `breakpoint` statement to automatically stop execution at
+  the place of interest in our program when running within a debugger.
+  To compile this program and run it within LLDB, we use {{<sidenote
+  "right" "the following commands">}}Note that we are working on a
+  more ergonomic way to disable optimizations and code transformations
+  when debugging, to avoid the list of flags shown here.  This is
+  being discussed in issue
   [#27615](https://github.com/chapel-lang/chapel/issues/27615){{</sidenote>}}
-  and run it within LLDB, we use the following commands using the
-  Chapel compiler's C back-end (e.g.,&nbsp;`CHPL_TARGET_COMPILER=clang`):
+  in a configuration that uses Chapel's C back-end
+  (e.g.,&nbsp;`CHPL_TARGET_COMPILER=clang`):
 
   ```console
   $ chpl -g --no-copy-propagation --no-scalar-replacement --no-denormalize --no-munge-user-idents example.chpl
-  $  ./example --lldb
+  $ ./example --lldb
   ```
 
   Upon running the program, we hit the `breakpoint` statement and can
@@ -203,7 +204,7 @@ on Locales.last {
   the Chapel compiler generates. The best example of this is with
   `enum`s. The debugger now has enough information to print out the
   names of the enum symbols instead of the underlying integer
-  value. This makes it much easier to understand what is going on in
+  values. This makes it much easier to understand what is going on in
   your program. These improvements also lay the groundwork for
   additional improvements in the future.
 
@@ -225,8 +226,8 @@ on Locales.last {
   switch between them using a custom `on` command that mirrors the
   Chapel syntax.  To get each locale running, we use a `c` (continue)
   command, and then are notified once we hit one of the breakpoints.
-  Note that the `up` command is performed automatically by the tooling
-  for us to ensure that we're in the user-level Chapel code.
+  Note that the `up` command is performed automatically for us by the
+  tooling to ensure that we're in the user-level Chapel code.
 
   {{< figure class="fullwide" src="parallel-dbg.png" >}}
 
@@ -347,7 +348,7 @@ on Locales.last {
   changes; and `chpldoc` itself is better than ever!
 
 
-  ### Improvements to the Dyno Compiler Front End
+  ### Improvements to the Dyno Compiler Front-End
 
   As you may have seen in [previous]({{< relref
   "announcing-chapel-2.5#improvements-to-the-dyno-compiler-front-end"
@@ -355,7 +356,7 @@ on Locales.last {
   "announcing-chapel-2.4#dyno-support-for-chapel-features" >}})
   [announcements]({{< relref
   "announcing-chapel-2.3#dyno-compiler-improvements" >}}), _Dyno_ is
-  the name of out effort to modernize and improve the Chapel compiler.
+  the name of our effort to modernize and improve the Chapel compiler.
   Dyno improves error messages, allows incremental type resolution,
   and enables the [development of language tooling]({{< relref
   "chapel-py" >}}).  Among the major wins for this ongoing effort is
@@ -370,7 +371,7 @@ on Locales.last {
   enable tools like CLS to provide more accurate and helpful
   information to users.  In the 2.6 release, we have continued to
   improve Dyno's support for Chapel's language features, and we've
-  also expanded the compiler's ability to leverage the Dyno front end
+  also expanded the compiler's ability to leverage the Dyno front-end
   to generate executable code.
 
   #### More Language Features
@@ -379,7 +380,7 @@ on Locales.last {
   features with Dyno, where some notable examples include:
   * various aspects of `enum`s, including casting and iteration
   * promotion, particularly with methods and compiler-generated operations
-  * type queries, particularly for tuples and variadic formals
+  * type queries, particularly for tuples and variadic formal arguments
 
   The following screenshot shows an editing session in which
   Dyno-inferred type information is rendered in-line when editing the
@@ -439,14 +440,14 @@ on Locales.last {
 
   Initial support is limited to a subset of Chapel's language
   features, but is growing all the time.  Here is an example program
-  that Dyno can now compile, demonstrating uses of classes, records,
-  and strings:
+  and helper module that Dyno can now compile, demonstrating uses of
+  classes, records, and strings:
 
   {{< file_download fname="converter-aggregates.chpl" lang="chapel" >}}
 
   {{< file_download_min fname="Print.chpl" lang="chapel" >}}
 
-  Stay tuned as we continue to add support for more features!
+  Stay tuned as we continue to add support for more features to Dyno!
 
 
   ### For More Information
