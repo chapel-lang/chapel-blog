@@ -1,1 +1,1 @@
---dyno --no-checks
+--dyno --no-checks --local
