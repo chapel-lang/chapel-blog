@@ -16,7 +16,10 @@
   In this article, we'll introduce some of the highlights of Chapel
   2.6, including:
 
-  * A new [description](#tag) that ...
+  * Chapel's new module for [dynamically loading
+    libraries](#dynamic-loading-support) and calling into them
+
+  * ...
 
   * Improvements to the capabilities of the [Dyno
     front-end](#improvements-to-the-dyno-compiler-front-end)
@@ -32,9 +35,152 @@
   contributed](https://github.com/chapel-lang/chapel/blob/release/2.6/CONTRIBUTORS.md)
   to version 2.6!
 
-  ### Dynamic Loading
+  ### Dynamic Loading Support
+
+  This release of Chapel offers improved support for calling into
+  dynamically loaded libraries.  This feature was introduced in a
+  prototypical form for the 2.5 release, but in 2.6 it is now
+  supported by all compiler back-ends and has improved stability.
+
+  To use this feature, you must first have a _shared library_ (using
+  Linux terminology) that you wish to dynamically load.  As a simple
+  example, we'll compile and call into this simple library:
+
+  {{<file_download fname="MyAdd.c" lang="C">}}
+
+  The compiler invocation to create a dynamic library should look
+  something like the following, where details may vary depending on
+  your C compiler and platform:
+
+
+  ```console
+  $ clang -shared -fPIC -o libMyAdd.so MyAdd.c
+  ```
+
+
+  Once your library is compiled, you can write a program to load it
+  and call `myAdd()` with just a few lines of Chapel code:
+
+*/
+
+ // UseMyAdd.chpl
+ use DynamicLoading;
+
+ const lib = binary.load('./libMyAdd.so'),
+       add = lib.retrieve('myAdd', proc(x: int, y: int): int);
+
+ const n = add(2, 2);
+ writeln(n);
+
+/*
+
+  Note that although `bin.retrieve()` was only called on `Locales[0]`,
+  the retrieved procedure stored in `add` can be invoked on any
+  locale:
+
+*/
+
+on Locales.last {
+  const n = add(here.id, here.id);
+  writeln(n);
+}
+
+/*
+
+  In order to use dynamic loading in Chapel at present, the
+  `useProcedurePointers` `config param` must be set to true during
+  Chapel compilation. This requirement will be relaxed in future
+  releases.  For example, to compile this example and run it on four
+  locales, you could use:
+
+  ```console
+  $ chpl -suseProcedurePointers=true UseMyAdd.chpl
+  $ ./UseMyAdd -nl 4
+  4
+  6
+  ```
+
+  In addition to supporting traditional shared libraries like this
+  sample C library, this feature also supports loading and calling
+  into dynamic Chapel libraries whose exported routines are pure and
+  C-like (e.g., ones that don't rely on Chapel's runtime or modules).
+  In future releases, we plan to expand this support to support
+  arbitrary Chapel code.
+
 
   ### Debugging Improvements
+
+  Debugging Chapel programs gets even better in version 2.6 with
+  better debug information and new pretty-printers.  Historically,
+  debugging Chapel programs has meant interacting with the generated C
+  code.  This meant that when inspecting Chapel variables, you would
+  see the internal C representation of those data structures.  In this
+  release, we added pretty-printers for LLDB that make it possible to
+  view Chapel data structures using formats that are much more
+  intuitive and user-oriented.  This improvement can be seen through a
+  sample debugging session involving arrays.
+
+  In the following session, we'll debug the following simple Chapel
+  program:
+
+  {{<file_download fname="example.chpl" lang="Chapel">}}
+
+  We have used the `Debugger.breakpoint` {{<sidenote "right"
+  "pseudo-statement">}}Actually, a parentheses-less
+  procedure...{{</sidenote>}} to automatically stop execution at the
+  place of interest in our program when running within a debugger.
+  Upon hitting it, we then print out the contents of `myArr`:
+
+  {{< figure class="fullwide" src="debug-old.png" >}}
+
+  What we see is a bunch of internal C pointers that are used to
+  implement Chapel arrays.  This isn't very helpful to the typical
+  user, since it looks nothing like the logical array they'd expect.
+
+  Now let's look at the exact same debugging session using the new
+  pretty-printers added in Chapel 2.6:
+
+  {{< figure class="fullwide" src="debug.png" >}}
+
+  Now we see the contents of the array printed in a much more familiar
+  and useful way, and the implementation details we don't care about
+  {{<sidenote "right" " are hidden">}}If these details are important
+  to you, you can still see them by printing the raw data structure
+  using `v -R`.{{</sidenote>}}. This is just one example of the new
+  pretty-printers, which cover a wide variety of built-in Chapel
+  types, including strings, tuples, ranges, and domains. These new
+  pretty-printers are available by default as long as you are using
+  LLDB with Python support enabled.
+
+  We also made some great improvements to the debug information that
+  the Chapel compiler generates. The best example of this is with
+  enum's. The debugger now has enough information to print out the
+  names of the enum values instead of the underlying integer
+  value. This makes it much easier to understand what is going on in
+  your program. These improvements also lay the groundwork for
+  additional improvements in the future.
+
+  #### Prototype Parallel Debugger
+
+  The Chapel 2.6 release also includes a new tool,
+  `chpl-parallel-dbg`. This tool enables vastly improved debugging of
+  multilocale Chapel programs, which has been a longstanding
+  challenge. This tool works by launching a debugger on each locale of
+  a Chapel program, and then connecting them all together with a
+  single interface.
+
+  The following session demonstrates that we are able to debug a
+  multilocale Chapel program running on two locales, stepping through
+  breakpoints on the distinct locales.
+
+  {{< figure class="fullwide" src="parallel-dbg.png" >}}
+
+
+  This new tool is still a work in progress, but it's already a huge
+  step forward for debugging multilocale Chapel programs.  To learn
+  more about it or try it yourself, see [its
+  documentation](https://chapel-lang.org/docs/2.6/usingchapel/debugging/multilocale.html#chpl-parallel-dbg).
+  We are excited to continue improving this tool in future releases.
 
   ### Testing Improvements
 
