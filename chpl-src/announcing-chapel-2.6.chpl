@@ -19,21 +19,51 @@
   * Chapel's new module for [dynamically loading
     libraries](#dynamic-loading-support) and calling into them
 
-  * ...
+  * Improvements for [debugging Chapel programs](#debugging-enhancements)
 
-  * Improvements to the capabilities of the [Dyno
+  * Improvements to [unit
+    testing](#unit-testing-improvements-for-mason-and-vscode) within
+    Mason and VSCode
+
+  * Numerous [documentation and `chpldoc`
+    improvements](#documentation-improvements)
+
+  * Improvements to the capabilities of the [Dyno compiler
     front-end](#improvements-to-the-dyno-compiler-front-end)
 
-  In addition to the above features, which are covered in more detail
-  in the sections below, other highlights of Chapel 2.6 include:
 
-  * 
+  In addition to the above features, each of which is covered in more
+  detail below, other highlights of Chapel 2.6 include:
+
+  * Improved support for using [address
+    sanitizers](https://chapel-lang.org/docs/2.6/usingchapel/debugging/sanitizers.html)
+    with Chapel programs
+
+  * Ongoing capability improvements to Chapel's tools, including
+    [VSCode](https://chapel-lang.org/docs/2.6/usingchapel/editor-support.html#vscode),
+    the [`chplcheck`
+    linter](https://chapel-lang.org/docs/2.6/tools/chplcheck/chplcheck.html),
+    [`chpl-language-server`](https://chapel-lang.org/docs/2.6/tools/chpl-language-server/chpl-language-server.html), and.
+
+  * Flexibility improvements to the
+    [Homebrew](https://chapel-lang.org/download/#homebrew) and [Linux
+    package](https://chapel-lang.org/download/#linux) releases of
+    Chapel, including support for:
+    - Chapel's cpu-as-device GPU simulation mode
+    - support for multi-locale executions with Homebrew installs
+    - the ability to use either the LLVM or C-based back-ends from
+      Linux packages
+
+    In addition, where past Linux packages supported a binary download
+    per Chapel configuration, the 2.6 release bundles all
+    configurations for a given OS/platform into a single binary.
 
   For a much more complete list of changes in Chapel 2.6, see the
   [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.6/CHANGES.md)
-  file.  And huge thanks to [everyone who
+  file.  And big thanks to [everyone who
   contributed](https://github.com/chapel-lang/chapel/blob/release/2.6/CONTRIBUTORS.md)
   to version 2.6!
+
 
   ### Dynamic Loading Support
 
@@ -108,7 +138,7 @@ on Locales.last {
   arbitrary Chapel code.
 
 
-  ### Debugging Improvements
+  ### Debugging Enhancements
 
   Debugging Chapel programs gets even better in version 2.6 with
   better debug information and new pretty-printers.  Historically,
@@ -183,7 +213,7 @@ on Locales.last {
   We are excited to continue improving this tool in future releases.
 
 
-  ### Testing Improvements for Mason and VSCode
+  ### Unit testing Improvements for Mason and VSCode
 
   This release also includes many significant improvements to `mason`,
   [Chapel's package
@@ -292,7 +322,106 @@ on Locales.last {
   changes, and `chpldoc` itself is better than ever!
 
 
-  ### Dyno Improvements
+  ### Improvements to the Dyno Compiler Front End
+
+  As you may have seen in [previous]({{< relref
+  "announcing-chapel-2.5#improvements-to-the-dyno-compiler-front-end"
+  >}}) [release]({{< relref
+  "announcing-chapel-2.4#dyno-support-for-chapel-features" >}})
+  [announcements]({{< relref
+  "announcing-chapel-2.3#dyno-compiler-improvements" >}}), _Dyno_ is
+  the name of out effort to modernize and improve the Chapel compiler.
+  Dyno improves error messages, allows incremental type resolution,
+  and enables the [development of language tooling]({{< relref
+  "chapel-py" >}}).  Among the major wins for this ongoing effort is
+  the [Chapel Language Server
+  (CLS)](https://chapel-lang.org/docs/2.6/tools/chpl-language-server/chpl-language-server.html),
+  which was previously featured in a [blog post about editor
+  integration]({{< relref "chapel-lsp" >}}), not to mention Chapel's
+  linter, VSCode support, and `chpldoc`.
+
+  Our team has been hard at work implementing many features of
+  Chapel's type system in Dyno, which---among other things---will
+  enable tools like CLS to provide more accurate and helpful
+  information to users.  In the 2.6 release, we have continued to
+  improve Dyno's support for Chapel's language features as well as
+  expand the compiler's ability to leverage the Dyno front end to
+  generate executable code.
+
+  #### More Language Features
+
+  This release includes new support for additional support language
+  features with Dyno, where some notable examples include:
+  - various aspects of `enum`s, including casting and iteration
+  - promotion, particularly with methods and compiler-generated operations
+  - type queries, particularly for tuples and variadic formals
+
+  The following screenshot shows an editing session in which
+  Dyno-inferred type information is rendered in-line when editing the
+  following code example.
+
+  {{< file_download_min fname="enum-aspects.chpl" lang="chapel" >}}
+
+  {{< figure src="./dyno-enum-aspects.png" alt="Dyno displaying inferred type information for `enum` casts, access, and iteration" caption="Dyno displaying inferred type information for `enum` casts, access, and iteration" class="fullwide" >}}
+
+  There's a lot going on here!  As can be seen in the inferred type
+  of `color1`, Dyno now supports casting `param` (compile-time
+  constant) strings to `enum` values.  The inferred type of `color2`
+  demonstrates accessing an `enum` constant (`blue` in this case) via
+  a type alias (`myColorAlias`).  Finally, `index1` stores the numeric
+  value computed for `cyan`, which Dyno now correctly infers to be
+  `13`.
+
+  The most involved example is the `for param` loop.  Chapel's
+  semantics allow for compile-time iteration over certain ranges,
+  which effectively completely unrolls the loop.  Dyno, like the
+  production compiler, now supports iteration over ranges of `enum`s
+  (in addition to ranges of integers).  Moreover, Dyno properly
+  handles complex patterns of iteration, such as those that use the
+  count operator `#` and the stride specification `by -2`.  The
+  compiler warnings generated within the loop body show the values
+  that `c` takes on during the unrolling of the loop.
+
+  In this next example, you can see the improvements to Dyno's support
+  for
+  [promotion](https://chapel-lang.org/docs/2.6/users-guide/datapar/promotion.html).
+
+  {{< file_download_min fname="promotion.chpl" lang="chapel" >}}
+
+  {{< figure src="./dyno-promotion.png" alt="Dyno displaying inferred type information for various promoted calls" caption="Dyno displaying inferred type information for various promoted calls" class="fullwide" >}}
+
+  Here, we re-use the `myColor` enumeration type.  We define a new
+  method on this `enum`, called `someMethod`, then invoke this method
+  on an array of colors, `A`.  Since this method produces a tuple of a
+  string and an integer, applying it element-wise to the array `A`
+  results in an array of tuples, which is the type that Dyno infers
+  for `B`.  Chapel's compiler auto-generates casts from `enum`s to
+  their specified `int` values where possible; in the example, we also
+  apply this cast element-wise to `A`, resulting in an array of
+  integers, which is the type that Dyno infers for `C`.
+
+
+  #### Generating Executable Code
+
+  This release also saw improvements to experimental support for using
+  Dyno to generate executable code, which is a major step toward
+  Dyno's goal of replacing the front-end of the production
+  compiler. This is an ongoing process that involves taking the
+  information that Dyno has computed about the program and generating
+  AST for the production compiler, essentially skipping over its
+  historical type resolution and analysis phases. This capability is
+  enabled using the ``--dyno`` command-line flag.
+
+  Initial support is limited to a subset of Chapel's language
+  features, but is growing all the time.  Here is an example program
+  that Dyno can now compile, demonstrating uses of classes, records,
+  and strings:
+
+  {{< file_download_min fname="converter-print26.chpl" lang="chapel" >}}
+
+  {{< file_download fname="converter-aggregates26.chpl" lang="chapel" >}}
+
+  Stay tuned as we continue to add support for more features!
 
 
   ### For More Information
