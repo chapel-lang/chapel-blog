@@ -417,9 +417,9 @@ on Locales.last {
   that Dyno can now compile, demonstrating uses of classes, records,
   and strings:
 
-  {{< file_download_min fname="converter-print26.chpl" lang="chapel" >}}
+  {{< file_download_min fname="Print.chpl" lang="chapel" >}}
 
-  {{< file_download fname="converter-aggregates26.chpl" lang="chapel" >}}
+  {{< file_download fname="converter-aggregates.chpl" lang="chapel" >}}
 
   Stay tuned as we continue to add support for more features!
 
