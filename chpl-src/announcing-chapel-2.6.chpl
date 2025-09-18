@@ -1,9 +1,12 @@
 // Announcing Chapel 2.6!
 // authors: ["David Longnecker", "Jade Abraham", "Lydia Duncan", "Daniel Fedorin", "Ben Harshbarger", "Brad Chamberlain"]
 // summary: "Highlights from the September 2025 release of Chapel 2.6"
-// tags: ["Release Announcements"]
+// tags: ["Release Announcements", "Debugging", "Tools", "Dyno"]
 // date: 2025-09-18
 /*
+
+{{<todo>}} Consider removing following sidebar depending on status at
+time of publication {{</todo>}}
 
   The Chapel community is pleased to announce the release of Chapel
   2.6!  As usual, you can [download and
@@ -19,14 +22,14 @@
   * Chapel's new module for [dynamically loading
     libraries](#dynamic-loading-support) and calling into them
 
-  * Improvements for [debugging Chapel programs](#debugging-enhancements)
+  * Improvements when [debugging Chapel programs](#debugging-enhancements)
 
-  * Improvements to [unit
-    testing](#unit-testing-improvements-for-mason-and-vscode) within
+  * Improved [unit
+    testing](#unit-testing-improvements-for-mason-and-vscode) with
     Mason and VSCode
 
-  * Numerous [documentation and `chpldoc`
-    improvements](#documentation-improvements)
+  * Numerous [documentation and
+    `chpldoc`](#documentation-improvements) improvements
 
   * Improvements to the capabilities of the [Dyno compiler
     front-end](#improvements-to-the-dyno-compiler-front-end)
@@ -39,20 +42,19 @@
     sanitizers](https://chapel-lang.org/docs/2.6/usingchapel/debugging/sanitizers.html)
     with Chapel programs
 
-  * Ongoing capability improvements to Chapel's tools, including
+  * Ongoing capability improvements to Chapel's tools, such as
     [VSCode](https://chapel-lang.org/docs/2.6/usingchapel/editor-support.html#vscode),
-    the [`chplcheck`
-    linter](https://chapel-lang.org/docs/2.6/tools/chplcheck/chplcheck.html),
-    [`chpl-language-server`](https://chapel-lang.org/docs/2.6/tools/chpl-language-server/chpl-language-server.html), and.
+    the [`chplcheck`](https://chapel-lang.org/docs/2.6/tools/chplcheck/chplcheck.html) linter,
+    [`chpl-language-server`](https://chapel-lang.org/docs/2.6/tools/chpl-language-server/chpl-language-server.html), and [`chapel-py`](https://chapel-lang.org/docs/2.6/tools/chapel-py/chapel-py.html)
 
   * Flexibility improvements to the
     [Homebrew](https://chapel-lang.org/download/#homebrew) and [Linux
     package](https://chapel-lang.org/download/#linux) releases of
     Chapel, including support for:
-    - Chapel's cpu-as-device GPU simulation mode
+    - Chapel's cpu-as-device GPU emulation mode
     - support for multi-locale executions with Homebrew installs
-    - the ability to use either the LLVM or C-based back-ends from
-      Linux packages
+    - support for both the LLVM or C-based back-ends from Linux
+      packages
 
     In addition, where past Linux packages supported a binary download
     per Chapel configuration, the 2.6 release bundles all
@@ -60,7 +62,7 @@
 
   For a much more complete list of changes in Chapel 2.6, see the
   [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.6/CHANGES.md)
-  file.  And big thanks to [everyone who
+  file.  And as always, thanks to [everyone who
   contributed](https://github.com/chapel-lang/chapel/blob/release/2.6/CONTRIBUTORS.md)
   to version 2.6!
 
@@ -74,17 +76,20 @@
 
   To use this feature, you must first have a _shared library_ (using
   Linux terminology) that you wish to dynamically load.  As a simple
-  example, we'll compile and call into this simple library:
+  example, we'll create and call into a toy library defined as
+  follows:
+
+{{<todo>}} Why is this double-spaced? {{</todo>}}
 
   {{<file_download fname="MyAdd.c" lang="C">}}
 
-  The compiler invocation to create a dynamic library should look
-  something like the following, where details may vary depending on
-  your C compiler and platform:
+  The compiler invocation to create a dynamic library from the C code
+  above should look something like the following, where details may
+  vary depending on your C compiler and platform:
 
 
   ```console
-   $ clang -shared -fPIC -o libMyAdd.so MyAdd.c
+  $ clang -shared -fPIC -o libMyAdd.so MyAdd.c
   ```
 
 
@@ -93,7 +98,6 @@
 
 */
 
- // UseMyAdd.chpl
  use DynamicLoading;
 
  const lib = binary.load('./libMyAdd.so'),
@@ -133,9 +137,9 @@ on Locales.last {
   In addition to supporting traditional shared libraries like this
   sample C library, this feature also supports loading and calling
   into dynamic Chapel libraries whose exported routines are pure and
-  C-like (e.g., ones that don't rely on Chapel's runtime or modules).
-  In future releases, we plan to expand this support to support
-  arbitrary Chapel code.
+  C-like—for example, ones that don't rely on Chapel's runtime or
+  modules.  In future releases, we plan to expand these features to
+  support arbitrary Chapel code.
 
 
   ### Debugging Enhancements
@@ -145,21 +149,36 @@ on Locales.last {
   debugging Chapel programs has meant interacting with the generated C
   code.  This meant that when inspecting Chapel variables, you would
   see the internal C representation of those data structures.  In this
-  release, we added pretty-printers for LLDB that make it possible to
-  view Chapel data structures using formats that are much more
-  intuitive and user-oriented.  This improvement can be seen through a
-  sample debugging session involving arrays.
+  release, we added pretty-printers for LLDB when using Chapel's C
+  back-end that make it possible to view Chapel data structures using
+  formats that are much more intuitive and user-oriented.  This
+  improvement can be seen through the following sample debugging
+  session involving arrays.
 
-  In the following session, we'll debug the following simple Chapel
-  program:
+  In this example, we'll debug the following simple Chapel program:
 
   {{<file_download fname="example.chpl" lang="Chapel">}}
 
   We have used the `Debugger.breakpoint` {{<sidenote "right"
-  "pseudo-statement">}}Actually, a parentheses-less
-  procedure...{{</sidenote>}} to automatically stop execution at the
-  place of interest in our program when running within a debugger.
-  Upon hitting it, we then print out the contents of `myArr`:
+  "pseudo-statement" -5>}}This is actually a parentheses-less
+  procedure in Chapel, which supports statement-like
+  syntax.{{</sidenote>}} to automatically stop execution at the place
+  of interest in our program when running within a debugger.  To
+  {{<sidenote "right" "compile this program" 1>}}Note that we are
+  working on a more ergonomic way to disable optimizations and code
+  transformations when debugging, which is being discussed in issue
+  [#27615](https://github.com/chapel-lang/chapel/issues/27615){{</sidenote>}}
+  and run it within LLDB, we use the following commands using the
+  Chapel compiler's C back-end (e.g.,&nbsp;`CHPL_TARGET_COMPILER=clang`):
+
+  ```console
+  $ chpl -g --no-copy-propagation --no-scalar-replacement --no-denormalize --no-munge-user-idents example.chpl
+  $  ./example --lldb
+  ```
+
+  Upon running the program, we hit the `breakpoint` statement and can
+  print out the contents of `myArr`.  Traditionally, that output would
+  have looked like this:
 
   {{< figure class="fullwide" src="debug-old.png" >}}
 
@@ -184,8 +203,8 @@ on Locales.last {
 
   We also made some great improvements to the debug information that
   the Chapel compiler generates. The best example of this is with
-  enum's. The debugger now has enough information to print out the
-  names of the enum values instead of the underlying integer
+  `enum`s. The debugger now has enough information to print out the
+  names of the enum symbols instead of the underlying integer
   value. This makes it much easier to understand what is going on in
   your program. These improvements also lay the groundwork for
   additional improvements in the future.
@@ -195,20 +214,25 @@ on Locales.last {
   The Chapel 2.6 release also includes a new tool,
   `chpl-parallel-dbg`. This tool enables vastly improved debugging of
   multilocale Chapel programs, which has been a longstanding
-  challenge. This tool works by launching a debugger on each locale of
-  a Chapel program, and then connecting them all together with a
-  single interface.
+  challenge. It works by launching a debugger on each locale of a
+  Chapel program, and then connecting them all together with a single
+  interface.
 
-  The following session demonstrates that we are able to debug a
-  multilocale Chapel program running on two locales, stepping through
-  breakpoints on the distinct locales.
+  In the following example, we'll demonstrate the use of
+  `chpl-parallel-dbg` on this multilocale Chapel program:
+
+  {{<file_download fname="multiloc/example.chpl" lang="Chapel">}}
+
+  This session shows the program running on two locales, where we step
+  through breakpoints on the distinct locales, switching between them
+  using a custom `on` command to mirror the Chapel syntax..
 
   {{< figure class="fullwide" src="parallel-dbg.png" >}}
 
 
   This new tool is still a work in progress, but it's already a huge
   step forward for debugging multilocale Chapel programs.  To learn
-  more about it or try it yourself, see [its
+  more about it or to try it yourself, see [its
   documentation](https://chapel-lang.org/docs/2.6/usingchapel/debugging/multilocale.html#chpl-parallel-dbg).
   We are excited to continue improving this tool in future releases.
 
@@ -229,8 +253,8 @@ on Locales.last {
   This can be run, standalone, using:
 
   ```console
-   $ chpl myTest.chpl
-   $ ./myTest
+  $ chpl myTest.chpl
+  $ ./myTest
   ```
 
   However, using `mason` we can just run:
@@ -282,7 +306,7 @@ on Locales.last {
   find it healthy to dedicate a week shortly after each release to
   focus on some housekeeping task.  Instead of juggling these
   important, ongoing efforts with other priorities, it allows us to
-  make a rapid progress in a short period of time, and also feels like
+  make rapid progress in a short period of time, and also feels like
   a nice break from normal work.  Past dedicated weeks have focused
   specifically on cleaning up nightly testing or resolving user
   issues, and for this release it made sense to focus on
@@ -313,13 +337,13 @@ on Locales.last {
   documentation to support nightly testing.  Our enthusiasm for this
   effort carried over into subsequent weeks, such that for version
   2.6, we ultimately added testing for examples in 45 libraries and 9
-  technotes!  As a result, we were able to notice and fix many
+  technotes!  As a result, we were able to identify and fix many
   examples that had gotten out-of-date due to improvements to the
   language.
 
   As a result of all these efforts, Chapel's online documentation is
   now more searchable, more accurate, and more robust to future
-  changes, and `chpldoc` itself is better than ever!
+  changes; and `chpldoc` itself is better than ever!
 
 
   ### Improvements to the Dyno Compiler Front End
@@ -344,17 +368,17 @@ on Locales.last {
   Chapel's type system in Dyno, which---among other things---will
   enable tools like CLS to provide more accurate and helpful
   information to users.  In the 2.6 release, we have continued to
-  improve Dyno's support for Chapel's language features as well as
-  expand the compiler's ability to leverage the Dyno front end to
-  generate executable code.
+  improve Dyno's support for Chapel's language features, and we've
+  also expanded the compiler's ability to leverage the Dyno front end
+  to generate executable code.
 
   #### More Language Features
 
-  This release includes new support for additional support language
+  This release includes new support for resolving additional language
   features with Dyno, where some notable examples include:
-  - various aspects of `enum`s, including casting and iteration
-  - promotion, particularly with methods and compiler-generated operations
-  - type queries, particularly for tuples and variadic formals
+  * various aspects of `enum`s, including casting and iteration
+  * promotion, particularly with methods and compiler-generated operations
+  * type queries, particularly for tuples and variadic formals
 
   The following screenshot shows an editing session in which
   Dyno-inferred type information is rendered in-line when editing the
@@ -362,7 +386,7 @@ on Locales.last {
 
   {{< file_download_min fname="enum-aspects.chpl" lang="chapel" >}}
 
-  {{< figure src="./dyno-enum-aspects.png" alt="Dyno displaying inferred type information for `enum` casts, access, and iteration" caption="Dyno displaying inferred type information for `enum` casts, access, and iteration" class="fullwide" >}}
+  {{< figure class="fullwide" src="./dyno-enum-aspects.png" alt="Dyno displaying inferred type information for `enum` casts, access, and iteration">}}
 
   There's a lot going on here!  As can be seen in the inferred type
   of `color1`, Dyno now supports casting `param` (compile-time
@@ -378,7 +402,7 @@ on Locales.last {
   production compiler, now supports iteration over ranges of `enum`s
   (in addition to ranges of integers).  Moreover, Dyno properly
   handles complex patterns of iteration, such as those that use the
-  count operator `#` and the stride specification `by -2`.  The
+  count operator (`#`) and the stride specification `by -2`.  The
   compiler warnings generated within the loop body show the values
   that `c` takes on during the unrolling of the loop.
 
@@ -388,7 +412,7 @@ on Locales.last {
 
   {{< file_download_min fname="promotion.chpl" lang="chapel" >}}
 
-  {{< figure src="./dyno-promotion.png" alt="Dyno displaying inferred type information for various promoted calls" caption="Dyno displaying inferred type information for various promoted calls" class="fullwide" >}}
+  {{< figure class="fullwide" src="./dyno-promotion.png" alt="Dyno displaying inferred type information for various promoted calls">}}
 
   Here, we re-use the `myColor` enumeration type.  We define a new
   method on this `enum`, called `someMethod`, then invoke this method
@@ -403,7 +427,7 @@ on Locales.last {
 
   #### Generating Executable Code
 
-  This release also saw improvements to experimental support for using
+  This release also saw improvements to our support for using
   Dyno to generate executable code, which is a major step toward
   Dyno's goal of replacing the front-end of the production
   compiler. This is an ongoing process that involves taking the
@@ -417,9 +441,9 @@ on Locales.last {
   that Dyno can now compile, demonstrating uses of classes, records,
   and strings:
 
-  {{< file_download_min fname="Print.chpl" lang="chapel" >}}
-
   {{< file_download fname="converter-aggregates.chpl" lang="chapel" >}}
+
+  {{< file_download_min fname="Print.chpl" lang="chapel" >}}
 
   Stay tuned as we continue to add support for more features!
 
