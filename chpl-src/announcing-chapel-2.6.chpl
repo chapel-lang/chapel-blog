@@ -54,7 +54,7 @@
 
 
   ```console
-  $ clang -shared -fPIC -o libMyAdd.so MyAdd.c
+   $ clang -shared -fPIC -o libMyAdd.so MyAdd.c
   ```
 
 
@@ -94,10 +94,10 @@ on Locales.last {
   locales, you could use:
 
   ```console
-  $ chpl -suseProcedurePointers=true UseMyAdd.chpl
-  $ ./UseMyAdd -nl 4
-  4
-  6
+   $ chpl -suseProcedurePointers=true UseMyAdd.chpl
+   $ ./UseMyAdd -nl 4
+   4
+   6
   ```
 
   In addition to supporting traditional shared libraries like this
@@ -182,7 +182,64 @@ on Locales.last {
   documentation](https://chapel-lang.org/docs/2.6/usingchapel/debugging/multilocale.html#chpl-parallel-dbg).
   We are excited to continue improving this tool in future releases.
 
-  ### Testing Improvements
+
+  ### Testing Improvements for Mason and VSCode
+
+  This release also includes many significant improvements to `mason`,
+  [Chapel's package
+  manager](https://chapel-lang.org/docs/2.6/tools/mason/mason.html),
+  primarily focused on improving the developer experience when
+  testing.  We fixed many bugs with mason itself and added some new
+  testing features.  For example, suppose we have a simple program
+  defining some unit tests:
+
+  {{<file_download fname="myTest.chpl" lang="Chapel">}}
+
+
+  This can be run, standalone, using:
+
+  ```console
+   $ chpl myTest.chpl
+   $ ./myTest
+  ```
+
+  However, using `mason` we can just run:
+
+  ```console
+   $ mason test myTest.chpl
+  ```
+
+  and it will handle compilation and execution, while also generating
+  a nice report for us:
+
+  ```text
+  
+  ----------------------------------------------------------------------
+  Ran 2 tests in 18.6117 seconds
+  
+  OK (passed = 2 )
+  ```
+
+
+  Chapel 2.6 also adds the ability to selectively run tests by name.
+  For example, this command:
+
+  ```console
+   $ mason test myTest.chpl --filter myTest1
+  ```
+
+  will only run the `myTest1` test.  This is particularly useful when
+  you are working on a specific test and don't want to run the entire
+  suite.
+
+  We also integrated testing into VSCode, so that you can run (and in
+  the future, debug) tests directly from the editor!
+
+  {{< figure class="fullwide" src="mason-test.png" >}}
+
+  This creates a much smoother workflow for developing and testing
+  Chapel code from the comfort of a GUI.
+
 
   ### Documentation Improvements
 
