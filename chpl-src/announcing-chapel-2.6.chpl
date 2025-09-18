@@ -1,5 +1,5 @@
 // Announcing Chapel 2.6!
-// authors: ["Brad Chamberlain", "Jade Abraham", "Lydia Duncan", "Ben Harshbarger", "Daniel Fedorin"]
+// authors: ["David Longnecker", "Jade Abraham", "Lydia Duncan", "Daniel Fedorin", "Ben Harshbarger", "Brad Chamberlain"]
 // summary: "Highlights from the September 2025 release of Chapel 2.6"
 // tags: ["Release Announcements"]
 // date: 2025-09-18
@@ -242,6 +242,55 @@ on Locales.last {
 
 
   ### Documentation Improvements
+
+  Each Chapel release typically includes a handful of documentation
+  improvements, usually motivated by the features being added or
+  improved during that release cycle.  This release cycle saw a larger
+  than normal set of documentation improvements, due to _documentation
+  week_.  This was a dedicated week focused on improving documentation
+  and documentation-adjacent aspects of the project.  We frequently
+  find it healthy to dedicate a week shortly after each release to
+  focus on some housekeeping task.  Instead of juggling these
+  important, ongoing efforts with other priorities, it allows us to
+  make a rapid progress in a short period of time, and also feels like
+  a nice break from normal work.  Past dedicated weeks have focused
+  specifically on cleaning up nightly testing or resolving user
+  issues, and for this release it made sense to focus on
+  documentation.
+
+  During documentation week, we resolved and closed 23 outstanding
+  issues.  We fixed bugs with our `chpldoc` documentation tool and
+  added the ability to search our online documentation for compiler
+  flags (like [this
+  search](https://chapel-lang.org/docs/2.6/search.html?q=--fast&check_keywords=yes&area=default)
+  for `--fast`).  As part of refactoring our [multilocale
+  documentation](https://chapel-lang.org/docs/2.6/usingchapel/multilocale.html),
+  we added or extended pages on using the [Elastic Fabric Adapter
+  (EFA)](https://chapel-lang.org/docs/2.6/platforms/networks/efa.html)
+  network interface for
+  [AWS](https://chapel-lang.org/docs/2.6/platforms/aws.html#readme-aws),
+  [Ethernet
+  clusters](https://chapel-lang.org/docs/2.6/platforms/networks/ethernet.html),
+  and [GASNet's SMP
+  conduit](https://chapel-lang.org/docs/2.6/platforms/comm-layers/gasnet.html#readme-gasnet-smp)
+  for running multiple locales on shared memory.  Additionally, this
+  release saw the introduction of documentation on [sanitizer
+  tools](https://chapel-lang.org/docs/2.6/usingchapel/debugging/sanitizers.html),
+  and general improvements to our [debugging
+  documentation](https://chapel-lang.org/docs/2.6/usingchapel/debugging.html).
+
+  We also made extensive progress in updating code examples in
+  documentation to support nightly testing.  Our enthusiasm for this
+  effort carried over into subsequent weeks, such that for version
+  2.6, we ultimately added testing for examples in 45 libraries and 9
+  technotes!  As a result, we were able to notice and fix many
+  examples that had gotten out-of-date due to improvements to the
+  language.
+
+  As a result of all these efforts, Chapel's online documentation is
+  now more searchable, more accurate, and more robust to future
+  changes, and `chpldoc` itself is better than ever!
+
 
   ### Dyno Improvements
 
