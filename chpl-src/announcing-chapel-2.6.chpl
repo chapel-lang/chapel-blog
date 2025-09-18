@@ -1,12 +1,9 @@
 // Announcing Chapel 2.6!
 // authors: ["David Longnecker", "Jade Abraham", "Lydia Duncan", "Daniel Fedorin", "Ben Harshbarger", "Brad Chamberlain"]
 // summary: "Highlights from the September 2025 release of Chapel 2.6"
-// tags: ["Release Announcements", "Debugging", "Tools", "Dyno"]
+// tags: ["Release Announcements", "Interoperability", "Debugging", "Tools", "Dyno"]
 // date: 2025-09-18
 /*
-
-{{<todo>}} Consider removing following sidebar depending on status at
-time of publication {{</todo>}}
 
   The Chapel community is pleased to announce the release of Chapel
   2.6!  As usual, you can [download and
@@ -291,7 +288,7 @@ on Locales.last {
   We also integrated testing into VSCode, so that you can run (and in
   the future, debug) tests directly from the editor!
 
-  {{< figure class="fullwide" src="mason-test.png" >}}
+  {{< figure class="fullwide" src="vscode-test.png" >}}
 
   This creates a much smoother workflow for developing and testing
   Chapel code from the comfort of a GUI.
