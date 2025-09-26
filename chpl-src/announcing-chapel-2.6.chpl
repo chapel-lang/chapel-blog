@@ -93,10 +93,10 @@
 
 */
 
-use DynamicLoading;
+use DynamicLoading, CTypes;
 
 const lib = binary.load('./libMyAdd.so'),
-      add = lib.retrieve('myAdd', proc(x: int, y: int): int);
+      add = lib.retrieve('myAdd', proc(x: c_int, y: c_int): c_int);
 
 const n = add(2, 2);
 writeln(n);
@@ -110,7 +110,7 @@ writeln(n);
 */
 
 on Locales.last {
-  const n = add(here.id, here.id);
+  const n = add(here.id: c_int, here.id: c_int);
   writeln(n);
 }
 
@@ -456,5 +456,10 @@ on Locales.last {
   addition, we're always interested in hearing about how we can make
   the Chapel language, libraries, implementation, and tools more
   useful to you.
+
+  {{< changetable >}}
+  | Date         | Change                                                      |
+  |:-------------|:----------------------------------------------------------------------------------|
+  | Sept 26, 2025  | Fixed dynamic library calls to use `c_int` rather than `int`  |
 
 */
