@@ -45,6 +45,11 @@ jobs:
           ./scripts/chpl_blog.py build --fast -D -F
           for file in $(find public -name "*.html"); do ./scripts/insert_links.py $file; done
 
+      - name: Verify Links
+        run: |
+          cd ./blog
+          python3 ./scripts/check_doc_links.py file-link-cache.json
+
       - name: Archive Generated HTML
         uses: actions/upload-artifact@v4
         with:
