@@ -354,6 +354,85 @@
       [[[7,5],[7,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
     ]
   },
+  "public/posts/10myths-part5/code/stencil-3D.chpl": {
+    "references": [
+      [[[18,1],[18,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/10myths-part5/code/weights-nD.chpl": {
+    "references": [
+      [[[22,1],[22,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/announcing-chapel-2.6.chpl": {
+    "references": [
+      [[[1,5],[1,19]],"https://chapel-lang.org/docs/modules/packages/DynamicLoading.html"],
+      [[[1,21],[1,27]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[3,13],[3,19]],"https://chapel-lang.org/docs/modules/packages/DynamicLoading.html#DynamicLoading.binary"],
+      [[[3,20],[3,24]],"https://chapel-lang.org/docs/modules/packages/DynamicLoading.html#DynamicLoading.binary.load"],
+      [[[4,43],[4,48]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[4,53],[4,58]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[4,61],[4,66]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[9,12],[9,16]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.last"],
+      [[[10,26],[10,31]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[10,42],[10,47]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/example.chpl": {
+    "references": [
+      [[[1,5],[1,13]],"https://chapel-lang.org/docs/modules/standard/Debugger.html"],
+      [[[5,3],[5,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[6,3],[6,13]],"https://chapel-lang.org/docs/modules/standard/Debugger.html#Debugger.breakpoint"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/multiloc/example.chpl": {
+    "references": [
+      [[[1,5],[1,14]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[3,13],[3,22]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[3,23],[3,34]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createArray"],
+      [[[7,5],[7,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[8,29],[8,43]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.localSubdomain"],
+      [[[9,5],[9,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[10,12],[10,20]],"https://chapel-lang.org/docs/modules/standard/Debugger.html"],
+      [[[10,22],[10,30]],"https://chapel-lang.org/docs/modules/standard/Debugger.html"],
+      [[[10,31],[10,41]],"https://chapel-lang.org/docs/modules/standard/Debugger.html#Debugger.breakpoint"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/myTest.chpl": {
+    "references": [
+      [[[1,5],[1,13]],"https://chapel-lang.org/docs/modules/packages/UnitTest.html"],
+      [[[10,1],[10,9]],"https://chapel-lang.org/docs/modules/packages/UnitTest.html"],
+      [[[10,10],[10,14]],"https://chapel-lang.org/docs/modules/packages/UnitTest.html#UnitTest.main"],
+      [[[10,10],[10,14]],"https://chapel-lang.org/docs/modules/packages/UnitTest.html#UnitTest.main"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/enum-aspects.chpl": {
+    "references": [
+      [[[26,23],[26,29]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/promotion.chpl": {
+    "references": [
+      [[[3,46],[3,52]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/converter-aggregates.chpl": {
+    "references": []
+  },
+  "public/posts/announcing-chapel-2.6/code/Print.chpl": {
+    "references": [
+      [[[1,5],[1,10]],"https://chapel-lang.org/docs/modules/standard/Types.html"],
+      [[[1,12],[1,18]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[50,27],[50,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrConst"],
+      [[[50,38],[50,44]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_char"],
+      [[[58,13],[58,22]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isIntType"],
+      [[[60,13],[60,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isUintType"],
+      [[[62,13],[62,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isRealType"],
+      [[[64,18],[64,24]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[66,13],[66,24]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isTupleType"],
+      [[[76,13],[76,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isEnumType"]
+    ]
+  },
   "public/posts/aoc2022-day09-elvish-string-theory/code/aoc2022-day09-elvish-string-theory.chpl": {
     "references": [
       [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
@@ -829,6 +908,23 @@
       [[[5,1],[5,14]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.compilerError"],
       [[[5,48],[5,59]],"https://chapel-lang.org/docs/modules/standard/Reflection.html#Reflection.getFileName"],
       [[[5,48],[5,59]],"https://chapel-lang.org/docs/modules/standard/Reflection.html#Reflection.getFileName"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.5/code/announcing-chapel-2.5.chpl": {
+    "references": [
+      [[[2,11],[2,18]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.reshape"],
+      [[[6,11],[6,18]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.reshape"],
+      [[[9,1],[9,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.5/code/reduce-index-nd.chpl": {
+    "references": []
+  },
+  "public/posts/announcing-chapel-2.5/code/converter-simple.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[18,11],[18,18]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[19,13],[19,18]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.deref"]
     ]
   },
   "public/posts/10myths-part1/code/inferred.chpl": {
