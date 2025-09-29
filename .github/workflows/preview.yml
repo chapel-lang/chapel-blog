@@ -36,7 +36,9 @@ jobs:
           python-version: '3.10'
 
       - name: Install Python Dependencies
-        run: pip install -r ./blog/requirements.txt
+        run: |
+          pip install -r ./blog/requirements.txt
+          pip install requests beautifulsoup4
 
       - name: Build Blog
         run: |
