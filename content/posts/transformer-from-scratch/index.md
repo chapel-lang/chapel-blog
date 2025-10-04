@@ -26,11 +26,7 @@ All versions were tested on the following configurations and environments.
 - Single thread, Machine B, Full model size
 - Multi thread, Machine B, Full model size
 
-the details of the test machine and model configuration are described in the following section.
-
-In order to measure the time required by each layer, timers were inserted into all layers. The model was then run on the Italian-English machine translation task, with the dataset obtained from opus_books ([Hugging Face link](https://huggingface.co/datasets/Helsinki-NLP/opus_books)). The model was executed for 500 and 40 iterations on Machines A and B, respectively. The timing results of each iteration for each layer were gathered and sorted; the fastest and slowest 10% of iterations were removed, and the mean and standard deviation were computed.
-
-Machine A facilitated easy inspection of compiled code with the `perf` command, allowing bottlenecks to be identified easily, while Machine B did not. On the other hand, Machine A had a limited amount of memory and was incapable of running the full-size model, whereas Machine B had larger memory, allowing full-size model to be run.
+{{< details summary="**Click here to view the details of the test machines and configurations**" >}}
 
 #### Environment
 
@@ -87,6 +83,11 @@ Model
   - srcVocab : 15700 - *Size of source vocabulary*
   - tgtVocab : 22470 - *Size of target vocabulary*
 
+{{< /details >}}
+
+Machine A (AMD Ryzen) facilitated easy inspection of compiled code with permission to the `perf` command, allowing bottlenecks to be identified easily, while Machine B (Xeon Phi) did not. On the other hand, Machine A had a limited memory of 6.67 GB and was incapable of running the full-size model, whereas Machine B had 204.45 GB, allowing the full-size model to be run.
+
+In order to measure the time required by each layer, timers were inserted into all layers. The model was then run on the Italian-English machine translation task, with the dataset obtained from opus_books ([Hugging Face link](https://huggingface.co/datasets/Helsinki-NLP/opus_books)). The model was executed for 500 and 40 iterations on Machines A and B, respectively. The timing results of each iteration for each layer were gathered and sorted; the fastest and slowest 10% of iterations were removed, and the mean and standard deviation were computed.
  
 ### Small-Size Model on Single Thread
 
