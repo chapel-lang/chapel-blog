@@ -165,20 +165,23 @@ After some tests, Chapel outperformed C++ for certain matrix sizes and underperf
 This section discusses general operations such as element-wise multiplication, addition, division, etc. As I wanted to have control over parallelism, there were several candidate designs, including overloading the array operators like `+`, `-`,  `*`, and `/` or creating new functions for these operations. As I experimented with performance and inspected the generated assembly, I found that the design and implementation of these operations had a greater impact on the model than I had expected. Therefore, I tested five versions of the sum-reduction function used in LayerNorm to calculate the mean. (However, the implementation of LayerNorm that used this function was later changed to be similar to the C++ version).
 
 ```Chapel
-proc PlusReduce1(ref A: [?D] real(32), out output: real(32)) : void {
+// query the domain from the array argument
+proc PlusReduce1(ref A: [?D] real(32) out output: real(32),) : void {
     output = 0.0;
     for i in D {
        output += A[i];
     }
 }
 
-proc PlusReduce2(D: domain(1), ref A: [] real(32)) : void {
+// pass domain explicitly
+proc PlusReduce2(D: domain(1), ref A: [] real(32), out output: real(32)) : void {
     output = 0.0;
     for i in D {
         output += A[i];
     }
 }
 
+// pass starting and ending points explicitly
 proc PlusReduce3(in start: int, in count: int, ref A: [] real(32), out output: real(32)) : void {
     output = 0.0;
     for i in start..#count {
@@ -186,10 +189,12 @@ proc PlusReduce3(in start: int, in count: int, ref A: [] real(32), out output: r
     }
 }
 
+// use + reduce expression
 proc PlusReduce4(ref A: [?D] real(32), out output real(32)) : void {
     output = + reduce(A);
 }
 
+// operator overloading
 operator +=(ref sum: real(32), ref A: [] real(32)) {
     var output: real(32) = 0.0;
     for i in A.domain {
@@ -475,7 +480,7 @@ There are several things that I like about Chapel:
 
 Nevertheless, there are several shortcomings I found about Chapel, too:
 - Long compilation time, which is especially so when multi-locale is introduced.
-- Type casting among numeric types is done implicitly in C++, but not in Chapel (I am not sure which approach is better).
+- Downcasting among numeric types, such from `real(64)` to `real(32)`, is done implicitly in C++, but not in Chapel (I am not sure which approach is better).
 - All the performance issues that I mentioned in this blog. This causes tricky fixes to be made and it makes the code messy.
 
 Chapel took as long as C++ to implement this transformer model in this project as it required some tricky fixes. The productivity of implementing and parallel programming tends to be the same as C++ and OpenMP, as far as this project is concerned. I believe that having the same level of expertise, Chapel could be more productive than C++ and Python in doing scientific simulations that require parallelism on multithread and multilocale as it automates data movement and configuration. However, it has much less support frameworks than Python, making it hard to create a project, and less control over the machine than C++, making it difficult to conduct performance research.
