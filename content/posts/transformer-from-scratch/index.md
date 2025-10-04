@@ -1,7 +1,7 @@
 
 ---
 title: "Transformer From Scratch"
-date: 2025-09-11
+date: 2025-10-10
 tags: ["Benchmark", "Language Comparison", "Performance", "User Experience"]
 summary: "An Attempt at Implementing a Transformer Using Chapel: Performance Comparison with C++ (and PyTorch) on Single- and Multi-Threaded CPUs"
 authors: ["Thitrin Sastarasadhit"]
@@ -157,24 +157,7 @@ I also experimented with nested arrays, such as `var arr: [0..#N][0..#N] real(32
 
 The algorithm used for matrix multiplication is blocked matrix multiplication, in which the operation is divided into smaller blocks to exploit cache locality. A block size of 64×64 was chosen, as it provided the best performance in my environment. Both the C++ and Chapel versions use the same algorithm and block size.
 
-In the C++ version, I initially encountered an unexpected performance drop in the Linear layer compared to the Chapel version. Even though the compiler-generated code of the C++ version contains a vectorized loop for the main computation and a scalar (non-vectorized) loop for collecting the remaining elements of the innermost loop as usual, for certain matrix sizes, the scalar path was used more frequently than expected. As I speculated that the independence of block size and array size checks in the three innermost loop conditions wasn't emphasized enough, I tried replacing bitwise ANDs (`&&`) with logical ANDs (`&`) in these conditions.
-```cpp
-for(int ii = 0;ii < d1;ii += BLOCK_SIZE) {
-for(int jj = 0;jj < d3;jj += BLOCK_SIZE) {
-for(int kk = 0;kk < d2;kk += BLOCK_SIZE) {
-        for(int i = 0;(i < BLOCK_SIZE) /*&&*/& (ii + i < d1);i++) {
-            for(int k = 0; (k < BLOCK_SIZE) /*&&*/& (kk + k < d2);k++) {
-                for(int j = 0;(j < BLOCK_SIZE) /*&&*/& (jj + j < d3);j++) {
-                    C[(ii + i) * d3 + (jj + j)] += A[(ii + i) * d2 + (kk + k)] * B[(kk + k) * d3 + (jj + j)];
-                }
-            }
-        }
-}}}
-```
-
-This change ensures the independence between the two conditions (block size and array size), which, however, should be recognized by the compiler in the first place, and somehow restored performance to a comparable level. I don't think that this should be the main cause, as this is a common case that the compiler should be able to optimize. Thus, I currently don't understand the core reason behind this phenomenon.
-
-Despite the change, Chapel still outperformed C++ for some specific matrix sizes and underperformed for others, even though the compiled inner loops were nearly identical. The cause of this variation also remains unknown to me.
+After some tests, Chapel outperformed C++ for certain matrix sizes and underperformed for others, even though the compiler-generated code of the inner loops were nearly identical. This caused the performance of the linear layer, when tested on the full-size model, to be faster in Chapel than in C++. The cause of this variation remains unknown to me.
 
 #### Matrix Operations
 
@@ -491,24 +474,12 @@ There are several things that I like about Chapel:
 
 Nevertheless, there are several shortcomings I found about Chapel, too:
 - Long compilation time, which is especially so when multi-locale is introduced.
-- Array initialization in a class is confusing. As the domain of the array is initialized in the init() of a class, the array still needs to be explicitly initialized before it can be used in any function, even though it works without it.
-```Chapel
-class C {
-    proc init(in size: int) {
-        dom = {0..#size};
-        // someFunction(A); // error: array is not yet initialized
-    }
-
-    var dom: domain(1);
-    var A: [dom] real(32);
-}
-```
 - Type casting among numeric types is done implicitly in C++, but not in Chapel (I am not sure which approach is better).
 - All the performance issues that I mentioned in this blog. This causes tricky fixes to be made and it makes the code messy.
 
 Chapel took as long as C++ to implement this transformer model in this project as it required some tricky fixes. The productivity of implementing and parallel programming tends to be the same as C++ and OpenMP, as far as this project is concerned. I believe that having the same level of expertise, Chapel could be more productive than C++ and Python in doing scientific simulations that require parallelism on multithread and multilocale as it automates data movement and configuration. However, it has much less support frameworks than Python, making it hard to create a project, and less control over the machine than C++, making it difficult to conduct performance research.
 
-One controversial thought I have is that generative AI, such as ChatGPT, should be able to help programmers fix and implement projects, for example, by creating simple test cases. However, since the language is not very popular and has less code available on the Internet, current large language models do not have much knowledge of it, which can cause them to produce faulty code. I believe this is a concept that could greatly impact productivity.
+One controversial thought I have is that generative AI, such as ChatGPT, should be able to help programmers fix and implement projects, for example, by creating simple test cases. However, since the language is not very popular and has less code available on the Internet, combined with the backwards-incompatible evolution of the language, current large language models do not have much knowledge of it and can easily become confused, which can cause them to produce faulty code. Interestingly, there is already a Chapel blog, [Experimenting with the Model Context Protocol and Chapel](https://chapel-lang.org/blog/posts/claude-mcp/), that explores this idea. By using the Model Context Protocol (MCP), they achieved surprisingly good results. I believe that improving the capability of large language models in Chapel programming could greatly impact productivity and should be investigated and improved further.
 
 In the end, Chapel serves well as a programming language dedicated to parallel programming and indeed increases productivity compared to C++. It also has many features that can improve the language’s performance and efficiency.
 
