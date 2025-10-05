@@ -1,7 +1,7 @@
 
 ---
 title: "Transformer From Scratch Part 1"
-date: 2025-10-10
+date: 2025-10-05
 tags: ["Benchmark", "Language Comparison", "Performance", "User Experience"]
 summary: "An Attempt at Implementing a Transformer Using Chapel: Performance Comparison with C++ (and PyTorch) on Single- and Multi-Threaded CPUs"
 authors: ["Thitrin Sastarasadhit"]
@@ -13,7 +13,7 @@ As I finished my third year of my bachelor’s degree at Chulalongkorn Universit
 
 In this blog series, I present my implementation of the Transformer model from scratch in both C++ and Chapel, along with performance comparisons of the two versions on single-threaded and multi-threaded CPUs. I also discuss various performance challenges I encountered and the optimizations I applied in both C++ and Chapel
 
-The blog is divided into two parts: the first part, presented here, discusses the experimental methodology and the first test, Small-Size Model on Single Thread, while the second part focuses on the subsequent test, Full-Size Model on Single and Multiple Threads, along with a discussion on productivity.
+The blog is divided into two parts: the first part, presented here, discusses the experimental methodology and the first test, Small-Size Model on Single Thread, while the second part focuses on the second test, Full-Size Model on Single and Multiple Threads, along with a discussion on productivity.
 
 ---
 
@@ -23,9 +23,7 @@ This project compared four implementation versions on both single-threaded and m
 
 The main focus of this project is to compare the achievable performance in training a transformer model using C++ and Chapel. However, having two additional Python implementations that use PyTorch as their backbone, representing existing well-known frameworks, allowed the results to be contextualized with these as references.
 
-All versions were tested on the following configurations and environments.
-- Single thread, Machine A, Small model size
-- Single thread and Multi thread, Machine B, Full model size
+All versions were tested on two tests. The first test, discussed in this part, was conducted on Machine A using a small-size model configuration on a single thread only. The second test, discussed in the next part, was conducted on Machine B using a full-size model configuration on both single and multiple threads.
 
 {{< details summary="**Click here to view the details of the test machines and configurations**" >}}
 
@@ -149,7 +147,7 @@ class TensorView {
 }
 ```
 
-Another interesting design choice I made is to use a 1D array instead of a multidimensional array to represent each matrix and tensor. In an earlier draft, I initially used a multidimensional array with the `LinearAlgebra` module. However, I found its performance to be significantly worse than expected. Upon inspecting the compiler-generated code, I discovered that iterating over elements in a multidimensional array invoked a function called `advance_chpl`, a function that retrieves the next item in an array, which introduced considerable overhead and prevented vectorization. This issue had already been reported in a GitHub issue titled ["Regarding multidimensional zippered iteration (or promotion) kills performance"](https://github.com/chapel-lang/chapel/issues/13147) and was noted as a known performance concern on the [Chapel website](https://chapel-lang.org/docs/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration).
+Another interesting design choice I made is to use a 1D array instead of a multidimensional array to represent each matrix and tensor. In an earlier draft, I initially used a multidimensional array with the `LinearAlgebra` module. However, I found its performance to be significantly worse than expected. Upon inspecting the compiler-generated code, I discovered that iterating over elements in a multidimensional array invoked a function called `advance_chpl`, a function that retrieves the next item in an array, which introduced considerable overhead and prevented vectorization. This issue had already been reported in a [GitHub issue](https://github.com/chapel-lang/chapel/issues/13147) titled "Regarding multidimensional zippered iteration (or promotion) kills performance" and was noted as a known performance concern on the [Chapel website](https://chapel-lang.org/docs/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration).
 
 Although this could be mitigated by iterating over the array’s domain instead of its elements, doing so might introduce unknown performance issues with multidimensional arrays in the future. For these reasons, I decided to use the 1D array design, which is one of the methods suggested on the Chapel Performance Concerns website.
 
@@ -307,7 +305,6 @@ for i in D {
 }
 Copy(0,0,D.size,outputGradient,inputGradient);
 ```
-Despite the optimization, Chapel is still a little slower than C++, as the copy section in the C++ version is recognized and replaced with `memcpy`
 
 Chapel also got better performance than C++ in the forward pass of this layer. The compiled code is almost the same, with the same vectorizing and loop unrolling degree; the difference is that Chapel do load, max, and store separately, while C++ merge load and max oprations into one instruction.
 ```asm
@@ -327,6 +324,6 @@ The other layers seem fine and perform as well as or better than the PyTorch ver
 
 ### Conclusion
 
-In this part, we explore the methodology of the experiment and the first test, Small-Size Model on Single Thread. The performance of the C++ and Chapel models is relatively similar to that of the two PyTorch models with the C++ version being the fastest, as the benefits of PyTorch’s optimized linear algebra are not very apparent in this small-scale test. The Chapel version turned out to be slowest version in this test, mainly due to the Dropout and Softmax layers. Several mysterious performance issues were also encountered, requiring tricky solutions during Chapel’s development.
+In this part, we explore the methodology of the experiment and the first test, Small-Size Model on Single Thread. The performance of the C++ and Chapel models is comparable to that of the two PyTorch models with the C++ version being the fastest, as the benefits of PyTorch’s optimized linear algebra are not very apparent in this small-scale test. The Chapel version was slowest in this test, mainly due to the Dropout and Softmax layers. Several unexpected performance issues were also encountered, requiring tricky solutions during Chapel’s development.
 
 In the next part, we will explore the second test, Full-Size Model on Single and Multiple Threads, along with a discussion on productivity.

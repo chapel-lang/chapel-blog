@@ -1,7 +1,7 @@
 
 ---
 title: "Transformer From Scratch Part 2"
-date: 2025-10-10
+date: 2025-10-06
 tags: ["Benchmark", "Language Comparison", "Performance", "User Experience"]
 summary: "An Attempt at Implementing a Transformer Using Chapel: Performance Comparison with C++ (and PyTorch) on Single- and Multi-Threaded CPUs"
 authors: ["Thitrin Sastarasadhit"]
@@ -9,7 +9,7 @@ authors: ["Thitrin Sastarasadhit"]
 
 ### Introduction
 
-This is the second part of this series. If you're just joining us, you may want to check out the previous part, where we explored the experimental methodology and the first test, Small-Size Model on a Single Thread. In this part, we focus on the second, Full-Size Model on Single and Multiple Threads, and discuss the productivity of Chapel in developing this project.
+his is the second part of the series. If you're just joining us, you may want to check out the previous part, where we explored the experimental methodology and the first test, Small-Size Model on a Single Thread. In this part, we focus on the second test, Full-Size Model on Single and Multiple Threads, and discuss the productivity of Chapel in developing this project.
 
 ### Full-Size Model on Single and Multiple Threads
 
@@ -180,7 +180,7 @@ Even though today it might be more feasible to enable parallel programming by cr
 
 ### Conclusion
 
-This project illustrates an attempt to implement the Transformer model in Chapel. Across both parts, we explored small-size and full-size models, single- and multi-threaded performance, and compared Chapel with C++ and PyTorch. The final performance achieved is reasonable and comparable to C++, and potentially to PyTorch if its optimized linear algebra algorithms are utilized. Nevertheless, many performance issues were encountered during implementation, such as problems with multidimensional arrays, vectorization, loop unrolling, and more. While many issues can be resolved or avoided using special tricks that add complexity to the code, some problems are unavoidable, such as random number generation and non-vectorized exponential functions.
+This project illustrates an attempt to implement the Transformer model in Chapel. Across both parts, we explored single-threaded and multi-threaded performance and compared Chapel with C++ and PyTorch. The final performance achieved is reasonable and comparable to C++, and potentially to PyTorch if its optimized linear algebra algorithms are utilized. Nevertheless, many performance issues were encountered during implementation, such as problems with multidimensional arrays, vectorization, loop unrolling, and more. While many issues can be resolved or avoided using special tricks that add complexity to the code, some problems are unavoidable, such as random number generation and non-vectorized exponential functions.
 
 Additionally, I would like to see some language features implemented, such as `ref` in classes and records, as well as stack-allocated arrays. Faster compilation times would also be a great improvement.
 
