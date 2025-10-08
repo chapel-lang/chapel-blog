@@ -193,7 +193,15 @@ proc PlusReduce4(ref A: [?D] real(32), out output real(32)) : void {
     output = + reduce(A);
 }
 
-// operator overloading
+// {{<sidenote "right" "overloading operator">}}
+  Note that while this overload is
+  identical to Chapel's built-in
+  +operator on arrays, in my work
+  as I actually wanted more control
+  over the parallelism, so the body
+  was more complicated than shown here,
+  simplified for the purposes of
+  discussion{{</sidenote>}}
 operator +=(ref sum: real(32), ref A: [] real(32)) {
     var output: real(32) = 0.0;
     for i in A.domain {
