@@ -24,7 +24,7 @@ article]({{<relref 10myths-part1 >}}) in this series.
 This month, we're reprinting the series' seventh article, originally
 published on October 15, 2012.  Comments in the sidebar and [the
 sections that follow the reprint]({{<relref
-"#reflections-on-the-original-article">}}) contain a few of my current
+"#reflections-on-the-original-article">}}) give a few of my current
 thoughts and reflections on it.
 
 ---
@@ -56,21 +56,22 @@ parts [2]({{< relref 10myths-part2
 #### Myth #8: To be successful, scalable parallel programming languages should be small/minimal.
 
 A {{<sidenote "right" "fairly common notion">}}(or so it seemed to me
-in 2012, at least){{</sidenote>}} in parallel programming language
-design is that developing a small language with a minimal set of
-features is ideal.  While I would agree that language developers
-should avoid the temptation to put every feature that they think of
-into the language, for fear of creating a kitchen sink design, I also
-believe that the value placed on minimal language design can often be
-overrated.
+in 2012, at least... let's return to this [below]({{<relref
+"#reflections-on-the-original-article">}})){{</sidenote>}} in parallel
+programming language design is that developing a small language with a
+minimal set of features is ideal.  While I would agree that language
+developers should avoid the temptation to put every feature that they
+think of into the language, for fear of creating a kitchen sink
+design, I also believe that the value placed on minimal language
+design can often be overrated.
 
 
 #### A Case Study in Minimalism: Co-Array Fortran
 
 One rationale for minimalism in language design is to simplify the
 implementation.  And this is a worthy goal since {{<sidenote "right"
-"many proposed languages" -2>}}You may be wondering, like I am while
-re-reading this tonight, what languages I was thinking of here.  I
+"many proposed languages" -2>}}You may be wondering, as I am while
+re-reading this tonight, what languages I was referring to here.  I
 imagine that High-Performance Fortran (HPF)—[discussed earlier in this
 series]({{< relref 10myths-part2 >}})—was at the top of my mind.  That
 said, it may be that Fortress—one of our sibling languages in the
@@ -81,7 +82,7 @@ expansive and audacious in design to me.  Beyond those two, there were
 dozens of other failed parallel programming languages in the 1990's,
 and I imagine my use of "many" refers to them.  That said, today I
 find myself wondering how many of them failed to gain broad adoption
-due to complexity as opposed to other reasons.{{</sidenote>}} have
+due to complexity, as opposed to other reasons.{{</sidenote>}} have
 failed for being more complex than their implementations could handle
 or optimize for.  But the danger of being too minimal is that the
 language may not be sufficiently general or productive to be
@@ -138,13 +139,13 @@ having compilers support all of its new features (not to mention
 getting users to start using those new features).
 
 While I understand Fortran 2008 to have enjoyed some amount of uptake
-since I originally wrote this article, I think few would consider it
-to have achieved _broad_ adoption---and certainly nowhere near the
-level of MPI.  Then again, nothing else has either
-(yet...!).{{</sidenote>}}).  Several explanations have been offered for
-its lack of adoption, such as the dearth of mature implementations or
-disappointing performance portability due to the lack of good support
-for fine-grained, single-sided communication in many network
+since I originally wrote this article, I think few would consider its
+coarray features to have achieved _broad_ adoption---and certainly
+nowhere near the level of MPI.  Then again, nothing else has either
+(yet...!).{{</sidenote>}}).  Several explanations have been offered
+for its lack of adoption, such as the dearth of mature implementations
+or disappointing performance portability due to the lack of good
+support for fine-grained, single-sided communication in many network
 architectures.  These are almost certainly factors contributing to the
 lack of CAF adoption, but in my opinion, the biggest strike against
 CAF is the one that was intended to be its strength: its minimalism.
@@ -183,7 +184,7 @@ support for _teams_, which permit the complete set of program images
 to be subdivided into groups.  For example, slide 63 of [this
 presentation](https://stevelionel.com/drfortran/wp-content/uploads/2022/08/Modern-Fortran.pdf)
 illustrates a conceptual use of teams to execute distinct parts of a
-coupled climate model---the same motivator used here.{{</sidenote>}}.
+coupled climate model---the same motivator I used here.{{</sidenote>}}.
 The combination of these factors makes CAF best when writing
 algorithms in which all the program images are computing the same
 thing, whereas MPI programs can more easily create general teams of
@@ -285,8 +286,8 @@ large languages will overwhelm users, compromising the languages'
 adoptability.  While I understand this concern, I don’t share it.
 Most computer users, certainly HPC programmers, use large complex
 software systems every day without being paralyzed by the large number
-of features.  LaTeX, the bash shell, UNIX, C++, MPI, and gmake are all
-examples of powerful, adopted software systems that are also quite
+of features.  LaTeX, the bash shell, UNIX, C++, MPI, and GNU Make are
+all examples of powerful, adopted software systems that are also quite
 large and feature-rich.  One can imagine more minimal counterparts to
 these technologies, yet the size of these systems has not been a
 liability in their adoption, and in fact has been a strength.  A key
@@ -352,27 +353,27 @@ Programming Models and Supportive Environments, 1998.
 ### Reflections on the Original Article
 
 Re-reading the original article today, I wonder whether this myth is
-one that will resonate at all with modern readers.  As my colleague
-points out, currently popular languages like Python, Julia, and Rust
-are definitely in the "feature-rich" category rather than being
-minimal.  Meanwhile, each new version of C++ adds lots of new features
-to what was already a fairly sizable language.  So perhaps whatever
-preference toward minimalism I was reacting to in 2012 either no
-longer exists, or was somehow specific to the HPC community.
+one that will resonate at all with modern readers.  As one of my
+colleagues points out, currently popular languages like Python, Julia,
+and Rust are definitely in the "feature-rich" category rather than
+being minimal.  Meanwhile, each new version of C++ adds lots of new
+features to what was already a fairly sizable language.  So perhaps
+whatever preference toward minimalism I was reacting to in 2012 either
+no longer exists, or was somehow specific to the HPC community.
 
 In any case, my belief in bigger, more general languages that can be
 learned incrementally remains as strong today as it was in back
 then---particularly for scalable parallel programming.  In this
 section, I'll reflect on why this is and what I think about Chapel's
 current size and features. Then I'll touch on the state of Chapel
-documentation and go on to provide an illustration of the bookkeeping
+documentation and wrap up with an illustration of the bookkeeping
 that's required by SPMD programs.
 
 {{<pullquote>}}
 
 There are very few features provided by typical, mainstream, adopted
 programming languages that can be ignored in a language for scalable
-parallel computing without compromising generality or adoption.
+parallel computing.
 
 {{</pullquote>}}
 
@@ -421,33 +422,28 @@ _promotion_).
 
 Generally speaking, I feel very comfortable with Chapel's size, both
 on its own terms, and relative to popular modern languages.  When I
-think about features it contains that feel neglected, just two come to
+think about features it contains that feel neglected, only two come to
 mind.  The first is the `let` expression, which has been a part of the
 language since its inception, yet which has rarely been used in
 practice (while also having its share of detractors over the years).
 Based on this experience, it seems like one of the least important
-features in the language; though it also feels fairly innocuous.  The
-second is a (relatively) new feature, the `manage` statement, which
-was introduced around four years ago.  Despite being popular and
+features in the language; though it also feels fairly innocuous.
+
+The second is a (relatively) new feature, the `manage` statement,
+which was introduced around four years ago.  Despite being popular and
 anticipated when it was introduced, to my knowledge, it hasn't been
 used much in practice.  That said, there are some current efforts to
-add utilities based on `manage` to the standard library, and given
-their success in Python, I remain optimistic that their use will grow
-in the coming years.
+add utilities based on `manage` to the standard library, and given the
+feature's success in Python, I remain optimistic that their use will
+grow in the coming years.
 
-
-When I think about features of Chapel that
-seem potentially
-superfluous and candidates for removal, only a few come to mind.  We
-have a `let` expression that is rarely used (or advertised) and has
-had more detractors than supporters.  We have a context management
-feature that was very heavily anticipated and popularly supported when
-it was introduced, but which has been used only very rarely in
-practice (though in the past month or two, I've been heaing about new
-uses of it, so maybe its time is coming).  Those are the only two
-things that come to mind, though, when I consider whether there are
-aspects of the language that feel like indications of bloat to me,
-today.
+The fact that only these two examples come to mind after years of
+using Chapel and supporting users with it is a big part of what makes
+me feel that Chapel is not oversized.  And more to the point, we have
+had key users express their gratitude that Chapel is very approachable
+while also having additional depths when more control or complexity
+is required, suggesting that the whole language need not be learned
+to use it effectively.
 
 
 #### Chapel Documentation
@@ -459,37 +455,39 @@ more can, and should, still be done.
 
 Looking back at Chapel {{<sidenote "right" "version 1.6">}}It's purely
 coincidental that this past month's release was version 2.6.  There's
-no logical relationship between numerical symmetry and the thirteen
-years that have passed between articles.{{</sidenote>}}, which was
-released just a few days after this article's publication, it left a
-lot to be desired in terms of documentation.  It included PDF versions
-of the language specification and quick-reference sheet, as well as a
-couple dozen primer examples that were made available as commented
-source code files within the release's `examples/` directory that you
-could bring up in your editor.  It also had 32 README-style text
-files, all of which were maddeningly named `README.*` (`README.ibm`,
-`README.building`, `README.atomics`, etc.), as though named by
-{{<sidenote "left" "someone">}}(very likely me... but I'd like to
-think I've improved since then){{</sidenote>}} who liked Lewis Carroll
-more than useful file extensions.  Notably, we had no online, HTML,
-hyperlinked documentation, and no search capability.  As it happens,
-Chapel 1.6 was also the first release to support a prototype of our
-`chpldoc` tool that generates {{<sidenote "right"
-"HTML documentation">}} Even so, we did not reach the point of using
-it to publish HTML documentation for our library modules until [Chapel
+no logical relationship between the numerical symmetry and the
+thirteen years that have passed between articles.{{</sidenote>}},
+which was released just a few days after this article's publication,
+it left a lot to be desired in terms of documentation.  It included
+PDF versions of the language specification and quick-reference sheet.
+It also had a couple dozen primer examples that were made available as
+commented source code files that you could bring up in your editor.
+Finally, it had 32 README-style text files, all of which were
+maddeningly named `README.*` (`README.ibm`, `README.building`,
+`README.atomics`, etc.), as though named by {{<sidenote "left"
+"someone">}}(very likely me... but I'd like to think I've improved
+since then){{</sidenote>}} who liked Lewis Carroll more than useful
+file extensions.  Notably, we had no online, HTML, hyperlinked
+documentation, and no search capability.  As it happens, Chapel 1.6
+was also the first release to support a prototype of our `chpldoc`
+tool that generates {{<sidenote "right" "HTML documentation">}} Even
+so, we did not reach the point of using it to publish web-based
+documentation for our library modules until [Chapel
 1.11](https://chapel-lang.org/docs/1.11), 2-1/2 years
 later.{{</sidenote>}} from comments in the code.
 
 Contrast the state in 2012 with [Chapel's documentation
 hierarchy](https://chapel-lang.org/docs/2.6/) today, where the
 primers, technical notes, and specification are all rendered directly
-online, along with our library modules, combined with many
-improvements and resources that have been added over the years.  In
+online, along with our library modules.  There have also been many
+significant improvements and resources that have been added over the
+years, as tracked in the Documentation sections of our [CHANGES
+file](https://github.com/chapel-lang/chapel/blob/main/CHANGES.md).  In
 total, we now have over 370 distinct pages of HTML documentation, much
 of which is indexed, and all of which is searchable.
 
 Despite these great strides, documentation remains a place where
-further investment and improvements would still be beneficial.  We
+further investment and improvements would still be beneficial.  Chapel
 would benefit greatly from a user's guide or textbook that provides a
 more complete and readable introduction to Chapel.  We would also like
 to have alternatives to written documentation, such as a library of
@@ -500,7 +498,7 @@ YouTube](https://www.youtube.com/playlist?list=PLuqM5RJ2KYFjYgOStSfrNshIQ0I-AibH
 "[how-to]({{<relref how-to>}})" articles on this blog, and a
 [repository of code examples and
 resources](https://github.com/chapel-lang/ChapelExamplesAndTeachingMaterials)
-stemming from our monthly "teaching Chapel" meet-up.  It seems the
+stemming from our monthly meet-up about teaching Chapel.  It seems the
 task of improving documentation is never done; and simultaneously, it
 is an activity that often feels difficult to prioritize or fund as
 compared to adding the next language feature or optimization.  That
@@ -511,12 +509,12 @@ language more approachable and usable.
 #### An SPMD Bookkeeping Example
 
 In [last month's article]({{<relref 10myths-part6>}}), we saw some
-examples of how benchmark implementations in MPI, CAF, and SHMEM
-required more code than in Chapel, SAC, and ZPL, and I attributed this
-to the bookkeeping required by SPMD programming models.  Yet that
-article did not take the time to describe or illustrate the causes.
-One of the nice things about CAF's minimalism and clean design is that
-it can make this bookkeeping much clearer.
+examples of how benchmark implementations in MPI, CAF, or SHMEM
+required more code than in Chapel, SAC, or ZPL.  In that article, I
+attributed this to the bookkeeping required by SPMD programming
+models, yet did not take the time and space to describe the causes
+well.  One of the nice things about CAF's minimalism and clean design
+is that it can make this bookkeeping much clearer.
 
 In this section, we'll look at a simple program that uses a Monte
 Carlo method to compute an approximation of <small>$\pi$</small> in
@@ -537,19 +535,19 @@ divide the global problem size, _n_, by the number of images running
 the program as though it divides evenly, when it very well may not—and
 then printing a warning when it doesn't.  With a bit more code and
 care, I could've given the images varying local problem sizes such
-that the total across images was $n$, as you would want in a real
+that the total across images was _n_, as you would want in a real
 application.  However, this would've required a bit more code while
 making the same point—that care must be taken when dividing a global
 problem space between images in the SPMD model.  In this case, where
 the problem size merely acts as a local count and array size, the
 bookkeeping is not so bad.  However, in cases where the problem size
 matters—say the images are storing chunks of a dataframe or a
-discretized space—things can get more challenging, particularly when
+discretized volume—things can get more challenging, particularly when
 each image must also know how many elements others own, as in a
 stencil computation.
 
 Summarizing the comments in the code above, ways in which SPMD
-bookkeeping comes up in this simple example include:
+bookkeeping come up in this simple example include:
 
 * storing and computing using distinct global vs. local problem sizes
 * using conditionals to avoid doing redundant work on all images
@@ -560,7 +558,7 @@ All said, Fortran 2008's coarray features make the communication steps
 far more concise and elegant than in MPI, demonstrating the benefits
 of using a compiled parallel language over a library-based approach.
 That said, the need for this additional bookkeeping remains, due to
-requiring users to code using an SPMD model.
+requiring users to code using an SPMD model in the first place.
 
 In Chapel, the same computation can be written as follows:
 
@@ -580,7 +578,7 @@ The result is a program that much more closely resembles traditional
 desktop programming.
 
 At the same time, Chapel is general enough that explicit SPMD
-programming {{<sidenote "right" "can be written">}}Moreover, users can
+patterns {{<sidenote "right" "can be written">}}Moreover, users can
 even create coarray-like data structures in Chapel by creating
 block-distributed arrays of arrays.{{</sidenote>}} when required.
 This combination of abstractions and flexibility are part of what make
@@ -594,5 +592,5 @@ supporting manual overrides when desired.
 That concludes this month's look at the relationship between the size
 of a language's feature set and its productivity and capabilities.
 Next month, join us for the final article in the series, in which we
-tackle our final two myths, relating to whether Chapel is perfect and
+tackle our last two myths, relating to whether Chapel is perfect and
 whether it will ultimately be broadly adopted.
