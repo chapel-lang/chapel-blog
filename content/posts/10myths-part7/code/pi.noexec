@@ -1,0 +1,3 @@
+The values of pi that are generated vary due to the RNG, and I'm not
+sure I want to write a prediff for this, so for now, I'm just going
+to check that it compiles
