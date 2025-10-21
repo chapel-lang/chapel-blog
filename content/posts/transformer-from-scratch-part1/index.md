@@ -1,7 +1,7 @@
 
 ---
 title: "Transformer From Scratch Part 1"
-date: 2025-10-05
+date: 2025-10-21
 tags: ["Benchmark", "Language Comparison", "Performance", "User Experience"]
 summary: "An Attempt at Implementing a Transformer Using Chapel: Performance Comparison with C++ (and PyTorch) on Single- and Multi-Threaded CPUs"
 authors: ["Thitrin Sastarasadhit"]
