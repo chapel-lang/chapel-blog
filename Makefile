@@ -2,6 +2,7 @@ ifndef CHPL_WWW
 CHPL_WWW=~/chapel-www
 endif
 
+SHELL=/bin/bash
 VENV_DIR=./venv
 ACTIVATE=$(VENV_DIR)/bin/activate
 SETUP=source $(ACTIVATE)
