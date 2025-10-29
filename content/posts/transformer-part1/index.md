@@ -82,7 +82,7 @@ Machine A (AMD Ryzen) facilitated easy inspection of the compiled code thanks to
 
 In order to measure the time required by each layer, timers were inserted into all layers. The model was then run on the Italian-English machine translation task, with the dataset obtained from `opus_books` ([Hugging Face link](https://huggingface.co/datasets/Helsinki-NLP/opus_books)). The model was executed for 500 and 40 iterations on Machines A and B, respectively. The timing results of each iteration for each layer were gathered and sorted; the fastest and slowest 10% of iterations were removed, and the mean and standard deviation were computed.
  
-### Small-Size Model on Single Thread
+### Small-Size Model on a Single Thread
 
 In this experiment, I tested the small version of the model on Machine A. With this version, I was able to continuously inspect each part of the compiled program using the `perf` command and optimize the slow parts. The models were run for 500 iterations, and the mean and standard deviation were collected as described in the methodology section. The detailed results can be viewed in [this Google Spreadsheet](https://docs.google.com/spreadsheets/d/1aHkE9Ckl0-waxVwu-f4dIJ0peM6jIUQv3IU1-bFa0p0/edit?usp=sharing), and the single-threaded implementation is available at [this GitHub link](https://github.com/markthitrin/Transformer/tree/SingleThread)
 
@@ -97,14 +97,14 @@ According to Figure 1, most layers in Chapel performed as well as those in C++ a
 
 You might expect the Linear and Multi-Headed Attention layers to dominate the execution time. While this is true for a larger model, in this small version, the execution time of these layers did not contribute as much. Additionally, the PyTorch version might be expected to be significantly faster than the C++ and Chapel versions, as it is equipped with optimized linear algebra libraries. However, since this is a small-size model, the execution time of the Linear and Multi-Headed Attention layers did not dominate, and the matrix sizes were not very large. As a result, the performance of all versions was comparable.
 
-#### Result of Backward pass
+#### Backward Pass Results
 
   {{< figure src="each-backward.png" class="fullwide"
   caption="**Figure 2.** Time spent on each layer (in microseconds) during a single backward-pass training iteration for each model, tested on Machine A (single-threaded) using the small model configuration.">}}
 
 As for the backward pass, Figure 2 shows that, overall, C++ and Chapel performed better than both Python versions. it also shows that Chapel could achieve relatively the same performance as C++, resulting in the total backward-pass time of Chapel and C++ in this configuration to be almost the same.
 
-#### Overall Result
+#### Overall Results
 
   {{< figure src="total.png" class="fullwide"
   caption="**Figure 3.** Time spent on each layer (in microseconds) per training iteration (including forward, backward, and update) for each model, tested on Machine A (single-threaded) using the small model configuration.">}}
