@@ -62,7 +62,7 @@ All versions were tested on two tests. The first test, discussed in this post, w
 - **C++:** `clang++ ./file.cpp -O3 --std=c++20 -fopenmp -funroll-loops -ftree-vectorize -mavx2 -msse -ffast-math -march=native -fveclib=libmvec`
 - **Python:** `python ./file.py`
 
-<u>Model</u> (using 32-bit floating point)
+<u>Model</u>
 
    | Parameter      | Small Size | Full Size | Meaning              |
    |:---------------|:-----------|:----------|:---------------------|
@@ -74,9 +74,11 @@ All versions were tested on two tests. The first test, discussed in this post, w
    | srcVocab       | 15700      | 15700     | *Size of source vocabulary (number of unique tokens)* |
    | tgtVocab       | 22470      | 22470     | *Size of target vocabulary*
 
+   (_note that the model uses 32-bit floating point values_)
+
 {{< /details >}}
 
-Machine A (AMD Ryzen) facilitated easy inspection of the compiled code thanks to the `perf` command, allowing bottlenecks to be identified easily, while Machine B (Xeon Phi) did not. On the other hand, Machine A had a limited memory of 6.67 GB and was incapable of running the full-size model, whereas Machine B had 204.45 GB, allowing the full-size model to be run.
+Machine A (AMD Ryzen) facilitated easy inspection of the compiled code thanks to the `perf` command and having super-user access, allowing bottlenecks to be identified easily, while Machine B (Xeon Phi) did not. On the other hand, Machine A had a limited memory of 6.67 GB and was incapable of running the full-size model, whereas Machine B had 204.45 GB, allowing the full-size model to be run.
 
 In order to measure the time required by each layer, timers were inserted into all layers. The model was then run on the Italian-English machine translation task, with the dataset obtained from `opus_books` ([Hugging Face link](https://huggingface.co/datasets/Helsinki-NLP/opus_books)). The model was executed for 500 and 40 iterations on Machines A and B, respectively. The timing results of each iteration for each layer were gathered and sorted; the fastest and slowest 10% of iterations were removed, and the mean and standard deviation were computed.
  
@@ -158,7 +160,7 @@ This section discusses general operations such as element-wise multiplication, a
 
 ```Chapel
 // query the domain from the array argument
-proc PlusReduce1(ref A: [?D] real(32,) out output: real(32)) {
+proc PlusReduce1(ref A: [?D] real(32), out output: real(32)) {
     output = 0.0;
     for i in D {
        output += A[i];
