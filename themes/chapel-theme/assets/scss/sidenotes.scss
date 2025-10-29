@@ -36,6 +36,11 @@ $sidenote-highlight-border-width: .2rem;
     padding: $sidenote-padding;
     text-align: left;
 
+    font-family: $font-body;
+    font-size: 1.0rem;
+    font-style: normal;
+    color: black;
+
     &.sidenote-right {
         @include margin-content-right;
     }
