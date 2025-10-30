@@ -183,7 +183,7 @@ proc PlusReduce3(in start: int, in count: int, ref A: [] real(32), out output: r
     }
 }
 
-// use + reduce expression
+// use a + reduce expression
 proc PlusReduce4(ref A: [?D] real(32), out output real(32)) {
     output = + reduce(A);
 }
