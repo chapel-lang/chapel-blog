@@ -46,7 +46,7 @@ question “Please identify the best parts of ChapelCon&nbsp;'24 for you”:
            title="The Word Cloud of the Best Parts of ChapelCon '24 for Attendees" >}}
 
 I strongly encourage checking out Paul Sathre's keynote. The
-[slides](https://chapel-lang.org/ChapelCon/2024/sathre.pdf) and
+[slides](https://chapel-lang.org/chapelcon/2024/sathre.pdf) and
 [video recording](https://www.youtube.com/watch?v=G0LneLP1-Ko&list=PLuqM5RJ2KYFi2yV4sFLc6QeRYpS35UeKl&index=9&ab_channel=ChapelParallelProgrammingLanguage)
 are available alongside the rest of the content from ChapelCon.
 
@@ -128,7 +128,7 @@ attendee survey responses as one of the best parts of the Conference Day.
            class="fullwide border"
            title="The Summary Slide from Brad's State of the Project Talk">}}
 
-Brad's [slides](https://chapel-lang.org/ChapelCon/2024/chamberlain-sop.pdf) and
+Brad's [slides](https://chapel-lang.org/chapelcon/2024/chamberlain-sop.pdf) and
 [video
 recording](https://www.youtube.com/watch?v=nfxJ-tOsgrY&list=PLuqM5RJ2KYFi2yV4sFLc6QeRYpS35UeKl&index=2&ab_channel=ChapelParallelProgrammingLanguage)
 are also available for those who want to have a 30-minute summary of Chapel

@@ -24,7 +24,7 @@
   interested, I introduced this theme and ran through some of our
   recent efforts here in my "State of the Chapel Project" talk at 
   [ChapelCon '24]({{< relref "chapelcon24" >}}) whose
-  [slides](https://chapel-lang.org/ChapelCon/2024/chamberlain-sop.pdf) and
+  [slides](https://chapel-lang.org/chapelcon/2024/chamberlain-sop.pdf) and
   [video](https://www.youtube.com/watch?v=nfxJ-tOsgrY&amp;list=PLuqM5RJ2KYFi2yV4sFLc6QeRYpS35UeKl&amp;index=2&amp;pp=iAQB)
   are available online. {{< /sidenote >}}.  One effort we've kicked
   off as a result of this seeks to improve and diversify the options
