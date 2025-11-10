@@ -127,7 +127,7 @@ to Cloud storage.
 
 2. Allow generic arrays to be arguments of first-class procedures. But
 Chapel allows an elegant work-around, among many possibilities. See my
-solution [here](https://chapel-lang.org/ChapelCon/2024/dias.pdf).
+solution [here](https://chapel-lang.org/chapelcon/2024/dias.pdf).
 
 
 ### 7. Anything else you'd like people to know?
@@ -156,7 +156,7 @@ be sure to check out his fan-favorite talks at [CHIUW
 2022](https://youtu.be/400jmMzdzHQ)
 ([slides](https://chapel-lang.org/CHIUW/2022/DiasSlides.pdf)) and
 [ChapelCon'24](https://www.youtube.com/watch?v=cR6N5EJpGTE&list=PLuqM5RJ2KYFi2yV4sFLc6QeRYpS35UeKl&index=13&t=1s&pp=iAQB)
-([slides](https://chapel-lang.org/ChapelCon/2024/dias.pdf)).
+([slides](https://chapel-lang.org/chapelcon/2024/dias.pdf)).
 
 And if you have any other questions for Nelson, or comments on this
 series, please direct them to the [7 Questions for Chapel

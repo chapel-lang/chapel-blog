@@ -118,14 +118,14 @@ data-parallel to task-parallel, from compute-intensive to
 communication-heavy, so we needed a language that could achieve
 world-class performance on a wide variety of tasks with as few lines
 of code as possible. The plot below is a
-[comparison](https://chapel-lang.org/ChapelCon/2024/chamberlain-clbg.pdf)
+[comparison](https://chapel-lang.org/chapelcon/2024/chamberlain-clbg.pdf)
 of Chapel against other languages on axes of code size and execution
 time on a set of desktop benchmarks, and it showcases Chapel’s
 combination of performance and productivity on a single node.
 
 
 {{< figure src="clbg-dec2024.jpg" class="fullwide left-caption"
-    caption="**Comparison of Chapel and other programming languages on axes of compressed code size and execution time on a set of benchmarks (see [this ChapelCon '24 talk](https://www.youtube.com/watch?v=U8KM8wv32js&t=2s) or [its slides](https://chapel-lang.org/ChapelCon/2024/chamberlain-clbg.pdf) for details). Chapel occupies the lower left corner, implying high performance from a small amount of code.**" >}}
+    caption="**Comparison of Chapel and other programming languages on axes of compressed code size and execution time on a set of benchmarks (see [this ChapelCon '24 talk](https://www.youtube.com/watch?v=U8KM8wv32js&t=2s) or [its slides](https://chapel-lang.org/chapelcon/2024/chamberlain-clbg.pdf) for details). Chapel occupies the lower left corner, implying high performance from a small amount of code.**" >}}
 
 <br>
 
