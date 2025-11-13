@@ -3,7 +3,7 @@ title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 7:
 date: 2025-10-15
 tags: ["Editorial", "Archival Posts / Reprints", "Language Comparison"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
-summary: "The seventh archival post from the 2012 IEEE TCSC blog series with a current reflection on it"
+summary: "The seventh archival post from the 2012 IEEE TCSC blog series, with a current reflection on it"
 authors: ["Brad Chamberlain"]
 ---
 
@@ -49,7 +49,7 @@ parts [2]({{< relref 10myths-part2
 >}}#the-original-article-reprinted), [3]({{< relref 10myths-part3
 >}}#the-original-article-reprinted), [4]({{< relref 10myths-part4
 >}}#the-original-article-reprinted), [5]({{< relref 10myths-part5
->}}#the-original-article-reprinted). and [6]({{< relref 10myths-part6
+>}}#the-original-article-reprinted), and [6]({{< relref 10myths-part6
 >}}#the-original-article-reprinted).
 
 
@@ -587,7 +587,7 @@ Chapel can support compact, readable, performant code, while also
 supporting manual overrides when desired.
 
 
-#### Wrapping Up
+### Wrapping Up
 
 That concludes this month's look at the relationship between the size
 of a language's feature set and its productivity and capabilities.
