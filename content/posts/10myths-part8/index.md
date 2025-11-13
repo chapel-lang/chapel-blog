@@ -174,19 +174,18 @@ Chapel notable:
   move between layers as necessary, or to provide their own
   implementations of {{<sidenote "right" "higher-level features">}}Or
   to call out to another language, like C or Python.{{</sidenote>}}
-  [[1]({{< relref 10myths-part7 >}}#the-original-article-reprinted)].
-  This seems essential in any parallel language where productivity,
-  performance, and forward portability are desired, since it provides
-  a means of trading off abstraction for control, and for creating new
-  abstractions that a compiler can reason about and optimize.
+  [[1](#bibliography)].  This seems essential in any parallel language
+  where productivity, performance, and forward portability are
+  desired, since it provides a means of trading off abstraction for
+  control, and for creating new abstractions that a compiler can
+  reason about and optimize.
 
 * **User-defined layouts, distributions, and parallel iterators:** In
   Chapel, I think the specific choice of permitting users to provide
-  their own local and distributed array implementations [[2, 3]({{<
-  relref 10myths-part7 >}}#the-original-article-reprinted)], as well
-  as the ability to control the implementation of data parallel loops
-  [[4]({{< relref 10myths-part7 >}}#the-original-article-reprinted)]
-  is incredibly important in terms of making the language
+  their own local and distributed array implementations [[2,
+  3](#bibliography)], as well as the ability to control the
+  implementation of data parallel loops [[4](#bibliography)] is
+  incredibly important in terms of making the language
   forward-portable and adaptable to emerging parallel architectures
   and algorithms.
 
@@ -369,7 +368,7 @@ series.{{</sidenote>}}
 
 [3] B. Chamberlain, S. Deitz, D. Iten, S.-E, Choi, [User-Defined Distributions and Layouts in Chapel: Philosophy and Framework](https://chapel-lang.org/publications/hotpar10-final.pdf), 2nd USENIX Workshop on Hot Topics in Parallelism (HotPar '10), June 2010.
 
-[4] B. L. Chamberlain, S.-E. Choi, S. J. Deitz, A. Navarro, [User-Defined Parallel Zippered Iterators in Chapel](https://pgas11.rice.edu/papers/ChamberlainEtAl-Chapel-Iterators-PGAS11.pdf), PGAS 2011: Fifth Conference on Partitioned Global Address Space Programming Models, October 2011.
+[4] B. L. Chamberlain, S.-E. Choi, S. J. Deitz, A. Navarro, [User-Defined Parallel Zippered Iterators in Chapel](http://pgas11.rice.edu/papers/ChamberlainEtAl-Chapel-Iterators-PGAS11.pdf), PGAS 2011: Fifth Conference on Partitioned Global Address Space Programming Models, October 2011.
 
 
 #### Acknowledgments
@@ -723,7 +722,7 @@ scalable language to finish!
 
 ---
 
-#### Acknowledgments (Redux)
+### Acknowledgments (Redux)
 
 The [acknowledgments section above](#acknowledgments) is from the
 original article, and it appeared at the end of each post in the 2012
