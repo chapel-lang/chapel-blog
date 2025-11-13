@@ -207,7 +207,7 @@ operator +=(ref sum: real(32), ref A: [] real(32)) {
 }
 ```
 
-After benchmarking on a small array, the first method was the slowest, followed by the second, while the third was the fastest. The other methods produced similar compiler-generated code and performed comparably to the first, with the fourth method creating a Chapel task when invoked, introducing additional overhead. Therefore, we will focus on comparing only the first three methods. After completing this project, I reported my findings on [Chapel's GitHub Issue](https://github.com/chapel-lang/chapel/issues/27958), where the discussion clearly revealed the causes of the observed performance differences.
+After benchmarking on a small array, the first method was the slowest, followed by the second, while the third was the fastest. The other methods produced similar compiler-generated code and performed comparably to the first, with the fourth method creating a Chapel task when invoked, introducing additional overhead. Therefore, we will focus on comparing only the first three methods. After completing this project, I reported my findings on a [GitHub Issue](https://github.com/chapel-lang/chapel/issues/27958), where the discussion clearly revealed the causes of the observed performance differences.
 
 In short, the primary cause was the overhead of passing arguments. The first method forces the creation of an array view, introducing significant overhead compared to the others. Similarly, the second method needs to pass domain data, while the third requires almost nothing. These overheads are noticeable when the function operates on small arrays. Nevertheless, for large arrays, the overhead becomes negligible, resulting in similar performance. It is also worth noting that passing a range instead of a domain yields performance comparable to the third method, since the overhead of passing a range is minimal compared to that of a domain.
 
@@ -232,13 +232,11 @@ However, this issue has been resolved in modern Chapel (version 2.7), which intr
 
 #### DropOut
 
-This is another layer that performed significantly worse in Chapel. The random number generator I used in the Chapel version is from the `Random` standard module. As for the C++ version, I tried to implement the same random algorithm, `pcg_setseq_64_xsh_rr_32`.
-
-Initially, I generated random floating-point numbers, which turned out to be 4–5 times slower than generating random integers. Therefore, I switched to generating random integers with an integer threshold.
+This is another layer that performed significantly worse in Chapel. The random number generator I used in the Chapel version is from the `Random` standard module. As for the C++ version, I tried to implement the same random algorithm, `pcg_setseq_64_xsh_rr_32`. I also used integer-based random generation with an integer threshold, which is 4–5 times faster than using floating-point numbers.
 
 It also appeared that using `rng.fill` is faster than using `rng.next` when iterating over an array. Since this function forces parallelism when available, `CHPL_RT_NUM_THREADS_PER_LOCALE=1` must be set accordingly when experimenting with a single thread.
 
-In the end, the Dropout layer in Chapel still performed worse than in the other versions.
+This layer is much slower compared to those in other models, mainly due to the random number generator. Using the random function with bounds caused a significant performance drop. After removing the bounds, Chapel achieved the same performance as the C++ version. This issue was discussed in a [Github Issue](https://github.com/chapel-lang/chapel/issues/28036). However, since I noticed and reported this only after completing the project, I did not resolve it.
 
 #### Multihead Attention
 
