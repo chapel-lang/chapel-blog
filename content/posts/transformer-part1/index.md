@@ -5,7 +5,7 @@ date: 2025-10-29
 tags: ["User Experiences", "Language Comparison", "Performance", "Benchmarks"]
 summary: "An implementation of a transformer using Chapel, comparing to C++ and PyTorch"
 authors: ["Thitrin Sastarasadhit"]
-draft: true
+<!-- draft: true -->
 ---
 
 ### Introduction
@@ -145,7 +145,7 @@ I see this as a feature that would be beneficial to implement in the future.
 
 Another interesting design choice I made is to use a 1D array instead of a multidimensional array to represent each matrix and tensor. In an earlier draft, I initially used a multidimensional array with the `LinearAlgebra` module. However, I found its performance to be significantly worse than expected. Upon inspecting the compiler-generated code, I discovered that iterating over elements in a multidimensional array invoked a function called `advance_chpl`, a function that retrieves the next item in an array, which introduced considerable overhead and prevented vectorization. This issue had already been reported in a GitHub issue titled "[Multidimensional zippered iteration (or promotion) kills performance](https://github.com/chapel-lang/chapel/issues/13147)" and has been noted as a known performance concern on the [Chapel website](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration).
 
-Although this could be mitigated by iterating over the array’s domain instead of its elements, doing so might introduce unknown performance issues with multidimensional arrays in the future. For these reasons, I decided to use the 1D array design, which is one of the methods suggested in the "[Optimizing Performance of Chapel Programs](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration)" documentation.
+Although this could be mitigated by iterating over the array’s domain instead of its elements, I was still afraid that doing so might introduce unknown performance issues with multidimensional arrays in the future. For these reasons, I decided to use the 1D array design, which is one of the methods suggested in the "[Optimizing Performance of Chapel Programs](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration)" documentation.
 
 I also experimented with nested arrays, such as `var arr: [0..#N][0..#N] real(32)`. This approach yielded better performance, as the compiler treated it as a 1D array of 1D arrays. However, this made the array non-contiguous in memory, as each row is not guaranteed to be contiguous with the others, effectively equivalent to a `float**` in C++. As a result, it was still less efficient than using a pure 1D array.
 
@@ -207,26 +207,13 @@ operator +=(ref sum: real(32), ref A: [] real(32)) {
 }
 ```
 
-1. The first method is the one mentioned in the primers section of the Chapel documentation, which receives a portion of the matrix along with its domain. This version generates non-unrolled loops without vectorization, making it the slowest.
+After benchmarking on a small array, the first method was the slowest, followed by the second, while the third was the fastest. The other methods produced similar compiler-generated code and performed comparably to the first, with the fourth method creating a Chapel task when invoked, introducing additional overhead. Therefore, we will focus on comparing only the first three methods. After completing this project, I reported my findings on [Chapel's GitHub Issue](https://github.com/chapel-lang/chapel/issues/27958), where the discussion clearly revealed the causes of the observed performance differences.
 
-2. The second method receives the domain separately, which appears to reduce data transfer overhead. Additionally, it generates a large unrolled loop, but still without vectorization.
+In short, the primary cause was the overhead of passing arguments. The first method forces the creation of an array view, introducing significant overhead compared to the others. Similarly, the second method needs to pass domain data, while the third requires almost nothing. These overheads are noticeable when the function operates on small arrays. Nevertheless, for large arrays, the overhead becomes negligible, resulting in similar performance. It is also worth noting that passing a range instead of a domain yields performance comparable to the third method, since the overhead of passing a range is minimal compared to that of a domain.
 
-3. The third method is the best, as it generates unrolled loops with vectorization. Moreover, when used consecutively with other operations implemented in the same way, the compiler can recognize the pattern and combine them into a single vectorized loop if necessary. For instance:
-   ```Chapel
-   // The compiler might combine these into a single loop 
-   // that performs plus, exp, and mul in each iteration.
-   Plus();
-   Exp();
-   Mul();
-   ```
+Initially, I benchmarked only on a small array and mistakenly attributed the performance differences among the three methods to missed vectorization. In reality, the compiler generated different code for each function based on what it knew at compile time. For example, the third method could detect fixed start and end points, allowing full unrolling for small arrays, while the first method could not, producing general code for any size. This effect can be confirmed by implementing similar C++ code and comparing the results.
 
-4. The fourth method generates the same loop as the first but also creates a Chapel task when it is called.
-
-5. The fifth method, overloading the operator, enabled clean code. However, it gave the same result as the first method.
-
-Please note that this effect may or may not occur in specific cases. When I tested `PlusReduce1` and `PlusReduce2` individually outside the model, the optimization occurred normally, with the entire function inlined into `chpl_gen_main` (the main function appearing in the compiler-generated code).
-
-As a result, I chose the third design, passing the array with start and end points manually, as it gives the best performance result. I also want to point out that another reason I didn't choose overloading operator even though it enables much cleaner code is that it requires additional memory allocation or copying in expressions that have three or more operands such as `C = A + B`, it costs unnecessary additional execution time, both in Chapel and C++.
+As I didn’t notice this until I finished the project, I chose the third design, passing the array with start and end points manually, as it gives the best performance result. I also want to point out that another reason I didn't choose overloading operator even though it enables much cleaner code is that it requires additional memory allocation or copying in expressions that have three or more operands such as `C = A + B`, it costs unnecessary additional execution time, both in Chapel and C++.
 ```Chapel
 operator +(ref A: [] real(32), ref B: [] real(32)) {
     var C: [A.domain] real(32); // allocation
@@ -239,16 +226,9 @@ operator +(ref A: [] real(32), ref B: [] real(32)) {
 
 #### Softmax
 
-This is the most critical layer, as it is significantly slower in both versions compared to PyTorch, with Chapel being the slowest. I do not know the reason behind the slowness of the C++ version, as it is slower than both of the Python versions, but I understand why it performs better than the Chapel version. The Chapel version refuses to use `_ZGVdN8v_expf_avx2`, the vectorized exponential function in the GNU C Library, in exponential computation, while the C++ version uses the function (`clang` requires the `-fveclib=libmvec` flag to enable `_ZGVdN8v_expf_avx2`). I have tried the following methods to enable the use of `_ZGVdN8v_expf_avx2` in Chapel but failed:
-- Simple for loop iterating over the array’s domain
-- Simple for loop iterating over the array’s elements
-- Switching from `real(32)` to `real(64)`
-- Direct assignment `B = exp(A)`
-- Using `foreach` loops.
-- Passing the same flags used in Clang via `--ccflag`
-- Using `--no-ieee-float`
+This is the most critical layer, as it is significantly slower in both versions compared to PyTorch, with Chapel being the slowest. I do not know the reason behind the slowness of the C++ version, as it is slower than both of the Python versions, but I understand why it performs better than the Chapel version. The Chapel version refuses to use `_ZGVdN8v_expf_avx2`, the vectorized exponential function in the GNU C Library, in exponential computation, while the C++ version uses the function (`clang` requires the `-fveclib=libmvec` flag to enable `_ZGVdN8v_expf_avx2`). I have tried many methods to enable the use of `_ZGVdN8v_expf_avx2` in Chapel, such as iterating with simple `for` or `foreach` loops, switching from `real(32)` to real(64), using direct assignments like `B = exp(A)`, and passing the same compilation flags used in `clang` via `--ccflag`, but none of these attempts succeeded.
 
-As Chapel uses LLVM as its backbone, Chapel should be able to access this function like clang does. This issue should be further investigated (or the function should be integrated if it hasn't been) so that Chapel can benefit from it.
+However, this issue has been resolved in modern Chapel (version 2.7), which introduces the new compiler flag `--vector-library`. Setting it to `LIBMVEC-X86` for the `llvm` target compiler (or `libmvec` for `clang`) produces the same effect as specifying `--fveclib` in clang.
 
 #### DropOut
 
