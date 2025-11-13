@@ -251,18 +251,18 @@ milestones.
 By comparison, the achievements of the space program made designing a
 productive and adoptable parallel language seem far more like a matter
 of will, cooperation, and resources—{{<sidenote "right"
-"social challenges, really" -7>}}When writing this in 2012, we still
+"social challenges, really" -9>}}When writing this in 2012, we still
 had many significant technical challenges ahead of us, a large
 fraction of which we've now addressed.  These days, it sometimes feels
-like it's all social challenges remaining...  That's an overstatement
-because technical challenges still exist, but the social ones are the
-ones that keep me up at night now—in part because I find them far more
-challenging to wrestle with.{{</sidenote>}}—than of technical
-impossibilities.  So if, as a parallel computing community, we truly
-believe that we would benefit from improved parallel programming
-models, then we should get to work creating them rather than standing
-around wringing our hands or prophesying their doom out of sheer force
-of habit after years of disappointment.
+like it's all social challenges remaining...  That's an exaggeration
+because technical challenges definitely still exist, but the social
+ones are the ones that keep me up at night now—in part because I find
+them far more challenging to wrestle with.{{</sidenote>}}—than of
+technical impossibilities.  So if, as a parallel computing community,
+we truly believe that we would benefit from improved parallel
+programming models, then we should get to work creating them rather
+than standing around wringing our hands or prophesying their doom out
+of sheer force of habit after years of disappointment.
 
 Sometimes when looking back on a period, it can feel as though a goal
 is unattainable.  But it doesn’t take many concrete steps toward a
@@ -300,7 +300,7 @@ the best HPC has to offer;” and change “this” from “Chapel today” into
 “Chapel as it could be, improved by the efforts of the broader
 community;” and {{<sidenote "right" "in those terms">}}If, like me
 today, you're having trouble untangling the interpretation proposed by
-this sentence, I'm saying that if "We'll never pull this off" is
+this sentence, I was trying to say that if "We'll never pull this off" is
 intended to mean "A broad community effort, leveraging HPC expertise,
 will never be successful with a language like Chapel," then I strongly
 disagree—I definitely believe we have a fighting chance.  I'll come
@@ -317,6 +317,8 @@ This brings us to the conclusions for this final article’s myths:
 #### Counterpoint #10:  With appropriate force of will, cooperation, resources, and effort, the HPC community should be able to successfully create a viable and adoptable scalable parallel programming language.
 
 #### Counterpoint #9: While Chapel almost certainly has flaws, its design also has a number of reasonably unique strengths that make it worth pursuing and striving to perfect.  To that end, we appreciate having users point out missteps in a constructive manner that helps lead us to a better design.
+
+#### Summary
 
 To summarize the series as a whole, the ten myths and counterpoints
 have been as follows:
@@ -417,7 +419,7 @@ Despite the ongoing and arguably growing need for productive parallel
 languages, the number of groups working on scalable parallel languages
 has dwindled significantly.  How many current language projects can
 you name that are playing in the space that HPF, ZPL, UPC, Titanium,
-X10, Fortress, and others once did?  Community interest in, not to
+X10, Fortress, and so many others once did?  Community interest in, not to
 mention hope for, new scalable parallel languages has become far more
 muted.  And not because it's a solved problem—if anything, HPC systems
 have only become more challenging to program over that time.
@@ -425,8 +427,8 @@ have only become more challenging to program over that time.
 When we launched Chapel and I was put in charge of its implementation,
 I often felt overwhelmed by what we were trying to achieve.  In
 response, my manager at that time would tell me that my role was to be
-the "young Turk" who would lead the charge and show people the way to
-better parallel programming.  Now I feel increasingly like the much
+the "young Turk" who would lead the charge to show people a better
+way to do parallel programming.  Now I feel increasingly like the much
 older man who is easy to ignore because he seems to tell similar
 stories over and over.  So how did we get here...?
 
@@ -455,12 +457,12 @@ of results forever.  So it was interesting to be reminded that 13
 years ago, we didn't really have worthwhile performance results to
 speak of, just the belief that we'd designed a language that would be
 able to achieve them in time.  To that end, it's been gratifying to be
-able to reprint the series and to share results where we've
+able to reprint the series and share results where we've
 successfully delivered on our aspirations.
 
-In gathering those results for publication, it's also been surprising
-to realize how many of them were still years away when the series was
-originally published.  Our first competitive results for HPCC STREAM
+In gathering those results for this series, it's also been surprising
+to realize how many of them were still years away when the original series was
+published.  Our first competitive results for HPCC STREAM
 Triad—arguably one of the simplest distributed benchmarks—weren't
 achieved until 2015.  Our first optimizations enabling massively
 scalable results for HPCC RA, Arkouda argsort, and Bale Indexgather
@@ -548,7 +550,7 @@ the [Dyno]({{<relref dyno>}}) compiler rework, addressing technical
 debt that dates back to Chapel's research origins.  We also began
 investing time in developing [productivity tools]({{<relref tools>}})
 for Chapel and amping up our focus on resolving user issues.  On the
-less-technical side, we focused on broadening our communications
+less-technical side, we've focused on broadening our communications
 through [talks](https://chapel-lang.org/presentations/),
 [tutorials](https://www.youtube.com/playlist?list=PLuqM5RJ2KYFgllPMfP5OiRKsVRPf1UEDs),
 [demos](https://www.youtube.com/playlist?list=PLuqM5RJ2KYFjYgOStSfrNshIQ0I-AibHY),
@@ -665,8 +667,8 @@ ignore the fact that most performance-focused programmers must now be
 parallel programmers, and increasingly ones for whom scalability might
 matter.
 
-Summarizing, here's a table with the two bonus myths added in
-this article's commentary:
+Summarizing, here's a table with the two bonus myths added for
+this article:
 
    {{< alttable >}}
    | **Myth** | **Counterpoint** |
