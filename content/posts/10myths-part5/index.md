@@ -3,7 +3,7 @@ title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 5:
 date: 2025-08-20
 tags: ["Editorial", "Archival Posts / Reprints"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
-summary: "The fifth archival post from the 2012 IEEE TCSC blog series with a current reflection on it"
+summary: "The fifth archival post from the 2012 IEEE TCSC blog series, with a current reflection on it"
 authors: ["Brad Chamberlain"]
 ---
 
@@ -579,7 +579,7 @@ analyze, but this too remains future work.
 
 
 
-#### Wrapping Up
+### Wrapping Up
 
 That concludes this month's myth about how well-designed, productive
 languages need not rely on magic or heroic compilers to get things

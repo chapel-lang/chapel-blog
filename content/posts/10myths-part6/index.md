@@ -3,7 +3,7 @@ title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 6:
 date: 2025-09-17
 tags: ["Editorial", "Archival Posts / Reprints", "Language Comparison", "Performance", "Benchmarks"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
-summary: "The sixth archival post from the 2012 IEEE TCSC blog series with a current reflection on it"
+summary: "The sixth archival post from the 2012 IEEE TCSC blog series, with a current reflection on it"
 authors: ["Brad Chamberlain"]
 ---
 
@@ -630,7 +630,7 @@ computer science.
 
 {{</pullquote>}}
 
-#### Wrapping Up
+### Wrapping Up
 
 Wrapping up, I want to note that while this article demonstrates that
 concise ZPL and Chapel programs _can_ outperform MPI due to the

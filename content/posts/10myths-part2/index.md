@@ -3,7 +3,7 @@ title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 2:
 date: 2025-05-28
 tags: ["Editorial", "Archival Posts / Reprints", "GPU Programming"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
-summary: "Another archival post from the IEEE TCSC blog in 2012 with a current reflection on it"
+summary: "Another archival post from the IEEE TCSC blog in 2012, with a current reflection on it"
 authors: ["Brad Chamberlain"]
 ---
 
@@ -495,7 +495,7 @@ language design discussions during those years, and the positive
 impact they had on Chapel.
 
 
-#### Wrapping Up
+### Wrapping Up
 
 That wraps up this month's article.  While its focus on HPF may seem
 dated, I think the content remains interesting by capturing some of

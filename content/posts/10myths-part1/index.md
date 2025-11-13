@@ -3,7 +3,7 @@ title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 1:
 date: 2025-04-30
 tags: ["Editorial", "Archival Posts / Reprints", "Sparse Arrays"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
-summary: "An archival post from the IEEE TCSC blog in 2012 with a current reflection on it"
+summary: "An archival post from the IEEE TCSC blog in 2012, with a current reflection on it"
 authors: ["Brad Chamberlain"]
 ---
 
@@ -381,7 +381,7 @@ Tune in next time for more myths about scalable parallel programming languages.
 
 [1] B. L. Chamberlain, D. Callahan, H. P. Zima, [Parallel
 Programmability and the Chapel
-Language](http://hpc.sagepub.com/content/21/3/291.abstract),
+Language](https://hpc.sagepub.com/content/21/3/291.abstract),
 _International Journal of High Performance Computing Applications_,
 August 2007, 21(3): 291–312.
 
@@ -506,7 +506,7 @@ to be 64 bits in Chapel—almost like I was trying to go out of my way
 to make it more verbose.  That said, I can also think of users who
 tend to prefer that additional level of explicitness in their code.
 
-#### Wrapping Up
+### Wrapping Up
 
 All in all, I think the premise of the original article holds up and
 that, by and large, the features we had designed for Chapel in 2012

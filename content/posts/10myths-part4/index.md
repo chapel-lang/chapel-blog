@@ -3,7 +3,7 @@ title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 4:
 date: 2025-07-23
 tags: ["Editorial", "Archival Posts / Reprints"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
-summary: "The fourth archival post from the 2012 IEEE TCSC blog series with a current reflection on it"
+summary: "The fourth archival post from the 2012 IEEE TCSC blog series, with a current reflection on it"
 authors: ["Brad Chamberlain"]
 ---
 
@@ -438,7 +438,7 @@ that rely on using an outer array's indices to parameterize an inner
 array's domain.  The other declarations would work fine.
 
 
-#### Wrapping Up
+### Wrapping Up
 
 That concludes this month's myth about whether syntax matters when
 designing scalable parallel programming languages.  I definitely

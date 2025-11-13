@@ -3,7 +3,7 @@ title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 3:
 date: 2025-06-25
 tags: ["Editorial", "Archival Posts / Reprints", "GPU Programming"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
-summary: "A third archival post from the 2012 IEEE TCSC blog series with a current reflection on it"
+summary: "A third archival post from the 2012 IEEE TCSC blog series, with a current reflection on it"
 authors: ["Brad Chamberlain"]
 ---
 
@@ -613,7 +613,7 @@ of ubiquitous parallel computing and ride it to widespread adoption,
 as Fortran did with optimizing compilers or Java did with the web.
 
 
-#### Wrapping Up
+### Wrapping Up
 
 That concludes this month's myth about the non-adoptability of new
 languages and particularly languages that aren't extensions of others.
