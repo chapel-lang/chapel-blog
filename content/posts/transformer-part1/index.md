@@ -248,14 +248,14 @@ proc backward(/*...*/) {
 // ...
 // These matrix multiplications are slow
     for i in 0..#batch {
-        MatMulPlusAB(QTGradient[(i * block)..#block], inputQ[(i * block)..#block], WQOpt.gradient);
-        MatMulPlusAB(KTGradient[(i * block)..#block], inputK[(i * block)..#block], WKOpt.gradient);
-        MatMulPlusAB(VTGradient[(i * block)..#block], inputV[(i * block)..#block], WVOpt.gradient);
+        MatMulPlusAB(dModel, sequenceLength, dModel, QTGradient[(i * block)..#block], inputQ[(i * block)..#block], WQOpt.gradient);
+        MatMulPlusAB(dModel, sequenceLength, dModel, KTGradient[(i * block)..#block], inputK[(i * block)..#block], WKOpt.gradient);
+        MatMulPlusAB(dModel, sequenceLength, dModel, VTGradient[(i * block)..#block], inputV[(i * block)..#block], WVOpt.gradient);
     }
     for i in 0..#batch {
-        MatMulPlusATB(QTGradient[(i * block)..#block], WQ, inputGradientQ[(i * block)..#block]);
-        MatMulPlusATB(KTGradient[(i * block)..#block], WK, inputGradientK[(i * block)..#block]);
-        MatMulPlusATB(VTGradient[(i * block)..#block], WV, inputGradientV[(i * block)..#block]);
+        MatMulPlusATB(sequenceLength, dModel, dModel, QTGradient[(i * block)..#block], WQ, inputGradientQ[(i * block)..#block]);
+        MatMulPlusATB(sequenceLength, dModel, dModel, KTGradient[(i * block)..#block], WK, inputGradientK[(i * block)..#block]);
+        MatMulPlusATB(sequenceLength, dModel, dModel, VTGradient[(i * block)..#block], WV, inputGradientV[(i * block)..#block]);
     }
 }
 
@@ -270,7 +270,43 @@ config /*param*/ var sequenceLength: int = 128;
 // ... 
 ```
 
-Fortunately, this alteration did not negatively affect the performance of other layers. Still, this phenomenon should be investigated further, as the conditions for triggering this issue seem very specific; even commenting out unrelated code could make the issue disappear, making it difficult to reproduce outside of the full model.
+After the project was done, I investigated this phenomenon further. It turned out that the cause is related to LLVM’s optimization choices. In short, I found that if LLVM notices that a loop runs for a small number of iterations (fewer than 50 on my machine), it chooses loop unrolling instead of vectorization, possibly because the setup cost of vectorization is not worth it. This threshold likely depends on the hardware and may vary across machines.
+
+My block-tiling matrix multiplication algorithm has its innermost loop run for `min(d3, BLOCK_SIZE)`. In this case, where the model size is small, the `dModel` value passed to `d3` is 32. If dModel is known at compile time (declared as a `param`), the compiler detects this and chooses loop-unrolling optimization for the innermost loop of the algorithm. On the other hand, when `dModel` is not known at compile time (declared as a `var`), the compiler chooses normal vectorized loops for that part. This can also happen in C++ as well, since it also depends on LLVM.
+```Chapel
+// An example of AB matrix multiplication
+// BLOCK_SIZE is 64
+proc MatMulPlusAB(in d1: int, in d2: int, in d3: int,
+    const ref A:[] real(32), const ref B:[] real(32), ref C:[] real(32)) : void {
+    
+    ref Ar = A.reindex(0..#(d1 * d2));
+    ref Br = B.reindex(0..#(d2 * d3));
+    ref Cr = C.reindex(0..#(d1 * d3));
+
+    for ii in 0..<d1 by BLOCK_SIZE {
+    for jj in 0..<d3 by BLOCK_SIZE {
+    for kk in 0..<d2 by BLOCK_SIZE {
+                
+        var i = 0;
+        while (i < BLOCK_SIZE && ii + i < d1) {
+            var k = 0;
+            while(k < BLOCK_SIZE && kk + k < d2) {
+                var j = 0;
+                while(j < BLOCK_SIZE && jj + j < d3) { // The most inner loop
+                    Cr[(ii + i) * d3 + (jj + j)] += Ar[(ii + i) * d2 + (kk + k)] * Br[(kk + k) * d3 + (jj + j)];
+                    j += 1;
+                }
+                k += 1;
+            }
+            i += 1;
+        }
+    }
+    }
+    } 
+}
+```
+
+I didn’t notice this during the project development. Fortunately, this change did not negatively affect the performance of the other layers.
 
 #### ReLU
 
