@@ -316,13 +316,14 @@ for i in D {
     inputGradient[i] = if input[i] >= 0 then outputGradient[i] else 0.0:real(32);
 }
 ```
-The problem is that the compiler refused to vectorize and unroll this loop. This was solved by seperating the loop into two sections:
+The problem was that the compiler refused to use a vectorized `movemask` operation. This was resolved by splitting the loop into two sections:
 ```Chapel
 for i in D {
     outputGradient[i] = if input[i] >= 0 then outputGradient[i] else 0.0:real(32);
 }
 Copy(0,0,D.size,outputGradient,inputGradient);
 ```
+Having completed this project, I reported it and discussed it on [GitHub Issue](https://github.com/chapel-lang/chapel/issues/28040). In short, this represents a missed optimization opportunity for the ternary operator. The compiler could have detected the pattern and chosen a compare-and-jump implementation instead of a vectorized `movemask` or compare-and-bitwise-AND operation. Instead, it chose compare-and-jump, which not only fails to exploit parallelism but also introduces branch misprediction. This is likely due to the overhead of Chapel arrays’ metadata, which interferes with the compiler’s pattern detection.
 
 Chapel also got better performance than C++ in the forward pass of this layer. The compiled code is almost the same, with the same vectorizing and loop unrolling degree; the difference is that Chapel did the load, max, and store operations separately, while C++ merges the load and max oprations into one instruction.
 ```asm
