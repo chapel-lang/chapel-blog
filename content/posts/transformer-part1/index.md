@@ -5,7 +5,7 @@ date: 2025-10-29
 tags: ["User Experiences", "Language Comparison", "Performance", "Benchmarks"]
 summary: "An implementation of a transformer using Chapel, comparing to C++ and PyTorch"
 authors: ["Thitrin Sastarasadhit"]
-<!-- draft: true -->
+draft: true
 ---
 
 ### Introduction
