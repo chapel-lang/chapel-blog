@@ -325,17 +325,8 @@ Copy(0,0,D.size,outputGradient,inputGradient);
 ```
 Having completed this project, I reported it and discussed it on [GitHub Issue](https://github.com/chapel-lang/chapel/issues/28040). In short, this represents a missed optimization opportunity for the ternary operator. The compiler could have detected the pattern and chosen a compare-and-jump implementation instead of a vectorized `movemask` or compare-and-bitwise-AND operation. Instead, it chose compare-and-jump, which not only fails to exploit parallelism but also introduces branch misprediction. This is likely due to the overhead of Chapel arrays’ metadata, which interferes with the compiler’s pattern detection.
 
-Chapel also got better performance than C++ in the forward pass of this layer. The compiled code is almost the same, with the same vectorizing and loop unrolling degree; the difference is that Chapel did the load, max, and store operations separately, while C++ merges the load and max oprations into one instruction.
-```asm
-// Chapel
-load mem -> res
-max 0,res -> res
-store res -> mem
-// C++
-max 0,mem -> res
-store res -> mem
-```
-This somehow makes the function in the Chapel version faster than that in C++ when tested on the small-size model. However, when tested on the full-size model, it makes the function in the Chapel version much slower than the function in the C++ version. Additionally, this performance drop when testing on the full-size model can also be seen in the backward pass of LayerNorm. I currently don't understand the cause of this effect.
+
+For the forward pass, Chapel achieves better performance than C++ even though the compiled code is nearly identical. However, when tested on the full-size model, a large performance difference appears, with Chapel taking significantly more time. I tested the function in isolation outside the model and confirmed that both Chapel and C++ yield the same performance regardless of array size. I suspect this issue is related to differences in memory loading between Chapel and C++, because when I executed this function consecutively inside the model, only the first execution of both languages after the previous layer incurred a large performance cost, with Chapel taking noticeably longer. A similar effect can also be observed in the backward pass of LayerNorm. At the moment, I do not fully understand the cause of this behavior.
 
 #### Other Layers
 
