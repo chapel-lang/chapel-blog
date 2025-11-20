@@ -89,8 +89,8 @@ I encountered a problem defining the buffer, as I initially tried to declare the
 // Chapel
 forall i in D {
     var buffer: [dom] real(32); // memory allocation
-    exp(input, buffer) // compute exp one time
-    sumreduce(buffer, sum) // use 1
+    Exp(input, buffer) // compute exp one time
+    SumReduce(buffer, sum) // use 1
     Div(buffer, output) // use 2
     // automatically deallocated of buffer at the end of this iteration
 }
@@ -100,8 +100,8 @@ forall i in D {
 #pragma omp parallel
 for(int i = 0;i < row;i++) {
     float buffer[size]; // stack memory
-    exp(input, buffer)
-    sumreduce(buffer, sum) // use 1
+    Exp(input, buffer)
+    SumReduce(buffer, sum) // use 1
     Div(buffer, output) // use 2
     // no memory deallocation for buffer
 }
@@ -111,8 +111,8 @@ The performance turned out to be very poor. This is likely because declaring the
 var buffer: [dom] real(32); // memory allocation one time
 
 forall i in D {
-    exp(input, buffer[thread[i]]) // compute exp into thread i's buffer chunk
-    sumreduce(buffer[thread[i]], sum) // use 1
+    Exp(input, buffer[thread[i]]) // compute exp into thread i's buffer chunk
+    SumReduce(buffer[thread[i]], sum) // use 1
     Div(buffer[thread[i]], output) // use 2
     // no memory deallocation for buffer
 }
@@ -120,7 +120,7 @@ forall i in D {
 
 #### LayerNorm
 
-An observation that can be seen in Fig. 8 is that LayerNorm is surprisingly much slower than C++ in the backward pass. This occurs in both single-thread and multi-thread execution on the full-size model. I have not yet fully understood the reason behind LayerNorm being the slowest on large-size matrices, even though the compiled loops are the same. Chapel causes much more L1 cache misses than C++ does when tested with `perf stat`.
+An observation that can be seen in Fig. 8 is that LayerNorm is surprisingly much slower than C++ in the backward pass. This occurs in both single-thread and multi-thread execution on the full-size model. I have not yet fully understood the reason behind LayerNorm being the slowest on large-size matrices, even though the compiled loops are very similar. Chapel causes much more L1 cache misses than C++ does when tested with `perf stat`.
 
 #### Multihead Attention
 
@@ -165,11 +165,12 @@ There are several things that I like about Chapel:
 - Object memory management
 - Memory management between threads
 - It is easier to make the program run on multi-locales.
+- The Chapel developers are very active and friendly, as can be seen through continuous updates and quick responses to the reported issues.
 
 Nevertheless, there are several shortcomings I found about Chapel, too:
 - Long compilation time, which is especially so when multi-locale is introduced.
-- Downcasting among numeric types, such from `real(64)` to `real(32)`, is done implicitly in C++, but not in Chapel (I am not sure which approach is better).
-- All the performance issues that I mentioned in this blog. This causes tricky fixes to be made and it makes the code messy.
+- Downcasting among numeric types, such from `real(64)` to `real(32)`, is done implicitly in C++, but not in Chapel (This is my personal thoughts; I am not sure which approach is better.)
+- All the performance issues that I mentioned in this blog. This causes tricky fixes to be made and it makes the code a bit messy.
 
 Chapel took as long as C++ to implement this transformer model in this project as it required some tricky fixes. The productivity of implementing and parallel programming tends to be the same as C++ and OpenMP, as far as this project is concerned. I believe that having the same level of expertise, Chapel could be more productive than C++ and Python in doing scientific simulations that require parallelism on multithread and multilocale as it automates data movement and configuration. However, it has much less support frameworks than Python, making it hard to create a project, and less control over the machine than C++, making it difficult to conduct performance research.
 
@@ -181,7 +182,7 @@ Even though today it might be more feasible to enable parallel programming by cr
 
 ### Conclusion
 
-This project illustrates an attempt to implement the Transformer model in Chapel. Across both parts, we explored single-threaded and multi-threaded performance and compared Chapel with C++ and PyTorch. The final performance achieved is reasonable and comparable to C++, and potentially to PyTorch if its optimized linear algebra algorithms are utilized. Nevertheless, many performance issues were encountered during implementation, such as problems with multidimensional arrays, vectorization, loop unrolling, and more. While many issues can be resolved or avoided using special tricks that add complexity to the code, some problems are unavoidable, such as random number generation and non-vectorized exponential functions.
+This project illustrates an attempt to implement the Transformer model in Chapel. Across both parts, we explored single-threaded and multi-threaded performance and compared Chapel with C++ and PyTorch. The final performance achieved is reasonable and comparable to C++, and potentially to PyTorch if its optimized linear algebra algorithms are utilized. Nevertheless, many performance issues were encountered during implementation, such as problems with multidimensional arrays, vectorization, loop unrolling, random number generation, and more. Currently, many issues have been resolved; for example, vectorization now enables optimization in exponential computations. Some problems are still being addressed but can be mitigated using special techniques, such as optimized random number generation and ternary operation handling.
 
 Additionally, I would like to see some language features implemented, such as `ref` in classes and records, as well as stack-allocated arrays. Faster compilation times would also be a great improvement.
 
