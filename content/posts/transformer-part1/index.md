@@ -1,11 +1,10 @@
 
 ---
 title: "Transformers From Scratch in Chapel and C++, Part 1"
-date: 2025-10-29
+date: 2025-11-20
 tags: ["User Experiences", "Language Comparison", "Performance", "Benchmarks"]
 summary: "An implementation of a transformer using Chapel, comparing to C++ and PyTorch"
 authors: ["Thitrin Sastarasadhit"]
-draft: true
 ---
 
 ### Introduction
@@ -16,7 +15,7 @@ In this blog series, I present my implementation of the Transformer model from s
 
 This blog is divided into two parts: the first part, presented here, discusses the experimental methodology and the first test, using a small-size model on a single thread; while the second part focuses on the second test, a full-size model on single and multiple threads, along with a discussion on productivity.
 
-*This project was also featured at ChaplCon’25, which you can watch on [Youtube Link](https://www.youtube.com/watch?v=vhyXmYwARL4), though that version was less detailed and updated compared to this blog.*
+*This project was also featured at [ChapelCon ’25](https://chapel-lang.org/chapelcon25/), which you can watch on [YouTube](https://www.youtube.com/watch?v=vhyXmYwARL4), though that version was less detailed and updated compared to this blog.*
 
 ---
 
@@ -118,7 +117,7 @@ Figure 3 shows the total time required for each training iteration, including th
 
 Throughout the implementation process, I encountered and resolved many interesting performance issues and gained valuable insights. I will discuss them in this section.
 
-#### Matrix Repsentation
+#### Matrix Representation
 
 This is the most critical building block of the model. In C++, I created a `Tensor` class to store the data and a `TensorView` class to capture a portion of the tensor when performing calculations.
 ```cpp
@@ -145,11 +144,11 @@ class TensorView {
 ```
 I see this as a feature that would be beneficial to implement in the future.
 
-Another interesting design choice I made is to use a 1D array instead of a multidimensional array to represent each matrix and tensor. In an earlier draft, I initially used a multidimensional array with the `LinearAlgebra` module. However, I found its performance to be significantly worse than expected. Upon inspecting the compiler-generated code, I discovered that iterating over elements in a multidimensional array invoked a function called `advance_chpl`, a function that retrieves the next item in an array, which introduced considerable overhead and prevented vectorization. This issue had already been reported in a GitHub issue titled "[Multidimensional zippered iteration (or promotion) kills performance](https://github.com/chapel-lang/chapel/issues/13147)" and has been noted as a known performance concern on the [Chapel website](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration).
+Another interesting design choice I made is to use a 1D array instead of a multidimensional array to represent each matrix and tensor. In an earlier draft, I initially used a multidimensional array with the `LinearAlgebra` module. However, I found its performance to be significantly worse than expected. Upon inspecting the compiler-generated code, I discovered that iterating over elements in a multidimensional array invoked `advance_chpl`, a function that retrieves the next item in an array, which introduced considerable overhead and prevented vectorization. This issue had already been reported in a GitHub issue titled "[Multidimensional zippered iteration (or promotion) kills performance](https://github.com/chapel-lang/chapel/issues/13147)" and has been noted as a known performance concern on the [Chapel website](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration).
 
 Although this could be mitigated by iterating over the array’s domain instead of its elements, I was still afraid that doing so might introduce unknown performance issues with multidimensional arrays in the future. For these reasons, I decided to use the 1D array design, which is one of the methods suggested in the "[Optimizing Performance of Chapel Programs](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration)" documentation.
 
-I also experimented with nested arrays, such as `var arr: [0..#N][0..#N] real(32)`. This approach yielded better performance, as the compiler treated it as a 1D array of 1D arrays. However, this made the array non-contiguous in memory, as each row is not guaranteed to be contiguous with the others, effectively equivalent to a `float**` in C++. As a result, it was still less efficient than using a pure 1D array.
+I also experimented with nested arrays, such as `var arr: [0..#N][0..#N] real(32)`. This approach yielded better performance than the 2D version, as the compiler treated it as a 1D array of 1D arrays. However, this made the array non-contiguous in memory, as each row is not guaranteed to be contiguous with the others, effectively equivalent to a `float**` in C++. As a result, it was still less efficient than using a pure 1D array.
 
 #### Matrix Multiplication
 
@@ -211,7 +210,7 @@ operator +=(ref sum: real(32), ref A: [] real(32)) {
 
 After benchmarking on small arrays, the first method was the slowest, followed by the second, while the third was the fastest. The other methods produced similar compiler-generated code and performed comparably to the first, with the fourth method creating a Chapel task when invoked, introducing additional overhead. Therefore, we will focus on comparing only the first three methods.
 
-After completing this project, I reported my findings on a GitHub issue titled "[Different implement of the same function cause different performance](https://github.com/chapel-lang/chapel/issues/27958)", where the discussion clearly revealed the causes of the observed performance differences.
+After completing this project, I reported my findings on a GitHub issue titled "[Different implementations of the same function cause different performance](https://github.com/chapel-lang/chapel/issues/27958)", where the discussion clearly revealed the causes of the observed performance differences.
 
 In short, the primary performance bottleneck stems from the overhead of passing arguments. The first method creates an array view, introducing considerable overhead compared to the others, while the second method incurs overhead due to requiring a domain. The third method, in contrast, requires almost no overhead, making it the fastest. These costs are especially noticeable when operating on small arrays. Nevertheless, for large arrays, the overhead becomes negligible, resulting in similar performance. It is also worth noting that passing a range instead of a domain yields performance comparable to the third method, since the overhead of passing a range is minimal compared to that of a domain.
 
@@ -230,7 +229,7 @@ operator +(ref A: [] real(32), ref B: [] real(32)) {
 
 #### Softmax
 
-This is a critical layer, as it is significantly slower in both versions compared to PyTorch, with Chapel being the slowest. I do not know the reason behind the slowness of the C++ version, as it is slower than both of the Python versions, but I understand why it performs better than the Chapel version. The Chapel version refuses to use `_ZGVdN8v_expf_avx2`, the vectorized exponential function in the GNU C Library, in exponential computation, while the C++ version uses the function (`clang` requires the `-fveclib=libmvec` flag to enable `_ZGVdN8v_expf_avx2`). II have tried many methods to enable it in Chapel, such as iterating with simple `for` or `foreach` loops, switching from `real(32)` to `real(64)`, using direct assignments like `B = exp(A)`, passing the same compilation flags used in `clang` via `--ccflag`, and many more, but none of these attempts succeeded.
+This is a critical layer, as it is significantly slower in both versions compared to PyTorch, with Chapel being the slowest. I do not know the reason behind the slowness of the C++ version, as it is slower than both of the Python versions, but I understand why it performs better than the Chapel version. The Chapel version refuses to use `_ZGVdN8v_expf_avx2`, the vectorized exponential function in the GNU C Library, in exponential computation, while the C++ version uses the function (`clang` requires the `-fveclib=libmvec` flag to enable `_ZGVdN8v_expf_avx2`). I have tried many methods to enable it in Chapel, such as iterating with simple `for` or `foreach` loops, switching from `real(32)` to `real(64)`, using direct assignments like `B = exp(A)`, passing the same compilation flags used in `clang` via `--ccflag`, and many more, but none of these attempts succeeded.
 
 However, this issue has been resolved in modern Chapel (version 2.7), which introduces the new compiler flag `--vector-library`. Setting it to `LIBMVEC-X86` for the `llvm` target compiler (or `libmvec` for `clang`) produces the same effect as specifying `-fveclib` in clang.
 
@@ -338,6 +337,6 @@ The other layers seem fine and perform as well as, or better than, the PyTorch v
 
 ### Conclusion
 
-In this post, we explore the methodology of the experiment and the first test, running a small-size model on single thread. The performance of the C++ and Chapel models is comparable to that of the two PyTorch models, with the C++ version being the fastest, as the benefits of PyTorch’s optimized linear algebra are not very apparent in this small-scale test. The Chapel version was slowest in this test, mainly due to the Dropout and Softmax layers. Several unexpected performance issues were also encountered, requiring tricky solutions during Chapel’s development.
+In this post, we explore the methodology of the experiment and the first test, running a small-size model on a single thread. The performance of the C++ and Chapel models is comparable to that of the two PyTorch models, with the C++ version being the fastest, as the benefits of PyTorch’s optimized linear algebra are not very apparent in this small-scale test. The Chapel version was slowest in this test, mainly due to the Dropout and Softmax layers. Several unexpected performance issues were also encountered, requiring tricky solutions during Chapel’s development.
 
 In the next post in this series, we will explore the second test, using a full-size model on single and multiple threads, along with a discussion on productivity.
