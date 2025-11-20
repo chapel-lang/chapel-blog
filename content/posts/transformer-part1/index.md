@@ -237,7 +237,7 @@ However, this issue has been resolved in modern Chapel (version 2.7), which intr
 
 This is another layer that performed significantly worse in Chapel. The random number generator I used in the Chapel version is from the `Random` standard module. As for the C++ version, I tried to implement the same random algorithm, `pcg_setseq_64_xsh_rr_32`. I also used integer-based random generation with an integer threshold, which is 4–5 times faster than using floating-point numbers.
 
-It also appeared that using `rng.fill` is faster than using `rng.next` when iterating over an array. Since this function forces parallelism when available, `CHPL_RT_NUM_THREADS_PER_LOCALE=1` must be set accordingly when experimenting with a single thread.
+Since this function forces parallelism when available, `CHPL_RT_NUM_THREADS_PER_LOCALE=1` must be set accordingly when experimenting with a single thread.
 
 This layer in Chapel is significantly slower compared to those in other models, primarily due to the random number generator. Using the random function with bounds caused a significant performance drop. After removing the bounds, Chapel achieved performance comparable to the C++ version. I reported and discussed this issue on a GitHub issue titled "[Random with bounds is much slower than no bound](https://github.com/chapel-lang/chapel/issues/28036)". However, since I only noticed and reported it after completing the project, I did not resolve it.
 
