@@ -16,6 +16,8 @@ In this blog series, I present my implementation of the Transformer model from s
 
 This blog is divided into two parts: the first part, presented here, discusses the experimental methodology and the first test, using a small-size model on a single thread; while the second part focuses on the second test, a full-size model on single and multiple threads, along with a discussion on productivity.
 
+*This project was also featured at ChaplCon’25, which you can watch on [Youtube Link](https://www.youtube.com/watch?v=vhyXmYwARL4), though that version was less detailed and updated compared to this blog.*
+
 ---
 
 ### Methodology
@@ -145,7 +147,7 @@ I see this as a feature that would be beneficial to implement in the future.
 
 Another interesting design choice I made is to use a 1D array instead of a multidimensional array to represent each matrix and tensor. In an earlier draft, I initially used a multidimensional array with the `LinearAlgebra` module. However, I found its performance to be significantly worse than expected. Upon inspecting the compiler-generated code, I discovered that iterating over elements in a multidimensional array invoked a function called `advance_chpl`, a function that retrieves the next item in an array, which introduced considerable overhead and prevented vectorization. This issue had already been reported in a GitHub issue titled "[Multidimensional zippered iteration (or promotion) kills performance](https://github.com/chapel-lang/chapel/issues/13147)" and has been noted as a known performance concern on the [Chapel website](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration).
 
-Although this could be mitigated by iterating over the array’s domain instead of its elements, doing so might introduce unknown performance issues with multidimensional arrays in the future. For these reasons, I decided to use the 1D array design, which is one of the methods suggested in the "[Optimizing Performance of Chapel Programs](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration)" documentation.
+Although this could be mitigated by iterating over the array’s domain instead of its elements, I was still afraid that doing so might introduce unknown performance issues with multidimensional arrays in the future. For these reasons, I decided to use the 1D array design, which is one of the methods suggested in the "[Optimizing Performance of Chapel Programs](https://chapel-lang.org/docs/2.6/technotes/optimization.html#performance-problems-with-multidimensional-zippered-iteration)" documentation.
 
 I also experimented with nested arrays, such as `var arr: [0..#N][0..#N] real(32)`. This approach yielded better performance, as the compiler treated it as a 1D array of 1D arrays. However, this made the array non-contiguous in memory, as each row is not guaranteed to be contiguous with the others, effectively equivalent to a `float**` in C++. As a result, it was still less efficient than using a pure 1D array.
 
@@ -153,11 +155,11 @@ I also experimented with nested arrays, such as `var arr: [0..#N][0..#N] real(32
 
 The algorithm used for matrix multiplication is blocked matrix multiplication, in which the operation is divided into smaller blocks to exploit cache locality. A block size of 64<small>$\times$</small>64 was chosen, as it provided the best performance in my environment. Both the C++ and Chapel versions use the same algorithm and block size.
 
-After some tests, Chapel outperformed C++ for certain matrix sizes and underperformed for others, even though the compiler-generated code of the inner loops was nearly identical. This caused the performance of the linear layer, when tested on the full-size model, to be faster in Chapel than in C++. The cause of this variation remains unknown to me.
+After some tests, Chapel outperformed C++ for certain matrix sizes and underperformed for others, even though the compiler-generated code was nearly identical. This caused the performance of the linear layer, when tested on the full-size model, to be faster in Chapel than in C++. The cause of this variation remains unknown to me.
 
 #### Matrix Operations
 
-This section discusses general operations such as element-wise multiplication, addition, division, etc. As I wanted to have control over parallelism, there were several candidate designs, including overloading the array operators like `+`, `-`,  `*`, and `/` or creating new functions for these operations. As I experimented with performance and inspected the generated assembly, I found that the design and implementation of these operations had a greater impact on the model than I had expected. Therefore, I tested five versions of the sum-reduction function used in LayerNorm to calculate the mean. (However, the implementation of LayerNorm that used this function was later changed to be similar to the C++ version).
+This section discusses general operations such as element-wise multiplication, addition, division, etc. As I wanted to have control over parallelism, there were several candidate designs, including overloading the array operators like `+`, `-`,  `*`, and `/` or creating new functions for these operations. As I experimented with performance, I found that the design and implementation of these operations had a greater impact on the model than I had expected. Therefore, I tested five versions of the sum-reduction function used in LayerNorm to calculate the mean. (However, the implementation of LayerNorm that used this function was later changed to be similar to the C++ version).
 
 ```Chapel
 // query the domain from the array argument
@@ -207,26 +209,15 @@ operator +=(ref sum: real(32), ref A: [] real(32)) {
 }
 ```
 
-1. The first method is the one mentioned in the primers section of the Chapel documentation, which receives a portion of the matrix along with its domain. This version generates non-unrolled loops without vectorization, making it the slowest.
+After benchmarking on small arrays, the first method was the slowest, followed by the second, while the third was the fastest. The other methods produced similar compiler-generated code and performed comparably to the first, with the fourth method creating a Chapel task when invoked, introducing additional overhead. Therefore, we will focus on comparing only the first three methods.
 
-2. The second method receives the domain separately, which appears to reduce data transfer overhead. Additionally, it generates a large unrolled loop, but still without vectorization.
+After completing this project, I reported my findings on a GitHub issue titled "[Different implement of the same function cause different performance](https://github.com/chapel-lang/chapel/issues/27958)", where the discussion clearly revealed the causes of the observed performance differences.
 
-3. The third method is the best, as it generates unrolled loops with vectorization. Moreover, when used consecutively with other operations implemented in the same way, the compiler can recognize the pattern and combine them into a single vectorized loop if necessary. For instance:
-   ```Chapel
-   // The compiler might combine these into a single loop 
-   // that performs plus, exp, and mul in each iteration.
-   Plus();
-   Exp();
-   Mul();
-   ```
+In short, the primary performance bottleneck stems from the overhead of passing arguments. The first method creates an array view, introducing considerable overhead compared to the others, while the second method incurs overhead due to requiring a domain. The third method, in contrast, requires almost no overhead, making it the fastest. These costs are especially noticeable when operating on small arrays. Nevertheless, for large arrays, the overhead becomes negligible, resulting in similar performance. It is also worth noting that passing a range instead of a domain yields performance comparable to the third method, since the overhead of passing a range is minimal compared to that of a domain.
 
-4. The fourth method generates the same loop as the first but also creates a Chapel task when it is called.
+Initially, I carelessly benchmarked only on a small array and mistakenly attributed the performance differences among the three methods to missed opportunities for vectorization. This occurred because the compiler generated different code for each function based on what it could determine at compile time. For example, the third method could detect fixed start and end points, allowing full unrolling for small arrays, while the first method could not, producing general code applicable to any size. C++ exhibited the same effect, as it reflects LLVM’s optimization choices. Nevertheless, this was not the primary cause of the observed performance differences.
 
-5. The fifth method, overloading the operator, enabled clean code. However, it gave the same result as the first method.
-
-Please note that this effect may or may not occur in specific cases. When I tested `PlusReduce1` and `PlusReduce2` individually outside the model, the optimization occurred normally, with the entire function inlined into `chpl_gen_main` (the main function appearing in the compiler-generated code).
-
-As a result, I chose the third design, passing the array with start and end points manually, as it gives the best performance result. I also want to point out that another reason I didn't choose overloading operator even though it enables much cleaner code is that it requires additional memory allocation or copying in expressions that have three or more operands such as `C = A + B`, it costs unnecessary additional execution time, both in Chapel and C++.
+As I didn’t notice this until I finished the project, I chose the third design, passing the array with start and end points manually, as it gives the best performance result. I also want to point out that another reason I didn't choose overloading the operator, even though it enables much cleaner code, is that it requires additional memory allocation or copying in expressions that have three or more operands such as `C = A + B`; it costs unnecessary additional execution time, both in Chapel and C++.
 ```Chapel
 operator +(ref A: [] real(32), ref B: [] real(32)) {
     var C: [A.domain] real(32); // allocation
@@ -239,51 +230,42 @@ operator +(ref A: [] real(32), ref B: [] real(32)) {
 
 #### Softmax
 
-This is the most critical layer, as it is significantly slower in both versions compared to PyTorch, with Chapel being the slowest. I do not know the reason behind the slowness of the C++ version, as it is slower than both of the Python versions, but I understand why it performs better than the Chapel version. The Chapel version refuses to use `_ZGVdN8v_expf_avx2`, the vectorized exponential function in the GNU C Library, in exponential computation, while the C++ version uses the function (`clang` requires the `-fveclib=libmvec` flag to enable `_ZGVdN8v_expf_avx2`). I have tried the following methods to enable the use of `_ZGVdN8v_expf_avx2` in Chapel but failed:
-- Simple for loop iterating over the array’s domain
-- Simple for loop iterating over the array’s elements
-- Switching from `real(32)` to `real(64)`
-- Direct assignment `B = exp(A)`
-- Using `foreach` loops.
-- Passing the same flags used in Clang via `--ccflag`
-- Using `--no-ieee-float`
+This is a critical layer, as it is significantly slower in both versions compared to PyTorch, with Chapel being the slowest. I do not know the reason behind the slowness of the C++ version, as it is slower than both of the Python versions, but I understand why it performs better than the Chapel version. The Chapel version refuses to use `_ZGVdN8v_expf_avx2`, the vectorized exponential function in the GNU C Library, in exponential computation, while the C++ version uses the function (`clang` requires the `-fveclib=libmvec` flag to enable `_ZGVdN8v_expf_avx2`). II have tried many methods to enable it in Chapel, such as iterating with simple `for` or `foreach` loops, switching from `real(32)` to `real(64)`, using direct assignments like `B = exp(A)`, passing the same compilation flags used in `clang` via `--ccflag`, and many more, but none of these attempts succeeded.
 
-As Chapel uses LLVM as its backbone, Chapel should be able to access this function like clang does. This issue should be further investigated (or the function should be integrated if it hasn't been) so that Chapel can benefit from it.
+However, this issue has been resolved in modern Chapel (version 2.7), which introduces the new compiler flag `--vector-library`. Setting it to `LIBMVEC-X86` for the `llvm` target compiler (or `libmvec` for `clang`) produces the same effect as specifying `-fveclib` in clang.
 
 #### DropOut
 
-This is another layer that performed significantly worse in Chapel. The random number generator I used in the Chapel version is from the `Random` standard module. As for the C++ version, I tried to implement the same random algorithm, `pcg_setseq_64_xsh_rr_32`.
-
-Initially, I generated random floating-point numbers, which turned out to be 4–5 times slower than generating random integers. Therefore, I switched to generating random integers with an integer threshold.
+This is another layer that performed significantly worse in Chapel. The random number generator I used in the Chapel version is from the `Random` standard module. As for the C++ version, I tried to implement the same random algorithm, `pcg_setseq_64_xsh_rr_32`. I also used integer-based random generation with an integer threshold, which is 4–5 times faster than using floating-point numbers.
 
 It also appeared that using `rng.fill` is faster than using `rng.next` when iterating over an array. Since this function forces parallelism when available, `CHPL_RT_NUM_THREADS_PER_LOCALE=1` must be set accordingly when experimenting with a single thread.
 
-In the end, the Dropout layer in Chapel still performed worse than in the other versions.
+This layer in Chapel is significantly slower compared to those in other models, primarily due to the random number generator. Using the random function with bounds caused a significant performance drop. After removing the bounds, Chapel achieved performance comparable to the C++ version. I reported and discussed this issue on a GitHub issue titled "[Random with bounds is much slower than no bound](https://github.com/chapel-lang/chapel/issues/28036)". However, since I only noticed and reported it after completing the project, I did not resolve it.
 
 #### Multihead Attention
 
 This layer consumes the most resources and plays a major role in the model. In this layer, I designed the process to avoid explicitly transposing any matrix and instead utilized specialized matrix multiplication functions for transposed operations, such as `MatMulPlusATB`, which performs `C += dot(A.T,B)`
 
-The performance issue I found in this layer was both interesting and mysterious. While the forward process of both versions performed as expected, the backward pass of the Chapel version initially performed very poorly. After some investigation, I discovered that in the final step, where the weight gradients of Q, K, and V are computed along with the gradient for the next layer, the matrix multiplication was performing poorly because the compiler refused to fully vectorize it. Instead, the loop was heavily unrolled without any vectorization.
+The performance issue I found in this layer was interesting. While the forward process of both versions performed as expected, the backward pass of the Chapel version initially performed very poorly. After some investigation, I discovered that in the final step, where the weight gradients of Q, K, and V are computed along with the gradient for the next layer, the matrix multiplication was performing poorly because the compiler refused to fully vectorize it. Instead, the loop was heavily unrolled without any vectorization.
 ```Chapel
 proc backward(/*...*/) {
 // ...
 // These matrix multiplications are slow
     for i in 0..#batch {
-        MatMulPlusAB(QTGradient[(i * block)..#block], inputQ[(i * block)..#block], WQOpt.gradient);
-        MatMulPlusAB(KTGradient[(i * block)..#block], inputK[(i * block)..#block], WKOpt.gradient);
-        MatMulPlusAB(VTGradient[(i * block)..#block], inputV[(i * block)..#block], WVOpt.gradient);
+        MatMulPlusAB(dModel, sequenceLength, dModel, QTGradient[(i * block)..#block], inputQ[(i * block)..#block], WQOpt.gradient);
+        MatMulPlusAB(dModel, sequenceLength, dModel, KTGradient[(i * block)..#block], inputK[(i * block)..#block], WKOpt.gradient);
+        MatMulPlusAB(dModel, sequenceLength, dModel, VTGradient[(i * block)..#block], inputV[(i * block)..#block], WVOpt.gradient);
     }
     for i in 0..#batch {
-        MatMulPlusATB(QTGradient[(i * block)..#block], WQ, inputGradientQ[(i * block)..#block]);
-        MatMulPlusATB(KTGradient[(i * block)..#block], WK, inputGradientK[(i * block)..#block]);
-        MatMulPlusATB(VTGradient[(i * block)..#block], WV, inputGradientV[(i * block)..#block]);
+        MatMulPlusATB(sequenceLength, dModel, dModel, QTGradient[(i * block)..#block], WQ, inputGradientQ[(i * block)..#block]);
+        MatMulPlusATB(sequenceLength, dModel, dModel, KTGradient[(i * block)..#block], WK, inputGradientK[(i * block)..#block]);
+        MatMulPlusATB(sequenceLength, dModel, dModel, VTGradient[(i * block)..#block], WV, inputGradientV[(i * block)..#block]);
     }
 }
 
 ```
 
-Surprisingly, this issue was resolved by altering some code in the Config file, which is a Chapel file that defines values known at compile time, such as model dimension, sequence length, matrix multiplication block size, etc. Since these values are known at compile time, the `param` keyword was initially used. However, when I changed from `param` to `var`, loosening the variable restriction, the issue in multi-head attention vanished, and the compiler was able to recognize the pattern and optimize the function normally.
+Surprisingly, this issue was resolved by altering some code in the Config file, which is a Chapel file that defines values known at compile time, such as model dimension, sequence length, matrix multiplication block size, etc. Since these values are known at compile time, the `param` keyword was initially used. However, when I changed from `param` to `var`, loosening the variable restriction, the issue in multi-head attention vanished.
 ```Chapel
 // ...
 config /*param*/ var dModel: int = 32;
@@ -292,7 +274,44 @@ config /*param*/ var sequenceLength: int = 128;
 // ... 
 ```
 
-Fortunately, this alteration did not negatively affect the performance of other layers. Still, this phenomenon should be investigated further, as the conditions for triggering this issue seem very specific; even commenting out unrelated code could make the issue disappear, making it difficult to reproduce outside of the full model.
+After the project was done, I investigated this phenomenon further. It turned out that the cause is related to LLVM’s optimization choices. In short, I found that if LLVM notices that a loop runs for a small number of iterations (fewer than 50 on my machine), it chooses loop unrolling instead of vectorization, possibly because the setup cost of vectorization is not worth it. This threshold likely depends on the hardware and may vary across machines.
+
+My blocked matrix multiplication algorithm has its innermost loop run for `min(d3, BLOCK_SIZE)`. In this case, where the model size is small, the `dModel` value passed to `d3` is 32. If `dModel` is known at compile time (declared as a `param`), the compiler detects this and chooses loop-unrolling optimization for the innermost loop of the algorithm. On the other hand, when `dModel` is not known at compile time (declared as a `var`), the compiler chooses normal vectorized loops for that part. This can also happen in C++ as well, since it also depends on LLVM.
+```Chapel
+// AB matrix multiplication implementation
+// BLOCK_SIZE is 64
+proc MatMulPlusAB(in d1: int, in d2: int, in d3: int,
+    const ref A:[] real(32), const ref B:[] real(32), ref C:[] real(32)) : void {
+    
+    // Reindex for sliced array
+    ref Ar = A.reindex(0..#(d1 * d2));
+    ref Br = B.reindex(0..#(d2 * d3));
+    ref Cr = C.reindex(0..#(d1 * d3));
+
+    for ii in 0..<d1 by BLOCK_SIZE {
+    for jj in 0..<d3 by BLOCK_SIZE {
+    for kk in 0..<d2 by BLOCK_SIZE {
+                
+        var i = 0;
+        while (i < BLOCK_SIZE && ii + i < d1) {
+            var k = 0;
+            while(k < BLOCK_SIZE && kk + k < d2) {
+                var j = 0;
+                while(j < BLOCK_SIZE && jj + j < d3) { // The most inner loop
+                    Cr[(ii + i) * d3 + (jj + j)] += Ar[(ii + i) * d2 + (kk + k)] * Br[(kk + k) * d3 + (jj + j)];
+                    j += 1;
+                }
+                k += 1;
+            }
+            i += 1;
+        }
+    }
+    }
+    } 
+}
+```
+
+I didn’t notice this during the project development. Therefore, I solved the problem by changing the `param` to `var` in the Config file. Fortunately, this did not negatively affect the performance of the other layers.
 
 #### ReLU
 
@@ -302,25 +321,16 @@ for i in D {
     inputGradient[i] = if input[i] >= 0 then outputGradient[i] else 0.0:real(32);
 }
 ```
-The problem is that the compiler refused to vectorize and unroll this loop. This was solved by seperating the loop into two sections:
+The problem was that the compiler refused to use a vectorized `movemask` optimization and instead used a compare-and-jump approach. This was resolved by splitting the loop into two sections:
 ```Chapel
 for i in D {
     outputGradient[i] = if input[i] >= 0 then outputGradient[i] else 0.0:real(32);
 }
 Copy(0,0,D.size,outputGradient,inputGradient);
 ```
+Having completed this project, I reported and discussed it on a GitHub issue titled "[Optimization missed on ternary operator when used with arrays](https://github.com/chapel-lang/chapel/issues/28040)".. In short, this represents a missed optimization opportunity for the ternary operator. The compiler could have detected the pattern and chosen a compare-and-jump implementation instead of a vectorized `movemask` or a compare-and-bitwise-AND operation, which not only fails to exploit parallelism but also introduces branch mispredictions. This is likely due to the overhead of Chapel arrays’ metadata, which interferes with the compiler’s pattern detection.
 
-Chapel also got better performance than C++ in the forward pass of this layer. The compiled code is almost the same, with the same vectorizing and loop unrolling degree; the difference is that Chapel did the load, max, and store operations separately, while C++ merges the load and max oprations into one instruction.
-```asm
-// Chapel
-load mem -> res
-max 0,res -> res
-store res -> mem
-// C++
-max 0,mem -> res
-store res -> mem
-```
-This somehow makes the function in the Chapel version faster than that in C++ when tested on the small-size model. However, when tested on the full-size model, it makes the function in the Chapel version much slower than the function in the C++ version. Additionally, this performance drop when testing on the full-size model can also be seen in the backward pass of LayerNorm. I currently don't understand the cause of this effect.
+For the forward pass, Chapel achieves better performance than C++ even though the compiled code is nearly identical. However, when tested on the full-size model, a significant performance gap was shown, with Chapel taking more time. Despite this, I tested the function in isolation outside the model and confirmed that both Chapel and C++ perform similarly, regardless of array size. Additionally, the compiler-generated code is very similar, and when I executed the function consecutively within the model, only the first execution after the previous layer incurred a significant performance cost, with Chapel taking noticeably longer. A similar effect is also observed in the backward pass of LayerNorm. At present, I do not fully understand the cause of this behavior.
 
 #### Other Layers
 
