@@ -1,6 +1,6 @@
 ---
 title: "Reflections on ChapelCon '25"
-date: 2025-11-05
+date: 2025-12-05
 tags: ["ChapelCon", "Community"]
 series: []
 summary: "This post is a retrospective on ChapelCon '25"
@@ -10,7 +10,7 @@ authors: ["Brandon Neth"]
 
 ChapelCon '25 has wrapped up, and another year of productive HPC programming lies ahead!
 Don't worry if you missed a talk, you can find the recordings and slides on the ChapelCon '25 [webpage](https://chapel-lang.org/chapelcon25/#program).
-Before reflecting on the conference, I'd like to thank everyone who made ChapelCon '25 the exciting week it was. 
+Before reflecting on the conference, I'd like to thank everyone who made ChapelCon '25 the exciting week it was. 
 Thank you to contributors and participants for the exciting dialogue during our demo sessions and conference days.
 Thank you to the program committee for your support in reviewing a record-breaking number of submissions.
 And, of course, huge thank yous to Luca Ferranti for his work as Program Committee Chair, Daniel Fedorin for his as Tutorial Days Chair, and Jade Abraham for theirs as Office Hours Chair.
