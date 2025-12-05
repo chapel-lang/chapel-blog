@@ -1,19 +1,21 @@
 ---
 title: "Reflections on ChapelCon '25"
-date: 2025-11-05
+date: 2025-12-05
 tags: ["ChapelCon", "Community"]
 series: []
-summary: "This post is a retrospective on ChapelCon '25"
+summary: "A retrospective on ChapelCon '25 from general chair Brandon Neth"
 weight: 15
 authors: ["Brandon Neth"]
+featured: true
+weight: -1
 ---
 
 ChapelCon '25 has wrapped up, and another year of productive HPC programming lies ahead!
 Don't worry if you missed a talk, you can find the recordings and slides on the ChapelCon '25 [webpage](https://chapel-lang.org/chapelcon25/#program).
-Before reflecting on the conference, I'd like to thank everyone who made ChapelCon '25 the exciting week it was. 
+Before reflecting on the conference, I'd like to thank everyone who made ChapelCon '25 the exciting week it was. 
 Thank you to contributors and participants for the exciting dialogue during our demo sessions and conference days.
 Thank you to the program committee for your support in reviewing a record-breaking number of submissions.
-And, of course, huge thank yous to Luca Ferranti for his work as Program Committee Chair, Daniel Fedorin for his as Tutorial Days Chair, and Jade Abraham for theirs as Office Hours Chair.
+And, of course, huge _thank-yous_ to Luca Ferranti for his work as Program Committee Chair, Daniel Fedorin for his as Tutorial Days Chair, and Jade Abraham for theirs as Office Hours Chair.
 
 ### Second Conference, First Experiments
 
@@ -79,7 +81,7 @@ While there are too many for me to cover here (I encourage you to check them all
 
 One contribution that succinctly demonstrated Chapel's strengths in delivering both performance and productivity was [Mohammad Dindoost's talk on HiPerMotif](https://youtu.be/acvyLakS6gA).
 HiPerMotif is a hybrid parallel algorithm for identifying subgraph "motifs" within large-scale property graphs. 
-Implemented using Arache (an Arkouda/Chapel-based graph library developed at NJIT), it provides up to 66x speedup compared to state-of-the-art methods, and processes graphs large enough to cause memory failures in other technologies. 
+Implemented using Arachne (an Arkouda/Chapel-based graph library developed at NJIT), it provides up to 66x speedup compared to state-of-the-art methods, and processes graphs large enough to cause memory failures in other technologies. 
 
 The second highlight came from Daniel Fedorin and demonstrates the expansive power of Chapel's type system. 
 Using Chapel's compile-time `param` values and a bit of clever thinking, his approach makes it possible to encode complex data structures and specialized functions, all at compile time. 
@@ -93,7 +95,7 @@ This year's ChapelCon had a record-breaking 20 presentations from community memb
 Third, from our PC chair Luca Ferranti, was a talk on [automatic differentiation in Chapel](https://youtu.be/ioqxdmSprBM).
 Useful in domains including machine learning, scientific computing, and optimization, automatic differentiation computes derivatives without the numerical error of finite-difference or the complexity of symbolic differentiation. 
 The `ForwardModeAD` library uses Chapel's operator overloading to support derivatives, gradients, jacobians, and more, all in a composable way.
-The cherry on top? A Chapel intergration for Enzyme, a library for automatic differentation at the LLVM-level!
+The cherry on top? A Chapel integration for Enzyme, a library for automatic differentiation at the LLVM-level!
 
 Finally, closing out the conference, was [Iain Moncrief's talk on his machine learning library ChAI](https://youtu.be/Y0YaLtZ-0lc).
 ChAI offers a set of tools to support high- or low-level ML programming, defining/loading existing models, and distributed inference.
