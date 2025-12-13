@@ -1,7 +1,7 @@
 
 ---
 title: "Transformers From Scratch in Chapel and C++, Part 2"
-date: 2025-12-11
+date: 2025-12-12
 tags: ["User Experiences", "Language Comparison", "Performance", "Benchmarks"]
 summary: "Comparison of transformers in Chapel, C++, and PyTorch focusing on multi-threaded CPUs"
 authors: ["Thitrin Sastarasadhit"]
@@ -19,7 +19,7 @@ To see the gained speed-up, all models were tested with both a single thread and
 
 #### Result of Forward Pass
 
-Now, it can be seen in Figures 4 and 5 that both PyTorch versions gain a huge advantage from having an optimized linear algebra library integrated into the model, resulting in better performance in the Linear and Multihead-Attention layers. Nevertheless, they still lost to Chapel and C++ on other layers. Although it might seem unfair to compare the Chapel and C++ versions, which are written from scratch, I think it is still a good idea to have existing frameworks as reference.
+Now, it can be seen in Figures 4 and 5 that both PyTorch versions gain a huge advantage from having an optimized linear algebra library integrated into the model, resulting in better performance in the Linear and Multihead-Attention layers. Nevertheless, they still lost to Chapel and C++ on other layers. Although it might seem unfair to compare the Chapel and C++ versions, which are written from scratch, I think it is still a good idea to have existing frameworks as a reference.
 
   {{< figure src="each-single-forward.png" class="fullwide"
   caption="**Fig. 4.** Time spent on each layer (in microseconds) during a single forward-pass training iteration for each model, measured on Machine B (single-threaded) using the full-size model configuration.">}}
@@ -167,13 +167,13 @@ There are several things that I like about Chapel:
 - The Chapel developers are very active and friendly, as can be seen through continuous updates and quick responses to the reported issues.
 
 Nevertheless, there are several shortcomings I found about Chapel, too:
-- Long compilation time, and especially so when multi-locale is introduced.
+- Long compilation times, and especially so when multi-locale is introduced.
 - Downcasting among numeric types, such from `real(64)` to `real(32)`, is done implicitly in C++, but not in Chapel (This is my personal thought; I am not sure which approach is better.)
 - All the performance issues that I mentioned in this blog. This causes tricky fixes to be made, and it makes the code a bit messy.
 
 Chapel took as long as C++ to implement the transformer model in this project, as it required some tricky fixes. The productivity of implementing and parallel programming tends to be the same as C++ and OpenMP, as far as this project is concerned. I believe that having the same level of expertise, Chapel could be more productive than C++ and Python in doing scientific simulations that require parallelism on multithreading and multiple locales, as it automates data movement and configuration. However, it has many fewer support frameworks than Python, making it hard to create a project, and less control over the machine than C++, making it difficult to conduct performance research.
 
-One controversial thought I have is that generative AI, such as ChatGPT, should be able to help programmers fix and implement projects, for example, by creating simple test cases. However, since the language is not very popular and has less code available on the Internet, combined with the backwards-incompatible evolution of the language, current large language models do not have much knowledge of it and can easily become confused, which can cause them to produce faulty code. Interestingly, there is already a Chapel blog, [_Experimenting with the Model Context Protocol and Chapel_]({{<relref claude-mcp>}}), that explores this idea. By using the Model Context Protocol (MCP), they achieved surprisingly good results. I believe that improving the capability of large language models in Chapel programming could greatly impact productivity and should be investigated and improved further.
+One controversial thought I have is that generative AI, such as ChatGPT, should be able to help programmers fix and implement projects, for example, by creating simple test cases. However, since the language is not yet very popular and has less code available on the Internet, combined with the backwards-incompatible evolution of the language, current large language models do not have much knowledge of it and can easily become confused, which can cause them to produce faulty code. Interestingly, there is already a Chapel blog, [_Experimenting with the Model Context Protocol and Chapel_]({{<relref claude-mcp>}}), that explores this idea. By using the Model Context Protocol (MCP), they achieved surprisingly good results. I believe that improving the capability of large language models in Chapel programming could greatly impact productivity and should be investigated and improved further.
 
 In the end, Chapel serves well as a programming language dedicated to parallel programming and indeed increases productivity compared to C++. It also has many features that can improve the language’s performance and efficiency.
 
