@@ -76,7 +76,8 @@ features and flexibility.
 
 use Random;
 
-config const N = 1000;
+config const N = 1000,
+       print = true;
 
 proc main() {
   const scalar = (new randomStream(real)).next();
@@ -84,7 +85,7 @@ proc main() {
 
   fillRandom(Arr);
   kernel(Res, Arr, scalar);
-  writeln(Res);
+  if print then writeln(Res);
 }
 
 proc kernel(ref Res, Arr, scalar) {
