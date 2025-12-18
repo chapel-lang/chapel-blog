@@ -275,6 +275,68 @@ proc kernel(ref Res, Arr, scalar) {
   becomes easier than ever!
 
 
+  ### Mason Improvements
+
+  Chapel 2.7 includes a slew of improvements to Mason, Chapel's
+  package manager. The first highlight is better integration with
+  Chapel's ever-growing tooling support.  In Chapel 2.6, VSCode users
+  had to take additional steps to configure the language server so
+  that it could recognize a Mason package's structure. Without that
+  additional step, users would get errors about the Chapel compiler
+  not being able to find a module included in the Mason package, like
+  the following::
+
+  {{< figure class="fullwide" src="mason-cls-26.png" >}}
+
+  With Chapel 2.7, the additional step for Mason packages is no longer
+  necessary.  Compare the screenshot using Chapel 2.7 below to the one
+  above to see the difference!
+
+  {{< figure class="fullwide" src="mason-cls-27.png" >}}
+
+  Another new Mason feature is support for _prerequisites_.  This
+  feature supports code in other languages that needs to be compiled
+  or bootstrapped in some way before compiling the Chapel code for the
+  Mason application or library. A common use case for prerequisites is
+  to bundle some C code that a Chapel-based library would call into
+  via interoperability. With the Chapel 2.7 version of Mason, package
+  implementers can add code in other languages to be compiled
+  alongside the Chapel code.
+
+  The initial implementation for prerequisites involves extending
+  Mason's standard directory structure to specify prerequisites, how
+  to build them, and how to incorporate them into the Chapel
+  compiler's command-line.  For example, a Mason package with a
+  C-based prerequisite might use a directory structure like this:
+
+  ```
+  MyMasonPackage/
+  ├── src/
+  │   └── MyMasonPackage.chpl
+  ├── prereqs/
+  │   └── SomePrereq/
+  │       └── code.c
+  │       └── header.h
+  │       └── Makefile
+  └── Mason.toml
+  ```
+
+  To learn more about Mason's new prerequisites feature, check out the
+  new section of Mason's documentation, [Building Code in Other
+  Languages](https://chapel-lang.org/docs/main/tools/mason/guide/prereqs.html).
+
+  Meanwhile, we're working on further generalizations to supporting
+  prerequisites.  [Issue
+  #28174](https://github.com/chapel-lang/chapel/issues/28174) captures
+  some of our ideas, and we are interested in receiving your comments
+  about the feature there as well.
+
+  Finally, two additional Mason highlights in Chapel 2.7 are that
+  Mason performance has improved significantly, and we have started to
+  modernize Mason's integration with [Spack](https://spack.io/), a
+  popular package manager designed for HPC.
+
+
   ### For More Information
 
   If you have questions about Chapel 2.7 or any of its new features,
