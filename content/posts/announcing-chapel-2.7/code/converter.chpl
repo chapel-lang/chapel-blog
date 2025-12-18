@@ -15,7 +15,7 @@ proc double(arg: int) {
 }
 
 proc main() {
-  // uses generic varargs and param for-loop to mimic 'writeln' behavior
+  // uses generic varargs and a param for-loop to mimic 'writeln' behavior
   myWriteln(1, " != ", 2.0);
 
   // grouped variable initialization, unpacking the result of 'double'

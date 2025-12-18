@@ -41,7 +41,7 @@ features and flexibility.
   For more information, or a much more complete list of changes in
   Chapel 2.7, see the
   [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.7/CHANGES.md)
-  file.  And as always, thanks to [everyone who
+  file.  And a big thanks to [everyone who
   contributed](https://github.com/chapel-lang/chapel/blob/release/2.7/CONTRIBUTORS.md)
   to version 2.7!
 
@@ -51,8 +51,8 @@ features and flexibility.
   One of the nice performance-oriented features added in this release
   improves the vectorization capabilities of the Chapel compiler
   through vector math libraries.  Chapel already does a good job of
-  {{<sidenote "right" "vectorizing code">}}Vectorization is turning
-  scalar code into vector code to make use of modern CPU's SIMD
+  {{<sidenote "right" "vectorizing code">}}_Vectorization_ is turning
+  scalar code into vector code to make use of modern CPUs' SIMD
   capabilities.{{</sidenote>}}, particularly when making use of vector
   math libraries such as Libmvec or SVML to accelerate math-heavy
   code.  However, using such libraries has traditionally not been a
@@ -69,12 +69,8 @@ features and flexibility.
   $ chpl --fast --no-ieee-float --vector-library LIBMVEC-X86 myBenchmark.chpl 
   ```
 
-  This makes it easier to vectorize code like the example below, which
-  raises each element of an array to a random scalar power. Normally,
-  this code would either not be vectorized at all or would require
-  low-level tricks to get vectorized performance.  Using
-  `--vector-library`, the compiler can automatically make use of
-  vector math libraries to enable big performance improvements.
+  This makes it easier to vectorize code like the following example, which
+  raises each element of an array to a random scalar power:
 
 */
 
@@ -98,6 +94,11 @@ proc kernel(ref Res, Arr, scalar) {
 }
 
 /*
+
+  Normally, this code would either not be vectorized at all or would
+  require low-level tricks to get vectorized performance.  Using
+  `--vector-library`, the compiler can automatically make use of
+  vector math libraries to enable big performance improvements.
 
   Benchmarking the code above to see how much of an impact
   `--vector-library` would have, we saw more than a
@@ -158,9 +159,9 @@ proc kernel(ref Res, Arr, scalar) {
   {{<figure class="fullwide" src="otherLocale.png">}}
 
   Note that on locale 0, `myArr` has a type of `ref(_array(…))`,
-  indicating that the array we're printing is actually a reference to
-  the array on locale 1.  Notably, we can still print its contents
-  despite it being stored remotely.
+  indicating that the array we're printing is actually a remote
+  reference to the array on locale 1.  Notably, we can still print its
+  contents despite it being stored remotely.
 
   We are continuing to improve `chpl-parallel-debug` for future
   releases and welcome feedback on how to make it even better.
@@ -220,15 +221,15 @@ proc kernel(ref Res, Arr, scalar) {
   note: index was 10 but array bounds are -9..9
   ```
 
-  This doesn't provide enough information to figure out which slice is
-  causing the halt.  Prior to today's release, there are a few ways
+  This doesn't provide enough information to figure out _which_ slice
+  is causing the halt.  Prior to today's release, there are a few ways
   you might figure this out:
 
   * Add lots of `writeln()` statements to narrow down where the error
     is occurring.
 
   * Run the program in a debugger, which will stop execution at the
-    point of the halt, permitting a backtrace to be inspected.
+    point of the halt, permitting a backtrace to be viewed.
 
   * Rebuild the Chapel runtime and program with stack unwinding
     enabled, causing a stack trace to be printed on halt.
@@ -241,8 +242,8 @@ proc kernel(ref Res, Arr, scalar) {
   release formats now have stack unwinding support enabled by default.
   As a result, when compiling the program above {{<sidenote "right"
   "with debugging on">}}Note that compiling without debugging will
-  also result in a stack trace, simply one with less precise line
-  number information.{{</sidenote>}} and running it:
+  also result in a stack trace, simply one with potentially less
+  precise line number information.{{</sidenote>}} and running it:
 
   ```console
   $ chpl --debug outOfBounds.chpl
@@ -289,8 +290,8 @@ proc kernel(ref Res, Arr, scalar) {
   {{< figure class="fullwide" src="mason-cls-26.png" >}}
 
   With Chapel 2.7, the additional step for Mason packages is no longer
-  necessary.  Compare the screenshot using Chapel 2.7 below to the one
-  above to see the difference!
+  necessary.  Compare the screenshot using Chapel 2.7 below with the
+  one above to see the difference!
 
   {{< figure class="fullwide" src="mason-cls-27.png" >}}
 
@@ -321,20 +322,20 @@ proc kernel(ref Res, Arr, scalar) {
   └── Mason.toml
   ```
 
-  To learn more about Mason's new prerequisites feature, check out the
-  new section of Mason's documentation, [Building Code in Other
+  To learn more about this new feature, check out the new section of
+  Mason's documentation, [Building Code in Other
   Languages](https://chapel-lang.org/docs/2.7/tools/mason/guide/prereqs.html).
-
   Meanwhile, we're working on further generalizations to supporting
   prerequisites.  [Issue
   #28174](https://github.com/chapel-lang/chapel/issues/28174) captures
   some of our ideas, and we are interested in receiving your comments
   about the feature there as well.
 
-  Finally, two additional Mason highlights in Chapel 2.7 are that
-  Mason performance has improved significantly, and we have started to
-  modernize Mason's integration with [Spack](https://spack.io/), a
-  popular package manager designed for HPC.
+  Finally, two additional package management highlights in Chapel 2.7
+  are that Mason performance has improved significantly, and we have
+  started to modernize Mason's integration with
+  [Spack](https://spack.io/), a popular package manager designed for
+  HPC.
 
 
   ### Improvements to the Dyno Compiler Front-End
@@ -430,7 +431,7 @@ proc kernel(ref Res, Arr, scalar) {
   {{< file_download_min fname="Print.chpl" lang="chapel" >}}
 
   The program above can be {{< sidenote "right" "compiled" >}}
-  The <code>--no-checks</code> flag is used here to disable runtime checks that
+  The `--no-checks` flag is used here to disable runtime checks that
   utilize language features not yet supported by Dyno's code generation.
   {{< /sidenote >}}
   with ``--dyno --no-checks`` to produce an executable that prints the
