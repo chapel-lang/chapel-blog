@@ -52,7 +52,7 @@ features and flexibility.
   improves the vectorization capabilities of the Chapel compiler
   through vector math libraries.  Chapel already does a good job of
   {{<sidenote "right" "vectorizing code">}}Vectorization is turning
-  scalar code into vector code to make use modern CPU's SIMD
+  scalar code into vector code to make use of modern CPU's SIMD
   capabilities.{{</sidenote>}}, particularly when making use of vector
   math libraries such as Libmvec or SVML to accelerate math-heavy
   code.  However, using such libraries has traditionally not been a
@@ -323,7 +323,7 @@ proc kernel(ref Res, Arr, scalar) {
 
   To learn more about Mason's new prerequisites feature, check out the
   new section of Mason's documentation, [Building Code in Other
-  Languages](https://chapel-lang.org/docs/main/tools/mason/guide/prereqs.html).
+  Languages](https://chapel-lang.org/docs/2.7/tools/mason/guide/prereqs.html).
 
   Meanwhile, we're working on further generalizations to supporting
   prerequisites.  [Issue
