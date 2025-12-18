@@ -21,13 +21,13 @@
   This article introduces some of the highlights of Chapel 2.7,
   including:
 
-  * A new compiler flag supporting [vector libraries](#vector-library)
+  * A new compiler flag supporting [vector libraries](#using-vector-libraries)
 
-  * Improvements when [debugging Chapel programs](#debugging-enhancements)
+  * Improvements when [debugging Chapel programs](#debugging)
 
-  * [Stack traces](#stack-traces) on fatal errors by default
+  * [Stack traces](#improved-stack-traces) on fatal errors by default
 
-  * Enhancements to [Mason](#mason), Chapel's package manager
+  * Enhancements to [Mason](#mason-improvements), Chapel's package manager
 
   * Improvements to the capabilities of the [Dyno compiler
     front-end](#improvements-to-the-dyno-compiler-front-end)
