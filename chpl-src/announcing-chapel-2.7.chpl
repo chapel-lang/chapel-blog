@@ -1,7 +1,7 @@
 // Announcing Chapel 2.7!
 // authors: ["Jade Abraham", "Engin Kayraklioglu", "Daniel Fedorin", "Ben Harshbarger", "Brad Chamberlain"]
 // summary: "Highlights from the December 2025 release of Chapel 2.7"
-// tags: ["Release Announcements", "Debugging", "Tools", "Dyno"]
+// tags: ["Release Announcements", "Vectorization", "Debugging", "Mason", "Tools", "Dyno"]
 // date: 2025-12-18
 /*
 
@@ -144,7 +144,7 @@ proc kernel(ref Res, Arr, scalar) {
 
   {{<file_download fname="debug.chpl" lang="chapel" >}}
 
-  The following screenshots illustate a debugging session for this
+  The following screenshots illustrate a debugging session for this
   program starting from the point when we hit the initial breakpoint
   on locale 1 (where we already happen to be in locale 1's context).
   We start by printing `myArr`, which prints its values:
@@ -423,7 +423,7 @@ proc kernel(ref Res, Arr, scalar) {
   features, but is growing all the time.  Here is an example program
   and helper module that Dyno can now compile, demonstrating uses of
   language features like `param` for-loops and grouped variable initialization.
-  This program also demonstrates Dyno's abililty to compile standard module
+  This program also demonstrates Dyno's ability to compile standard module
   code, like that found in Chapel's ``IO`` module. This represents a
   significant step forward in Dyno's ability to compile real-world Chapel code:
 
