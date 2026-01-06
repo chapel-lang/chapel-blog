@@ -9,9 +9,23 @@ import bisect
 import json
 import re
 
+BLOG_ROOT_PATH = pathlib.Path("https://chapel-lang.org/blog/")
+DOC_ROOT_PATH = pathlib.Path("https://chapel-lang.org/docs/")
+DOC_ROOT_URL = "https://chapel-lang.org/docs/"
+
 CACHE_DEST = "file-link-cache.json"
 # match abc.abc, not abc.def
 TYPE_CONSTRUCTOR_HEURISTIC = re.compile(r"([^.]+)\.\1$")
+
+def relative_to_docs(html_file, use_relative_links) -> str:
+    if not use_relative_links:
+        return DOC_ROOT_URL
+
+    try:
+        to_blog_root = pathlib.Path("public").resolve().relative_to(html_file, walk_up=True)
+        return str(to_blog_root / DOC_ROOT_PATH.relative_to(BLOG_ROOT_PATH, walk_up=True))
+    except ValueError:
+        return DOC_ROOT_URL
 
 class ReferenceContainer:
     def applicable_links(self, start_line, end_line):
@@ -38,8 +52,6 @@ try:
 
 
     ### Copied / adjusted from https://chapel-lang.org/blog/posts/chapel-py/
-
-    ROOT_URL = "https://chapel-lang.org/docs/"
 
     def rewrite_module_name(name):
         if name == "ChapelIO": return "IO"
@@ -127,18 +139,18 @@ try:
 
         module = parent_module(node)
         if module.name() == "String" and internal:
-            url = ROOT_URL + "language/spec/strings.html" + anchor
+            url = DOC_ROOT_URL + "language/spec/strings.html" + anchor
             return url.replace("_string", "string")
         if module.name() == "ChapelRange" and internal:
-            url = ROOT_URL + "language/spec/ranges.html" + anchor
+            url = DOC_ROOT_URL + "language/spec/ranges.html" + anchor
             return url.replace("_range", "range")
         if module.name() == "ChapelArray" and internal:
-            url = ROOT_URL + "language/spec/arrays.html" + anchor
+            url = DOC_ROOT_URL + "language/spec/arrays.html" + anchor
             return url.replace("_array", "array").replace("array.", "")
         elif internal:
             return None
 
-        return ROOT_URL + relpath + build_url(module) + anchor
+        return DOC_ROOT_URL + relpath + build_url(module) + anchor
 
     ### End copied from chapel-py
 
@@ -276,6 +288,7 @@ def main():
     parser = argparse.ArgumentParser(description="Insert links into HTML files that contain Chapel blocks.")
     parser.add_argument('files', help='HTML files to post-process', nargs='+')
     parser.add_argument('--regenerate-links', help='Re-run resolution in affected files to determine linked locations', action='store_true', default=False)
+    parser.add_argument('--use-relative-links', help='Assume documentation is at ../docs relative to the HTML root', action='store_true', default=False)
     args = parser.parse_args()
 
     @functools.cache
@@ -312,6 +325,7 @@ def main():
         html = pathlib.Path(os.path.realpath(html_file))
         html_folder = html.parent
         soup = bs4.BeautifulSoup(html.read_text(), 'html.parser')
+        relative_doc_url = relative_to_docs(html_folder, args.use_relative_links)
 
         # Collect all Chapel files, if any, used in this HTML file.
         # Do not fetch key outside the loop so that if no Chapel files are found,
@@ -354,6 +368,7 @@ def main():
                         doc_link = links[link_idx][1]
 
                         if doc_link:
+                            doc_link = doc_link.replace(DOC_ROOT_URL, relative_doc_url + "/")
                             node = node.wrap(soup.new_tag('a', href=doc_link))
 
                         cur_col += len(text)
