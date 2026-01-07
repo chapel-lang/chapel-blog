@@ -94,23 +94,35 @@ try:
             node = node.parent_symbol()
         return "#" + ".".join(reversed(names))
 
-    def find_doc_link(node):
+    def should_link_node(node):
+        if not isinstance(node, NamedDecl):
+            return False
+
+        if node.name() == "this" and isinstance(node, Function):
+            # invoking a variable as a callable means calling its
+            # 'this' method, but that looks confusing when linked.
+            # so, skip it
+            return False
+
         if node.name() in ("localSlice", "rows", "colsAndVals"):
             # Generally, we don't rule out nodoc'ed things because they have
             # doc'ed overloads. However, some things really are nodoc'ed and have
             # no links.
-            return None
+            return False
 
         if node.name() == "_dom":
             # ._dom calls -- written as .domain in user code -- are not
             # listed in the documentation
-            return None
+            return False
 
         if node.name() == "Block":
             # in the standard modules, Block is in blockDist but fixDistDocs
             # removes it, so skip it.
-            return None
+            return False
 
+        return True
+
+    def find_doc_link(node):
         file = pathlib.Path(node.location().path())
         root = file
         internal = False
@@ -262,15 +274,8 @@ try:
             # out things without links.
             converted_references = []
             for (location, node) in self.references:
-                if not isinstance(node, NamedDecl):
+                if not should_link_node(node):
                     continue
-
-                if node.name() == "this" and isinstance(node, Function):
-                    # invoking a variable as a callable means calling its
-                    # 'this' method, but that looks confusing when linked.
-                    # so, skip it
-                    continue
-
                 found_link = find_doc_link(node)
                 if found_link is None:
                     continue
