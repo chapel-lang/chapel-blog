@@ -86,6 +86,19 @@ code, .code, .chroma .lntable {
     .line {
         padding-left: .5rem;
         padding-right: 0.5rem;
+
+        a {
+          border-bottom: $standard-border;
+          border-color: rgba($border-color, 1);
+          border-radius: $standard-border-radius;
+
+          &:hover, &:focus {
+            span {
+              color: $primary-color;
+              transition: color 0.25s, background-color 0.25s;
+            }
+          }
+        }
     }
 
     .lnt {

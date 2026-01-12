@@ -1,1 +1,1100 @@
-{}
+{
+  "public/posts/linear-multistep/code/linear-multistep.chpl": {
+    "references": [
+      [[[64,1],[64,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[66,1],[66,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/aoc2022-day03-rucksacks/code/aoc2022-day03-rucksacks.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,12]],"https://chapel-lang.org/docs/modules/standard/Set.html"],
+      [[[4,1],[4,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[9,9],[9,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[9,9],[9,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[23,16],[23,19]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set"],
+      [[[26,13],[26,16]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set.add"],
+      [[[29,16],[29,24]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set.contains"]
+    ]
+  },
+  "public/posts/memory-safety/code/unset-int-variable.chpl": {
+    "references": [
+      [[[3,3],[3,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/memory-safety/code/string-greeting.chpl": {
+    "references": [
+      [[[5,1],[5,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/memory-safety/code/use-after-free-scoped.chpl": {
+    "references": [
+      [[[20,3],[20,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/memory-safety/code/out-of-bounds.chpl": {
+    "references": [
+      [[[7,1],[7,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/memory-safety/code/out-of-bounds-dist.chpl": {
+    "references": [
+      [[[1,5],[1,14]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[6,13],[6,22]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[6,23],[6,34]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createArray"],
+      [[[10,1],[10,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-1.31/code/announcing-chapel-1.31.chpl": {
+    "references": []
+  },
+  "public/posts/announcing-chapel-1.30/code/announcing-chapel-1.30.chpl": {
+    "references": [
+      [[[4,5],[4,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/aoc2022-day01-calories/code/aoc2022-day01-calories.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[3,11],[3,17]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[9,16],[9,24]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[10,27],[10,31]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[27,1],[27,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/std-sort-performance/code/sort-random.chpl": {
+    "references": [
+      [[[1,5],[1,9]],"https://chapel-lang.org/docs/modules/standard/Time.html"],
+      [[[1,11],[1,15]],"https://chapel-lang.org/docs/modules/standard/Sort.html"],
+      [[[1,17],[1,23]],"https://chapel-lang.org/docs/modules/standard/Random.html"],
+      [[[12,1],[12,11]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.fillRandom"],
+      [[[15,12],[15,21]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch"],
+      [[[16,7],[16,12]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.start"],
+      [[[19,1],[19,5]],"https://chapel-lang.org/docs/modules/standard/Sort.html#Sort.sort"],
+      [[[22,21],[22,28]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.elapsed"],
+      [[[23,1],[23,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[24,1],[24,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/bns2/code/nsPoisson.chpl": {
+    "references": []
+  },
+  "public/posts/bns2/code/surfPlot.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[2,8],[2,18]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html"],
+      [[[2,19],[2,24]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html"],
+      [[[7,12],[7,18]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[8,14],[8,20]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[12,14],[12,24]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.openWriter"],
+      [[[19,5],[19,10]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.spawn"],
+      [[[19,72],[19,78]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[19,88],[19,94]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"]
+    ]
+  },
+  "public/posts/aoc2022-day10-crt/code/aoc2022-day10-crt.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[5,15],[5,20]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.stdin"],
+      [[[5,21],[5,26]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.lines"],
+      [[[5,21],[5,26]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.lines"],
+      [[[5,29],[5,34]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[5,29],[5,34]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[17,23],[17,27]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[22,1],[22,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[29,19],[29,26]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.reshape"],
+      [[[32,6],[32,9]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.abs"],
+      [[[33,1],[33,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/bns3/code/datapar-example.chpl": {
+    "references": [
+      [[[1,5],[1,14]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[3,13],[3,22]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[3,23],[3,35]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createDomain"],
+      [[[9,1],[9,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/bns3/code/nsPoissonStencil.chpl": {
+    "references": [
+      [[[2,5],[2,16]],"https://chapel-lang.org/docs/modules/dists/StencilDist.html"],
+      [[[21,15],[21,26]],"https://chapel-lang.org/docs/modules/dists/StencilDist.html#StencilDist.stencilDist"]
+    ]
+  },
+  "public/posts/nvidia-gpu-wsl/code/chapel-stream.chpl": {
+    "references": [
+      [[[4,5],[4,9]],"https://chapel-lang.org/docs/modules/standard/Time.html"],
+      [[[4,11],[4,16]],"https://chapel-lang.org/docs/modules/standard/Types.html"],
+      [[[81,25],[81,39]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.timeSinceEpoch"],
+      [[[81,25],[81,39]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.timeSinceEpoch"],
+      [[[81,42],[81,54]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.timeDelta.totalSeconds"],
+      [[[95,25],[95,39]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.timeSinceEpoch"],
+      [[[95,25],[95,39]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.timeSinceEpoch"],
+      [[[95,42],[95,54]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.timeDelta.totalSeconds"],
+      [[[110,5],[110,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[110,5],[110,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[123,5],[123,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[124,5],[124,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[134,19],[134,22]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.max"],
+      [[[135,19],[135,22]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.min"],
+      [[[138,17],[138,20]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.min"],
+      [[[139,17],[139,20]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.max"],
+      [[[143,5],[143,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[144,5],[144,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[145,5],[145,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[146,5],[146,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[150,22],[150,30]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.numBytes"],
+      [[[150,22],[150,30]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.numBytes"],
+      [[[151,7],[151,14]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[154,22],[154,30]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.numBytes"],
+      [[[154,22],[154,30]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.numBytes"],
+      [[[155,7],[155,14]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/bns4/code/nsStep11.chpl": {
+    "references": [
+      [[[2,5],[2,16]],"https://chapel-lang.org/docs/modules/dists/StencilDist.html"],
+      [[[3,5],[3,9]],"https://chapel-lang.org/docs/modules/standard/Time.html"],
+      [[[24,42],[24,46]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[25,15],[25,26]],"https://chapel-lang.org/docs/modules/dists/StencilDist.html#StencilDist.stencilDist"],
+      [[[38,17],[38,26]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch"],
+      [[[39,7],[39,12]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.start"],
+      [[[43,5],[43,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[43,37],[43,44]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.elapsed"]
+    ]
+  },
+  "public/posts/bns4/code/FlowPlot.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,19]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html"],
+      [[[8,12],[8,18]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[16,9],[16,19]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.openWriter"],
+      [[[20,5],[20,15]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html"],
+      [[[20,16],[20,21]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.spawn"],
+      [[[24,17],[24,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[25,17],[25,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"]
+    ]
+  },
+  "public/posts/changes-since-2.0-rc1/code/indirectMod.chpl": {
+    "references": [
+      [[[8,3],[8,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[8,3],[8,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[10,3],[10,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[10,3],[10,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/changes-since-2.0-rc1/code/shadowing.chpl": {
+    "references": [
+      [[[4,7],[4,14]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[4,7],[4,14]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[11,5],[11,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/netcdf1/code/netcdf1.chpl": {
+    "references": [
+      [[[2,5],[2,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[2,13],[2,22]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[9,34],[9,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[13,29],[13,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrConst"],
+      [[[13,40],[13,46]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_char"],
+      [[[13,55],[13,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[13,69],[13,74]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[13,75],[13,80]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[13,84],[13,89]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[15,28],[15,33]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[17,20],[17,25]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.string.c_str"],
+      [[[17,41],[17,48]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[22,34],[22,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[22,50],[22,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrConst"],
+      [[[22,61],[22,67]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_char"],
+      [[[22,77],[22,82]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[22,83],[22,88]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[24,30],[24,35]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.string.c_str"],
+      [[[24,39],[24,46]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[29,37],[29,42]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[29,51],[29,56]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[29,66],[29,71]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[29,72],[29,77]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[31,32],[31,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[33,27],[33,32]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[38,37],[38,42]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[38,51],[38,56]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[38,67],[38,72]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[38,73],[38,78]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[38,82],[38,87]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[40,32],[40,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[42,28],[42,36]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_size_t"],
+      [[[47,35],[47,40]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[47,49],[47,54]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[47,62],[47,67]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[47,68],[47,76]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_size_t"],
+      [[[47,80],[47,85]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[50,36],[50,43]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[56,30],[56,35]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"]
+    ]
+  },
+  "public/posts/aoc2022-day11-monkeys/code/aoc2022-day11-monkeys.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,13]],"https://chapel-lang.org/docs/modules/standard/List.html"],
+      [[[1,15],[1,26]],"https://chapel-lang.org/docs/modules/standard/Collectives.html"],
+      [[[11,21],[11,25]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[29,28],[29,32]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[33,15],[33,22]],"https://chapel-lang.org/docs/modules/standard/Collectives.html#Collectives.barrier"],
+      [[[50,1],[50,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[54,57],[54,61]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.size"],
+      [[[56,26],[56,30]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.size"],
+      [[[57,33],[57,40]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.popBack"],
+      [[[78,5],[78,9]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.halt"],
+      [[[117,11],[117,16]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.stdin"],
+      [[[117,17],[117,29]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.matchNewline"],
+      [[[117,17],[117,29]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.matchNewline"],
+      [[[122,3],[122,8]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[123,13],[123,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.read"],
+      [[[124,3],[124,8]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[126,3],[126,8]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[127,18],[127,22]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[129,17],[129,21]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.read"],
+      [[[130,15],[130,23]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"],
+      [[[131,11],[131,16]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.stdin"],
+      [[[131,17],[131,29]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.matchLiteral"],
+      [[[133,27],[133,33]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[134,3],[134,8]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[137,3],[137,8]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[138,18],[138,22]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.read"],
+      [[[147,20],[147,28]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"]
+    ]
+  },
+  "public/posts/aoc2022-day12-summit/code/aoc2022-day12-summit.chpl": {
+    "references": [
+      [[[2,7],[2,9]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[4,17],[4,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.toByte"],
+      [[[4,17],[4,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.toByte"],
+      [[[5,17],[5,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.toByte"],
+      [[[5,17],[5,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.toByte"],
+      [[[6,17],[6,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.toByte"],
+      [[[6,17],[6,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.toByte"],
+      [[[8,21],[8,26]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.stdin"],
+      [[[8,27],[8,32]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.lines"],
+      [[[8,27],[8,32]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.lines"],
+      [[[8,35],[8,40]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[8,35],[8,40]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[9,31],[9,35]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[9,31],[9,35]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[9,51],[9,56]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.first"],
+      [[[9,51],[9,56]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.first"],
+      [[[9,57],[9,61]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[9,57],[9,61]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[11,48],[11,54]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.toByte"],
+      [[[11,48],[11,54]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.toByte"]
+    ]
+  },
+  "public/posts/gpu-data-movement/code/allocation.chpl": {
+    "references": [
+      [[[7,3],[7,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[10,1],[10,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/gpu-data-movement/code/movement.chpl": {
+    "references": [
+      [[[12,1],[12,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/gpu-data-movement/code/slices.chpl": {
+    "references": [
+      [[[1,8],[1,18]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html"],
+      [[[1,19],[1,25]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html"],
+      [[[12,16],[12,22]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[12,16],[12,22]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[21,1],[21,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/gpu-data-movement/code/overlap.chpl": {
+    "references": [
+      [[[1,8],[1,18]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html"],
+      [[[1,19],[1,25]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html"],
+      [[[12,21],[12,27]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[12,21],[12,27]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[21,1],[21,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/gpu-data-movement/code/parallel.chpl": {
+    "references": [
+      [[[1,8],[1,18]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html"],
+      [[[1,19],[1,25]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html"],
+      [[[9,27],[9,31]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[10,44],[10,50]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[10,44],[10,50]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[12,32],[12,36]],"https://chapel-lang.org/docs/language/spec/ranges.html#ChapelRange.range.size"],
+      [[[14,23],[14,29]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[14,23],[14,29]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[24,1],[24,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/gpu-data-movement/code/distributed.chpl": {
+    "references": [
+      [[[1,8],[1,18]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html"],
+      [[[1,19],[1,25]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html"],
+      [[[9,42],[9,48]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[9,42],[9,48]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[11,31],[11,35]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[12,48],[12,54]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[12,48],[12,54]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[14,36],[14,40]],"https://chapel-lang.org/docs/language/spec/ranges.html#ChapelRange.range.size"],
+      [[[16,27],[16,33]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[16,27],[16,33]],"https://chapel-lang.org/docs/modules/packages/RangeChunk.html#RangeChunk.chunks"],
+      [[[28,1],[28,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.1/code/announcing-chapel-2.1.chpl": {
+    "references": [
+      [[[1,14],[1,18]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.last"],
+      [[[2,3],[2,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[5,14],[5,18]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.last"],
+      [[[7,5],[7,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/10myths-part5/code/stencil-3D.chpl": {
+    "references": [
+      [[[18,1],[18,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/10myths-part5/code/weights-nD.chpl": {
+    "references": [
+      [[[22,1],[22,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/announcing-chapel-2.6.chpl": {
+    "references": [
+      [[[1,5],[1,19]],"https://chapel-lang.org/docs/modules/packages/DynamicLoading.html"],
+      [[[1,21],[1,27]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[3,13],[3,19]],"https://chapel-lang.org/docs/modules/packages/DynamicLoading.html#DynamicLoading.binary"],
+      [[[3,20],[3,24]],"https://chapel-lang.org/docs/modules/packages/DynamicLoading.html#DynamicLoading.binary.load"],
+      [[[4,43],[4,48]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[4,53],[4,58]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[4,61],[4,66]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[9,12],[9,16]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.last"],
+      [[[10,26],[10,31]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[10,42],[10,47]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/example.chpl": {
+    "references": [
+      [[[1,5],[1,13]],"https://chapel-lang.org/docs/modules/standard/Debugger.html"],
+      [[[5,3],[5,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[6,3],[6,13]],"https://chapel-lang.org/docs/modules/standard/Debugger.html#Debugger.breakpoint"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/multiloc/example.chpl": {
+    "references": [
+      [[[1,5],[1,14]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[3,13],[3,22]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[3,23],[3,34]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createArray"],
+      [[[7,5],[7,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[8,29],[8,43]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.localSubdomain"],
+      [[[9,5],[9,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[10,12],[10,20]],"https://chapel-lang.org/docs/modules/standard/Debugger.html"],
+      [[[10,22],[10,30]],"https://chapel-lang.org/docs/modules/standard/Debugger.html"],
+      [[[10,31],[10,41]],"https://chapel-lang.org/docs/modules/standard/Debugger.html#Debugger.breakpoint"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/myTest.chpl": {
+    "references": [
+      [[[1,5],[1,13]],"https://chapel-lang.org/docs/modules/packages/UnitTest.html"],
+      [[[10,1],[10,9]],"https://chapel-lang.org/docs/modules/packages/UnitTest.html"],
+      [[[10,10],[10,14]],"https://chapel-lang.org/docs/modules/packages/UnitTest.html#UnitTest.main"],
+      [[[10,10],[10,14]],"https://chapel-lang.org/docs/modules/packages/UnitTest.html#UnitTest.main"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/enum-aspects.chpl": {
+    "references": [
+      [[[26,23],[26,29]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/promotion.chpl": {
+    "references": [
+      [[[3,46],[3,52]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.6/code/converter-aggregates.chpl": {
+    "references": []
+  },
+  "public/posts/announcing-chapel-2.6/code/Print.chpl": {
+    "references": [
+      [[[1,5],[1,10]],"https://chapel-lang.org/docs/modules/standard/Types.html"],
+      [[[1,12],[1,18]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[50,27],[50,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrConst"],
+      [[[50,38],[50,44]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_char"],
+      [[[58,13],[58,22]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isIntType"],
+      [[[60,13],[60,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isUintType"],
+      [[[62,13],[62,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isRealType"],
+      [[[64,18],[64,24]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[66,13],[66,24]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isTupleType"],
+      [[[76,13],[76,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isEnumType"]
+    ]
+  },
+  "public/posts/aoc2022-day09-elvish-string-theory/code/aoc2022-day09-elvish-string-theory.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,12]],"https://chapel-lang.org/docs/modules/standard/Set.html"],
+      [[[4,12],[4,18]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[5,9],[5,14]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[5,9],[5,14]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[14,19],[14,22]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set"],
+      [[[29,8],[29,11]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.abs"],
+      [[[30,23],[30,26]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.sgn"],
+      [[[31,13],[31,16]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.abs"],
+      [[[32,23],[32,26]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.sgn"],
+      [[[33,13],[33,16]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.abs"],
+      [[[33,29],[33,32]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.abs"],
+      [[[34,20],[34,23]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.sgn"],
+      [[[36,15],[36,18]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set.add"],
+      [[[40,1],[40,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[40,17],[40,21]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set.size"]
+    ]
+  },
+  "public/posts/chapel-py/code/record-naming.chpl": {
+    "references": []
+  },
+  "public/posts/chapel-py/code/one-two-three.chpl": {
+    "references": [
+      [[[2,1],[2,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/chapel-py/code/list-io.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,13]],"https://chapel-lang.org/docs/modules/standard/List.html"],
+      [[[3,13],[3,17]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[4,9],[4,15]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.ioMode"],
+      [[[4,16],[4,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.ioMode.r"]
+    ]
+  },
+  "public/posts/aoc2022-day04-ranges/code/aoc2022-day04-ranges.chpl": {
+    "references": [
+      [[[1,7],[1,9]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[7,11],[7,16]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[7,11],[7,16]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[19,21],[19,29]],"https://chapel-lang.org/docs/language/spec/ranges.html#ChapelRange.range.contains"],
+      [[[19,40],[19,48]],"https://chapel-lang.org/docs/language/spec/ranges.html#ChapelRange.range.contains"],
+      [[[21,32],[21,36]],"https://chapel-lang.org/docs/language/spec/ranges.html#ChapelRange.range.size"],
+      [[[24,3],[24,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[25,3],[25,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/fortran-marbl1/code/sequential.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[4,23],[4,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[4,29],[4,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[4,55],[4,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[5,23],[5,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[5,29],[5,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[5,55],[5,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[9,1],[9,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[10,6],[10,13]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[10,24],[10,28]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[10,30],[10,35]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[11,1],[11,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[12,6],[12,13]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[12,24],[12,28]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[12,30],[12,35]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[13,1],[13,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/fortran-marbl1/code/threaded.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[4,23],[4,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[4,29],[4,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[4,55],[4,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[5,23],[5,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[5,29],[5,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[5,55],[5,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[12,1],[12,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[13,1],[13,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[16,8],[16,15]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[16,33],[16,38]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[18,1],[18,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[19,1],[19,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[22,8],[22,15]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[22,33],[22,38]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[24,1],[24,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[25,1],[25,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/fortran-marbl1/code/sequentialTimed.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[1,13],[1,17]],"https://chapel-lang.org/docs/modules/standard/Time.html"],
+      [[[4,23],[4,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[4,29],[4,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[4,55],[4,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[5,23],[5,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[5,29],[5,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[5,55],[5,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[12,8],[12,17]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch"],
+      [[[14,3],[14,8]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.start"],
+      [[[15,6],[15,13]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[15,28],[15,32]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[15,34],[15,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[16,6],[16,13]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[16,28],[16,32]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[16,34],[16,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[17,3],[17,7]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.stop"],
+      [[[19,1],[19,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[19,34],[19,41]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.elapsed"]
+    ]
+  },
+  "public/posts/fortran-marbl1/code/threadedTimed.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[1,13],[1,17]],"https://chapel-lang.org/docs/modules/standard/Time.html"],
+      [[[4,23],[4,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[4,29],[4,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[4,55],[4,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[5,23],[5,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[5,29],[5,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[5,55],[5,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[12,8],[12,17]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch"],
+      [[[14,3],[14,8]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.start"],
+      [[[16,8],[16,15]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[16,33],[16,38]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[18,8],[18,15]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[18,33],[18,38]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[19,3],[19,7]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.stop"],
+      [[[21,1],[21,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[21,32],[21,39]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.elapsed"]
+    ]
+  },
+  "public/posts/fortran-marbl1/code/distributed.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[2,5],[2,14]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[5,23],[5,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[5,29],[5,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[5,55],[5,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[6,23],[6,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[6,29],[6,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[6,55],[6,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[10,20],[10,29]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[10,30],[10,42]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createDomain"],
+      [[[16,1],[16,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[17,1],[17,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[23,10],[23,17]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[23,60],[23,64]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[23,66],[23,71]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[26,1],[26,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[27,1],[27,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[33,10],[33,17]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[33,60],[33,64]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[33,66],[33,71]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[36,1],[36,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[37,1],[37,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/fortran-marbl1/code/distributedComparison.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[1,13],[1,17]],"https://chapel-lang.org/docs/modules/standard/Time.html"],
+      [[[1,19],[1,28]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[4,23],[4,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[4,29],[4,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[4,55],[4,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[5,23],[5,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[5,29],[5,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_double"],
+      [[[5,55],[5,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[9,20],[9,29]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[9,30],[9,42]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createDomain"],
+      [[[15,8],[15,17]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch"],
+      [[[17,3],[17,8]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.start"],
+      [[[22,10],[22,17]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[22,60],[22,64]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[22,66],[22,71]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[29,10],[29,17]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[29,60],[29,64]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[29,66],[29,71]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[31,3],[31,7]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.stop"],
+      [[[33,14],[33,20]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[39,41],[39,47]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[41,1],[41,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[41,31],[41,38]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.elapsed"]
+    ]
+  },
+  "public/posts/aoc2022-day07-dir-traversals/code/aoc2022-day07-dir-traversals.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,12]],"https://chapel-lang.org/docs/modules/standard/Map.html"],
+      [[[1,14],[1,18]],"https://chapel-lang.org/docs/modules/standard/List.html"],
+      [[[4,13],[4,19]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[6,19],[6,22]],"https://chapel-lang.org/docs/modules/standard/Map.html#Map.map"],
+      [[[6,23],[6,29]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[7,18],[7,22]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[9,29],[9,35]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[10,15],[10,21]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[13,11],[13,19]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[18,22],[18,32]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.startsWith"],
+      [[[20,39],[20,43]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[23,23],[23,33]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.startsWith"],
+      [[[23,51],[23,61]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.startsWith"],
+      [[[24,38],[24,47]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.partition"],
+      [[[34,31],[34,37]],"https://chapel-lang.org/docs/modules/standard/Map.html#Map.map.values"],
+      [[[34,31],[34,37]],"https://chapel-lang.org/docs/modules/standard/Map.html#Map.map.values"],
+      [[[48,1],[48,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[52,1],[52,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/welcome/code/welcome.chpl": {
+    "references": [
+      [[[1,1],[1,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-1.32/code/announcing-chapel-1.32.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,13]],"https://chapel-lang.org/docs/modules/standard/JSON.html"],
+      [[[5,1],[5,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[7,18],[7,24]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.stdout"],
+      [[[7,25],[7,39]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileWriter.withSerializer"],
+      [[[7,40],[7,54]],"https://chapel-lang.org/docs/modules/standard/JSON.html#JSON.jsonSerializer"],
+      [[[8,12],[8,19]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileWriter.writeln"]
+    ]
+  },
+  "public/posts/aoc2022-day08-treehouse/code/aoc2022-day08-treehouse.chpl": {
+    "references": [
+      [[[4,7],[4,9]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[6,13],[6,19]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[7,9],[7,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[7,9],[7,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[11,23],[11,27]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[12,23],[12,28]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.first"],
+      [[[12,29],[12,33]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[26,1],[26,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/hpo-example/code/hpo-example.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/Random.html"],
+      [[[1,13],[1,17]],"https://chapel-lang.org/docs/modules/standard/List.html"],
+      [[[1,19],[1,29]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html"],
+      [[[1,31],[1,33]],"https://chapel-lang.org/docs/modules/standard/OS/POSIX.html"],
+      [[[1,34],[1,39]],"https://chapel-lang.org/docs/modules/standard/OS/POSIX.html"],
+      [[[1,41],[1,50]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[3,30],[3,36]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[11,47],[11,53]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[14,19],[14,29]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.spawnshell"],
+      [[[14,19],[14,29]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.spawnshell"],
+      [[[14,50],[14,59]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.pipeStyle"],
+      [[[14,60],[14,64]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.pipeStyle.pipe"],
+      [[[15,37],[15,46]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.pipeStyle"],
+      [[[15,47],[15,51]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.pipeStyle.pipe"],
+      [[[19,15],[19,19]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.subprocess.poll"],
+      [[[22,13],[22,24]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.subprocess.communicate"],
+      [[[24,37],[24,43]],"https://chapel-lang.org/docs/modules/standard/Subprocess.html#Subprocess.subprocess.stdout"],
+      [[[24,44],[24,48]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.read"],
+      [[[26,7],[26,14]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[26,33],[26,40]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.Error.message"],
+      [[[27,29],[27,32]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.max"],
+      [[[38,13],[38,17]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[38,19],[38,25]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[44,30],[44,35]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[46,22],[46,31]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[46,32],[46,44]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createDomain"],
+      [[[57,3],[57,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[58,3],[58,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[60,5],[60,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[63,3],[63,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[64,3],[64,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[67,32],[67,38]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[67,41],[67,45]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[67,47],[67,53]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[68,18],[68,22]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[68,24],[68,30]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[69,30],[69,35]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.split"],
+      [[[69,30],[69,35]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.split"],
+      [[[71,15],[71,20]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[71,15],[71,20]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[71,30],[71,34]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[71,30],[71,34]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[72,26],[72,31]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.split"],
+      [[[72,26],[72,31]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.split"],
+      [[[73,33],[73,38]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[73,33],[73,38]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[74,37],[74,42]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[74,37],[74,42]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[75,38],[75,43]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[75,38],[75,43]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[76,34],[76,39]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[76,34],[76,39]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[77,47],[77,51]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[77,47],[77,51]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[77,55],[77,60]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[77,55],[77,60]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.strip"],
+      [[[78,10],[78,18]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"],
+      [[[78,10],[78,18]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"],
+      [[[83,23],[83,35]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.randomStream"],
+      [[[85,38],[85,42]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[85,44],[85,50]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[93,21],[93,25]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.randomStream.next"],
+      [[[94,25],[94,33]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"],
+      [[[102,65],[102,72]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.indices"]
+    ]
+  },
+  "public/posts/intro-to-gpus/code/intro-to-gpus.chpl": {
+    "references": [
+      [[[9,3],[9,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[11,5],[11,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[14,5],[14,19]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html"],
+      [[[17,3],[17,22]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.resetGpuDiagnostics"],
+      [[[17,3],[17,22]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.resetGpuDiagnostics"],
+      [[[17,3],[17,22]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.resetGpuDiagnostics"],
+      [[[18,3],[18,22]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.startGpuDiagnostics"],
+      [[[18,3],[18,22]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.startGpuDiagnostics"],
+      [[[18,3],[18,22]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.startGpuDiagnostics"],
+      [[[22,3],[22,21]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.stopGpuDiagnostics"],
+      [[[22,3],[22,21]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.stopGpuDiagnostics"],
+      [[[22,3],[22,21]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.stopGpuDiagnostics"],
+      [[[23,25],[23,42]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.getGpuDiagnostics"],
+      [[[23,25],[23,42]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.getGpuDiagnostics"],
+      [[[23,25],[23,42]],"https://chapel-lang.org/docs/modules/standard/GpuDiagnostics.html#GpuDiagnostics.getGpuDiagnostics"],
+      [[[33,3],[33,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[36,3],[36,9]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.assert"],
+      [[[38,7],[38,11]],"https://chapel-lang.org/docs/modules/standard/Math.html"],
+      [[[41,33],[41,36]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.sin"],
+      [[[41,41],[41,43]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.pi"],
+      [[[43,3],[43,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[46,3],[46,9]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.assert"],
+      [[[54,3],[54,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[57,3],[57,9]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.assert"],
+      [[[61,28],[61,35]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.indices"],
+      [[[64,3],[64,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[65,3],[65,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[68,3],[68,9]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.assert"],
+      [[[79,3],[79,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[80,3],[80,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[83,3],[83,9]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.assert"],
+      [[[90,5],[90,12]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/bns1/code/nsStep3.chpl": {
+    "references": [
+      [[[17,1],[17,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[30,1],[30,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/bns1/code/plotUtil.chpl": {
+    "references": []
+  },
+  "public/posts/netcdf2/code/netcdf2.chpl": {
+    "references": [
+      [[[2,5],[2,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[2,13],[2,22]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[7,27],[7,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrConst"],
+      [[[7,38],[7,44]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_char"],
+      [[[7,53],[7,58]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[7,67],[7,72]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[7,73],[7,78]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[7,82],[7,87]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[8,26],[8,31]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[12,34],[12,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[15,20],[15,25]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.string.c_str"],
+      [[[15,41],[15,48]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[18,34],[18,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[18,50],[18,60]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrConst"],
+      [[[18,61],[18,67]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_char"],
+      [[[18,77],[18,82]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[18,83],[18,88]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[20,30],[20,35]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.string.c_str"],
+      [[[20,39],[20,46]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[23,37],[23,42]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[23,51],[23,56]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[23,66],[23,71]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[23,72],[23,77]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[24,32],[24,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[27,27],[27,32]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[28,37],[28,42]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[28,51],[28,56]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[28,67],[28,72]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[28,73],[28,78]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[28,82],[28,87]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[29,32],[29,39]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[32,28],[32,36]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_size_t"],
+      [[[33,35],[33,40]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[33,49],[33,54]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[33,62],[33,67]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[33,68],[33,76]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_size_t"],
+      [[[33,80],[33,85]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[35,36],[35,43]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[39,30],[39,35]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[62,5],[62,9]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.halt"],
+      [[[87,13],[87,22]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[93,42],[93,47]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[93,56],[93,61]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[93,71],[93,76]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[93,77],[93,85]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_size_t"],
+      [[[93,96],[93,101]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[93,102],[93,110]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_size_t"],
+      [[[93,117],[93,122]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptr"],
+      [[[93,135],[93,140]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"],
+      [[[103,45],[103,53]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_size_t"],
+      [[[107,15],[107,20]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_int"]
+    ]
+  },
+  "public/posts/aoc2022-day06-packets/code/aoc2022-day06-packets.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,12]],"https://chapel-lang.org/docs/modules/standard/Set.html"],
+      [[[6,10],[6,13]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set"],
+      [[[9,7],[9,10]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set.add"],
+      [[[11,12],[11,16]],"https://chapel-lang.org/docs/modules/standard/Set.html#Set.set.size"],
+      [[[19,1],[19,9]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[26,1],[26,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.3/code/announcing-chapel-2.3.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/packages/Python.html"],
+      [[[3,18],[3,29]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Interpreter"],
+      [[[4,17],[4,23]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Module"],
+      [[[5,18],[5,26]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Function"],
+      [[[7,22],[7,27]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Value"],
+      [[[12,18],[12,26]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Function"],
+      [[[16,1],[16,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[21,1],[21,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[23,6],[23,28]],"https://chapel-lang.org/docs/modules/layouts/CompressedSparseLayout.html"],
+      [[[30,46],[30,55]],"https://chapel-lang.org/docs/modules/layouts/CompressedSparseLayout.html#CompressedSparseLayout.csrLayout"],
+      [[[41,4],[41,9]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.write"],
+      [[[44,13],[44,17]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.last"],
+      [[[54,8],[54,15]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.4/code/announcing-chapel-2.4.chpl": {
+    "references": [
+      [[[17,6],[17,8]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[18,14],[18,18]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.read"],
+      [[[21,2],[21,9]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[24,2],[24,9]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[28,2],[28,9]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[58,6],[58,12]],"https://chapel-lang.org/docs/modules/packages/Python.html"],
+      [[[59,21],[59,32]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Interpreter"],
+      [[[63,20],[63,26]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Module"],
+      [[[64,28],[64,36]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Function"],
+      [[[72,21],[72,33]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Interpreter.importModule"],
+      [[[78,8],[78,14]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.dedent"],
+      [[[80,26],[80,29]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Value.get"],
+      [[[83,33],[83,38]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Array"],
+      [[[87,29],[87,34]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Array"],
+      [[[89,2],[89,9]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[91,24],[91,36]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Interpreter.importModule"],
+      [[[95,8],[95,14]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.dedent"],
+      [[[95,18],[95,21]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.Value.get"],
+      [[[97,25],[97,30]],"https://chapel-lang.org/docs/modules/packages/Python.html#Python.PySet"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.4/code/release-2.4-arrays.chpl": {
+    "references": []
+  },
+  "public/posts/announcing-chapel-2.4/code/release-2.4-interfaces.chpl": {
+    "references": [
+      [[[3,36],[3,41]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.Error"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.4/code/release-2.4-compiler.chpl": {
+    "references": [
+      [[[1,5],[1,15]],"https://chapel-lang.org/docs/modules/standard/Reflection.html"],
+      [[[2,16],[2,29]],"https://chapel-lang.org/docs/modules/standard/Reflection.html#Reflection.getLineNumber"],
+      [[[2,16],[2,29]],"https://chapel-lang.org/docs/modules/standard/Reflection.html#Reflection.getLineNumber"],
+      [[[4,1],[4,16]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.compilerWarning"],
+      [[[5,1],[5,14]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.compilerError"],
+      [[[5,48],[5,59]],"https://chapel-lang.org/docs/modules/standard/Reflection.html#Reflection.getFileName"],
+      [[[5,48],[5,59]],"https://chapel-lang.org/docs/modules/standard/Reflection.html#Reflection.getFileName"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.5/code/announcing-chapel-2.5.chpl": {
+    "references": [
+      [[[2,11],[2,18]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.reshape"],
+      [[[6,11],[6,18]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.reshape"],
+      [[[9,1],[9,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.5/code/reduce-index-nd.chpl": {
+    "references": []
+  },
+  "public/posts/announcing-chapel-2.5/code/converter-simple.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[18,11],[18,18]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrTo"],
+      [[[19,13],[19,18]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.deref"]
+    ]
+  },
+  "public/posts/10myths-part1/code/inferred.chpl": {
+    "references": [
+      [[[8,1],[8,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/10myths-part1/code/specified.chpl": {
+    "references": [
+      [[[8,1],[8,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/10myths-part1/code/assign-sparse-to-dense.chpl": {
+    "references": [
+      [[[1,5],[1,9]],"https://chapel-lang.org/docs/modules/standard/Time.html"],
+      [[[23,3],[23,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[24,3],[24,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[30,8],[30,17]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch"],
+      [[[32,3],[32,8]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.start"],
+      [[[34,3],[34,7]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.stop"],
+      [[[40,3],[40,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[43,3],[43,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[43,35],[43,42]],"https://chapel-lang.org/docs/modules/standard/Time.html#Time.stopwatch.elapsed"],
+      [[[50,5],[50,11]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.assert"],
+      [[[52,5],[52,11]],"https://chapel-lang.org/docs/modules/standard/Errors.html#Errors.assert"],
+      [[[53,1],[53,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.2/code/announcing-chapel-2.2.chpl": {
+    "references": [
+      [[[1,6],[1,8]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[3,17],[3,27]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.openReader"],
+      [[[3,17],[3,27]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.openReader"],
+      [[[5,24],[5,29]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileReader.lines"],
+      [[[6,4],[6,11]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[8,6],[8,25]],"https://chapel-lang.org/docs/modules/packages/PrecisionSerializer.html"],
+      [[[11,31],[11,50]],"https://chapel-lang.org/docs/modules/packages/PrecisionSerializer.html#PrecisionSerializer.precisionSerializer"],
+      [[[13,2],[13,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.stdout"],
+      [[[13,9],[13,23]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileWriter.withSerializer"],
+      [[[13,42],[13,49]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileWriter.writeln"],
+      [[[25,1],[25,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[27,12],[27,16]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.last"],
+      [[[38,1],[38,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[40,29],[40,33]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[49,3],[49,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/chapel-lsp/code/diagnostics.chpl": {
+    "references": [
+      [[[1,5],[1,14]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[6,15],[6,26]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createArray"]
+    ]
+  },
+  "public/posts/chapel-lsp/code/somecomplexfunction.chpl": {
+    "references": []
+  },
+  "public/posts/aoc2022-day02-rochambeau/code/aoc2022-day02-rochambeau.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[35,17],[35,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"]
+    ]
+  },
+  "public/posts/announcing-chapel-1.29/code/announcing-chapel-1.29.chpl": {
+    "references": []
+  },
+  "public/posts/aoc2022-day05-cratestacks/code/aoc2022-day05-cratestacks.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[1,9],[1,13]],"https://chapel-lang.org/docs/modules/standard/List.html"],
+      [[[6,7],[6,12]],"https://chapel-lang.org/docs/modules/standard/IO/FormattedIO.html#FormattedIO.readf"],
+      [[[9,32],[9,39]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.popBack"],
+      [[[10,16],[10,24]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"],
+      [[[15,3],[15,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.write"],
+      [[[15,15],[15,19]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.last"],
+      [[[18,1],[18,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[21,13],[21,19]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[22,9],[22,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[22,9],[22,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
+      [[[22,32],[22,36]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[22,32],[22,36]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[31,29],[31,33]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.last"],
+      [[[31,29],[31,33]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.last"],
+      [[[31,34],[31,38]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[31,34],[31,38]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[36,30],[36,34]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[38,26],[38,30]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[38,26],[38,30]],"https://chapel-lang.org/docs/language/spec/arrays.html#ChapelArray.size"],
+      [[[44,44],[44,48]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[44,44],[44,48]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[48,26],[48,34]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"],
+      [[[48,26],[48,34]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"]
+    ]
+  },
+  "public/posts/aoc2022-day13-wrap-up/code/aoc2022-day13-wrap-up.chpl": {
+    "references": [
+      [[[4,9],[4,16]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[6,3],[6,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.7/code/announcing-chapel-2.7.chpl": {
+    "references": [
+      [[[1,5],[1,11]],"https://chapel-lang.org/docs/modules/standard/Random.html"],
+      [[[7,23],[7,35]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.randomStream"],
+      [[[7,43],[7,47]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.randomStream.next"],
+      [[[10,3],[10,13]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.fillRandom"],
+      [[[12,17],[12,24]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.7/code/debug.chpl": {
+    "references": [
+      [[[1,5],[1,13]],"https://chapel-lang.org/docs/modules/standard/Debugger.html"],
+      [[[6,5],[6,15]],"https://chapel-lang.org/docs/modules/standard/Debugger.html#Debugger.breakpoint"],
+      [[[8,7],[8,14]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[9,7],[9,17]],"https://chapel-lang.org/docs/modules/standard/Debugger.html#Debugger.breakpoint"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.7/code/outOfBounds.chpl": {
+    "references": [
+      [[[6,3],[6,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[7,3],[7,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[8,3],[8,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[12,10],[12,16]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[14,17],[14,23]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.7/code/array-formals.chpl": {
+    "references": [
+      [[[4,29],[4,35]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[5,22],[5,28]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[9,5],[9,14]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[11,9],[11,18]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[11,19],[11,30]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createArray"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.7/code/casts.chpl": {
+    "references": []
+  },
+  "public/posts/announcing-chapel-2.7/code/converter.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[29,15],[29,19]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.file"],
+      [[[30,13],[30,19]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.file.writer"],
+      [[[31,5],[31,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileWriter.writeLiteral"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.7/code/Print.chpl": {
+    "references": [
+      [[[1,5],[1,10]],"https://chapel-lang.org/docs/modules/standard/Types.html"],
+      [[[2,5],[2,11]],"https://chapel-lang.org/docs/modules/standard/CTypes.html"],
+      [[[51,27],[51,37]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrConst"],
+      [[[51,38],[51,44]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_char"],
+      [[[59,13],[59,22]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isIntType"],
+      [[[61,13],[61,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isUintType"],
+      [[[63,13],[63,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isRealType"],
+      [[[65,18],[65,24]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[67,18],[67,28]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_ptrConst"],
+      [[[67,29],[67,35]],"https://chapel-lang.org/docs/modules/standard/CTypes.html#CTypes.c_char"],
+      [[[69,13],[69,24]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isTupleType"],
+      [[[81,13],[81,23]],"https://chapel-lang.org/docs/modules/standard/Types.html#Types.isEnumType"]
+    ]
+  },
+  "public/posts/10myths-part7/code/pi.chpl": {
+    "references": [
+      [[[2,5],[2,14]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html"],
+      [[[2,16],[2,22]],"https://chapel-lang.org/docs/modules/standard/Random.html"],
+      [[[8,12],[8,21]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist"],
+      [[[8,22],[8,33]],"https://chapel-lang.org/docs/modules/dists/BlockDist.html#BlockDist.blockDist.createArray"],
+      [[[11,1],[11,11]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.fillRandom"],
+      [[[12,1],[12,11]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.fillRandom"],
+      [[[18,1],[18,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  }
+}

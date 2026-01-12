@@ -26,7 +26,7 @@ serve-drafts preview-drafts: check-env $(ACTIVATE)
 
 www web html: check-env clean $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py build && \
-		(find public -name "*.html" | xargs ./scripts/insert_links.py)
+		(find public -name "*.html" | xargs ./scripts/insert_links.py --use-relative-links)
 	$(MAKE) copy-to-www
 
 www-future: $(ACTIVATE)
