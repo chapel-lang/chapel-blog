@@ -1,6 +1,8 @@
 {{ define "main" }}
 <h2>Tagged "{{ .Title }}"</h2>
 
+{{ .Content }}
+
 <ul class="post-list">
     {{ range .Pages.ByDate.Reverse }}
     {{ partial "post.html" . }}
