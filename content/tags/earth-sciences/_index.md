@@ -2,4 +2,4 @@
 title: "Earth Sciences"
 ---
 
-Articles about performing earth science computations in Chapel
+Articles about performing Earth science computations in Chapel
