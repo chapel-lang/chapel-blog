@@ -1,7 +1,8 @@
 // Announcing Chapel 2.7!
 // authors: ["Jade Abraham", "Engin Kayraklioglu", "Daniel Fedorin", "Ben Harshbarger", "Brad Chamberlain"]
 // summary: "Highlights from the December 2025 release of Chapel 2.7"
-// tags: ["Release Announcements", "Vectorization", "Debugging", "Mason", "Tools", "Dyno"]
+// tags: ["Vectorization", "Debugging", "Mason", "Tools", "Dyno"]
+// series: ["Release Announcements"]
 // date: 2025-12-18
 /*
 

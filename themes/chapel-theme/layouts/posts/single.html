@@ -13,12 +13,14 @@
 <h2>{{ .Title }}</h2>
 <div class="post-subscript">
     <p>Posted on {{ .Date.Format "January 2, 2006" }}.</p>
+    {{- if .Params.tags }}
     <p>
         Tags:
         {{ range .Params.tags }}
         <a class="button" href="{{ urls.JoinPath ( $.Site.BaseURL | relLangURL ) "tags" ( . | urlize ) }}">{{ . }}</a>
         {{ end }}
     </p>
+    {{- end }}
     <p>
     By:
     {{ range $i, $e := .Params.authors -}}
@@ -26,6 +28,13 @@
     <a href="{{ urls.JoinPath ( $.Site.BaseURL | relLangURL ) "authors" ($e | urlize) }}">{{ $e }}</a>
     {{- end }}
     </p>
+    {{- if .Params.series -}}
+        {{- $series_name := (index .Params.series 0) -}}
+        {{- $series := .Site.Taxonomies.series.Get $series_name}}
+    <p>
+        Part of a series: <a href="{{ $series.Page.Permalink }}">{{ $series.Page.Title }}</a>
+    </p>
+    {{- end }}
 </div>
 {{  if .Params.interviewee_photo -}}
 </div>

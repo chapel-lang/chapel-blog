@@ -2,7 +2,8 @@
 // authors: ["Brad Chamberlain"]
 // summary: "A summary of highlights from the September 2023 release of Chapel 1.32.0"
 // featured: false
-// tags: ["Release Announcements", "Chapel 2.0"]
+// tags: ["Chapel 2.0"]
+// series: ["Release Announcements"]
 // date: 2023-09-28
 
 /*

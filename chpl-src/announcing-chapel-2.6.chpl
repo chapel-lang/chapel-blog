@@ -1,7 +1,8 @@
 // Announcing Chapel 2.6!
 // authors: ["David Longnecker", "Jade Abraham", "Lydia Duncan", "Daniel Fedorin", "Ben Harshbarger", "Brad Chamberlain"]
 // summary: "Highlights from the September 2025 release of Chapel 2.6"
-// tags: ["Release Announcements", "Interoperability", "Debugging", "Tools", "Dyno"]
+// tags: ["Interoperability", "Debugging", "Tools", "Dyno"]
+// series: ["Release Announcements"]
 // date: 2025-09-18
 /*
 

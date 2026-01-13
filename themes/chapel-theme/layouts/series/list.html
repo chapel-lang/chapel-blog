@@ -3,7 +3,7 @@
 {{ .Content }}
 
 <ul class="post-list">
-    {{ range .Pages.ByDate }}
+    {{ range (cond .Params.reverseOrder .Pages.ByDate.Reverse .Pages.ByDate) }}
     {{ partial "post.html" . }}
     {{ end }}
 </ul>

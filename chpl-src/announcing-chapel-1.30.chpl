@@ -1,7 +1,8 @@
 // Announcing Chapel 1.30.0!
 // authors: ["Brad Chamberlain"]
 // summary: "A summary of highlights from the March 2023 release of Chapel 1.30.0"
-// tags: ["Release Announcements"]
+// tags: []
+// series: ["Release Announcements"]
 // date: 2023-03-23
 
 /*

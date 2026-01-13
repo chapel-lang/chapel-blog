@@ -1,7 +1,8 @@
 // Announcing Chapel 2.2!
 // authors: ["Brad Chamberlain", "Engin Kayraklioglu"]
 // summary: "A summary of highlights from the September 2024 release of Chapel 2.2"
-// tags: ["Release Announcements", "I/O", "Parallel I/O", "Performance", "GPU Programming"]
+// tags: ["I/O", "Parallel I/O", "Performance", "GPU Programming"]
+// series: ["Release Announcements"]
 // date: 2024-09-26
 // weight: 90
 

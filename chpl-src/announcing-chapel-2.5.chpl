@@ -1,7 +1,8 @@
 // Announcing Chapel 2.5!
 // authors: ["Brad Chamberlain", "Michael Ferguson", "Lydia Duncan", "Jade Abraham", "Ben Harshbarger", "Daniel Fedorin"]
 // summary: "Highlights from the June 2025 release of Chapel 2.5"
-// tags: ["Release Announcements", "Sorting", "Performance", "Chapel 2.0", "Debugging", "Tools", "Dyno"]
+// tags: ["Sorting", "Performance", "Chapel 2.0", "Debugging", "Tools", "Dyno"]
+// series: ["Release Announcements"]
 // date: 2025-06-12
 /*
 
