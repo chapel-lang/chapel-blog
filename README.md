@@ -240,8 +240,8 @@ visiting the demo page, which should be visible at: http://localhost:1313/posts/
 > post-processing. Currently, this means that it does not insert
 > auto-generated links to documentation into code blocks.
 >
-> If you'd like to preview the blog as closely as it would appear when published,
-> you can use the `preview` command:
+> If you'd like to preview the blog as closely as possible to what it would
+> appear when published, you can use the `preview` command:
 >
 > ```Bash
 > make preview
