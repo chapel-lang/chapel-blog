@@ -18,19 +18,28 @@ $(ACTIVATE): requirements.txt
 clean:
 	rm -rf ./public ./public-server
 
-serve preview: check-env $(ACTIVATE)
+html: check-env clean $(ACTIVATE)
+	$(SETUP) && ./scripts/chpl_blog.py build && \
+		(find public -name "*.html" | xargs ./scripts/insert_links.py)
+
+preview: html $(ACTIVATE)
+	echo "Starting local server at http://localhost:1313"
+	$(SETUP) && python3 -m http.server --directory public 1313
+
+watch: check-env $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py serve -F
 
-serve-drafts preview-drafts: check-env $(ACTIVATE)
+watch-drafts: check-env $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py serve -D -F
 
-www web html: check-env clean $(ACTIVATE)
+www web: check-env clean $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py build && \
 		(find public -name "*.html" | xargs ./scripts/insert_links.py --use-relative-links)
 	$(MAKE) copy-to-www
 
 www-future: $(ACTIVATE)
-	$(SETUP) && ./scripts/chpl_blog.py build -F
+	$(SETUP) && ./scripts/chpl_blog.py build -F && \
+		(find public -name "*.html" | xargs ./scripts/insert_links.py --use-relative-links)
 	$(MAKE) copy-to-www
 
 copy-to-www:

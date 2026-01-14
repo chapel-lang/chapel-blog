@@ -72,7 +72,7 @@ for continuing to work on the blog again:
 source /path/to/chapel/util/setchplenv.bash
 
 # Launch the preview server
-make preview
+make watch
 ```
 
 Or, more manually:
@@ -205,14 +205,17 @@ blog scripts.
 ## Launching the Preview Server
 
 Once you have all the dependencies installed (see [Setting Up Your Environment](#setting-up-your-environment)),
-you should be able to start a Hugo server using either of the following commands:
+you should be able to start a Hugo server. This server will provide a URL
+for you to examine the blog's contents, and watch for changes to the
+Chapel and Markdown files to provide live updates. The server can be started
+using either of the following commands:
 
 ```Bash
-make preview-drafts  # to preview the blog, including any draft articles
+make watch-drafts  # to preview the blog, including any draft articles
 ```
 
 ```Bash
-make preview  # to only preview non-draft articles
+make watch  # to only preview non-draft articles
 ```
 
 or a more explicit command like:
@@ -230,6 +233,23 @@ Here’s what the arguments in the manual option mean:
 
 After this, you should be able to see the complete blog at [`localhost:1313`](http://localhost:1313/). Try
 visiting the demo page, which should be visible at: http://localhost:1313/posts/demo/ (assuming you enabled draft articles).
+
+> [!NOTE]
+> The preview server does not perform some steps that are done when publishing
+> the blog post on the live site. In particular, it skips some final
+> post-processing. Currently, this means that it does not insert
+> auto-generated links to documentation into code blocks.
+>
+> If you'd like to preview the blog as closely as it would appear when published,
+> you can use the `preview` command:
+>
+> ```Bash
+> make preview
+> ```
+>
+> The post-processing steps are not currently compatible with live updates,
+> which is why this option is not the default. The command also spawns
+> server at `localhost:1313`.
 
 ## Authoring Articles
 Currently, there are two modes of writing a Chapel blog post:
@@ -442,6 +462,14 @@ By default, links starting with `http` are considered "external links" and will 
 ## Generating HTML for Publishing
 Note: this section is only relevant to people managing https://chapel-lang.org/blog.
 If you're simply trying to contribute an article, you do not need this section.
+
+To preview the HTML you'd be copying with `make www` (with the small
+difference of using `chapel-lang.org/docs`, instead of relative documentation links),
+you can use:
+
+```bash
+make preview
+```
 
 To generate the HTML page and move it to `$CHPL_WWW/chapel-lang.org/blog`, use:
 
