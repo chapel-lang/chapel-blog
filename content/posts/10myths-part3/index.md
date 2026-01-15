@@ -1,7 +1,7 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 3: New Languages vs. Language Extensions"
 date: 2025-06-25
-tags: ["Editorial", "Archival Posts / Reprints", "GPU Programming"]
+tags: ["Editorial", "Archival Posts / Reprints", "GPUs"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
 summary: "A third archival post from the 2012 IEEE TCSC blog series, with a current reflection on it"
 authors: ["Brad Chamberlain"]

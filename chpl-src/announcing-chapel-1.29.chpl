@@ -1,7 +1,7 @@
 // Announcing Chapel 1.29.0!
 // authors: ["Brad Chamberlain"]
 // summary: "A summary of highlights from the December 2022 release of Chapel 1.29.0"
-// tags: ["Dyno"]
+// tags: ["Optimizations", "Libraries", "Chapel 2.0", "Dyno", "Language Features"]
 // series: ["Release Announcements"]
 // date: 2022-12-15
 

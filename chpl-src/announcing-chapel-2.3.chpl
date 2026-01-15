@@ -1,7 +1,7 @@
 // Announcing Chapel 2.3!
 // authors: ["Brad Chamberlain", "Jade Abraham", "Michael Ferguson", "John Hartman"]
 // summary: "Highlights from the December 2024 release of Chapel 2.3"
-// tags: ["Python", "Sparse Arrays", "Performance", "GPU Programming", "Dyno"]
+// tags: ["Python", "Sparse Arrays", "Optimizations", "Performance", "GPUs", "Dyno"]
 // series: ["Release Announcements"]
 // date: 2024-12-12
 // weight: 90

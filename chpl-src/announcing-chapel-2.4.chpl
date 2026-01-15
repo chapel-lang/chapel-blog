@@ -1,7 +1,7 @@
 // Announcing Chapel 2.4!
 // authors: ["Brad Chamberlain", "Jade Abraham", "Daniel Fedorin"]
 // summary: "Highlights from the March 2025 release of Chapel 2.4"
-// tags: ["Python", "Dyno"]
+// tags: ["Language Features", "Python", "Tools", "Dyno"]
 // series: ["Release Announcements"]
 // date: 2025-03-20
 // weight: 90

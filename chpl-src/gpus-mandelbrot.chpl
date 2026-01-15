@@ -1,5 +1,5 @@
 // Generating the Mandelbrot with Chapel's GPU Support
-// tags: ["GPU Programming", "Tutorial"]
+// tags: ["GPUs", "Tutorial"]
 // series: ["GPU Programming in Chapel"]
 // summary: "This post continues to introduce Chapel's GPU programming features by generating a fractal"
 // authors: ["Daniel Fedorin"]
