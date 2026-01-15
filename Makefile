@@ -7,7 +7,7 @@ VENV_DIR=./venv
 ACTIVATE=$(VENV_DIR)/bin/activate
 SETUP=source $(ACTIVATE)
 
-default: preview
+default: watch
 
 $(ACTIVATE): requirements.txt
 	rm -rf $(VENV_DIR)
@@ -18,10 +18,18 @@ $(ACTIVATE): requirements.txt
 clean:
 	rm -rf ./public ./public-server
 
-serve preview: check-env $(ACTIVATE)
+html-with-links-to-docs: check-env clean $(ACTIVATE)
+	$(SETUP) && ./scripts/chpl_blog.py build && \
+		(find public -name "*.html" | xargs ./scripts/insert_links.py)
+
+preview-links: html-with-links-to-docs $(ACTIVATE)
+	echo "Starting local server at http://localhost:1313"
+	$(SETUP) && python3 -m http.server --directory public 1313
+
+serve watch preview: check-env $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py serve -F
 
-serve-drafts preview-drafts: check-env $(ACTIVATE)
+serve-drafts watch-drafts preview-drafts: check-env $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py serve -D -F
 
 www web html: check-env clean $(ACTIVATE)
@@ -30,7 +38,8 @@ www web html: check-env clean $(ACTIVATE)
 	$(MAKE) copy-to-www
 
 www-future: $(ACTIVATE)
-	$(SETUP) && ./scripts/chpl_blog.py build -F
+	$(SETUP) && ./scripts/chpl_blog.py build -F && \
+		(find public -name "*.html" | xargs ./scripts/insert_links.py --use-relative-links)
 	$(MAKE) copy-to-www
 
 copy-to-www:
