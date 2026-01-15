@@ -26,10 +26,10 @@ preview-links: html $(ACTIVATE)
 	echo "Starting local server at http://localhost:1313"
 	$(SETUP) && python3 -m http.server --directory public 1313
 
-watch preview: check-env $(ACTIVATE)
+serve watch preview: check-env $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py serve -F
 
-watch-drafts preview-drafts: check-env $(ACTIVATE)
+serve-drafts watch-drafts preview-drafts: check-env $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py serve -D -F
 
 www web: check-env clean $(ACTIVATE)
