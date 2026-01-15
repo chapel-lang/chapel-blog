@@ -241,10 +241,10 @@ visiting the demo page, which should be visible at: http://localhost:1313/posts/
 > auto-generated links to documentation into code blocks.
 >
 > If you'd like to preview the blog as closely as possible to what it would
-> appear when published, you can use the `preview` command:
+> appear when published, you can use the `preview-links` command:
 >
 > ```Bash
-> make preview
+> make preview-links
 > ```
 >
 > The post-processing steps are not currently compatible with live updates,
@@ -468,7 +468,7 @@ difference of using `chapel-lang.org/docs`, instead of relative documentation li
 you can use:
 
 ```bash
-make preview
+make preview-links
 ```
 
 To generate the HTML page and move it to `$CHPL_WWW/chapel-lang.org/blog`, use:

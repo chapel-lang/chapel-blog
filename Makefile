@@ -7,7 +7,7 @@ VENV_DIR=./venv
 ACTIVATE=$(VENV_DIR)/bin/activate
 SETUP=source $(ACTIVATE)
 
-default: preview
+default: watch
 
 $(ACTIVATE): requirements.txt
 	rm -rf $(VENV_DIR)
@@ -22,14 +22,14 @@ html: check-env clean $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py build && \
 		(find public -name "*.html" | xargs ./scripts/insert_links.py)
 
-preview: html $(ACTIVATE)
+preview-links: html $(ACTIVATE)
 	echo "Starting local server at http://localhost:1313"
 	$(SETUP) && python3 -m http.server --directory public 1313
 
-watch: check-env $(ACTIVATE)
+watch preview: check-env $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py serve -F
 
-watch-drafts: check-env $(ACTIVATE)
+watch-drafts preview-drafts: check-env $(ACTIVATE)
 	$(SETUP) && ./scripts/chpl_blog.py serve -D -F
 
 www web: check-env clean $(ACTIVATE)
