@@ -1,10 +1,10 @@
 ---
 title: "Chapel 2.0: Scalable and Productive Computing for All"
 date: 2024-03-21T13:00:00-07:00
-tags: ["Chapel 2.0", "Release Announcements"]
+tags: ["Chapel 2.0"]
 featured: true
 weight: 20
-series: []
+series: ["Release Announcements"]
 summary: "This post announces Chapel 2.0, including a brief tour of what the language is capable of."
 authors: ["Daniel Fedorin"]
 ---
