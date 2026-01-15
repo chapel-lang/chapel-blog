@@ -1,7 +1,7 @@
 ---
 title: "Measure the Performance of your Gaming GPU with Chapel"
 date: 2024-08-27
-tags: ["GPU Programming", "How-to", "Windows"]
+tags: ["GPUs", "How-to", "Windows"]
 series: ["GPU Programming in Chapel"]
 summary: "This post demonstrates using the Windows Subsystem for Linux to run Chapel code on a GPU from NVIDIA"
 authors: ["Ahmad Rezaii"]

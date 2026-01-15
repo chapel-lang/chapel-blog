@@ -1,7 +1,7 @@
 ---
 title: "7 Questions for Scott Bachman: Analyzing Coral Reefs with Chapel"
 date: 2024-10-01
-tags: ["Earth Sciences", "Image Analysis", "GPU Programming", "User Experiences", "Interviews"]
+tags: ["Earth Sciences", "Image Analysis", "GPUs", "User Experiences", "Interviews"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with oceanographer Scott Bachman, focusing on his work to measure coral reef biodiversity using satellite image analysis"
 authors: ["Brad Chamberlain", "Engin Kayraklioglu"]

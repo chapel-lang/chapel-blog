@@ -1,5 +1,5 @@
 // Introduction to GPU Programming in Chapel
-// tags: ["GPU Programming", "How-To"]
+// tags: ["GPUs", "How-To"]
 // series: ["GPU Programming in Chapel"]
 // summary: "This post gives a beginner's introduction to Chapel's GPU programming features"
 // featured: true
