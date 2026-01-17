@@ -1,7 +1,7 @@
 ---
-title: "7 Questions for Oliver Alvarado Rodriguez: TODO"
-date: 2026-01-15
-tags: ["User Experiences", "Interviews", "Graph Analytics", "Arkouda"]
+title: "7 Questions for Oliver Alvarado Rodriguez: Exploiting Chapel's Distributed Arrays for Graph Analysis through Arachne""
+date: 2026-01-21
+tags: ["User Experiences", "Interviews", "Graph Analytics", "Arkouda", "Sparse Arrays"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with Dr. Oliver Alvarado Rodriguez about his use
 of Chapel in writing graph analytics computations"
@@ -13,13 +13,13 @@ Welcome to the first interview in our [7 Questions for Chapel
 Users]({{< relref "series/7-questions-for-chapel-users" >}}) interview
 series for 2026!  In this edition, we hear from Dr. Oliver Alvarado
 Rodriguez about his experiences using Chapel in his Ph.D. thesis to
-write [Arachne](), a graph analytics package for
-[Arkouda](https://arkouda-www.github.io/).  This article is a logical
-successor to our [earlier interview with David Bader]({{<relref
-7qs-bader>}}), who served as Oliver's thesis advisor.  After Oliver
-graduated, we were very happy to have the opportunity to continue
-working with him within HPE's Advanced Programming Team that Chapel is
-a part of.
+write [Arachne](https://github.com/Bears-R-Us/arkouda-njit), a graph
+analytics package for [Arkouda](https://arkouda-www.github.io/).  This
+article is a logical successor to our [earlier interview with David
+Bader]({{<relref 7qs-bader>}}), who served as Oliver's Ph.D. advisor.
+After Oliver graduated, we were very happy to have the opportunity to
+continue working with him within HPE's Advanced Programming Team that
+Chapel is a part of.
 
 
 #### 1. Who are you?
@@ -28,7 +28,7 @@ My name is Oliver Alvarado Rodriguez, and I am a software engineer at
 Hewlett Packard Enterprise. I received my Ph.D. in Computer Science
 from the New Jersey Institute of Technology in Newark, NJ. My
 dissertation, _On the Design of a Framework for Large-Scale
-Exploratory Graph Analytics_, focused on extending the Arkouda library
+Exploratory Graph Analytics_, focused on extending the Arkouda framework
 to handle more complex and sparse problems such as graph
 analysis. Rather than modifying Arkouda directly, we implemented an
 add-on module called Arachne.
@@ -88,23 +88,24 @@ to read and work with codes written in other parallel frameworks.
 
 #### 5. What are your biggest successes that Chapel has helped achieve?
 
-My entire dissertation was written in Chapel, and that is the biggest
-success Chapel helped me achieve. I went from knowing little about
-parallel programming to becoming comfortable both as a graph scientist
-and a parallel programmer. Chapel let me learn parallel programming
-within the domain I love, graphs, and that foundation makes it
-significantly easier to understand and port ideas to OpenMP, MPI, or
-other frameworks. At the end of the day, these tools are all about
-parallelizing operations, and Chapel helped me see how parallelism
-maps to real problems without needing to first understand every detail
-of message passing, the underlying runtime, etc.
+The code I developed for my dissertation was written entirely in
+Chapel, and that is the biggest success Chapel helped me achieve. I
+went from knowing little about parallel programming to becoming
+comfortable both as a graph scientist and a parallel
+programmer. Chapel let me learn parallel programming within the domain
+I love, graphs, and that foundation makes it significantly easier to
+understand and port ideas to OpenMP, MPI, or other frameworks. At the
+end of the day, these tools are all about parallelizing operations,
+and Chapel helped me see how parallelism maps to real problems without
+needing to first understand every detail of message passing, the
+underlying runtime, etc.
 
 #### 6. If you could improve Chapel with a finger snap, what would you do?
 
 I would add a general aggregation framework that lets users define
 their own buffer-flushing functions and apply them to any distributed
 data structure—even their own user-defined ones. Relatedly, I’d like
-to see a wider variety of bespoke distributed data structures in the
+to see a wider variety of distributed data structures in the
 standard library that can be used with custom aggregators for moving
 data into and out of them.
 
