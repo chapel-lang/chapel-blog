@@ -1,5 +1,5 @@
 ---
-title: "7 Questions for Oliver Alvarado Rodriguez: Exploiting Chapel's Distributed Arrays for Graph Analysis through Arachne""
+title: "7 Questions for Oliver Alvarado Rodriguez: Exploiting Chapel's Distributed Arrays for Graph Analysis through Arachne"
 date: 2026-01-21
 tags: ["User Experiences", "Interviews", "Graph Analytics", "Arkouda", "Sparse Arrays"]
 series: ["7 Questions for Chapel Users"]
@@ -50,6 +50,15 @@ sparse matrices, and now I’m working on accelerating simulation
 software by improving underlying distributed graph data structures as
 well as building tools to facilitate hierarchical simulation models.
 
+{{<pullquote>}}
+
+Chapel’s biggest benefit for me is how quickly it lets me prototype
+high-level parallel and distributed code, and then incrementally
+optimize it.
+
+{{</pullquote>}}
+
+
 #### 3. How does Chapel help you with these problems?
 
 Chapel’s biggest benefit for me is how quickly it lets me prototype
@@ -85,6 +94,15 @@ parallelism clearly without wrestling with the more verbose or
 cumbersome syntax of OpenMP and MPI. That clarity helped me understand
 how parallel and distributed codes work, and later made it much easier
 to read and work with codes written in other parallel frameworks.
+
+
+{{<pullquote>}}
+
+Chapel helped me see how parallelism maps to real problems without
+needing to first understand every detail of message passing, the
+underlying runtime, etc.
+
+{{</pullquote>}}
 
 #### 5. What are your biggest successes that Chapel has helped achieve?
 
