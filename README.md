@@ -248,7 +248,7 @@ visiting the demo page, which should be visible at: http://localhost:1313/posts/
 > ```
 >
 > The post-processing steps are not currently compatible with live updates,
-> which is why this option is not the default. The command also spawns
+> which is why this option is not the default. The command also spawns a
 > server at `localhost:1313`.
 
 ## Authoring Articles
