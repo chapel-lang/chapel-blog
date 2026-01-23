@@ -2,7 +2,7 @@
 title: "Chapel's High-Level Support for CPU-GPU Data Transfers and Multi-GPU
         Programming"
 date: 2024-04-25
-tags: ["GPU Programming", "How-To"]
+tags: ["GPUs", "How-To"]
 series: ["GPU Programming in Chapel"]
 summary: "This post covers how Chapel's arrays, parallelism, and locality features
 enable moving data between CPUs and GPUs."

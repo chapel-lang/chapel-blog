@@ -1,7 +1,7 @@
 // Announcing Chapel 1.33!
 // authors: ["Brad Chamberlain"]
 // summary: "A summary of highlights from the December 2023 release of Chapel 1.33.0"
-// tags: ["Chapel 2.0"]
+// tags: ["Chapel 2.0", "Tools", "Co-locales", "Performance"]
 // series: ["Release Announcements"]
 // date: 2023-12-14
 // weight: 90

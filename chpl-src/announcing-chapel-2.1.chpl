@@ -1,7 +1,7 @@
 // Announcing Chapel 2.1!
 // authors: ["Brad Chamberlain"]
 // summary: "A summary of highlights from the June 2024 release of Chapel 2.1"
-// tags: []
+// tags: ["Portability", "Language Features", "GPUs"]
 // series: ["Release Announcements"]
 // date: 2024-06-27
 // weight: 90

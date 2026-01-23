@@ -1,7 +1,7 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 2: Past Failures and Future Attempts"
 date: 2025-05-28
-tags: ["Editorial", "Archival Posts / Reprints", "GPU Programming"]
+tags: ["Editorial", "Archival Posts / Reprints", "GPUs"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
 summary: "Another archival post from the IEEE TCSC blog in 2012, with a current reflection on it"
 authors: ["Brad Chamberlain"]
