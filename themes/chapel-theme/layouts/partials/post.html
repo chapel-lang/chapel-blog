@@ -15,6 +15,9 @@
     {{ if .Params.date }}
     <p class="post-date">Posted on {{ .Date.Format "January 2, 2006" }}</p>
     {{ end }}
+    {{- if .Page.Store.Get "hasMath" -}}
+    {{- page.Store.Set "hasMath" true -}}
+    {{- end }}
     {{ if .Summary }}
     <hr class="post-divider">
     <p class="post-preview">
