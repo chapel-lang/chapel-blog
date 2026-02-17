@@ -13,6 +13,18 @@ $toc-border-color: darken($code-color, 10%);
     align-items: flex-end;
     margin-bottom: 1rem;
 
+    @media (prefers-reduced-motion: no-preference) {
+      &.sticky {
+        top: 0;
+        bottom: 0;
+
+        div.wrapper {
+          position: sticky;
+          top: $margin-inner-offset + $margin-outer-offset;
+        }
+      }
+    }
+
     span.header {
         font-style: normal;
         font-weight: 500;
