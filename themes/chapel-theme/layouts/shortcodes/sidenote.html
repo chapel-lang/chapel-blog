@@ -1,6 +1,9 @@
 {{- if eq ($.Page.Scratch.Get "sidenote") nil -}}
   {{- $.Page.Scratch.Set "sidenote" 0 -}}
 {{- end -}}
+{{- if eq (.Get 0) "left" -}}
+  {{- $.Page.Scratch.Set "sidenotesOnLeft" true -}}
+{{- end -}}
 {{- $currentId := $.Page.Scratch.Get "sidenote" -}}
 {{- $.Page.Scratch.Add "sidenote" 1 -}}
 <span class="sidenote"><label class="sidenote-label" for="sidenote-{{ $currentId }}">{{ .Get 1 | .Page.RenderString }}</label><input class="sidenote-checkbox" type="checkbox" id="sidenote-{{ $currentId }}"></input><span class="sidenote-content sidenote-{{ .Get 0 }}" {{- with (.Get 2) }} style="margin-top: {{ sub . 1.5 }}rem"{{ end }}><span class="sidenote-delimiter">[note:</span>{{ replace (replace (replace (.Inner | page.RenderString (dict "display" "block")) "</p>\n<p>" "<br><br>") "<p>" "") "</p>" "" | chomp | safeHTML }}<span class="sidenote-delimiter">]</span></span></span>
