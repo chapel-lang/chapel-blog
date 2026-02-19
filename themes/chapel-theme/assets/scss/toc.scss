@@ -21,6 +21,12 @@ $toc-border-color: darken($code-color, 10%);
         div.wrapper {
           position: sticky;
           top: $margin-inner-offset + $margin-outer-offset;
+
+          // Only set by JS to pin the wrapper in an exact spot. The 'top'
+          // value is set by JS.
+          &.overfull {
+              position: absolute;
+          }
         }
       }
     }
