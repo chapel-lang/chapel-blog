@@ -64,6 +64,14 @@ $toc-border-color: darken($code-color, 10%);
         white-space: normal;
         text-indent: -0.5em;
         margin-left: 0.5em;
+        position: relative;
+    }
+
+    li.current > a::before {
+        content: "▸";
+        display: inline-block;
+        position: absolute;
+        left: -.75em;
     }
 
     div.wrapper {
