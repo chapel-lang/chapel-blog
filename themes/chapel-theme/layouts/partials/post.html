@@ -5,7 +5,7 @@
     {{- end }}
     <a href="{{ $url }}" class="post-title">
         {{- if .Params.featured }}{{ partial "icon.html" "star" }}{{ end }}
-        {{- " " -}}{{ .Title }}
+        {{- " " -}}{{ partial "richtitle.html" . }}
         {{- if .Params.externalURL -}}
         <span class="external-marker">
             External Article {{ partial "icon.html" "external-link" }}
