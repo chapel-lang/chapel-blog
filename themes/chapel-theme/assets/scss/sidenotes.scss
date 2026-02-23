@@ -3,7 +3,7 @@
 @import "margin.scss";
 
 $sidenote-padding: 1rem;
-$sidenote-highlight-border-width: .2rem;
+$sidenote-highlight-border-width: $standard-border-width;
 
 .sidenote {
     &:hover {
@@ -13,10 +13,11 @@ $sidenote-highlight-border-width: .2rem;
         }
 
         .sidenote-content {
-            border: $sidenote-highlight-border-width dashed;
+            border: $sidenote-highlight-border-width solid;
             padding: $sidenote-padding -
                 ($sidenote-highlight-border-width - $standard-border-width);
             border-color: $primary-color;
+            box-shadow: 0 0 0.4rem rgba(darken($primary-color, 20%), 0.3);
         }
     }
 }
