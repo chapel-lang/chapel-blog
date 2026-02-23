@@ -83,21 +83,18 @@ I really wish the installation of Chapel on HPC systems were easier and more
 straightforward. Relying heavily on SSH as the start-up method can be
 insufficient, as many HPC systems don't permit SSH between compute nodes.  I
 put in a lot of effort to {{% sidenote right "install Chapel on the HPC systems" -10 %}}
-After Marjan completed this work, we developed a <a
-href="https://chapel-lang.org/download/#spack">Spack
-package for Chapel</a>, which should significantly simplify the process of
+After Marjan completed this work, we developed a
+[Spack package for Chapel](https://chapel-lang.org/download/#spack),
+which should significantly simplify the process of
 installing Chapel on HPC systems.  Sorry we didn't have it at that time, Marjan!
 {{% /sidenote %}} we had, but unfortunately, it didn’t always work in the end.
 
 Another item on my wish list is that Chapel would support geospatial
 data. If Chapel could work with data structures {{% sidenote right
 "like NumPy arrays or XArrays" %}} Chapel doesn't natively support
-NumPy arrays or XArrays. However, <a
-href="https://arkouda-www.github.io/">Arkouda</a> does!  We recommend
-checking Arkouda out if you are interested in using such technologies
-<a href =
-"https://youtube.com/watch?v=v8p0T-RJTCU&embeds_referring_euri=https%3A%2F%2Fdiscourse.pangeo.io%2F&source_ve_path=Mjg2NjY">interactively
-at HPC scales</a>.
+NumPy arrays or XArrays. However, [Arkouda](https://arkouda-www.github.io/) does!
+We recommend checking Arkouda out if you are interested in using such technologies
+[interactively at HPC scales](https:/youtube.com/watch?v=v8p0T-RJTCU&embeds_referring_euri=https%3A%2F%2Fdiscourse.pangeo.io%2F&source_ve_path=Mjg2NjY%22).
 
 {{% /sidenote %}}, it would be
 a game-changer. In the field of Geomatics, there is immense potential for using
