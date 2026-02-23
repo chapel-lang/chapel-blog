@@ -1,5 +1,6 @@
 ---
 title: "7 Questions for Tiago Carneiro and Guillaume Helbecque: Combinatorial Optimization in Chapel"
+richtitle: "7 Questions for Tiago Carneiro and Guillaume Helbecque:<br>Combinatorial Optimization in Chapel"
 date: 2025-07-30
 tags: ["User Experiences", "Interviews"]
 series: ["7 Questions for Chapel Users"]

@@ -1,5 +1,6 @@
 ---
 title: "7 Questions for Éric Laurendeau: Computing Aircraft Aerodynamics in Chapel"
+richtitle: "7 Questions for Éric Laurendeau:<br>Computing Aircraft Aerodynamics in Chapel"
 date: 2024-09-17
 tags: ["Computational Fluid Dynamics", "User Experiences", "Interviews"]
 series: ["7 Questions for Chapel Users"]
