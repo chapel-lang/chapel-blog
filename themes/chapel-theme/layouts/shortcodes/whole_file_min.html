@@ -6,7 +6,7 @@
     <details>
         <summary class="file-header">
             <a href="./code/{{ $fname }}" download="{{ $fname }}">{{ $fname }}</a>
-            {{ if (not (eq nil $chpl_version ) ) }}
+            {{ if (and (not (eq nil $chpl_version ) ) (in (slice "chpl" "chapel") (.Get "lang" | lower))) }}
                 <div class="tooltip">
                     Chapel {{ $chpl_version }}
                     <span class="tooltiptext">Warning: this code is only tested up to Chapel version {{ $chpl_version }}</span>
