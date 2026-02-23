@@ -29,8 +29,9 @@ function setupCurrentHighlighting() {
             // Use actual window viewport to check this
             let belowViewport = elements[i].getBoundingClientRect().top > 5;
 
-            // So far, passing things that we've scrolled by. Increment the
-            // indices and remove the 'current' class from the corresponding TOC items.
+            // While !belowViewport (aka, 'above viewport'), we're
+            // iterating over things that we've scrolled by. Increment the
+            // indices to track our position in the TOC.
             if (!belowViewport) {
                 if (elements[i].tagName === 'H3') {
                     h3Index++;
