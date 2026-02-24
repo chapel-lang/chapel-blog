@@ -1,5 +1,7 @@
 {{ if and (strings.Contains .name "Advent of Code 2022, Day") (eq .series "Advent of Code 2022") }}
 {{ strings.TrimPrefix "Advent of Code 2022," .name }}
+{{ else if and (strings.Contains .name "10 Myths About Scalable Parallel Programming Languages (Redux),") (eq .series "10 Myths About Scalable Parallel Programming Languages Redux") }}
+{{ strings.TrimPrefix "10 Myths About Scalable Parallel Programming Languages (Redux)," .name }}
 {{ else }}
 {{ .name }}
 {{ end }}
