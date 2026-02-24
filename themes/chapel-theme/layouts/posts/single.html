@@ -42,7 +42,7 @@
 {{- end }}
 <div class="post-content">
     {{ if not (eq .TableOfContents "<nav id=\"TableOfContents\"></nav>") }}
-    <div class="table-of-contents">
+    <div class="table-of-contents{{ cond (page.Scratch.Get "sidenotesOnLeft") "" " sticky"}}">
         <div class="wrapper">
             <span class="header">Table of Contents</span>
             {{ .TableOfContents }}

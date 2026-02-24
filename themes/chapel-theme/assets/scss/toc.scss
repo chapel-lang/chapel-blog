@@ -13,6 +13,23 @@ $toc-border-color: darken($code-color, 10%);
     align-items: flex-end;
     margin-bottom: 1rem;
 
+    @media (prefers-reduced-motion: no-preference) {
+      &.sticky {
+        top: 0;
+        bottom: 0;
+
+        div.wrapper {
+          position: sticky;
+          top: $margin-inner-offset + $container-min-padding;
+
+          &.overfull {
+              position: relative;
+              top: auto;
+          }
+        }
+      }
+    }
+
     span.header {
         font-style: normal;
         font-weight: 500;
@@ -47,6 +64,14 @@ $toc-border-color: darken($code-color, 10%);
         white-space: normal;
         text-indent: -0.5em;
         margin-left: 0.5em;
+        position: relative;
+    }
+
+    li.current > a::before {
+        content: "▸";
+        display: inline-block;
+        position: absolute;
+        left: -.75em;
     }
 
     div.wrapper {
