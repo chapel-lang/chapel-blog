@@ -1,5 +1,6 @@
 ---
 title: "7 Questions for Marjan Asgari: Optimizing Hydrological Models with Chapel"
+richtitle: "7 Questions for Marjan Asgari:<br>Optimizing Hydrological Models with Chapel"
 date: 2025-09-15
 tags: ["User Experiences", "Interviews", "Earth Sciences"]
 series: ["7 Questions for Chapel Users"]

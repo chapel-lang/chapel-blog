@@ -1,5 +1,6 @@
 ---
 title: "7 Questions for Scott Bachman: Analyzing Coral Reefs with Chapel"
+richtitle: "7 Questions for Scott Bachman:<br>Analyzing Coral Reefs with Chapel"
 date: 2024-10-01
 tags: ["Earth Sciences", "Image Analysis", "GPUs", "User Experiences", "Interviews"]
 series: ["7 Questions for Chapel Users"]

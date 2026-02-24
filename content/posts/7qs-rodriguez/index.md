@@ -1,5 +1,6 @@
 ---
 title: "7 Questions for Oliver Alvarado Rodriguez: Exploiting Chapel's Distributed Arrays for Graph Analysis through Arachne"
+richtitle: "7 Questions for Oliver Alvarado Rodriguez:<br>Exploiting Chapel's Distributed Arrays for Graph Analysis through Arachne"
 date: 2026-01-21
 tags: ["User Experiences", "Interviews", "Graph Analytics", "Arkouda", "Sparse Arrays"]
 series: ["7 Questions for Chapel Users"]

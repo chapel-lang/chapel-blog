@@ -1,5 +1,6 @@
 ---
 title: "7 Questions for Bill Reus: Interactive Supercomputing with Chapel for Cybersecurity"
+richtitle: "7 Questions for Bill Reus:<br>Interactive Supercomputing with Chapel for Cybersecurity"
 date: 2025-02-12
 tags: ["User Experiences", "Interviews", "Data Analysis", "Arkouda"]
 series: ["7 Questions for Chapel Users"]

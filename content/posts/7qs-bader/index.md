@@ -1,6 +1,8 @@
 ---
 title: "7 Questions for David Bader: Graph Analytics at Scale with Arkouda and
 Chapel"
+richtitle: "7 Questions for David Bader:<br>Graph Analytics at Scale with Arkouda and
+Chapel"
 date: 2024-11-06
 tags: ["User Experiences", "Interviews", "Graph Analytics", "Arkouda"]
 series: ["7 Questions for Chapel Users"]

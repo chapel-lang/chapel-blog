@@ -1,5 +1,6 @@
 ---
 title: "7 Questions for Nelson Luís Dias: Atmospheric Turbulence in Chapel"
+richtitle: "7 Questions for Nelson Luís Dias:<br>Atmospheric Turbulence in Chapel"
 date: 2024-10-15
 tags: ["User Experiences", "Interviews", "Data Analysis", "Earth Sciences", "Computational Fluid Dynamics"]
 series: ["7 Questions for Chapel Users"]

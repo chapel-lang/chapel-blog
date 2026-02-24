@@ -10,7 +10,7 @@
 <div class="post-info">
 {{- end -}}
 
-<h2>{{ .Title }}</h2>
+<h2>{{ partial "richtitle" . }}</h2>
 <div class="post-subscript">
     <p>Posted on {{ .Date.Format "January 2, 2006" }}.</p>
     {{- if .Params.tags }}
