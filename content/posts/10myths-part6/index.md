@@ -1,5 +1,6 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 6: Performance of Higher-Level Languages"
+richtitle: "10 Myths About Scalable Parallel Programming Languages (Redux)<br>  Part 6: Performance of Higher-Level Languages"
 date: 2025-09-17
 tags: ["Editorial", "Archival Posts / Reprints", "Language Comparison", "Performance", "Benchmarks"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]

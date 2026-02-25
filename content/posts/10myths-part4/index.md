@@ -1,5 +1,6 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 4: Syntax Matters"
+richtitle: "10 Myths About Scalable Parallel Programming Languages (Redux)<br>  Part 4: Syntax Matters"
 date: 2025-07-23
 tags: ["Editorial", "Archival Posts / Reprints"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]

@@ -1,5 +1,6 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 1: Productivity and Performance"
+richtitle: "10 Myths About Scalable Parallel Programming Languages (Redux)<br>  Part 1: Productivity and Performance"
 date: 2025-04-30
 tags: ["Editorial", "Archival Posts / Reprints", "Sparse Arrays"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]

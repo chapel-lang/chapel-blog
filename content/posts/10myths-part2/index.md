@@ -1,5 +1,6 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 2: Past Failures and Future Attempts"
+richtitle: "10 Myths About Scalable Parallel Programming Languages (Redux)<br>  Part 2: Past Failures and Future Attempts"
 date: 2025-05-28
 tags: ["Editorial", "Archival Posts / Reprints", "GPUs"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]

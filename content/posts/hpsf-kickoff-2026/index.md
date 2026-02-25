@@ -1,5 +1,6 @@
 ---
 title: "Charting the Future of High Performance Software: HPSF Year in Review and What’s Ahead"
+richtitle: "Charting the Future of High Performance Software:<br>HPSF Year in Review and What’s Ahead"
 date: 2026-01-09
 tags: ["External Posts", "HPSF"]
 summary: "A 2025 retrospective and 2026 preview for HPSF and its projects, including Chapel"

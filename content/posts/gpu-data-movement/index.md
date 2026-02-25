@@ -1,6 +1,8 @@
 ---
 title: "Chapel's High-Level Support for CPU-GPU Data Transfers and Multi-GPU
         Programming"
+richtitle: "Chapel's High-Level Support for CPU-GPU Data Transfers<br>and Multi-GPU
+        Programming"
 date: 2024-04-25
 tags: ["GPUs", "How-To"]
 series: ["GPU Programming in Chapel"]

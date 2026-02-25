@@ -1,5 +1,6 @@
 ---
 title: "Chapel's Runtime Types as an Interesting Alternative to Dependent Types"
+richtitle: "Chapel's Runtime Types as an Interesting Alternative<br>to Dependent Types"
 date: 2025-03-02
 tags: ["External Posts", "Language Comparison"]
 summary: "A comparison of Chapel's runtime types with other languages' type systems"

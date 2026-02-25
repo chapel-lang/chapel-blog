@@ -1,5 +1,6 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 3: New Languages vs. Language Extensions"
+richtitle: "10 Myths About Scalable Parallel Programming Languages (Redux)<br>  Part 3: New Languages vs. Language Extensions"
 date: 2025-06-25
 tags: ["Editorial", "Archival Posts / Reprints", "GPUs"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]

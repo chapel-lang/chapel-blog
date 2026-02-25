@@ -1,5 +1,6 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 5: Productivity and Magic Compilers"
+richtitle: "10 Myths About Scalable Parallel Programming Languages (Redux)<br>  Part 5: Productivity and Magic Compilers"
 date: 2025-08-20
 tags: ["Editorial", "Archival Posts / Reprints"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]

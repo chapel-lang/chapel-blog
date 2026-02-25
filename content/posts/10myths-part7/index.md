@@ -1,5 +1,6 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 7: Minimalist Language Designs"
+richtitle: "10 Myths About Scalable Parallel Programming Languages (Redux)<br>  Part 7: Minimalist Language Designs"
 date: 2025-10-15
 tags: ["Editorial", "Archival Posts / Reprints", "Language Comparison"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]

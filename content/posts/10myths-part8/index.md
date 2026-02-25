@@ -1,5 +1,6 @@
 ---
 title: "10 Myths About Scalable Parallel Programming Languages (Redux),  Part 8: Striving Toward Adoptability"
+richtitle: "10 Myths About Scalable Parallel Programming Languages (Redux)<br>Part 8: Striving Toward Adoptability"
 date: 2025-11-12
 tags: ["Editorial", "Archival Posts / Reprints", "Community", "HPSF"]
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]

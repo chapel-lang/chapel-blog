@@ -1,5 +1,6 @@
 ---
 title: "Chapel Newsletter - February 2026"
+richtitle: "Chapel Newsletter - February 2026"
 date: 2026-02-23
 tags: ["External Posts", "Community", "Newsletter"]
 summary: "Chapel's quarterly newsletter, with highlights from HPSFCon and SC"

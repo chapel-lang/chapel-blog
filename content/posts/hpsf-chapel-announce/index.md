@@ -1,5 +1,6 @@
 ---
 title: "High Performance Software Foundation Welcomes Chapel as HPSF Project"
+richtitle: "High Performance Software Foundation Welcomes Chapel<br> as HPSF Project"
 date: 2025-11-17
 tags: ["External Posts", "HPSF"]
 summary: "HPSF's official announcement of Chapel joining the foundation as an established project"
