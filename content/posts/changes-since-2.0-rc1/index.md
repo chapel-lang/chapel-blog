@@ -253,7 +253,7 @@ this that may be unsafe.
 
 #### Class Memory Management
 
-For the last few Chapel releases using stable features, it was not possible to escape the <a href="https://chapel-lang.org/docs/1.33/technotes/lifetimeChecking.html">lifetime checker</a>
+For the last few Chapel releases using stable features, it was not possible to escape the [lifetime checker](https://chapel-lang.org/docs/1.33/technotes/lifetimeChecking.html">lifetime checker)
 when using managed classes like `owned` and `shared`. These
 management strategies use the lifetime checker to ensure that memory is not
 accessed incorrectly. It is sometimes necessary to have pieces of code that a

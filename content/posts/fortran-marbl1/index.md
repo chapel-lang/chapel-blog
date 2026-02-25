@@ -69,8 +69,8 @@ Finally, we can use our Fortran subroutines in Chapel. Let's populate an array a
 {{< file_download fname="sequential.chpl" lang="chapel">}}
 
 {{<sidenote "right" "" -15 >}}
-These signatures were generated manually. Alternatively, the <code><a href = "https://chapel-lang.org/docs/tools/c2chapel/c2chapel.html">c2chapel</a></code> tool can be used to generate <code>extern</code> declarations automatically, or an 
-<a href = "https://chapel-lang.org/docs/technotes/extern.html#support-for-extern-blocks"><i>extern block</i></a> can be used to have the Chapel compiler parse the C header file contents directly.
+These signatures were generated manually. Alternatively, the [`c2chapel`](https://chapel-lang.org/docs/tools/c2chapel/c2chapel.html) tool can be used to generate <code>extern</code> declarations automatically, or an 
+[_extern block_](https://chapel-lang.org/docs/technotes/extern.html#support-for-extern-blocks) can be used to have the Chapel compiler parse the C header file contents directly.
 {{< /sidenote >}}
 
 {{< details summary="**Click here for help interpreting the Chapel code**" >}}

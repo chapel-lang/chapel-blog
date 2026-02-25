@@ -224,8 +224,7 @@ gap to an acceptable level, and that delay to achieving performance
 led to a lot of doubt and cynicism around Chapel in the 2010's, some
 of which persists to this day.  However, this approach was also an
 investment that has paid off—for example, the recently-added sparse
-features and optimizations <a href =
-"../10myths-part1/#the-sparse-example">mentioned last month</a> were
+features and optimizations [mentioned last month]({{<relref 10myths-part1>}}#the-sparse-example) were
 made with no changes to the compiler thanks to this
 approach.{{</sidenote>}}, with the goal of avoiding a performance
 cliff between “built-in” and user-defined distributions.
@@ -355,9 +354,9 @@ many more memory operations, slowing the application down while
 increasing the program's memory footprint.  They can be optimized away
 using transformations such as
 {{<sidenote "right" "_loop fusion_ and _array contraction_">}}See, for
-example, <a href = "https://dl.acm.org/doi/10.1145/277652.277663">The
+example, [The
 implementation and evaluation of fusion and contraction in array
-languages</a> by E Christopher Lewis, Calvin Lin, and Lawrence Snyder
+languages](https://dl.acm.org/doi/10.1145/277652.277663) by E Christopher Lewis, Calvin Lin, and Lawrence Snyder
 in <i>Proceedings of the ACM Conference on Programming Language Design
 and Implementation</i>, 1998.{{</sidenote>}}, resulting in performance
 that competes with hand-generated loops.  But these optimizations can
