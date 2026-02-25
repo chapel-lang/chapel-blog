@@ -2,6 +2,10 @@
 {{ strings.TrimPrefix "Advent of Code 2022," .name }}
 {{ else if and (strings.Contains .name "10 Myths About Scalable Parallel Programming Languages (Redux),") (eq .series "10 Myths About Scalable Parallel Programming Languages Redux") }}
 {{ strings.TrimPrefix "10 Myths About Scalable Parallel Programming Languages (Redux)," .name }}
+{{ else if and (strings.Contains .name "Navier-Stokes in Chapel — ") (eq .series "Navier-Stokes in Chapel") }}
+{{ strings.TrimPrefix "Navier-Stokes in Chapel — " .name }}
+{{ else if and (strings.Contains .name "NetCDF in Chapel, ") (eq .series "NetCDF in Chapel") }}
+{{ strings.TrimPrefix "NetCDF in Chapel, " .name }}
 {{ else }}
 {{ .name }}
 {{ end }}
