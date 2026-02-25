@@ -7,7 +7,7 @@
         {{- if .Params.featured }}{{ partial "icon.html" "star" }}{{ end }}
         {{- " " -}}{{ partial "richtitle.html" . }}
         {{- if .Params.externalURL -}}
-        <span class="external-marker">
+        <br><span class="external-marker">
             External Article {{ partial "icon.html" "external-link" }}
         </span>
         {{- end -}}
