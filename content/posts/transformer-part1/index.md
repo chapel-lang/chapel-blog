@@ -2,7 +2,7 @@
 ---
 title: "Transformers From Scratch in Chapel and C++, Part 1"
 date: 2025-11-20
-tags: ["User Experiences", "Language Comparison", "Vectorization", "Performance", "Benchmarks"]
+tags: ["User Experiences", "Language Comparison", "AI/ML", "Vectorization", "Performance", "Benchmarks"]
 summary: "An implementation of a transformer using Chapel, comparing to C++ and PyTorch"
 authors: ["Thitrin Sastarasadhit"]
 series: ["Transformers From Scratch in Chapel and C++"]

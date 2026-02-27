@@ -2,7 +2,7 @@
 ---
 title: "Transformers From Scratch in Chapel and C++, Part 2"
 date: 2025-12-12
-tags: ["User Experiences", "Language Comparison", "Performance", "Benchmarks"]
+tags: ["User Experiences", "Language Comparison", "AI/ML", "Performance", "Benchmarks"]
 summary: "Comparison of transformers in Chapel, C++, and PyTorch focusing on multi-threaded CPUs"
 authors: ["Thitrin Sastarasadhit"]
 series: ["Transformers From Scratch in Chapel and C++"]
