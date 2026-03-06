@@ -17,7 +17,7 @@
     <p>
         Tags:
         {{ range .Params.tags }}
-        <a class="button" href="{{ urls.JoinPath ( $.Site.BaseURL | relLangURL ) "tags" ( . | urlize ) }}">{{ . }}</a>
+        <a class="button" href="{{ urls.JoinPath ( $.Site.BaseURL | relLangURL ) "tags" ( . | urlize ) "/" }}">{{ . }}</a>
         {{ end }}
     </p>
     {{- end }}
