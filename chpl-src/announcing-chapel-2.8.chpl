@@ -44,7 +44,7 @@
   to Chapel 2.8!
 
 
-  ### Improvements to the Chapel Language Server and Linter
+  ### Chapel Language Server and Linter
 
   [Since its 2.0 release]({{< relref
   "announcing-chapel-2.0#rich-tooling-support" >}}), Chapel has
@@ -57,7 +57,7 @@
 
   #### CMake Integration
 
-  Starting with the the 2.8 release, Chapel's CMake integration can
+  As of the 2.8 release, Chapel's CMake integration can
   use the
   [`chpl-shim`](https://chapel-lang.org/docs/2.8/tools/chpl-language-server/chpl-language-server.html#configuring-chapel-projects)
   tool (previously written about in [our article on editor
@@ -91,38 +91,38 @@
   should update the `.cls-commands.json` file if necessary.
 
 
-  #### Resolution and Inlay Improvements
+  #### Resolution and Inlays
 
   When we first wrote about the CLS, we covered [language server
   features that relied on resolution]({{< relref
   "chapel-lsp#experimental-features" >}}), dubbing them
-  experimental. At that time, the Dyno resolver was still in a much
-  earlier state; it was in the [2.3 release]({{< relref
+  experimental. At that time, the Dyno resolver was in a much
+  more primitive state; it was in the [2.3 release]({{< relref
   "announcing-chapel-2.3#dyno-compiler-improvements" >}}) that Dyno
   acquired the ability to resolve domains and promoted expressions,
-  and the [2.4 release]({{< relref
-  "announcing-chapel-2.4#dyno-support-for-chapel-features" >}}) that
+  and in the [2.4 release]({{< relref
+  "announcing-chapel-2.4#dyno-support-for-chapel-features" >}})
   it was able to resolve arrays. However, the Dyno resolver has
   continued to make great strides, and today is capable of resolving a
   substantial (though not complete) portion of the language. As a
   result, the experimental support for resolution-driven features in
-  the CLS has been growing steadily more robust.
+  the CLS has been steadily growing more robust.
 
-  In the 2.8 release, we've spent some time to track down bugs that
+  In the 2.8 release, we've spent some time tracking down bugs that
   specifically affected the CLS with well-known codebases such as
   [Mason](https://chapel-lang.org/docs/2.8/tools/mason/mason.html). The
   result should be a relatively stable experience when using these
   resolution-driven features. Below is a screenshot of inferred types
   and other information (lighter background; blue font) while editing
   a part of the Mason codebase. Notably, the `execopts.these()` call
-  at the end of the block demonstrates a resolevd iterator, while
+  at the end of the block demonstrates a resolved iterator, while
   other hints in this file show off successfully-resolved calls to
-  other modules in the Mason source code, and correct understanding of
+  other modules in the Mason source code, as well as correct understanding of
   bundled package types such as `Toml`.
 
   {{< figure class="fullwide" src="mason-cls-28.png" >}}
 
-  We've also adjusted the behavior of information displayed in this
+  We've also improved the behavior of information displayed in this
   manner ("inlays", in language server terminology). Specifically,
   since CLS presently computes this information upon saving a file, we
   have adjusted the inlays to be invalidated (if necessary) when
@@ -146,25 +146,30 @@
 
   The following animated GIF demonstrates these checks being flagged,
   as well as `chplcheck`'s built-in functionality to automatically fix
-  these issues.
+  them.
 
   {{< figure class="fullwide" src="new-rules.gif" >}}
 
 
   ### Debugging
 
-  This release saw us continue to improve the debugging experience for
-  Chapel users. In this release, we added many new pretty printers for
-  common Chapel data structures, like `list`, `set`, and `map`.
+  In this release, we continued improving the debugging experience for
+  Chapel users.  Chapel 2.8 adds new pretty-printers for common Chapel
+  data structures, like `list`, `set`, and `map`, as well as for
+  Chapel's distributed arrays.  In addition, this release expands the
+  set of expressions that can be evaluated within the debugger
 
-  For example, the following program has a simple bug in it: it tries
-  to access a key in a map that doesn't exist.
+  #### New pretty-printers
+
+  As an example of the new pretty-printing capabilities, consider the
+  following program that has a simple bug in it since it tries to
+  access a key in a map that doesn't exist:
 
   ```chapel
   use Map;
 
   proc getIt(m) {
-    var val = m["it"];
+    var val = m["it"];  // this is an error since 'it' wasn't stored in map 'm'
     return val;
   }
 
@@ -193,18 +198,20 @@
 
   Re-running in a debugger lets us jump to the stack frame where the
   error occurs and inspect the state of the program. With the new
-  pretty printers, we can easily see the contents of the map `m` and
+  pretty-printers, we can easily see the contents of the map `m` and
   understand why the error is occurring.
 
 
   {{<figure class="fullwide" src="debugMap.png">}}
 
-  These new pretty printers are useful by themselves, but they are
-  built on top of other new debugging improvements. In this release,
-  we dramatically improved the ability of the debugger to reason about
-  Chapel expressions.
+  These new pretty-printers are useful by themselves, but they are
+  built on top of other new debugging improvements
 
-  For example, consider the following program.
+  #### Expression Evaluation
+
+  In this release, we dramatically improved the ability of the
+  debugger to reason about Chapel expressions.  For example, consider
+  the following program.
 
   ```chapel
   use List;
@@ -242,121 +249,162 @@
   {{<figure class="fullwide" src="breakDistanceTo.png">}}
 
   Once we hit the breakpoint, we step into the method and inspect both
-  `this` and `other`, as well as perform arbitrary arithmetic with
-  those values.
+  `this` and `other`:
 
   {{<figure class="fullwide" src="inspectVars.png">}}
+
+  We can also perform arbitrary arithmetic with those values:
+
   {{<figure class="fullwide" src="math.png">}}
 
-  We can even invoke the method directly from the debugger. This isn't
-  perfect and has some limitations, but most of the time we can get
-  creative in the debugger and work around those limitations to get
-  the information we need.
+  We can even invoke the `.distanceTo()` method directly from the
+  debugger. This isn't perfect and has some limitations, but most of
+  the time those limitations can be worked around to get the
+  information we need.
 
   {{<figure class="fullwide" src="callMethod.png">}}
 
   This is a huge improvement over previous releases, where none of the
-  above would even be possible. These new feature help bring the
-  CHapel debugging experience much closer to that of debugging more
-  established languages like C or C++, making it much more useful to
-  run Chapel programs in a debugger.
+  above was possible. These new features help make the Chapel
+  debugging experience much more like debugging conventional languages
+  like C or C++, making it much more useful to run Chapel programs in
+  a debugger.
 
   These new debugging features are already enabling us to track down
-  and fix bugs in Chapel code more quickly and we are excited to hear
+  and fix bugs in Chapel code more quickly, and we are excited to hear
   feedback from users about how they are using these new features in
   their own debugging workflows.
 
 
-  ### Improved Loop Invariant Code Motion
+  ### Improved Loop-Invariant Code Motion
 
-  Like many compiled languages, Chapel relies on the standard Loop
-  Invariant Code Motion (LICM) optimization to avoid re-executing code
-  within loop bodies that is unnecessary to execeute each time.  As a
-  trivial example of LICM, the following loop's computation of
-  `halfPi` need not be re-evaluated in each of its million iterations
-  since the value is independent of `i`::
+  Like most compiled languages, Chapel relies on Loop-Invariant Code
+  Motion (LICM) as an optimization to avoid executing code redundantly
+  within loop bodies.
+
+  {{<details summary="**(\"Hold up... What's Loop-Invariant Code Motion?**\")">}}
+
+  As a trivial example of Loop-Invariant Code Motion, the following
+  computation of `halfPi` does not need to be re-evaluated in each of
+  the loop's `n` iterations since its value is independent of `i`:
 
   ```chapel
-  forall i in 1..1_000_000 {
+  forall i in 1..n {
     const halfPi = pi / 2;
     A[i] *= halfPi;
   }
   ```
 
-  As a result, a compiler can rewrite this as follows to avoid
-  pointless work:
+  As a result, compilers can use LICM to rewrite this loop as follows,
+  hoisting that computation out of the loop to avoid the redundant
+  work:
 
   ```chapel
   const halfPi = pi / 2;
-  forall i in 1..1_000_000 {
+  forall i in 1..n {
     A[i] *= halfPi;
   }
   ```
 
-  Chapel benefits from LICM both in the Chapel-specific part of the
-  compiler and in the back-end LLVM or C compiler that generates the
-  final executable.  It can be particularly important for Chapel to
-  optimize cases that it has semantic knowledge about that may be
-  obfuscated or impossible to determine in the C-level code handed to
-  the back-end.  Array accesses have historically been a key case of
-  this since Chapel's muldimensional, sparse, and distributed arrays
-  involve a lot of metadata as compared to C-level pointers and
-  offsets.
+  {{</details>}}
 
-  In Chapel 2.8, we extended Chapel's existing LICM pass to optimize
-  metadata accesses for arrays that are passed as arguments with the
-  `const` intent.  TODO: Stopped here
+  When compiling Chapel programs, LICM is performed in both the Chapel
+  compiler and the standard LLVM or C compiler that makes up its
+  back-end.  It's a no-brainer to leverage the latter to avoid
+  reinventing the wheel and to benefit from decades of C-level
+  compiler investments.  The rationale for implementing the former is
+  that there are cases where the Chapel compiler has access to
+  semantic information that can benefit LICM, and which can be
+  significantly obfuscated, or even lost, when lowering to the C-level
+  code that we hand off to the back-end compiler.
+
+  One such case concerns the metadata used for array accesses.  When
+  it's known that the array will not be resized within the loop, such
+  metadata accesses can typically be hoisted outside of loops to avoid
+  referring to the same fields or computing the same subcomputations
+  over and over again.  In particular, Chapel's multidimensional,
+  sparse, and/or distributed arrays can involve a significant amount
+  of metadata compared to the simpler C-style buffers, pointers, and
+  offsets that back-end compilers are accustomed to.  Understanding
+  the semantics of arrays permits Chapel to optimize such metadata
+  accesses.
+
+  In Chapel 2.8, we extended Chapel's existing LICM pass to hoist
+  metadata computations for arrays that are declared `const`, knowing
+  that they can't change size, shape, or indices.  This work was
+  motivated in part by Thitrin Sastarasadhit's [transformers
+  study]({{<relref "transformers-from-scratch-in-chapel-and-c++">}})
+  that was published on this blog late last year.  Specifically, this
+  transformation enables vectorization for key loop kernels that had
+  previously been thwarted by these array metadata accesses.
+
+  The following execution time plot, taken from [Chapel's performance
+  tracking suite](https://chapel-lang.org/perf/), shows the impact of
+  this optimization on one of the motivating kernels from Thitrin's
+  article:
+
+  {{<figure class="fullwide" src="LICM-kernel.png">}}
+
+  Specifically, the motivating loop idiom improved by ~7.5% once the
+  LICM improvement was added on February 17th, bringing it in-line
+  with lower-level ways of writing the kernel that also enabled
+  vectorization.  We also saw improvements to other longstanding,
+  array-heavy benchmarks such as the following port of Bale Toposort:
+  
+  {{<figure class="fullwide" src="LICM-toposort.png">}}
+  
   
   
 
   ### New `--system-launcher-flags` option
 
-  This release adds a new flag to Chapel executables that utilize
+  Chapel 2.8 also adds a new flag to Chapel executables that utilize
   Slurm-based
-  [launchers](https://chapel-lang.org/docs/2.8/usingchapel/launcher.html).
-  The flag is named `--system-launcher-flags`, and it can be used to
-  pass additional options to the underlying Slurm commands that get
-  the Chapel program running, like `srun`.  This is particularly
-  useful when users need to access Slurm options that are not directly
-  supported by Chapel.  Specifically, this flag should be considered a
+  [launchers](https://chapel-lang.org/docs/2.8/usingchapel/launcher.html),
+  named `--system-launcher-flags`.  This flag can be used to pass
+  additional options to the underlying Slurm commands that get the
+  Chapel program running, like `srun`.  This is particularly valuable
+  when users need to access Slurm options that are not directly
+  supported by Chapel.  In other words, this flag can be considered a
   fallback for accessing features that aren't covered by Chapel's
   standard [launcher flags and environment
   variables](https://chapel-lang.org/docs/2.8/usingchapel/launcher.html#common-slurm-settings).
 
-  For example, a user doing benchmarking who wanted to override the
+  As an example, a user doing benchmarking who wants to override the
   default number of reserved specialized cores using Slurm's
   `--core-spec` or `-S` flag would be at a loss using standard Chapel
-  features, which do not support that override.  Prior to Chapel 2.8,
-  such users would need to either rely on a Slurm environment variable
-  to make the request, or else abandon Chapel's launcher and write
-  their own Slurm script or command to launch the program.  However,
-  as of Chapel 2.8, users can execute their program with
+  options, since they do not support that override.  Prior to Chapel
+  2.8, such users would need to either rely on a Slurm environment
+  variable to make the request, or else abandon Chapel's launcher and
+  write their own Slurm script or command to launch the program, which
+  can be tricky to get right.
+
+  However, as of Chapel 2.8, users can run their program with
   `--system-launcher-flags "-S 0"` to have Chapel pass `-S 0` to the
   underlying `srun` command that's invoked on their behalf, saving
   effort and the potential for errors, while also making the
-  command-line more explicit.
-
-  We expect that future Chapel releases will extend this capability to
-  support launchers wrapping technologies other than Slurm, as
-  desired.
+  command-line more explicit.  We anticipate that future Chapel
+  releases will extend this capability to support non-Slurm launchers,
+  as desired.
 
 
   ### Mason Package Manager
 
-  Chapel's package manager, Mason, has seen a lot of new feature
-  support in recent releases. In this release, we made a concerted
-  effort to track down and fix many edge cases and bugs, and we are
-  happy to report that Mason is now much more robust and
-  reliable. This isn't the most exciting work, but it is important for
-  the long-term health of the tool and project.
+  Chapel's package manager,
+  [Mason](https://chapel-lang.org/docs/2.8/tools/mason/mason.html),
+  has seen a lot of new feature support in recent releases. For
+  version 2.8, we made a concerted effort to track down and fix many
+  edge cases and bugs, and we are happy to report that Mason is now
+  much more robust and reliable. This isn't the most exciting work,
+  but it is important for the long-term health of the tool and
+  project.
 
   One exciting new feature for Mason is the improved `mason doc`
-  command. This work actually involved greatly improving the
-  underlying `chpldoc` tool, which is used to generate documentation
-  for Chapel packages. The `mason doc` command now generates
-  documentation specialized to a given project by default, as well as
-  giving users to tools to better customize the generated
-  documentation.
+  command. This effort involved several improvements to the underlying
+  `chpldoc` tool, which is used to generate documentation for Chapel
+  modules. The `mason doc` command now generates documentation
+  specialized to a given project by default, while also giving users
+  the tools to better customize the generated documentation.
 
   We are really excited to see Chapel users and developers starting to
   create and contribute more packages to Mason. We hope to see the
@@ -370,43 +418,34 @@
   As you may have seen in [previous]({{< relref
   "announcing-chapel-2.7#improvements-to-the-dyno-compiler-front-end"
   >}}) [release]({{< relref
-  "announcing-chapel-2.6#improvements-to-the-dyno-compiler-front-end" >}})
-  [announcements]({{< relref
-  "announcing-chapel-2.5#improvements-to-the-dyno-compiler-front-end" >}}),
-  _Dyno_ is the name of our project that is modernizing and improving the
-  Chapel compiler. Dyno improves error messages, allows incremental type
-  resolution, and enables the [development of language tooling]({{< relref
-  "chapel-py" >}}).  Among the major wins for this ongoing effort is
-  the [Chapel Language Server (CLS)](https://chapel-lang.org/docs/2.7/tools/chpl-language-server/chpl-language-server.html),
-  which was previously featured in a [blog post about editor
-  integration]({{< relref "chapel-lsp" >}}), not to mention Chapel's
-  linter, VSCode support, and `chpldoc`.
+  "announcing-chapel-2.6#improvements-to-the-dyno-compiler-front-end"
+  >}}) [announcements]({{< relref
+  "announcing-chapel-2.5#improvements-to-the-dyno-compiler-front-end"
+  >}}), _Dyno_ is the name of our project that is modernizing and
+  improving the Chapel compiler. Dyno improves error messages, allows
+  incremental type resolution, and enables the development of language
+  tooling, [as described above]({{< relref
+  "#chapel-language-server-and-linter" >}}).  Our team has been hard
+  at work implementing many features of Chapel's type system in Dyno,
+  which, among other things, enables tools like CLS to provide more
+  accurate and helpful information to users.
 
-  Our team has been hard at work implementing many features of
-  Chapel's type system in Dyno, which, among other things, will
-  enable tools like CLS to provide more accurate and helpful
-  information to users.  In the 2.8 release, we have continued to
-  improve Dyno's support for Chapel's language features, and we've
-  also expanded the compiler's ability to leverage the Dyno front-end
-  to generate executable code.
+  The other current focus within Dyno is taking the information that
+  it has computed about the program and generating AST for the
+  production compiler, essentially skipping over its historical type
+  resolution and analysis phases. This capability is enabled using the
+  `--dyno` command-line flag.  Current support is limited to a
+  subset of Chapel's language features, but is growing all the time.
 
-  #### Generating Executable Code
+  A key milestone for Dyno in Chapel 2.8 is the ability to generate
+  executable code for "Hello, world!" style programs. This is a
+  significant milestone for Dyno, as it demonstrates the ability to
+  compile many language features that the standard library relies
+  upon.  It's also a step toward Dyno's goal of replacing the
+  front-end of the production compiler.
 
-  This release saw improvements to our support for using
-  Dyno to generate executable code, which is a major step toward
-  Dyno's goal of replacing the front-end of the production
-  compiler. This is an ongoing process that involves taking the
-  information that Dyno has computed about the program and generating
-  AST for the production compiler, essentially skipping over its
-  historical type resolution and analysis phases. This capability is
-  enabled using the ``--dyno`` command-line flag.
-
-  Initial support is limited to a subset of Chapel's language
-  features, but is growing all the time. In this release, we were finally
-  able to compile a program that uses a ``fileWriter`` and its ``writeln``
-  method. This is a significant milestone for Dyno, as it demonstrates the
-  ability to compile many language features that the standard library relies
-  upon.
+  As an example, consider the following program, which makes use of
+  the `fileWriter` type and its `.writeln()` method:
 
   {{< file_download fname="converter.chpl" lang="chapel" >}}
 
@@ -419,9 +458,11 @@
 
   {{< file_download fname="converter.good" lang="text" >}}
 
-  A program like this looks simple, but relies on many language features
-  behind the scenes to make such a simple program possible. Here are just
-  some of the features that are being used by the IO module in this example:
+  While a program like this may appear to be trivial, it relies on
+  many language features behind the scenes for its
+  implementation. Here are just some of the Chapel features that are
+  being used by the `IO` module in this example:
+
     - generic variadic arguments
     - external interoperability
     - owned and shared classes
