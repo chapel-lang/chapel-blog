@@ -229,26 +229,27 @@
   We can even invoke the `.distanceTo()` method directly from the
   debugger. This is not yet perfect and has some limitations, but most
   of the time those limitations can be worked around to obtain the
-  needed information:
+  needed information, as demonstrated below:
 
   {{<figure class="fullwide" src="callMethod.png">}}
 
   This is a huge improvement over previous releases, in which none of
-  the above was possible
+  the above was possible.
 
   These new features help make the Chapel debugging experience much
-  more like debugging conventional languages like C or C++.  They make
-  it much more useful to run Chapel programs in a debugger and are
-  enabling us to track down and fix bugs in Chapel code much more
+  more like debugging conventional languages like C or C++.  The net
+  result improves the ability to run Chapel programs in a debugger and
+  has enabled us to track down and fix bugs in Chapel code far more
   quickly.  We are excited to hear feedback from users about how they
-  are using these new features in their own debugging workflows.
+  are applying these new features in their own debugging workflows.
 
 
   ### Loop-Invariant Code Motion for Arrays
 
   Like most compiled languages, Chapel relies on Loop-Invariant Code
   Motion (LICM) as an optimization to avoid executing code redundantly
-  within loop bodies.
+  within loop bodies.  In this release, we improved Chapel's LICM to
+  enable vectorization and improve performance.
 
   {{<details summary="**(\"Hold up... What's Loop-Invariant Code Motion?**\")">}}
 
@@ -276,29 +277,34 @@
 
   {{</details>}}
 
-  When compiling Chapel programs, LICM is performed in both the Chapel
-  compiler and the standard LLVM or C compiler that makes up its
-  back-end.  It's a no-brainer to leverage the latter to avoid
-  reinventing the wheel and benefit from decades of C-level compiler
-  investments.  The rationale for implementing the former is that
-  there are cases in which the Chapel compiler has access to
-  high-level semantic information that can benefit LICM, where that
-  information would be significantly obfuscated, or even lost, when
-  lowering to the C-level code that's handed off to the back-end
-  compiler.  Hoisting such expressions in the Chapel compiler can
-  therefore unlock new optimization opportunities enabled by the
-  language's high-level features.
-
-  One such case concerns the metadata used for array accesses.  When
-  it's known that an array will not be resized within a loop, such
-  metadata accesses can typically be hoisted outside of loops to avoid
-  referring to the same fields or computing the same subcomputations
-  over and over again.  In particular, Chapel's multidimensional,
-  sparse, and/or distributed arrays can involve a significant amount
-  of metadata compared to the simpler C-style buffers, pointers, and
-  offsets that back-end compilers are accustomed to.  By understanding
-  the semantics of its arrays, the Chapel compiler can optimize such
-  metadata accesses.
+  When compiling Chapel programs, LICM is performed in {{<sidenote
+  "right" "both" -15>}}The reason for "both" is that it's a no-brainer
+  to leverage the back-end compiler to benefit from decades of C-level
+  optimizations.  The rationale for also having the Chapel compiler do
+  LICM is that there are cases in which it has access to high-level
+  semantic information that is significantly obfuscated, or even lost,
+  when lowering to the C-level code that's handed off to the back-end.
+  Hoisting such expressions in the Chapel compiler can therefore
+  unlock new optimization opportunities enabled by the language's
+  high-level features.{{</sidenote>}} the Chapel compiler and the
+  standard LLVM or C compiler that makes up its back-end.  An
+  important case for the Chapel compiler to handle relates to the
+  metadata used for array accesses.  When it's known that an array
+  will not be resized within a loop, we can hoist reads of its
+  metadata fields and repetitive computations on their values to avoid
+  performing redundant work in each iteration.  This is particularly
+  important for Chapel given that its multidimensional, sparse, and/or
+  distributed arrays can involve a significant amount of metadata
+  compared to the simpler C-style buffers, pointers, and offsets that
+  back-end compilers are accustomed to.  By {{<sidenote "right"
+  "understanding the semantics of these arrays">}}This is an
+  illustration of a [point made]({{< relref
+  "10myths-part1/#enabling-optimization-through-improved-abstractions"
+  >}}) in the first article of our recent [_10 Myths About Scalable
+  Parallel Programming Languages (Redux)_]({{<relref
+  "10-myths-about-scalable-parallel-programming-languages-redux">}})
+  series.{{</sidenote>}}, the Chapel compiler is well-suited to
+  hoist such computations.
 
   In Chapel 2.8, we extended Chapel's existing LICM pass to hoist
   metadata computations for arrays that are declared `const`, knowing
@@ -306,17 +312,17 @@
   motivated in part by Thitrin Sastarasadhit's [transformers
   study]({{<relref "transformers-from-scratch-in-chapel-and-c++">}})
   that was published on this blog a few months ago.  Specifically,
-  this transformation enables vectorization for key loop kernels that
+  these improvements enable vectorization for key loop kernels that
   had previously been thwarted by such array metadata accesses.
 
-  The following execution time plot, taken from [Chapel's nightly
+  The following execution time plot, taken from Chapel's [nightly
   performance tracking suite](https://chapel-lang.org/perf/), shows
-  the impact of this optimization on one of a kernel motivated by
-  Thitrin's code:
+  the impact of this optimization on a kernel motivated by Thitrin's
+  code:
 
   {{<figure class="fullwide" src="LICM-kernel.png">}}
 
-  Specifically, the loop idiom improved by ~7.5% once the LICM
+  Specifically, the loop idiom improved by ~7.5% once our LICM
   improvement was merged on February 17th, making its performance
   comparable to lower-level ways of writing the kernel that also
   enabled vectorization.  We saw similar improvements to other
@@ -352,8 +358,8 @@
   However, as of Chapel 2.8, users can run their program with
   `--system-launcher-flags "-S 0"` to have Chapel pass `-S 0` to the
   underlying `srun` command that's invoked on their behalf.  This
-  saves effort and the potential for errors, while also making the
-  command-line more explicit.  We anticipate that future Chapel
+  saves effort and reduces the potential for errors, while also making
+  the command-line more explicit.  We anticipate that future Chapel
   releases will extend this capability to support non-Slurm launchers,
   if desired by the user community.
 
@@ -371,10 +377,11 @@
 
   One exciting new feature for Mason is the improved `mason doc`
   command. This effort involved several improvements to the underlying
-  `chpldoc` tool, which is used to generate documentation for Chapel
-  modules. The `mason doc` command now generates documentation
-  specialized to a given project by default, while also giving users
-  the tools to better customize the generated documentation.
+  [`chpldoc`](https://chapel-lang.org/docs/2.8/tools/chpldoc/chpldoc.html)
+  tool, which is used to generate documentation for Chapel
+  modules. The `mason doc` command now specializes the documentation
+  for the project by default, while also giving users the tools to
+  better customize the results.
 
   We are really excited to see Chapel users and developers starting to
   create and contribute more packages to Mason. We hope to see the
@@ -401,21 +408,22 @@
   users.
 
   The other current focus within Dyno is taking the information that
-  it has computed about a program and generating AST for the
-  production compiler, essentially skipping over its historical type
-  resolution and analysis phases. This capability is enabled using the
-  `--dyno` command-line flag.  Current support is limited to a
-  subset of Chapel's language features, but is growing all the time.
+  it has computed about a program and translating it into a form the
+  production compiler can understand, essentially skipping over its
+  historical type resolution and analysis phases. This capability is
+  enabled using the `--dyno` command-line flag.  Current support is
+  limited to a subset of Chapel's language features, but is growing
+  all the time.
 
   A key milestone for Dyno in Chapel 2.8 is the ability to generate
-  executable code for "Hello, world!" style programs. This is a
+  executable code for "Hello, world!"-style programs. This is a
   significant milestone for Dyno, as it demonstrates the ability to
   compile many language features that the standard library relies
   upon.  It's also a big step toward Dyno's goal of replacing the
   front-end of the production compiler.
 
   As an example, consider the following program, which makes use of
-  the `fileWriter` type and its `.writeln()` method:
+  the `fileWriter` type and its `.writeln()` method in various ways:
 
   {{< file_download fname="converter.chpl" lang="chapel" >}}
 
@@ -427,8 +435,8 @@
 
   {{< file_download fname="converter.good" lang="text" >}}
 
-  While a program like this may appear to be trivial, it relies on
-  many language features behind the scenes for its
+  While a program like this may appear to be somewhat straightforward,
+  behind the scenes it relies on many language features for its
   implementation. Here are just some of the Chapel features that are
   being used by the `IO` module in this example:
 
