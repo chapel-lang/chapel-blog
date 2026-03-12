@@ -184,37 +184,13 @@
   following program, noting that it contains a simple bug since it
   tries to read a non-existent key from a map:
 
-  ```chapel
-  use Map;
-
-  proc getIt(m) {
-    var val = m["it"];  // this is an error since 'it' wasn't stored in map 'm'
-    return val;
-  }
-
-  proc main() {
-    var m: map(string, int);
-    m["this"] = 22;
-    m["or"] = 33;
-    m["that"] = 44;
-    var val = getIt(m);
-    writeln('m["it"] is ', val);
-  }
-  ```
+  {{< file_download fname="mapDebug.chpl" lang="chapel" >}}
 
 /*
   If we run this program, the bug will cause it to halt due to the
   error not being caught and handled:.
 
-  ```
-  uncaught KeyNotFoundError: key 'it' not found
-    mapDebug.chpl:4: thrown here
-    mapDebug.chpl:4: uncaught here
-  Stacktrace
-  
-  ./maopgetIt() at mapDebug.chpl:4
-  main() at mapDebug.chpl:13
-  ```
+  {{< file_download fname="mapDebug.good" lang="chapel" >}}
 
   Re-running in a debugger permits us jump to the stack frame where
   the error occurs and inspect the state of the program. With the new
@@ -234,35 +210,7 @@
   debugger to reason about Chapel expressions.  As an example,
   consider the following program.
 
-  ```chapel
-  use List;
-  use Random;
-
-  var rs = new randomStream(real, 123456);
-
-  record point {
-    var x, y: real;
-  }
-
-  proc point.distanceTo(other: point) do
-    return sqrt((other.x - this.x)**2 + (other.y - this.y)**2);
-
-  proc main() {
-    var points: list(point);
-    for 1..10 do
-      points.pushBack(new point(rs.next(-10.0, 10.0),
-                                rs.next(-10.0, 10.0)));
-    writeln("points: ", points);
-    for i in 0..<points.size {
-      for j in 0..<points.size {
-        if i == j then continue;
-        var d = points[i].distanceTo(points[j]);
-        writef("distance between %? and %? is %n\n",
-                points[i], points[j], d);
-      }
-    }
-  }
-  ```
+  {{< file_download fname="distance.chpl" lang="chapel" >}}
 
   We can run this program in the debugger and set a breakpoint on the
   `.distanceTo()` method:

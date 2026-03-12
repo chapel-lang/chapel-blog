@@ -1,0 +1,7 @@
+uncaught KeyNotFoundError: key 'it' not found
+  mapDebug.chpl:4: thrown here
+  mapDebug.chpl:4: uncaught here
+Stacktrace
+
+getIt() at mapDebug.chpl:3
+main() at mapDebug.chpl:8

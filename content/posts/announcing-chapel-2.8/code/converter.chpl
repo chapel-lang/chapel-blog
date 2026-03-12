@@ -5,7 +5,6 @@ record R {
 }
 
 proc main() {
-  // as-yet-unsolved errors prevent use of top-level `writeln`
   var s = new file(chpl_cstdout());
   var w = s.writer(locking=false);
 
