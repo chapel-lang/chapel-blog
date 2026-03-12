@@ -7,15 +7,14 @@
 /*
 
   The Chapel developer community is pleased to announce the release of
-  Chapel 2.8!  As with other recent releases, a big focus of this
-  version is improvements to Chapel's tools ecosystem.
-
-  As always, you can [download and
-  install](https://chapel-lang.org/download/) this new version in a
-  {{<sidenote "right" "variety of formats">}}Please note that some
-  formats may not yet be available at time of
-  publication...{{</sidenote>}}, including Spack, Homebrew, various
-  Linux package managers, Docker, and source tarballs.
+  Chapel 2.8!  As with other recent versions, a big focus for this
+  release was improvements to Chapel's tools ecosystem.  As always,
+  you can [download and install](https://chapel-lang.org/download/)
+  this new version in a {{<sidenote "right"
+  "variety of formats">}}Please note that some formats may not yet be
+  available at time of publication...{{</sidenote>}}, including Spack,
+  Homebrew, various Linux package managers, Docker, and source
+  tarballs.
 
   This article summarizes several of Chapel 2.8's highlights,
   including:
@@ -30,12 +29,12 @@
 
   * A new [flag for Slurm
     launchers](#new-flag---system-launcher-flags) supporting the
-    specification of system-level flags
+    specification of lower-level flags
 
   * Improvements to the [Mason package
     manager](#mason-package-manager) for Chapel
 
-  * A nice "Hello, world!" milestone for [Dyno-based code
+  * A nice "Hello, world!"-style milestone for [Dyno-based code
     generation](#dyno-compiler-code-generation)
 
   Other notable highlights of Chapel 2.8 that aren't covered by this
@@ -55,9 +54,10 @@
 
   * Support for LLVM 21 as the Chapel compiler back-end
 
-  For a far more complete list of improvements in Chapel 2.8, see the
-  [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.8/CHANGES.md)
-  file.  And a big thanks to [everyone who
+  For a far more complete list of improvements in Chapel 2.8, see its
+  entries in
+  [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.8/CHANGES.md).
+  And a big thanks to [everyone who
   contributed](https://github.com/chapel-lang/chapel/blob/release/2.8/CONTRIBUTORS.md)
   to Chapel 2.8!
 
@@ -89,10 +89,10 @@
   continued to make great strides, and today is capable of resolving a
   substantial (though not complete) portion of the language. As a
   result, the experimental support for resolution-driven features in
-  the CLS has been steadily growing more robust.
+  CLS has been steadily growing more robust.
 
   In the 2.8 release, we've spent some time tracking down bugs that
-  specifically affected the CLS with established codebases such as
+  specifically affected CLS in established codebases such as
   [Mason](https://chapel-lang.org/docs/2.8/tools/mason/mason.html). The
   result should be a relatively stable experience when using these
   resolution-driven features.
@@ -159,15 +159,15 @@
   ```
 
   After executing these commands, the `build` directory will contain a
-  `.cls-commands.json` file. A common pattern is to then symbolically
+  `.cls-commands.json` file. A common pattern is then to symbolically
   link this file to the project root:
 
   ```bash
   ln -s build/.cls-commands.json .cls-commands.json
   ```
 
-  From there, the CLS should be usable as normal. Subsequent builds
-  will update the<br>`.cls-commands.json` file if necessary.
+  From there, CLS should be usable as normal. Subsequent builds
+  will update the<br>`.cls-commands.json` file, if necessary.
 
 
   ### Debugging
@@ -201,14 +201,14 @@
   {{<figure class="fullwide" src="debugMap.png">}}
 
   These new pretty-printers are useful by themselves, but they are
-  built on top of powerful new debugging capabilities described in the
-  next section.
+  built on top of powerful new debugging capabilities that we'll
+  describe next:
 
   #### Expression Evaluation
 
   In this release, we dramatically improved the ability of the
   debugger to reason about Chapel expressions.  As an example,
-  consider the following program.
+  consider the following program:
 
   {{< file_download fname="distance.chpl" lang="chapel" >}}
 
@@ -255,7 +255,7 @@
 
   As a trivial example of Loop-Invariant Code Motion, the following
   computation of `halfPi` does not need to be re-evaluated in each of
-  the loop's `n` iterations since its value is independent of `i`:
+  the loop's `n` iterations, since its value is independent of `i`:
 
   ```chapel
   forall i in 1..n {
@@ -280,31 +280,32 @@
   When compiling Chapel programs, LICM is performed in {{<sidenote
   "right" "both" -15>}}The reason for "both" is that it's a no-brainer
   to leverage the back-end compiler to benefit from decades of C-level
-  optimizations.  The rationale for also having the Chapel compiler do
-  LICM is that there are cases in which it has access to high-level
-  semantic information that is significantly obfuscated, or even lost,
-  when lowering to the C-level code that's handed off to the back-end.
-  Hoisting such expressions in the Chapel compiler can therefore
-  unlock new optimization opportunities enabled by the language's
-  high-level features.{{</sidenote>}} the Chapel compiler and the
-  standard LLVM or C compiler that makes up its back-end.  An
+  optimizations.  The rationale for also having the Chapel compiler
+  perform LICM is that there are cases in which it has access to
+  high-level semantic information that is significantly obfuscated, or
+  even lost, when lowering to the C-level code that's handed off to
+  the back-end.  Hoisting such expressions in the Chapel compiler can
+  therefore unlock new optimization opportunities enabled by the
+  language's high-level features.{{</sidenote>}} the Chapel compiler
+  and the standard LLVM or C compiler that makes up its back-end.  An
   important case for the Chapel compiler to handle relates to the
   metadata used for array accesses.  When it's known that an array
   will not be resized within a loop, we can hoist reads of its
-  metadata fields and repetitive computations on their values to avoid
-  performing redundant work in each iteration.  This is particularly
-  important for Chapel given that its multidimensional, sparse, and/or
-  distributed arrays can involve a significant amount of metadata
-  compared to the simpler C-style buffers, pointers, and offsets that
-  back-end compilers are accustomed to.  By {{<sidenote "right"
+  metadata fields, as well as repetitive computations on their values,
+  out of the loop to save work in each iteration.  This is
+  particularly important for Chapel given that its multidimensional,
+  sparse, and/or distributed arrays can involve a significant amount
+  of metadata that back-end compilers aren't accustomed to (given
+  their focus on more traditional C-style buffers, pointers, and
+  offsets).  By {{<sidenote "right"
   "understanding the semantics of these arrays">}}This is an
   illustration of a [point made]({{< relref
   "10myths-part1/#enabling-optimization-through-improved-abstractions"
   >}}) in the first article of our recent [_10 Myths About Scalable
   Parallel Programming Languages (Redux)_]({{<relref
   "10-myths-about-scalable-parallel-programming-languages-redux">}})
-  series.{{</sidenote>}}, the Chapel compiler is well-suited to
-  hoist such computations.
+  series.{{</sidenote>}}, the Chapel compiler is well-suited to hoist
+  such computations.
 
   In Chapel 2.8, we extended Chapel's existing LICM pass to hoist
   metadata computations for arrays that are declared `const`, knowing
@@ -334,16 +335,17 @@
 
   ### New flag: `--system-launcher-flags`
 
-  Chapel 2.8 adds a new flag to Chapel executables using Slurm-based
-  [launchers](https://chapel-lang.org/docs/2.8/usingchapel/launcher.html),
-  which is named `--system-launcher-flags`.  This flag can be used to
-  pass additional options to the underlying Slurm commands that get
-  the Chapel program running, like `srun`.  This is particularly
-  valuable when users need to specify Slurm options that aren't
-  supported directly by Chapel.  Generally, Chapel's standard
-  [launcher flags and environment
+  Chapel 2.8 adds a new execution-time flag,
+  `--system-launcher-flags`, to Chapel programs built to use
+  Slurm-based
+  [launchers](https://chapel-lang.org/docs/2.8/usingchapel/launcher.html).
+  This flag can be used to pass additional options to the underlying
+  Slurm commands, like `srun`, that get the Chapel program running.
+  This is particularly valuable when users need to specify Slurm
+  options that aren't supported directly by Chapel.  Generally,
+  Chapel's standard [launcher flags and environment
   variables](https://chapel-lang.org/docs/2.8/usingchapel/launcher.html#common-slurm-settings)
-  should be used when applicable, with this new flag available as a
+  should be used when applicable, with this new flag serving as a
   fallback.
 
   As a motivating example, a user performing benchmarking studies who
@@ -361,7 +363,7 @@
   saves effort and reduces the potential for errors, while also making
   the command-line more explicit.  We anticipate that future Chapel
   releases will extend this capability to support non-Slurm launchers,
-  if desired by the user community.
+  as desired by the user community.
 
 
   ### Mason Package Manager
@@ -400,23 +402,23 @@
   "announcing-chapel-2.5#improvements-to-the-dyno-compiler-front-end"
   >}}), _Dyno_ is the name of our project that is modernizing and
   improving the Chapel compiler. Dyno improves error messages, allows
-  incremental type resolution, and enables the development of language
-  tooling, [as described above](#chapel-language-server-and-linter).
-  Our team has been hard at work implementing many features of
-  Chapel's type system in Dyno, which, among other things, enables
-  tools like CLS to provide more accurate and helpful information to
-  users.
+  incremental type resolution, and simplifies the development of
+  language tooling.  Our team has been hard at work implementing many
+  features of Chapel's type system in Dyno. Among other things, this
+  enables tools like CLS to provide more accurate and helpful
+  information to users, [as described
+  above](#chapel-language-server-and-linter).
 
   The other current focus within Dyno is taking the information that
-  it has computed about a program and translating it into a form the
-  production compiler can understand, essentially skipping over its
-  historical type resolution and analysis phases. This capability is
-  enabled using the `--dyno` command-line flag.  Current support is
+  it has computed about a program and translating it into a form that
+  the production compiler can understand, essentially skipping over
+  its historical type resolution and analysis phases. This capability
+  is enabled using the `--dyno` command-line flag.  Current support is
   limited to a subset of Chapel's language features, but is growing
   all the time.
 
   A key milestone for Dyno in Chapel 2.8 is the ability to generate
-  executable code for "Hello, world!"-style programs. This is a
+  executable code for "Hello, world"-style programs. This is a
   significant milestone for Dyno, as it demonstrates the ability to
   compile many language features that the standard library relies
   upon.  It's also a big step toward Dyno's goal of replacing the
@@ -427,17 +429,18 @@
 
   {{< file_download fname="converter.chpl" lang="chapel" >}}
 
-  The program above can be {{< sidenote "right" "compiled" >}} The
-  `--no-checks` flag is used here to disable runtime checks that
-  utilize language features not yet supported by Dyno's code
-  generation.  {{< /sidenote >}} with ``--dyno --no-checks`` to have
-  Dyno produce an executable that prints the following output:
+  As of Chapel 2.8, this program can be {{< sidenote "right"
+  "compiled" >}} The `--no-checks` flag is used here to disable
+  runtime checks that utilize language features not yet supported by
+  Dyno's code generation.  {{< /sidenote >}} with ``--dyno
+  --no-checks`` to have Dyno produce an executable that prints the
+  following output:
 
   {{< file_download fname="converter.good" lang="text" >}}
 
   While a program like this may appear to be somewhat straightforward,
   behind the scenes it relies on many language features for its
-  implementation. Here are just some of the Chapel features that are
+  implementation. Here are just a few of the Chapel features that are
   being used by the `IO` module in this example:
 
     - generic variadic arguments
@@ -456,11 +459,12 @@
   ### For More Information
 
   If you have questions about Chapel 2.8 or any of its new features,
-  please reach out on Chapel's [Discord
-  channel](https://discord.gg/xu2xg45yqH), [Discourse
+  please reach out on Chapel's [Slack
+  workspace](https://join.slack.com/t/chapelnetwork/shared_invite/zt-3p459bjlh-0TQRloaBPqkZUe_dWz~C~Q),
+  [Discord channel](https://discord.gg/xu2xg45yqH), [Discourse
   group](https://chapel.discourse.group/), or one of our other
   [community forums](https://chapel-lang.org/forums/).  We're always
-  interested in hearing about how we can make the Chapel language,
-  libraries, implementation, and tools more useful to you.
+  interested in hearing more about how we can make the Chapel
+  language, libraries, implementation, and tools more useful to you.
 
 */
