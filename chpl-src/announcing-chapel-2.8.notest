@@ -1,0 +1,7 @@
+This announcement didn't end up using top-level code, but I wanted to
+keep it alongside the others for symmetry.
+
+(Specifically, it seemed weird to have one of the two debugging codes
+be testable and not the other; and I wasn't confident that I could
+inline the .good file for converter into the article in a clean way...
+though maybe I just didn't try hard enough?

@@ -1,7 +1,7 @@
 // Announcing Chapel 2.8!
 // authors: ["Daniel Fedorin", "Jade Abraham", "Ben Harshbarger", "Brad Chamberlain"]
 // summary: "Highlights from the March 2026 release of Chapel 2.8"
-// tags: []
+// tags: ["Tools", "Debugging", "Optimizations", "Vectorization", "Mason", "Dyno"]
 // series: ["Release Announcements"]
 // date: 2026-03-12
 /*
@@ -74,7 +74,7 @@
   This 2.8 release includes several improvements to both of these
   tools.
 
-  #### Editors, Resolution and Inlays
+  #### Editing, Resolution, and Inlays
 
   When we first wrote about CLS, we covered [language server features
   that relied on resolution]({{< relref
@@ -152,7 +152,7 @@
   Enabling this integration boils down to using the new
   `CMAKE_EXPORT_CHPL_COMMANDS` environment variable:
 
-  ```bash
+  ```console
   mkdir build
   cmake -B build -DCMAKE_EXPORT_CHPL_COMMANDS=ON
   cmake --build build
@@ -162,7 +162,7 @@
   `.cls-commands.json` file. A common pattern is then to symbolically
   link this file to the project root:
 
-  ```bash
+  ```console
   ln -s build/.cls-commands.json .cls-commands.json
   ```
 
@@ -186,7 +186,6 @@
 
   {{< file_download fname="mapDebug.chpl" lang="chapel" >}}
 
-/*
   If we run this program, the bug will cause it to halt due to the
   error not being caught and handled:.
 
