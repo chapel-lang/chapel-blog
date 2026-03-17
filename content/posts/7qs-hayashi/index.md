@@ -149,7 +149,7 @@ miniapps like Stream or Black-Scholes, but also in real-world Chapel
 applications such as
 [CHAMPS](https://chapel-lang.org/CHIUW2022.html#hayashi),
 [ChOp](https://hal.science/hal-03149394/),
-and [Arkouda](https://chapel-lang.org/CHIUW2022.html#milthorpe).
+and [Arkouda](https://chapel-lang.org/CHIUW2023.html#milthorpe).
 
 These successes highlight what I value most about Chapel: it lets me
 build systems that stay clean and expressive while still delivering
@@ -184,10 +184,11 @@ One recent development that excites our group is an early indication
 that Chapel could be more energy efficient than MPI or OpenSHMEM for
 certain classes of applications. This result comes from work by one of
 our Ph.D. students, Shubhendra Pal Singhal, and was made possible
-thanks to significant support from Dr. Brad Chamberlain and his
-team. We look forward to sharing it at the CUG 2026 conference. In an
-era where power efficiency is becoming as important as raw
-performance, this is a promising direction for the language.
+thanks to significant support from Dr. Brad Chamberlain and his team,
+as well as the ORNL team led by Dr. Oscar Hernandez. We look forward
+to sharing it at the CUG 2026 conference. In an era where power
+efficiency is becoming as important as raw performance, this is a
+promising direction for the language.
 
 Finally, I want to echo what many others have said: Chapel’s strengths
 go far beyond its elegant syntax and powerful abstractions. Its real
