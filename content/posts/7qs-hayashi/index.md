@@ -4,7 +4,7 @@ richtitle: "7 Questions for Akihro Hayashi:<br>Early Chapel GPU Support through 
 date: 2026-03-17
 tags: ["User Experiences", "Interviews", "GPUs", "ChapelCon"]
 series: ["7 Questions for Chapel Users"]
-summary: "An interview with Dr. Akihiro Hayashi about his TODO"
+summary: "An interview with Dr. Akihiro Hayashi about his trailblazing work targeting GPUs with Chapel"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "akihiro.jpeg"
 ---
