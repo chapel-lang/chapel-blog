@@ -68,11 +68,20 @@ effectively utilize the underlying hardware. These components help
 programmers achieve strong performance without needing to understand
 every hardware detail.
 
+{{<pullquote>}}
+
+One of Chapel’s most powerful strengths is that many of its features
+are implemented in Chapel itself.  This reflects Chapel's
+multi-resolution design philosophy.
+
+{{</pullquote>}}
+
 The broader impact is accessibility: more scientists, engineers, and
 developers can leverage advanced computing to solve real‑world
 problems, such as computational fluid dynamics, combinatorial
 optimization, and large‑scale data analysis, without becoming system
 experts.
+
 
 
 #### 3. How does Chapel help you with these problems?
@@ -143,6 +152,13 @@ alongside thin wrappers for CUDA, HIP, and DPC++, allowing users to
 choose their level of control while remaining portable across NVIDIA,
 AMD, and Intel GPUs via automatic source-to-source translation.
 
+{{<pullquote>}}
+
+Chapel encourages you to begin with clean, high-level code, then
+gradually introduce lower-level control only where it matters.
+
+{{</pullquote>}}
+
 Together, GPUIterator and GPUAPI enabled portable, high-performance
 GPU acceleration across various Chapel applications—not just in
 miniapps like Stream or Black-Scholes, but also in real-world Chapel
@@ -160,6 +176,7 @@ loops for GPUs, completing the full range of multi-resolution GPU
 programming in Chapel!
 
 {{< figure class="fullwide" src="CHAMPS-speedup.jpg" caption="The GPUIterator and GPUAPI modules provide significant performance improvements<br>while enabling Chapel programmers to continue using Chapel for most tasks, except the kernel, which can now be fully automated by recent Chapel compilers.">}}
+
 
 #### 6. If you could improve Chapel with a finger snap, what would you do?
 
@@ -189,6 +206,13 @@ as well as the ORNL team led by Dr. Oscar Hernandez. We look forward
 to sharing it at the CUG 2026 conference. In an era where power
 efficiency is becoming as important as raw performance, this is a
 promising direction for the language.
+
+{{<pullquote>}}
+
+Chapel's real power comes from the people behind it: the team, the
+contributors, and the broader community.
+
+{{</pullquote>}}
 
 Finally, I want to echo what many others have said: Chapel’s strengths
 go far beyond its elegant syntax and powerful abstractions. Its real
