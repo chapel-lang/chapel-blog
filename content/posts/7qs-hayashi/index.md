@@ -1,16 +1,19 @@
 ---
-title: "7 Questions for Akihiro Hayashi: TODO"
-richtitle: "7 Questions for Akihro Hayashi:<br>TODO"
+title: "7 Questions for Akihiro Hayashi: Early Chapel GPU Support through Multiresolution Abstractions"
+richtitle: "7 Questions for Akihro Hayashi:<br>Early Chapel GPU Support through Multiresolution Abstractions"
 date: 2026-03-17
-tags: ["User Experiences", "Interviews"]
+tags: ["User Experiences", "Interviews", "GPUs", "ChapelCon"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with Dr. Akihiro Hayashi about his TODO"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "akihiro.jpeg"
 ---
 
-Blah blah blah [7 Questions for Chapel
-Users]({{< relref "series/7-questions-for-chapel-users" >}})
+In this edition of our [7 Questions for Chapel Users]({{< relref
+"series/7-questions-for-chapel-users" >}}) series, we turn our
+questions to Dr. Akihiro Hayashi, a Principal Research Scientist at
+Georgia Tech whose work focuses on similar themes as Chapel:
+productivity and performance of parallel computing.
 
 
 #### 1. Who are you?
@@ -18,13 +21,13 @@ Users]({{< relref "series/7-questions-for-chapel-users" >}})
 My name is Akihiro Hayashi, and I’m a Principal Research Scientist at
 Georgia Tech. I received my B.E., M.E., and Ph.D. from Waseda
 University in Japan. After completing my Ph.D. in 2012, I joined
-Prof. Vivek Sarkar’s group at Rice University as a Postdoctoral
+Professor Vivek Sarkar’s group at Rice University as a Postdoctoral
 Researcher in 2013, later advancing to Research Scientist in 2015. In
 2019, I moved with the group to Georgia Tech, where I progressed from
 Senior Research Scientist to Principal Research Scientist. As a side
-note, my supervisor, Prof. Sarkar, is well known for his work on the
-X10 language at IBM and for collaborations with the Chapel team during
-the DARPA HPCS program.
+note, my supervisor, Professor Sarkar, is well known for his work on
+the X10 language at IBM and for collaborations with the Chapel team
+during the DARPA HPCS program.
 
 My research focuses on improving the productivity and performance of
 parallel and distributed systems, particularly through programming
@@ -103,8 +106,8 @@ clean and intuitive the abstractions were: forall loops, other
 parallel constructs, and the distributed domain model, all of which
 made parallel programming feel both elegant and powerful. I still
 remember experimenting with these features on a single-node machine
-while imagining how they would scale on distributed systems I did not
-yet have access to.
+while imagining how they would scale on distributed systems that I did
+not yet have access to.
 
 When I joined the Habanero group in 2013, I was fortunate that these
 early curiosities turned into real opportunities to work on
@@ -126,36 +129,37 @@ language’s elegance.
 {{< figure class="fullwide" src="MultiresGPU.jpg" caption="A Multi-resolution GPU Programming Model for Chapel">}}
 
 [GPUIterator](https://dl.acm.org/doi/10.1145/3329722.3330142) lets a
-single forall loop run on CPUs, GPUs, or any hybrid split by
-automatically partitioning the iteration space and invoking
-user-provided CUDA/HIP/SYCL/DPC++ kernels through a callback, without
-changing the loop body. This enables CPU-only, GPU-only, and hybrid
-execution, even across distributed domains, simply by wrapping the
-iteration space in GPU(...).
+single forall loop run on CPUs, GPUs, or any combination of the two,
+by automatically partitioning the iteration space and invoking
+user-provided CUDA/HIP/SYCL/DPC++ kernels through a callback, all
+without changing the loop body. This enables CPU-only, GPU-only, and
+hybrid execution, even across distributed domains, simply by wrapping
+the iteration space in `GPU(...)`.
 
 [GPUAPI](https://link.springer.com/chapter/10.1007/978-3-031-23220-6_7)
 complements this by handling the host-side complexity of GPU
-programming. It provides Chapel-friendly abstractions like GPUArray
+programming. It provides Chapel-friendly abstractions like `GPUArray`
 alongside thin wrappers for CUDA, HIP, and DPC++, allowing users to
 choose their level of control while remaining portable across NVIDIA,
 AMD, and Intel GPUs via automatic source-to-source translation.
 
 Together, GPUIterator and GPUAPI enabled portable, high-performance
-GPU acceleration across various Chapel applications, not just in
+GPU acceleration across various Chapel applications—not just in
 miniapps like Stream or Black-Scholes, but also in real-world Chapel
 applications such as
 [CHAMPS](https://chapel-lang.org/CHIUW2022.html#hayashi),
 [ChOp](https://hal.science/hal-03149394/),
-[Arkouda](https://chapel-lang.org/CHIUW2022.html#milthorpe), and so
-on.
+and [Arkouda](https://chapel-lang.org/CHIUW2022.html#milthorpe).
 
 These successes highlight what I value most about Chapel: it lets me
 build systems that stay clean and expressive while still delivering
 performance across diverse, multi-node CPU+GPU platforms.
 
-It’s worth noting that recent Chapel compilers now compile forall loops for GPUs, completing the full range of multi-resolution GPU programming in Chapel!
+It’s worth noting that recent Chapel compilers now compile forall
+loops for GPUs, completing the full range of multi-resolution GPU
+programming in Chapel!
 
-{{< figure class="fullwide" src="CHAMPS-speedup.jpg" caption="The GPUIterator and GPUAPI modules provide significant performance improvements while enabling Chapel programmers to continue using Chapel for most tasks, except for the kernel, which can now be fully automated by recent Chapel compilers.">}}
+{{< figure class="fullwide" src="CHAMPS-speedup.jpg" caption="The GPUIterator and GPUAPI modules provide significant performance improvements<br>while enabling Chapel programmers to continue using Chapel for most tasks, except the kernel, which can now be fully automated by recent Chapel compilers.">}}
 
 #### 6. If you could improve Chapel with a finger snap, what would you do?
 
@@ -181,7 +185,7 @@ that Chapel could be more energy efficient than MPI or OpenSHMEM for
 certain classes of applications. This result comes from work by one of
 our Ph.D. students, Shubhendra Pal Singhal, and was made possible
 thanks to significant support from Dr. Brad Chamberlain and his
-team. We look forward to sharing it at the CUG2026 conference. In an
+team. We look forward to sharing it at the CUG 2026 conference. In an
 era where power efficiency is becoming as important as raw
 performance, this is a promising direction for the language.
 
@@ -195,6 +199,8 @@ try. It’s a language that rewards curiosity and grows with you.
 
 ---
 
-We’d like to thank Akihiro for participating in this [7 Questions for
+We’d like to thank Akihiro for taking part in our [7 Questions for
 Chapel Users]({{< relref "series/7-questions-for-chapel-users" >}})
-interview.  Stay tuned for future installments of the series!
+series!  Be sure to catch his team's work on the energy implications
+of aggregators in Chapel at CUG 2026.  And stay tuned for future
+installments in this interview series!
