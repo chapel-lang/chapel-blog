@@ -6,6 +6,7 @@ tags: ["User Experiences", "Interviews", "Computational Fluid Dynamics"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with current CHAMPS students about their experiences doing CFD in Chapel"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
+interviewee_photo: "maxime-karim-baptiste.jpg"
 ---
 
 For this, the tenth interview in our [7 Questions for Chapel
