@@ -51,7 +51,11 @@ CHAMPS, developed in Chapel and deployed on HPC systems. We have spent
 more than 10 years working with this solver, performing large-scale
 simulations, and improving their efficiency and scalability. We have
 participated in major international benchmarking initiatives such as
-the Ice Prediction Workshop, the High-Lift Prediction Workshop and the
+the [Ice Prediction
+Workshop](https://arc.aiaa.org/doi/abs/10.2514/6.2024-3680) ([slides
+link](https://richahan.folk.ntnu.no/IPW/files/IPW2/Presentations/IPW2_Presentations/1050_Blanchet_IPW2_presentation.pdf)),
+the [High-Lift Prediction
+Workshop](https://arc.aiaa.org/doi/abs/10.2514/6.2025-0279) and the
 Drag Prediction Workshop Series. These workshops are key references in
 the community, allowing academic, industrial, and commercial solvers
 to be rigorously compared at the forefront of current scientific
