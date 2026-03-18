@@ -39,7 +39,7 @@ environments.
 I may (unofficially) hold the record for the most {{<sidenote "right"
 "CHIUW">}}CHIUW was the acronym for our annual "Chapel Implementers
 and Users Workshop," now rebranded to
-[ChapelCon](https://chapel-lang.org/chapelcon/).{{</sidenote>}} talks
+[ChapelCon](https://chapel-lang.org/chapelcon/).  _-Editors_{{</sidenote>}} talks
 delivered (2014, 2019–2023), though I’m fully prepared to surrender
 the title if anyone steps forward.
 
