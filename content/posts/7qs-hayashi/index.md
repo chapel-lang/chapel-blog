@@ -11,7 +11,7 @@ interviewee_photo: "akihiro.jpeg"
 
 In this edition of our [7 Questions for Chapel Users]({{< relref
 "series/7-questions-for-chapel-users" >}}) series, we turn our
-questions to Dr. Akihiro Hayashi, a Principal Research Scientist at
+attention to Dr. Akihiro Hayashi, a Principal Research Scientist at
 Georgia Tech whose work focuses on similar themes as Chapel:
 productivity and performance of parallel computing.
 
@@ -31,8 +31,8 @@ during the DARPA HPCS program.
 
 My research focuses on improving the productivity and performance of
 parallel and distributed systems, particularly through programming
-models, compilers, and runtime systems that hide complexity from end
-users. I have extensive experience accelerating both regular and
+models, compilers, and runtime systems that hide complexity from
+end-users. I have extensive experience accelerating both regular and
 irregular applications across shared-memory and distributed-memory
 environments.
 
@@ -61,13 +61,6 @@ interconnects, using them efficiently often requires specialized,
 low‑level expertise. My research interests lie in anything that
 reduces that burden.
 
-In my work with Chapel, as well as related projects, I develop
-higher‑level programming abstractions, compiler techniques that
-automatically generate optimized code, and runtime systems that
-effectively utilize the underlying hardware. These components help
-programmers achieve strong performance without needing to understand
-every hardware detail.
-
 {{<pullquote>}}
 
 One of Chapel’s most powerful strengths is that many of its features
@@ -75,6 +68,13 @@ are implemented in Chapel itself.  This reflects Chapel's
 multi-resolution design philosophy.
 
 {{</pullquote>}}
+
+In my work with Chapel, as well as related projects, I develop
+higher‑level programming abstractions, compiler techniques that
+automatically generate optimized code, and runtime systems that
+effectively utilize the underlying hardware. These components help
+programmers achieve strong performance without needing to understand
+every hardware detail.
 
 The broader impact is accessibility: more scientists, engineers, and
 developers can leverage advanced computing to solve real‑world
@@ -103,12 +103,19 @@ and the control needed to explore new ideas in parallel programming.
 
 #### 4. What initially drew you to Chapel?
 
-I first encountered Chapel in 2010 while I was a PhD student at Waseda
-University. At the time, my main research interest was automatic
-parallelization of sequential C programs, but I was also fascinated by
-the idea of languages that let programmers express parallelism
-directly. Chapel was the first such language I explored, and it
-immediately stood out.
+I first encountered Chapel in 2010 while I was a Ph.D. student at
+Waseda University. At the time, my main research interest was
+automatic parallelization of sequential C programs, but I was also
+fascinated by the idea of languages that let programmers express
+parallelism directly. Chapel was the first such language I explored,
+and it immediately stood out.
+
+{{<pullquote>}}
+
+Chapel encourages you to begin with clean, high-level code, then
+gradually introduce lower-level control only where it matters.
+
+{{</pullquote>}}
 
 Even just reading through the tutorial slides, I was intrigued by how
 clean and intuitive the abstractions were: forall loops, other
@@ -154,14 +161,15 @@ AMD, and Intel GPUs via automatic source-to-source translation.
 
 {{<pullquote>}}
 
-Chapel encourages you to begin with clean, high-level code, then
-gradually introduce lower-level control only where it matters.
+Chapel lets me build systems that stay clean and expressive while
+still delivering performance across diverse, multi-node CPU+GPU
+platforms.
 
 {{</pullquote>}}
 
 Together, GPUIterator and GPUAPI enabled portable, high-performance
 GPU acceleration across various Chapel applications—not just in
-miniapps like Stream or Black-Scholes, but also in real-world Chapel
+mini-apps like Stream or Black-Scholes, but also in real-world Chapel
 applications such as
 [CHAMPS](https://chapel-lang.org/CHIUW2022.html#hayashi),
 [ChOp](https://hal.science/hal-03149394/),
@@ -175,7 +183,7 @@ It’s worth noting that recent Chapel compilers now compile forall
 loops for GPUs, completing the full range of multi-resolution GPU
 programming in Chapel!
 
-{{< figure class="fullwide" src="CHAMPS-speedup.jpg" caption="The GPUIterator and GPUAPI modules provide significant performance improvements<br>while enabling Chapel programmers to continue using Chapel for most tasks, except the kernel, which can now be fully automated by recent Chapel compilers.">}}
+{{< figure class="fullwide" src="CHAMPS-speedup.jpg" caption="The GPUIterator and GPUAPI modules provide significant performance improvements, while enabling Chapel programmers to continue using Chapel for most tasks other than the kernel. However, even kernel generation can now be fully automated by recent Chapel compilers.">}}
 
 
 #### 6. If you could improve Chapel with a finger snap, what would you do?
@@ -198,7 +206,7 @@ they expect.
 #### 7. Anything else you'd like people to know?
 
 One recent development that excites our group is an early indication
-that Chapel could be more energy efficient than MPI or OpenSHMEM for
+that Chapel could be more energy-efficient than MPI or OpenSHMEM for
 certain classes of applications. This result comes from work by one of
 our Ph.D. students, Shubhendra Pal Singhal, and was made possible
 thanks to significant support from Dr. Brad Chamberlain and his team,
