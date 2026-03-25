@@ -258,7 +258,7 @@ institutions, while also predicting intricate ice shapes that compare
 well with experimental data as well as with results from industrial
 and academic participants.
 
-{{< figure class="fullwide" src="ice-accretion.jpg" caption="**Figure 2:** Ice accretion on a three-dimensional swept wing. Comparison between the clean wing geometry (left) and the final ice shape after accretion (right). The configuration corresponds to a test case from the first Ice Prediction Workshop (IPW1), representing a swept-wing model tested in an icing wind tunnel.">}}
+{{< figure src="iceAccretionSweptWing.gif" caption="**Figure 2:** Ice accretion on a three-dimensional swept wing. The animation starts with the clean wing geometry and progresses to the final ice shape after accretion. The configuration corresponds to a test case from the first Ice Prediction Workshop (IPW1), representing a swept-wing model tested in an icing wind tunnel.">}}
 
  
 
