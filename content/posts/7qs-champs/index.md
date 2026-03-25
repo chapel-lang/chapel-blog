@@ -1,7 +1,7 @@
 ---
 title: "7 Questions for CHAMPS Developers: CFD in Chapel from the Developer Perspective"
 richtitle: "7 Questions for CHAMPS Developers:<br>Empowering Academic R&D to Create Cutting-Edge CFD Apps in Chapel"
-date: 2026-03-25
+date: 2026-03-26
 tags: ["User Experiences", "Interviews", "Computational Fluid Dynamics"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with current CHAMPS students about their experiences doing CFD in Chapel"
