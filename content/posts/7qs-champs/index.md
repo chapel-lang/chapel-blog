@@ -12,18 +12,18 @@ interviewee_photo: "maxime-karim-baptiste.jpg"
 For this, the tenth interview in our [7 Questions for Chapel
 Users]({{< relref "series/7-questions-for-chapel-users" >}}) series,
 we return to the [starting point of the series]({{< relref
-"7qs-laurendeau">}}), revisiting Chapel's use to write CHAMPS, a
+"7qs-laurendeau">}}), revisiting Chapel's role in supporting CHAMPS, a
 world-class Computational Fluid Dynamics Framework developed at
-Polytechnique Montréal.  But where that inaugural interview was with
-Éric Laurendeau, the PI of the CHAMPS project, this one gives us the
-chance to hear from a few of the students who are doing the day-to-day
-implementation work and science first-hand.  Without further ado,
-let's have them introduce themselves:
+Polytechnique Montréal.  However, where that inaugural interview was
+with Professor Éric Laurendeau, the Principal Investigator of the
+CHAMPS project, this one focuses on the perspective of a few of the
+students who are doing the day-to-day science and implementation work
+first-hand.  Without further ado, let's meet them:
 
 
 #### 1. Who are you?
 
-**Maxime:** My name is Maxime Blanchet, and I am a PhD student in
+**Maxime:** My name is Maxime Blanchet, and I am a Ph.D. student in
 co-supervision between Université de Strasbourg and Polytechnique
 Montréal under the supervision of Prof. Éric Laurendeau. I hold a
 bachelor's degree in aerospace engineering and completed my master's
@@ -33,36 +33,49 @@ conditions.
 
 **Karim:** My name is Karim Zayni. After earning my bachelor’s degree
 in France, I moved to Canada, where I completed a master’s degree in
-mechanical engineering. I am currently a PhD student in aerospace
+mechanical engineering. I am currently a Ph.D. student in aerospace
 engineering at Polytechnique Montréal under the supervision of
 Prof. Éric Laurendeau. My research focuses on computational fluid
-dynamics (CFD) and high-performance computing (HPC). More
+dynamics (CFD) and high-performance computing (HPC). More
 specifically, I co-develop, together with Maxime, an ice-prediction
 solver.
 
-**Baptiste:** My name is Baptiste Arnould, and I am also a PhD student
-at Polytechnique Montréal conducting my research under the supervision
-of Prof. Éric Laurendeau and Prof. Roberto Paoli. My work focuses on
-computational fluid dynamics, with an emphasis on modeling turbulent
-flow regimes, particularly the chaotic, vortex-dominated dynamics
-encountered in aircraft takeoff and landing configurations.
+**Baptiste:** My name is Baptiste Arnould, and I am also a
+Ph.D. student at Polytechnique Montréal conducting my research under
+the supervision of Professor Éric Laurendeau and Professor Roberto
+Paoli. My work focuses on computational fluid dynamics, with an
+emphasis on modeling turbulent flow regimes, particularly the chaotic,
+vortex-dominated dynamics encountered in aircraft takeoff and landing
+configurations.
 
-**All:** During our PhD, we are working with the multiphysics solver
-CHAMPS, developed in Chapel and deployed on HPC systems. We have spent
-more than 10 years working with this solver, performing large-scale
-simulations, and improving their efficiency and scalability. We have
-participated in major international benchmarking initiatives such as
-the [Ice Prediction
-Workshop](https://arc.aiaa.org/doi/abs/10.2514/6.2024-3680) ([slides
-link](https://richahan.folk.ntnu.no/IPW/files/IPW2/Presentations/IPW2_Presentations/1050_Blanchet_IPW2_presentation.pdf)),
+{{<pullquote>}}
+
+CHAMPS is an unstructured solver written in Chapel for complex
+aerodynamic simulations and deployed on HPC systems.
+
+{{</pullquote>}}
+
+
+**All:** We are pursuing these efforts as part of the team that
+develops and maintains CHAMPS, the CHApel MultiPhysics Simulation
+framework.  CHAMPS is an unstructured solver written in Chapel for
+complex aerodynamic simulations and deployed on HPC systems. Our team
+has spent more than 7 years working with this solver, performing
+large-scale simulations and improving its efficiency and scalability.
+
+Beyond our individual efforts described above, the CHAMPS team also
+works on high- and low-fidelity aerodynamic modeling, drag prediction,
+unsteady aerodynamics, wing fluid-structure interaction, ice accretion
+on aircraft, and GPU programming.  We have participated in major
+international benchmarking initiatives such as the [Ice Prediction
+Workshop](https://arc.aiaa.org/doi/abs/10.2514/6.2024-3680)
+([slides](https://richahan.folk.ntnu.no/IPW/files/IPW2/Presentations/IPW2_Presentations/1050_Blanchet_IPW2_presentation.pdf)),
 the [High-Lift Prediction
-Workshop](https://arc.aiaa.org/doi/abs/10.2514/6.2025-0279) and the
-Drag Prediction Workshop Series. These workshops are key references in
-the community, allowing academic, industrial, and commercial solvers
-to be rigorously compared at the forefront of current scientific
-knowledge. More broadly, our team works on GPU programming, drag
-prediction, wing fluid–structure interaction, high- and low-fidelity
-aerodynamic modeling, unsteady aerodynamics, and icing physics.
+Workshop](https://arc.aiaa.org/doi/abs/10.2514/6.2025-0279), and the
+Drag Prediction Workshop Series. These workshops are key collaborative
+efforts in the community, allowing academic, industrial, and
+commercial solvers to be rigorously compared at the forefront of
+current scientific knowledge.
 
 
 #### 2. What do you do? What problems are you trying to solve?
@@ -89,6 +102,15 @@ performance of the aircraft and therefore represents a major safety
 concern. Certification currently depends largely on costly
 experimental campaigns, both in specialized icing wind tunnels and
 in-flight tests.
+
+{{<pullquote>}}
+
+In our lab, there is a lot of turnover as students arrive and
+graduate, so maintainability and readability are essential. Chapel’s
+parallel model significantly reduces the learning curve for new
+students.
+
+{{</pullquote>}}
 
 Our goal is to improve the accuracy and reliability of numerical
 models so that simulations can better predict these complex phenomena.
@@ -129,6 +151,14 @@ synchronization complexity. This allows us to focus more on physical
 and numerical modeling rather than on low-level parallel programming
 details.
 
+{{<pullquote>}}
+
+Many concepts that can be cumbersome to implement and maintain in C++
+with OpenMP and MPI are more naturally expressed in Chapel, which
+makes development significantly smoother.
+
+{{</pullquote>}}
+
 **Baptiste:** As I already said, my research heavily relies on
 high-performance computing (HPC), so using a language with strong
 support for scalable parallel programming is essential. In this
@@ -164,6 +194,15 @@ programming model. Compared with traditional MPI/OpenMP development,
 Chapel offers a much cleaner and more expressive way to write parallel
 programs, which immediately stood out to us.
 
+{{<pullquote>}}
+
+Chapel's not only elegant and easy to use, but also capable of
+delivering the performance required for large-scale simulations. It
+allows us to write compact and readable code while still running
+complex multiphysics simulations on HPC systems.
+
+{{</pullquote>}}
+
 **Karim and Baptiste:** For us, Chapel was also the language already
 used in our research group when we joined the lab. The CHAMPS
 simulation framework had been initiated in Chapel by previous
@@ -184,20 +223,28 @@ choice for continuing the development of our research software.
 #### 5. What are your biggest successes that Chapel has helped achieve?
 
 **Maxime:** One of our biggest successes has been our participation in
-the Ice Prediction Workshops (IPW), where leading icing solvers from
+the Ice Prediction Workshops (IPW), where leading icing solvers from
 institutions such as Bombardier (Canada), NASA (United-States), ONERA
-(France), and DLR (Germany) are benchmarked. With CHAMPS developed in
-Chapel, we have produced ice shape predictions and have compared them
-using standardized test cases. Using CHAMPS, we have produced ice
-shape predictions that are competitive with these well-established
-solvers. Achieving this with a research code developed in an academic
-environment is something we are particularly proud of.
+(France), and DLR (Germany) are benchmarked. Using CHAMPS developed in
+Chapel, we have produced ice shape predictions and compared them using
+standardized test cases, demonstrating that they are competitive with
+these well-established solvers. Achieving this with a research code
+developed in an academic environment is something we are particularly
+proud of.
+
+{{<pullquote>}}
+
+One of our biggest successes has been demonstrating that a relatively
+small academic team can develop and run a competitive high-fidelity
+simulation framework using Chapel.
+
+{{</pullquote>}}
 
 Just as importantly, Chapel allows us to continuously integrate new
 physical models without overwhelming code complexity. Here is an
 example of what we can do with CHAMPS:
 
-{{< figure src="ice-accum.gif" caption="Accumulation of ice on triangular extrusions inside a wind tunnel using a volumic mesh and iterating in time. Such test cases help validating and verifying what we implement into CHAMPS.">}}
+{{< figure class="fullwide" src="ice-accum.gif" caption="**Figure 1:** Accumulation of ice on triangular extrusions inside a wind tunnel using a volumic mesh and iterating in time. Such test cases help with validating and verifying what we implement into CHAMPS.">}}
 
 **Karim:** Chapel has allowed us to develop a modular multiphysics
 solver that researchers in our group can readily use and extend,
@@ -211,9 +258,11 @@ institutions, while also predicting intricate ice shapes that compare
 well with experimental data as well as with results from industrial
 and academic participants.
 
-{{< figure src="ice-accretion.jpg" caption="Ice accretion on a three-dimensional swept wing. Comparison between the clean wing geometry (left) and the final ice shape after accretion (right). The configuration corresponds to a test case from the first Ice Prediction Workshop (IPW1), representing a swept-wing model tested in an icing wind tunnel.">}}
+{{< figure class="fullwide" src="ice-accretion.jpg" caption="**Figure 2:** Ice accretion on a three-dimensional swept wing. Comparison between the clean wing geometry (left) and the final ice shape after accretion (right). The configuration corresponds to a test case from the first Ice Prediction Workshop (IPW1), representing a swept-wing model tested in an icing wind tunnel.">}}
 
-{{< figure src="ice-validation.jpg" caption="After simulating the ice accretion process, the predicted ice shapes are compared with three-dimensional scans of the experimentally accreted ice to assess the validity of the numerical model. In addition, chordwise cuts are compared with the experimental ice shape to provide a more detailed evaluation of the agreement. In this case, the ice shape predicted by CHAMPS (shown in blue) shows good overall agreement with the experimental geometry.">}}
+ 
+
+{{< figure class="fullwide" src="ice-validation.jpg" caption="**Figure 3:** After simulating the ice accretion process, the predicted ice shapes are compared with three-dimensional scans of the experimentally accreted ice to assess the validity of the numerical model. In addition, chordwise cuts are compared with the experimental ice shape to provide a more detailed evaluation of the agreement. In this case, the ice shape predicted by CHAMPS (shown in blue) shows good overall agreement with the experimental geometry (the grey dots).">}}
 
 **Baptiste:** Similarly, we have participated in large international
 aerodynamic benchmarks such as the AIAA High-Lift Prediction Workshop
@@ -224,9 +273,11 @@ tools. Chapel enabled us to expand our simulation capabilities quickly
 and produce meaningful results within the tight timelines typical of
 these collaborative efforts.
 
-{{< figure src="skin-friction.jpg" caption="Skin-friction lines on the Common Research Model. The geometry includes the wing, empennage, fuselage, slats, flaps and their brackets, as well as the engine nacelle. This post-processing helps identify where the flow remains attached over the wing and highlights the separation regions.">}}
+{{< figure src="skin-friction.jpg" caption="**Figure 4:** Skin-friction lines on the Common Research Model. The geometry includes the wing, empennage, fuselage, slats, flaps and their brackets, as well as the engine nacelle. This post-processing helps identify where the flow remains attached over the wing and highlights the separation regions.">}}
 
-{{< figure src="turbulence.jpg" caption="Turbulent structures and vortices created behind a 3D NACA0025 wing at 60° angle of attack.">}}
+ 
+
+{{< figure src="turbulence.jpg" caption="**Figure 5:** Turbulent structures and vortices created behind a 3D NACA0025 wing at 60° angle of attack.">}}
 
 
 #### 6. If you could improve Chapel with a finger snap, what would you do?
@@ -294,6 +345,16 @@ concepts as their experience grows. This accessibility is particularly
 valuable in academic environments where new students regularly join
 projects and need to become productive quickly.
 
+{{<pullquote>}}
+
+Chapel has genuinely transformed the way we develop high-performance
+scientific software. Its combination of simplicity, readability, and
+scalable parallelism allows our relatively small research team to
+tackle extremely complex problems.
+
+{{</pullquote>}}
+
+
 Looking ahead, we plan to continue expanding the CHAMPS simulation
 framework with more advanced physical models, and GPU
 acceleration. Chapel will remain at the core of our development,
@@ -315,10 +376,11 @@ We’d like to thank Maxime, Karim, and Baptiste for taking part in our
 providing their perspectives on Chapel's use in their graduate work.
 For more information on CHAMPS, see [this joint
 talk](https://www.nas.nasa.gov/pubs/ams/2025/02-20-25.html) between
-Karim, Éric Laurendeau, and Engin Kayraklioglu for NASA Ames in
-February 2025, or browse [its
+Karim, Éric Laurendeau, and Engin Kayraklioglu for the NASA Ames AMS
+seminar series in February 2025, or browse [its
 slides](https://www.nas.nasa.gov/pubs/ams/2025/02-20-25.html).
 Additional talks about CHAMPS can be found in the archives of
-[ChapelCon/CHIUW](https://chapel-lang.org/chapelcon/), such as [this
-recent talk](https://chapel-lang.org/chapelcon25/#champs) at ChapelCon
-'25.
+[ChapelCon and CHIUW](https://chapel-lang.org/chapelcon/), such as
+[this recent talk](https://chapel-lang.org/chapelcon25/#champs) by
+Anthony Chrun et al. at [ChapelCon
+'25](https://chapel-lang.org/chapelcon25/).
