@@ -182,6 +182,11 @@ to push the boundaries of data science and parallel computing. We look forward
 to seeing how his work evolves and inspires the next generation of computational
 breakthroughs!
 
+**Update:** Also be sure to check out [this follow-up
+  interview]({{<relref 7qs-rodriguez>}}) with David Bader's (now
+  graduated) student, Oliver Alvarado Rodriguez, about his experiences
+  developing Arachne in Chapel.
+
 If you have any questions for David, or comments, please direct them to the [7
 Questions for Chapel
 Users](https://chapel.discourse.group/t/7-questions-for-chapel-users-series-questions-comments/37200)
