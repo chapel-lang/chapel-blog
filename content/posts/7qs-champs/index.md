@@ -381,7 +381,7 @@ For more information on CHAMPS, see [this joint
 talk](https://www.nas.nasa.gov/pubs/ams/2025/02-20-25.html) between
 Karim, Éric Laurendeau, and Engin Kayraklioglu for the NASA Ames AMS
 seminar series last year, or browse [its
-slides](https://www.nas.nasa.gov/pubs/ams/2025/02-20-25.html).
+slides](https://chapel-lang.org/presentations/Chapel-CHAMPS-NASA2025.pdf).
 Additional talks about CHAMPS can be found in the archives of
 [ChapelCon and CHIUW](https://chapel-lang.org/chapelcon/), such as
 [this recent talk](https://chapel-lang.org/chapelcon25/#champs) by
