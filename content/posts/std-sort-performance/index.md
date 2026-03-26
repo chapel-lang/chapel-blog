@@ -1,7 +1,7 @@
 ---
 title: "Comparing Standard Library Sorts: The Impact of Parallelism"
 date: 2024-01-30
-tags: ["Sorting", "Performance", "Language Comparison"]
+tags: ["Searching / Sorting", "Performance", "Language Comparison"]
 series: []
 summary: "This blog post compares the performance of standard library sort routines in several programming languages."
 authors: ["Michael Ferguson"]

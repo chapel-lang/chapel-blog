@@ -2,7 +2,7 @@
 title: "7 Questions for Bill Reus: Interactive Supercomputing with Chapel for Cybersecurity"
 richtitle: "7 Questions for Bill Reus:<br>Interactive Supercomputing with Chapel for Cybersecurity"
 date: 2025-02-12
-tags: ["User Experiences", "Interviews", "Data Analysis", "Arkouda"]
+tags: ["Data Analysis", "Arkouda", "User Experiences", "Interviews"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with Bill Reus about the creation of Arkouda, a Python library supporting interactive data analysis on HPC systems"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]

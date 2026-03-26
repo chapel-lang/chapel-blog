@@ -2,7 +2,7 @@
 title: "7 Questions for Akihiro Hayashi: Early Chapel GPU Support through Multiresolution Abstractions"
 richtitle: "7 Questions for Akihiro Hayashi:<br>Early Chapel GPU Support through Multiresolution Abstractions"
 date: 2026-03-18
-tags: ["User Experiences", "Interviews", "GPUs", "ChapelCon"]
+tags: ["GPUs", "User Experiences", "Interviews", "ChapelCon"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with Dr. Akihiro Hayashi about his trailblazing work targeting GPUs with Chapel"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]

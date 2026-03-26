@@ -1,7 +1,7 @@
 ---
 title: "7 Questions for CHAMPS Developers: Empowering Academic R&D to Create Cutting-Edge CFD Apps in Chapel"
 date: 2026-03-26
-tags: ["User Experiences", "Interviews", "Computational Fluid Dynamics"]
+tags: ["Computational Fluid Dynamics", "User Experiences", "Interviews"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with graduate students at Polytechnique Montréal about their experiences doing Computational Fluid Dynamics in Chapel"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
@@ -243,7 +243,7 @@ Just as importantly, Chapel allows us to continuously integrate new
 physical models without overwhelming code complexity. Here is an
 example of what we can do with CHAMPS:
 
-{{< figure class="fullwide" src="ice-accum.gif" caption="**Figure 1:** Accumulation of ice on triangular extrusions inside a wind tunnel using a volumic mesh and iterating in time. Such test cases help with validating and verifying what we implement<br>into CHAMPS.">}}
+{{< figure class="fullwide" src="ice-accum.gif" caption="**Figure 1:** Accumulation of ice on triangular extrusions inside a wind tunnel using a volumetric mesh and iterating in time. Such test cases help with validating and verifying what we implement<br>into CHAMPS.">}}
 
  
 

@@ -2,7 +2,7 @@
 title: "7 Questions for Nelson Luís Dias: Atmospheric Turbulence in Chapel"
 richtitle: "7 Questions for Nelson Luís Dias:<br>Atmospheric Turbulence in Chapel"
 date: 2024-10-15
-tags: ["User Experiences", "Interviews", "Data Analysis", "Earth Sciences", "Computational Fluid Dynamics"]
+tags: ["Earth Sciences", "Computational Fluid Dynamics", "User Experiences", "Interviews", "Data Analysis"]
 series: ["7 Questions for Chapel Users"]
 summary: "An interview with Professor of Environmental Engineering Nelson Luís Dias about his use of Chapel in analyzing Atmospheric Turbulence"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
