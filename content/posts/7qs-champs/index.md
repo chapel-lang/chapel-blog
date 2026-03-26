@@ -313,10 +313,14 @@ valuable for pushing HPC applications even further.
 **All:** As AI-assisted programming tools become increasingly
 important for developers, stronger visibility and support for Chapel
 in AI-based development environments could significantly help the
-community. Ensuring that modern coding assistants understand Chapel
-well would reduce development time and help smaller research groups
-remain productive despite having fewer resources than teams working
-with more widely used languages.
+community. Ensuring that modern coding assistants {{<sidenote "right"
+"understand Chapel">}}Editors' note: Readers interested in this topic
+are encouraged to check out this [blog post]({{<relref claude-mcp>}})
+or [demo](https://youtu.be/zOxD4VmSE5o?si=1dDW7atZqlx-PmNf) by Daniel
+Fedorin about his experiences using AI-based tools to write
+Chapel.{{</sidenote>}} well would reduce development time and help
+smaller research groups remain productive despite having fewer
+resources than teams working with more widely used languages.
 
 
 #### 7. Anything else you'd like people to know?
