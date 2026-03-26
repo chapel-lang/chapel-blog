@@ -5,6 +5,7 @@ tags: ["AI/ML", "Tools", "How-To"]
 summary: "A report on developing MCP-based integrations for the Chapel programming language"
 authors: ["Daniel Fedorin"]
 featured: true
+weight: 25
 ---
 
 Developer tooling built on Large Language Models (LLMs) is a popular, if

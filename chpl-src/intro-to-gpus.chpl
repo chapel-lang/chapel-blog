@@ -5,7 +5,7 @@
 // featured: true
 // authors: ["Daniel Fedorin"]
 // date: 2024-01-10
-// weight: 70
+// weight: 30
 
 /*
   Chapel is a programming language for productive parallel computing.

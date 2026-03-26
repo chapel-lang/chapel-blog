@@ -5,7 +5,6 @@ tags: ["ChapelCon", "Community"]
 series: []
 summary: "A retrospective on ChapelCon '25 from general chair Brandon Neth"
 authors: ["Brandon Neth"]
-featured: true
 weight: -1
 ---
 

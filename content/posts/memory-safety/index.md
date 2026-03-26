@@ -6,6 +6,7 @@ series: []
 summary: "A description of how Chapel's features for memory safety strike a balance between productivity and performance, with comparisons to other languages"
 authors: ["Michael Ferguson"]
 featured: True
+weight: 23
 ---
 
 

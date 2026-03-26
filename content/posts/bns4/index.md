@@ -6,7 +6,7 @@ authors: ["Jeremiah Corrado"]
 summary: "Writing a distributed and parallel Navier-Stokes solver in Chapel, with an MPI performance comparison"
 date: 2024-11-14
 featured: True
-weight: 1
+weight: 40
 ---
 
 This article is a direct continuation of [Part 3]({{< relref "bns3" >}}) in this series, where we discussed several aspects of Chapel's distributed programming capabilities, and used those to create a distributed version of the code from [Part 2]({{< relref bns2 >}}). If you haven't already, you may want to read the previous article before continuing.
