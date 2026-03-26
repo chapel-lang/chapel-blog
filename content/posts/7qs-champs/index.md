@@ -245,6 +245,8 @@ example of what we can do with CHAMPS:
 
 {{< figure class="fullwide" src="ice-accum.gif" caption="**Figure 1:** Accumulation of ice on triangular extrusions inside a wind tunnel using a volumic mesh and iterating in time. Such test cases help with validating and verifying what we implement<br>into CHAMPS.">}}
 
+ 
+
 **Karim:** Chapel has allowed us to develop a modular multiphysics
 solver that researchers in our group can readily use and extend,
 lowering the barrier to contributing to complex HPC software. One of
@@ -263,6 +265,8 @@ and academic participants.
 
 {{< figure class="fullwide" src="ice-validation.jpg" caption="**Figure 3:** After simulating the ice accretion process, the predicted ice shapes are compared with three-dimensional scans of the experimentally accreted ice to assess the validity of the numerical model. In addition, chordwise cuts are compared with the experimental ice shape to provide a more detailed evaluation of the agreement. In this case, the ice shape predicted by CHAMPS (shown in blue) shows good overall agreement with the experimental geometry (the grey dots).">}}
 
+ 
+
 **Baptiste:** Similarly, we have participated in large international
 aerodynamic benchmarks such as the AIAA High-Lift Prediction Workshop
 (HLPW), which focuses on complex takeoff and landing configurations
@@ -278,6 +282,7 @@ these collaborative efforts.
 
 {{< figure src="turbulence.jpg" caption="**Figure 5:** Turbulent structures and vortices created behind a 3D NACA0025 wing<br>at 60° angle of attack.">}}
 
+ 
 
 #### 6. If you could improve Chapel with a finger snap, what would you do?
 
