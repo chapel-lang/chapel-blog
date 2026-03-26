@@ -280,6 +280,10 @@ or [slides](https://chapel-lang.org/CHIUW/2021/LaurendeauKeynote.pdf)
 from Éric's excellent CHIUW 2021 keynote, _HPC Lessons from 30 Years
 of Practice in CFD Towards Aircraft Design and Analysis_.
 
+**Update:** Also be sure to check out [this follow-up
+  interview]({{<relref 7qs-champs>}}) with a few of Éric's students
+  about their first-hand experiences developing CHAMPS.
+
 And/Or, for those attending [SC24](https://sc24.supercomputing.org/),
 Éric will be the Distinguished Speaker at [PAW-ATM
 2024](https://sourceryinstitute.github.io/PAW/)—the 7th Annual
