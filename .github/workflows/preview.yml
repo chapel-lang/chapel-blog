@@ -91,7 +91,7 @@ jobs:
         run: npx playwright test
 
       - name: Upload Updated Screenshots
-        if: always()
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: updated-screenshots
