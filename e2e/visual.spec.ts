@@ -7,9 +7,15 @@ for (const pageUrl of pages) {
 
       // 1. Ensure all stylesheets are parsed
       await page.waitForFunction(() =>
-        Array.from(document.styleSheets).every(
-          s => !s.href || s.cssRules !== null
-        )
+        Array.from(document.styleSheets).every(s => {
+          if (!s.href) return true;
+          try {
+            return s.cssRules !== null;
+          } catch (e) {
+            // Cross-origin stylesheets throw SecurityError - assume they're loaded
+            return true;
+          }
+        })
       );
 
       await page.evaluate(() => document.fonts.ready);
