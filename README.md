@@ -270,6 +270,10 @@ are fairly different, and are covered separately in the following
 sections.  Examples of articles in both styles can be found in
 `./chpl-src/*.chpl` or `./content/posts/*/index.md`, respectively.
 
+Also in both cases, first-time authors should create an author page for
+themselves, as described in the [Creating an Author Page](#creating-an-author-page)
+section below.
+
 ### Chapel-Driven Articles
 
 Chapel-driven articles are essentially Chapel source files with comments.
