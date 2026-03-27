@@ -105,6 +105,7 @@ in use... check the output to be sure).
     - Creating an Author Page
     - Creating a Series Page
 - [Generating HTML for Publishing](#generating-html-for-publishing)
+- [Visual Regression Testing](#visual-regression-testing)
 
 ## Setting Up Your Environment
 Broadly speaking, the blog has three dependencies:
