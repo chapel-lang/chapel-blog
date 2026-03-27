@@ -95,7 +95,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: updated-screenshots
-          path: e2e/**/*-snapshots/
+          path: |
+            e2e/**/*-snapshots/
+            test-results/
           retention-days: 30
 
       - name: Upload Test Results
