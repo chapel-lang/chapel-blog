@@ -90,6 +90,13 @@ jobs:
       - name: Run Visual Regression Tests
         run: npx playwright test
 
+      - name: Upload Updated Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: updated-screenshots
+          path: e2e/**/*-snapshots/
+          retention-days: 30
+
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
