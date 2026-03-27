@@ -102,8 +102,8 @@ in use... check the output to be sure).
 - [Authoring Articles](#authoring-articles)
     - [Chapel-Driven Articles](#chapel-driven-articles)
     - [Markdown-Driven Articles](#markdown-driven-articles)
-    - Creating an Author Page
-    - Creating a Series Page
+    - [Creating an Author Page](#creating-an-author-page)
+    - [Creating a Series Page](#creating-a-series-page)
 - [Generating HTML for Publishing](#generating-html-for-publishing)
 
 ## Setting Up Your Environment
@@ -450,6 +450,37 @@ Some Hugo shortcodes are provided specifically for Chapel-driven articles.
   arrow near the filename, to save space or avoid
   overwhelming the reader.  By default, such cases are minimized, but
   `open=true` can be used to start them in an expanded mode.
+
+### Creating an Author Page
+Each article on the blog typically has one or more authors. Each of the authors
+gets a page on the blog with a short bio and a picture. A list of all the
+authors --- including their photos --- is rendered at `/authors`.
+When an article is added by an author that doesn't yet have a page, a new
+author page for them should be explicitly created.
+
+Author pages live in the `content/authors` directory. In that directory,
+`kebab-case` subdirectories correspond to individual authors. Thus, to add
+an author named "Jane Doe", you would create a directory named
+`content/authors/jane-doe`. In this directory, you need to add two additional pieces:
+
+* **A profile photo**. This should be a square image, like a PNG or JPEG.
+  The exact name of the image is not significant; the front matter of the
+  Markdown document (see next bullet) will refer to this image by name.
+* **A markdown file** (`_index.md`) containing the author name and bio. This
+  has the following shape:
+
+  ```Markdown
+  ---
+  title: "Jane Doe"
+  summary: "Jane Doe is a (brief description of Jane)."
+  photo: "./photo-name.png"
+  ---
+
+  (a paragraph or two about Jane)
+  ```
+
+
+### Creating a Series Page
 
 ## Generating HTML for Publishing
 Note: this section is only relevant to people managing https://chapel-lang.org/blog.
