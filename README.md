@@ -104,6 +104,7 @@ in use... check the output to be sure).
     - [Markdown-Driven Articles](#markdown-driven-articles)
     - [Creating an Author Page](#creating-an-author-page)
     - [Creating a Series Page](#creating-a-series-page)
+    - [Creating a Tag Page](#creating-a-tag-page)
 - [Generating HTML for Publishing](#generating-html-for-publishing)
 
 ## Setting Up Your Environment
@@ -459,8 +460,8 @@ Some Hugo shortcodes are provided specifically for Chapel-driven articles.
 Each article on the blog typically has one or more authors. Each of the authors
 gets a page on the blog with a short bio and a picture. A list of all the
 authors --- including their photos --- is rendered at `/authors`.
-When an article is added by an author that doesn't yet have a page, a new
-author page for them should be explicitly created.
+When an article is added by an author that doesn't yet have a page, they
+should create a new author page for themselves.
 
 Author pages live in the `content/authors` directory. In that directory,
 `kebab-case` subdirectories correspond to individual authors. Thus, to add
@@ -509,6 +510,26 @@ are shown. Typically, articles in a series are shown in chronological order
 series (such as the release announcement series), it may make more sense to show
 articles in reverse chronological order. This can be done by setting
 `reverseOrder: true` in the front matter of the page.
+
+### Creating a Tag Page
+
+When a blog post is marked with a tag, Hugo automatically creates a corresponding
+tag page that links to all the articles with the tag. However, the standard
+practice is to explicitly define the tag page, providing a brief description
+of what articles are included in the tag. This is done by adding to the
+`content/tags` directory.
+
+To create a tag page for a tag called "My Tag", you would create a directory named
+`content/tags/my-tag`. In this directory, add a markdown file, `_index.md`,
+containing the tag name and description. This has the following shape:
+
+```Markdown
+---
+title: "My Tag"
+---
+
+Articles about (whatever "My Tag" is about)
+```
 
 ## Generating HTML for Publishing
 Note: this section is only relevant to people managing https://chapel-lang.org/blog.
