@@ -102,8 +102,9 @@ in use... check the output to be sure).
 - [Authoring Articles](#authoring-articles)
     - [Chapel-Driven Articles](#chapel-driven-articles)
     - [Markdown-Driven Articles](#markdown-driven-articles)
-    - Creating an Author Page
-    - Creating a Series Page
+    - [Creating an Author Page](#creating-an-author-page)
+    - [Creating a Series Page](#creating-a-series-page)
+    - [Creating a Tag Page](#creating-a-tag-page)
 - [Generating HTML for Publishing](#generating-html-for-publishing)
 
 ## Setting Up Your Environment
@@ -269,6 +270,10 @@ interprets to create an HTML page. However, the two supported modes
 are fairly different, and are covered separately in the following
 sections.  Examples of articles in both styles can be found in
 `./chpl-src/*.chpl` or `./content/posts/*/index.md`, respectively.
+
+Also in both cases, first-time authors should create an author page for
+themselves, as described in the [Creating an Author Page](#creating-an-author-page)
+section below.
 
 ### Chapel-Driven Articles
 
@@ -450,6 +455,81 @@ Some Hugo shortcodes are provided specifically for Chapel-driven articles.
   arrow near the filename, to save space or avoid
   overwhelming the reader.  By default, such cases are minimized, but
   `open=true` can be used to start them in an expanded mode.
+
+### Creating an Author Page
+Each article on the blog typically has one or more authors. Each of the authors
+gets a page on the blog with a short bio and a picture. A list of all the
+authors --- including their photos --- is rendered at `/authors`.
+When an article is added by an author that doesn't yet have a page, they
+should create a new author page for themselves.
+
+Author pages live in the `content/authors` directory. In that directory,
+`kebab-case` subdirectories correspond to individual authors. Thus, to add
+an author named "Jane Doe", you would create a directory named
+`content/authors/jane-doe`. In this directory, you need to add two additional pieces:
+
+* **A profile photo**. This should be a square image, like a PNG or JPEG.
+  The exact name of the image is not significant; the front matter of the
+  Markdown document (see next bullet) will refer to this image by name.
+* **A markdown file** (`_index.md`) containing the author name and bio. This
+  has the following shape:
+
+  ```Markdown
+  ---
+  title: "Jane Doe"
+  summary: "Jane Doe is a (brief description of Jane)."
+  photo: "./photo-name.png"
+  ---
+
+  (a paragraph or two about Jane)
+  ```
+
+
+### Creating a Series Page
+
+When a blog post is a part of a series, Hugo automatically creates a corresponding
+series page that links to all the articles in the series. However, the standard
+practice is to explicitly define the series page, providing a brief description
+of it. This is done by adding to the `content/series` directory.
+
+To add a series named "My Series", you would create a directory named
+`content/series/my-series`. In this directory, add a markdown file,
+`_index.md`, containing the series name and description. This has the following shape:
+
+```Markdown
+---
+title: "My Series"
+---
+
+(A description of this cool new series)
+```
+
+Creating a series page also allows you to adjust the order in which articles
+are shown. Typically, articles in a series are shown in chronological order
+(since they are presumably a sequence of related posts). However, for some
+series (such as the release announcement series), it may make more sense to show
+articles in reverse chronological order. This can be done by setting
+`reverseOrder: true` in the front matter of the page.
+
+### Creating a Tag Page
+
+When a blog post is marked with a tag, Hugo automatically creates a corresponding
+tag page that links to all the articles with the tag. However, the standard
+practice is to explicitly define the tag page, providing a brief description
+of what articles are included in the tag. This is done by adding to the
+`content/tags` directory.
+
+To create a tag page for a tag called "My Tag", you would create a directory named
+`content/tags/my-tag`. In this directory, add a markdown file, `_index.md`,
+containing the tag name and description. This has the following shape:
+
+```Markdown
+---
+title: "My Tag"
+---
+
+Articles about (whatever "My Tag" is about)
+```
 
 ## Generating HTML for Publishing
 Note: this section is only relevant to people managing https://chapel-lang.org/blog.
