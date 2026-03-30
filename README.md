@@ -451,14 +451,6 @@ Some Hugo shortcodes are provided specifically for Chapel-driven articles.
   overwhelming the reader.  By default, such cases are minimized, but
   `open=true` can be used to start them in an expanded mode.
 
-#### Note about HTML Links
-
-By default, links starting with `http` are considered "external links" and will open in a new tab. For referencing a section of the same blog post, use Hugo's `relref` shortcode so it opens in the same tab.
-
-```Markdown
-[link text]({{< relref "link target" >}})
-```
-
 ## Generating HTML for Publishing
 Note: this section is only relevant to people managing https://chapel-lang.org/blog.
 If you're simply trying to contribute an article, you do not need this section.
