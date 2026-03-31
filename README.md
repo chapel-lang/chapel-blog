@@ -106,6 +106,7 @@ in use... check the output to be sure).
     - [Creating a Series Page](#creating-a-series-page)
     - [Creating a Tag Page](#creating-a-tag-page)
 - [Generating HTML for Publishing](#generating-html-for-publishing)
+- [Visual Regression Testing](#visual-regression-testing)
 
 ## Setting Up Your Environment
 Broadly speaking, the blog has three dependencies:
@@ -560,3 +561,38 @@ The `build` command also understands `--fast` and `-D`, but when you're
 uploading the blog files to a particular location, you probably don't
 want to render drafts or include "Program output disabled" in your HTML.
 That is, you probably do _not_ want `--fast` or `-D` when using `build`.
+
+## Visual Regression Testing
+The blog uses [`playwright`](https://playwright.dev/) to perform
+visual regression testing on the generated HTML. In general, this works by
+storing screenshots of the tested pages in the repository. Specifically,
+`e2e/visual.spec.ts-snapshots` contains these screenshots. They are named after
+the page, OS, and browser used to capture them. During testing, the same pages
+are rendered in the CI environment and compared against the stored screenshots.
+Changes to the visual appearence of the pages will cause the tests to fail.
+
+Testing currently runs only on a relatively small set of pages whose content is
+not expected to change visually. Thus, new posts on the blog ought not trigger
+CI failures.
+
+If you do intend to change the visual appearence of pages on the blog,
+you will likely need to update the "baseline" screenshots of these pages.
+The easiest way to do this is to allow the GitHub action implementing
+the regression testing to fail. The new screenshots of the pages will be
+uploaded as artifacts of the failed action. You can download these screenshots,
+review them to ensure they look correct, and then replace the old screenshots in
+the repository with the new ones. For example, you might do:
+
+```bash
+mv test-results/visual-visual-regression-f-4c582-t-1313-tags-advent-of-code--chromium/visual-regression-for-http-00d8c-1313-tags-advent-of-code-1-actual.png \
+   e2e/visual.spec.ts-snapshots/visual-regression-for-http-localhost-1313-tags-advent-of-code-1-chromium-linux.png
+```
+
+Note that `chromium-linux` is used here because the GitHub action runs on
+a Linux machine.
+
+If adding new pages to the list of tested pages, you can once again allow
+CI to fail (due to a lack of baseline screenshots). The new screenshots of the
+pages will also be uploaded as artifacts of the failed action. You can add
+them to the `e2e/visual.spec.ts-snapshots` directory, and then re-run the
+tests.
