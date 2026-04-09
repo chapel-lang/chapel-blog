@@ -5,6 +5,7 @@ date: 2026-04-09
 tags: ["Editorial", "History", "Hardware", "GPUs", "Portability", "Performance", "Safety", "HPSF"]
 summary: "This summary of Brad's HIPS 2025 keynote looks at how HPC programming has (and has not) changed over the past 30 years"
 authors: ["Brad Chamberlain"]
+featured: true
 ---
 
 Last summer, I had the opportunity to give the keynote at [HIPS
@@ -331,7 +332,7 @@ Another explanation might be that HPC doesn't really need new
 languages; that Fortran, C, and C++ are somehow optimal choices for
 HPC.  But this is hard to take very seriously given some of the
 languages' demerits, combined with the fact that they are being (or
-have been) supplanted by more modern alternatives in maintream
+have been) supplanted by more modern alternatives in mainstream
 sectors.
 
 I think it's definitely fair to say that Fortran, C, and C++ are
@@ -495,11 +496,11 @@ attributed to a number of factors:
   To some extent, this bias is perhaps inevitable since it's the
   hardware that has historically made HPC unique.  Yet hardware is
   barely usable without software, and by not investing in software
-  more, we create a viscious cycle in which software remains an
+  more, we create a vicious cycle in which software remains an
   afterthought rather than a primary area of focus.  This is also
   somewhat unfortunate since investments in HPC software can compound
   across generations of hardware, whereas hardware has often seemed to
-  involve starting back near square one with each new network toplogy,
+  involve starting back near square one with each new network topology,
   processor architecture, etc.
 
 * **We tend to focus on what's sufficient rather than what's ideal**
@@ -538,7 +539,7 @@ attributed to a number of factors:
   This is perhaps one of the biggest challenges we face as a
   community.  Even if you believe in the funding imbalance between
   hardware and software that I mention above, opportunities for doing
-  HPC software reseach have nevertheless been abundant.  Where things
+  HPC software research have nevertheless been abundant.  Where things
   feel more lacking, however, is in providing paths to sustain HPC
   software over time, particularly as it moves from research to
   production.  I remember being shocked early in my career to learn
@@ -782,7 +783,7 @@ conversations on it.
 
 ---
 
-**Acknowledgements:** I'd like to thank [Engin
+**Acknowledgments:** I'd like to thank [Engin
 Kayraklioglu](/authors/engin-kayraklioglu) for providing helpful
 feedback and advice on this article, and also for encouraging me to
 capture these talks in blog form to begin with.
