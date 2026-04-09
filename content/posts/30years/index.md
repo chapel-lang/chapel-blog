@@ -262,8 +262,8 @@ MPI, OpenMP and/or CUDA.
 
 ### Why the Stasis in HPC Languages?
 
-Focusing on the 'Languages' row of the [summary table above]({{<relref
-"#hpc-programming-then-vs-now">}}), it's interesting to speculate
+Focusing on the 'Languages' row of the [summary table
+above](#hpc-programming-then-vs-now), it's interesting to speculate
 about why no new programming languages have been broadly adopted in
 HPC over the past 30 years.  Here are some possible explanations, as
 well as why I don't think they necessarily hold up:
@@ -651,8 +651,8 @@ to scalable computing that I mentioned in this article:
 * It demonstrates how higher-level languages can be more **resilient
   to hardware changes** than notations that are more
   mechanism-oriented.  Apart from commodity vector processors, Chapel
-  predates all of the hardware advances [listed above]({{<relref
-  "#hpc-systems-then-vs-now">}}), including commodity multicore
+  predates all of the hardware advances [listed
+  above](#hpc-systems-then-vs-now), including commodity multicore
   processors.  Yet, because its design focuses on the expression of
   parallelism and locality independently of specific hardware
   mechanisms, it has adapted very well to the massive changes in HPC
@@ -681,15 +681,16 @@ to scalable computing that I mentioned in this article:
 
 I didn't put Chapel on my list of broadly adopted HPC programming
 notations [above](#hpc-programming-then-vs-now), in large part to
-avoid being presumptuous.  But it's also because I don't consider
-Chapel's support to be as solid as the others on my list.  Despite
-those hesitations, I think Chapel is competitive with them in many
-respects.  For example, I believe we have grown a larger and more
-organic user community than some of the other notations on my list,
-and with less help from public institutions.  Unfortunately, most of
-Chapel's users tend to be academic groups who can afford to try an
-emerging language in their work, yet without being in a position to
-fund its development themselves.
+avoid being presumptuous.  But it's also because, regrettably, I don't
+consider Chapel's support within the community to be as solid as the
+others on my list.  Despite those hesitations, I think Chapel _is_
+competitive with them in many respects.  For example, I believe we
+have grown a larger user community than some of the other notations on
+my list, and in a more organic manner, with less marketing from large
+institutions.  Unfortunately, most of Chapel's users tend to be
+academic groups who can afford to try an emerging language in their
+work, yet without being in a position to fund its development
+themselves.
 
 
 {{<pullquote>}}
@@ -701,7 +702,7 @@ status quo and a desire to support such an alternative.
 {{</pullquote>}}
 
 When I think of the biggest risks to Chapel's longevity, they overlap
-heavily with the [factors above](#ok-so-then-why) related to stasis in
+heavily with the [factors above](#ok-then-why) related to stasis in
 HPC language design.  Finding research funding for Chapel was not
 terribly difficult, but finding funding to support users and improve
 our implementation over the long-haul has been far more so.  Chapel is
@@ -774,7 +775,7 @@ about why I think Chapel is well-positioned to be a broadly adopted
 HPC language despite all the challenges around doing so, check out my
 [10 Myths About Scalable Parallel Programming Languages
 (Redux)]({{<relref
-"10-myths-about-scalable-parallel-programming-languages-redux">}})
+10-myths-about-scalable-parallel-programming-languages-redux>}})
 series on this blog, or jump to the [final article's
 summary]({{<relref "10myths-part8#summary">}}) to get the takeaways
 and pick an entry point that's attractive to you.  And, if you'd like
