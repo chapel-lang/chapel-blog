@@ -1,5 +1,5 @@
 ---
-title: "History"
+title: "Hardware"
 ---
 
-Articles that touch on computer hardware, architecture, or systems
+Articles with a focus on computer hardware, architecture, or systems
