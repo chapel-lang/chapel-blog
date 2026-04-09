@@ -2,7 +2,7 @@
 title: "Reflections on 30 Years of HPC Programming: So many hardware advances, so little adoption of new languages"
 richtitle: "Reflections on 30 Years of HPC Programming:<br>So many hardware advances, so little adoption of new languages"
 date: 2026-04-09
-tags: ["Editorial"]
+tags: ["Editorial", "History", "Hardware", "GPUs", "Portability", "Performance", "Safety", "HPSF"]
 summary: "A written version of Brad's HIPS 2025 keynote talk"
 authors: ["Brad Chamberlain"]
 ---
