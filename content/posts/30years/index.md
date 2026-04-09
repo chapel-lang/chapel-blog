@@ -788,4 +788,6 @@ conversations on it.
 **Acknowledgments:** I'd like to thank [Engin
 Kayraklioglu](/authors/engin-kayraklioglu) for providing helpful
 feedback and advice on this article, and also for encouraging me to
-capture these talks in blog form to begin with.
+capture these talks in blog form to begin with.  I'd also like to
+thank Michael Gerndt, Amir Raoofy, and the HIPS 2025 committee for the
+opportunity to create and present this talk in its original form.
