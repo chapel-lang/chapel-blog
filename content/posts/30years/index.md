@@ -6,6 +6,7 @@ tags: ["Editorial", "History", "Hardware", "GPUs", "Portability", "Performance",
 summary: "This summary of Brad's HIPS 2025 keynote looks at how HPC programming has (and has not) changed over the past 30 years"
 authors: ["Brad Chamberlain"]
 featured: true
+weight: 15
 ---
 
 Last summer, I had the opportunity to give the keynote at [HIPS

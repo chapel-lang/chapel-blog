@@ -6,6 +6,7 @@ tags: ["External Posts", "Community", "Newsletter"]
 summary: "Chapel's quarterly newsletter, with highlights from HPSFCon and SC"
 featured: true
 externalURL: "https://chapel.discourse.group/t/chapel-newsletter-february-2026/47986"
+weight: 20
 ---
 
 This is the February 2026 newsletter.

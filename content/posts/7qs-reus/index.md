@@ -8,6 +8,7 @@ summary: "An interview with Bill Reus about the creation of Arkouda, a Python li
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "reus.jpg"
 featured: True
+weight: 15
 ---
 
 We're very excited to kick off the 2025 edition of our [Seven

@@ -7,6 +7,7 @@ summary: "An interview published by the devm.io blog with Brad Chamberlain"
 externalURL: "https://app.devm.io/fleq4BN6BEb"
 authors: ["Brad Chamberlain"]
 featured: true
+weight: 50
 ---
 
 This is an interview I did with Elisabeth (Liz) King of Software &
