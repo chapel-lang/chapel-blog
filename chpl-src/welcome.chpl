@@ -1,10 +1,8 @@
 // Welcome to the Chapel blog!
 // tags: ["Meta", "What is Chapel?"]
 // summary: "An introduction to the Chapel blog, and our intentions and plans for it."
-// featured: true
 // authors: ["Brad Chamberlain", "Daniel Fedorin", "Jeremiah Corrado"]
 // date: 2022-11-30
-// weight: -1
 
 writeln("Hello, Chapel readers!");
 

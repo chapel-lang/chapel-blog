@@ -7,6 +7,7 @@ summary: "An interview published by HPCWire with Brad Chamberlain"
 externalURL: "https://www.hpcwire.com/2024/09/04/whats-new-with-chapel-nine-questions-for-the-development-team/"
 authors: ["Brad Chamberlain"]
 featured: true
+weight: 10
 ---
 
 This summer, I sat down with Doug Eadline of HPCwire to answer some

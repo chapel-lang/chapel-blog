@@ -6,6 +6,7 @@ tags: ["External Posts", "HPSF"]
 summary: "HPSF's official announcement of Chapel joining the foundation as an established project"
 externalURL: "https://hpsf.io/blog/2025/hpsf-welcomes-chapel/"
 featured: true
+weight: 25
 ---
 
 This is the official HPSF announcement from their blog about Chapel

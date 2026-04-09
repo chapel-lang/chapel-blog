@@ -8,6 +8,7 @@ summary: "An interview with oceanographer Scott Bachman, focusing on his work to
 authors: ["Brad Chamberlain", "Engin Kayraklioglu"]
 featured: true
 interviewee_photo: "bachman.jpg"
+weight: 14
 ---
 
 In this second installment of our [Seven Questions for Chapel
