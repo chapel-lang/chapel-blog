@@ -2,7 +2,7 @@
 title: "Programming with Chapel: Making the Power of Parallelism and Supercomputers More Accessible"
 richtitle: "Programming with Chapel: Making the Power of Parallelism<br>and Supercomputers More Accessible"
 date: 2023-11-10
-tags: ["Interviews", "External Posts"]
+tags: ["Interviews", "What is Chapel?", "External Posts"]
 summary: "An interview published by the devm.io blog with Brad Chamberlain"
 externalURL: "https://app.devm.io/fleq4BN6BEb"
 authors: ["Brad Chamberlain"]

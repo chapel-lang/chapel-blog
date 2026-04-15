@@ -2,7 +2,7 @@
 title: "What’s New with Chapel?  Nine Questions for the Development Team"
 richtitle: "What’s New with Chapel?<br>Nine Questions for the Development Team"
 date: 2024-09-04
-tags: ["Interviews", "External Posts"]
+tags: ["Interviews", "What is Chapel?", "External Posts"]
 summary: "An interview published by HPCWire with Brad Chamberlain"
 externalURL: "https://www.hpcwire.com/2024/09/04/whats-new-with-chapel-nine-questions-for-the-development-team/"
 authors: ["Brad Chamberlain"]

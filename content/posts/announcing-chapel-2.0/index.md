@@ -1,7 +1,7 @@
 ---
 title: "Chapel 2.0: Scalable and Productive Computing for All"
 date: 2024-03-21T13:00:00-07:00
-tags: ["Chapel 2.0", "Arkouda", "Searching / Sorting", "Performance", "Computational Fluid Dynamics", "Earth Sciences", "Benchmarks", "Tools"]
+tags: ["Chapel 2.0", "Arkouda", "Searching / Sorting", "Performance", "Computational Fluid Dynamics", "Earth Sciences", "Benchmarks", "Tools", "What is Chapel?"]
 featured: true
 weight: 5
 series: ["Release Announcements"]
