@@ -4,14 +4,14 @@ date: 2022-11-30
 ---
 
 The goal of this blog is to host short, informal articles about the
-[Chapel parallel programming language](https://chapel-lang.org).  Over
-time, you can expect to see articles teaching language concepts,
+[Chapel parallel programming language](https://chapel-lang.org).
+Here, you can expect to see articles teaching language concepts,
 describing new features or performance results, sharing user
 experiences, reporting on community events, and other Chapel-related
 topics.  Our intent is that this will be a space for more in-depth
-content than our [Twitter](https://twitter.com/ChapelLanguage) or
-[Facebook](https://www.facebook.com/ChapelLanguage) feeds can handle,
-and in more of a browse-at-your-own-speed format than our [YouTube
+content than our [social media](https://chapel-lang.org/socials/)
+accounts can handle, and in more of a browse-at-your-own-speed format
+than our [YouTube
 channel](https://www.youtube.com/c/ChapelParallelProgrammingLanguage).
 
 If you'd like to keep up to date with the articles posted on this
@@ -22,13 +22,14 @@ full-text articles as they are published.
 
 
 If there is content you would be interested in seeing on the blog—or
-an article you'd like to propose writing for it—please let us know in
-[the Chapel Discourse
-forums](https://chapel.discourse.group/t/blog-article-proposals-and-requests/17683).
-The Discourse [Blog
-Category](https://chapel.discourse.group/c/blog/21) also serves as our
-primary way of commenting on blog articles or asking questions about
-them.
+an article you'd like to propose writing for it—please refer to the
+[GitHub repository](https://github.com/chapel-lang/chapel-blog) that
+powers this blog.  There, you can find our
+[README](https://github.com/chapel-lang/chapel-blog#readme) that
+describes how to propose or write a blog article, or you can [open an
+issue](https://github.com/chapel-lang/chapel-blog/issues/new) to make
+a suggestion or request.
+
 
 ## About Chapel
 
@@ -43,9 +44,9 @@ readable, the resulting performance can compete with or beat standard
 high-performance computing (HPC) approaches, such as Fortran/C/C++,
 OpenMP, MPI, and/or CUDA.
 
-If you're interested in learning more about Chapel, stick around and
-keep reading!  Alternatively, you can browse [the Chapel
-website](https://chapel-lang.org/) and/or reach out to the community
-via [Discourse](https://chapel.discourse.group/),
-[Gitter](https://gitter.im/chapel-lang/chapel), or [some other
-mechanism](https://chapel-lang.org/community.html).
+If you're interested in learning more about Chapel, browse this blog
+for articles that may be of interest like [this
+one](/posts/announcing-chapel-2.0/)!  Alternatively, you can browse
+[the Chapel website](https://chapel-lang.org/) and/or reach out to the
+community via one of our [community
+forums](https://chapel-lang.org/forums/).
