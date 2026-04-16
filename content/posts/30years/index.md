@@ -255,10 +255,16 @@ The fact that most of our hardware advances have required us to
 supplement programming notations of the past with new features or
 approaches suggests that our programming models haven't been
 sufficiently abstracted from the hardware they target.  Arguably, if
-they were able to express parallelism and locality in ways that were
-more general-purpose and hardware-neutral, we wouldn't need to be
-writing programs using a mix of programming notations, such as C++,
-MPI, OpenMP and/or CUDA.
+they were able to express parallelism and {{<sidenote "right"
+"locality">}}By "express locality", I mean the ability to control and
+reason about things like "Where should this data be allocated?",
+"Where should this task execute?", or "Where is this data allocated /
+task running?"  Answers to these questions might be "on compute node
+X" or "GPU Y" or "memory Z."  Such control tends to be crucial for
+performance and scalablity on distributed systems.{{</sidenote>}} in
+ways that were more general-purpose and hardware-neutral, we wouldn't
+need to be writing programs using a mix of programming notations, such
+as C++, MPI, OpenMP and/or CUDA.
 
 
 ### Why the Stasis in HPC Languages?
@@ -300,11 +306,13 @@ across multiple disciplines, suggesting that language design is
 far from dead.
 
 Moreover, if we look at what motivated these language designs and why
-they took hold, recurring themes include productivity, safety,
-portability, and performance—things that are also very important and
-desirable to HPC programmers:
+they took hold, recurring themes include productivity, {{<sidenote
+"right" "safety">}}I'm using "safety" in a broad sense here,
+encompassing type safety, memory safety, and/or parallel
+safety.{{</sidenote>}}, portability, and performance—things that are
+also very important and desirable to HPC programmers:
 
-{{< alttable >}}
+{{< alttable>}}
 | Language       | Productivity | Safety | Portability | Performance |
 |:---------------|:------------:|:------:|:-----------:|:-----------:|
 | **Java**       |              |  ✔     | ✔           |             |
@@ -315,6 +323,35 @@ desirable to HPC programmers:
 | **Rust**       |              |  ✔     |             | ✔           |
 | **Julia**      |  ✔           |        |             | ✔           |
 | **Swift**      |  ✔           |  ✔     |             | ✔           |
+
+
+ 
+
+{{<details summary="**\"Hold on... are you claiming that language _____  is not _____?\" (click for details)**">}}
+
+Some readers interpreted this table as meaning that if a language is
+missing a check mark, it means that I consider it to be
+non-productive, unsafe, non-portable, or non-performant.  That wasn't
+my intent, though perhaps I didn't make this as clear in the paragraph
+leading into the table as I could've.  To clarify, a check mark is
+meant to identify primary reasons that a language was designed or
+became successful, to the best of my understanding.
+
+For example, I consider Julia to be a language that was designed to
+provide a Python- or Matlab-like level of productivity, yet with the
+performance of Fortran, C, or C++ (say); and I believe these factors
+have also been the main reasons for its popularity.  So I gave it
+check marks in those two columns.  That's not to say that Julia
+doesn't care about safety or portability, nor that it was designed
+without considering those concerns.  Rather, my sense is that its
+primary reasons for being developed—and catching on—didn't relate to
+addressing perceived safety or portability shortcomings in the
+languages that preceded it.
+
+There's obviously some subjectivity here, as well as potential gaps in
+my knowledge, and I welcome feedback in cases where readers disagree.
+
+{{</details>}}
 
  
 
@@ -791,3 +828,10 @@ feedback and advice on this article, and also for encouraging me to
 capture these talks in blog form to begin with.  I'd also like to
 thank Michael Gerndt, Amir Raoofy, and the HIPS 2025 committee for the
 opportunity to create and present this talk in its original form.
+
+ 
+
+  {{< changetable >}}
+  | Date         | Change                                                      |
+  |:-------------|:------------------------------------------------------------|
+  | Apr 16, 2026 | Added a new details section and a few sidenotes to try and clarify a few things in response to questions from early readers. |
