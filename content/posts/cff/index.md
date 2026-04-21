@@ -99,19 +99,18 @@ explore possibilities, please don’t hesitate to reach out via
 [LinkedIn](https://www.linkedin.com/company/chapellanguage), or one of
 our other [community forums](https://chapel-lang.org/forums/).
 
- 
-                                                                                        — Chapel’s Technical Steering Committee
-                                                                                                              Brad Chamberlain, chair
-                                                                                                              Jade Abraham
-                                                                                                              Lydia Duncan
-                                                                                                              Daniel Fedorin
-                                                                                                              Abhishek Girish
-                                                                                                              Ben Harshbarger
-                                                                                                              John Hartman
-                                                                                                              Engin Kayraklioglu
-                                                                                                              Shreyas Khandekar
-                                                                                                              Anna Rift
-                                                                                                              Elliot Ronaghan
-                                                                                                              Andy Stone
-                                                                                                              Karlon West
+— Chapel’s Technical Steering Committee<br>
+          Brad Chamberlain, chair<br>
+          Jade Abraham<br>
+          Lydia Duncan<br>
+          Daniel Fedorin<br>
+          Abhishek Girish<br>
+          Ben Harshbarger<br>
+          John Hartman<br>
+          Engin Kayraklioglu<br>
+          Shreyas Khandekar<br>
+          Anna Rift<br>
+          Elliot Ronaghan<br>
+          Andy Stone<br>
+          Karlon West<br>
 
