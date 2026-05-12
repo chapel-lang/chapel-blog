@@ -5,7 +5,7 @@ photo: "./photo.jpg"
 ---
 
 Brad is a founding member of the Chapel programming language project
-and has served as the project's technical lead since 2006.  He is a
+and has served as the project's technical lead since 2005.  He is a
 Distinguished Technologist at HPE (formerly Cray Inc.) who has spent
 his career focused on improving the productivity of supercomputer
 users, particularly through the design of programming languages.  Brad
