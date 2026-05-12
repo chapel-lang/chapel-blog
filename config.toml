@@ -1,5 +1,5 @@
 relativeURLs = true
-languageCode = 'en-us'
+locale = 'en-us'
 title = 'Chapel Language Blog'
 theme = 'chapel-theme'
 
