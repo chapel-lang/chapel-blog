@@ -5,13 +5,13 @@
   {
     "title": {{ .Title | jsonify }},
     "date": {{ .Date | jsonify }},
-    "url": {{ printf "https://chapel-lang.org/blog%s" .RelPermalink | jsonify }},
+    "url": {{ printf "blog%s" .RelPermalink | jsonify }},
     {{ if .Params.featured }} "featured": true, {{ end }}
-    {{ if .Params.hide_from_news }} "hide_from_news_": true, {{ end }}
+    {{ if .Params.hidden_from_front_page_news }} "hidden_from_front_page_news": true, {{ end }}
     "description": {{ .Summary | transform.HTMLUnescape | jsonify }},
     {{- with partial "_funcs/get-page-images" . }}
       {{- range . | first 1 }}
-        "image": {{ printf "https://chapel-lang.org/blog%s" .RelPermalink | jsonify }},
+        "image": {{ printf "blog%s" .RelPermalink | jsonify }},
       {{- end }}
     {{- end }}
     "authors": [
@@ -19,7 +19,7 @@
       {{ if $idx }},{{ end }}
       {
         "name": {{ $author.Title | jsonify }},
-        "url": {{ printf "https://chapel-lang.org/blog%s" $author.RelPermalink | jsonify }}
+        "url": {{ printf "blog%s" $author.RelPermalink | jsonify }}
       }
       {{- end }}
     ]
