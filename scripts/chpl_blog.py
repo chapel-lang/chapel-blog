@@ -10,12 +10,13 @@ import watchdog.events
 import watchdog.observers
 import subprocess
 import shutil
+import contextlib
 from pathlib import Path
 from common import compute_options
+import chpl2md
 
 input_dir = 'chpl-src'
 output_dir = "content-gen/posts"
-convert_script = os.path.dirname(__file__) + "/chpl2md.py"
 
 print("Deleting generated content folder {}".format(output_dir))
 shutil.rmtree(output_dir, ignore_errors=True)
@@ -30,10 +31,12 @@ def create_output_dir_for(file):
 
 def generate_markdown(file, file_output_dir):
     base_name = os.path.basename(file).removesuffix(".chpl")
-    command = "{} {} --code-path=code/{}.chpl > {}/index.md".format(convert_script, file, base_name, file_output_dir)
-    os.system(command)
-    command = "{} --code {} > {}/code/{}.chpl".format(convert_script, file, file_output_dir, base_name)
-    os.system(command)
+    with open(f"{file_output_dir}/index.md", "w") as f:
+        with contextlib.redirect_stdout(f):
+            chpl2md.main_args(chapelfiles=[file], code=False, code_path=f"code/{base_name}.chpl")
+    with open(f"{file_output_dir}/code/{base_name}.chpl", "w") as f:
+        with contextlib.redirect_stdout(f):
+            chpl2md.main_args(chapelfiles=[file], code=True, code_path=None)
 
 def generate_chunks_for_option(file, file_output_dir, tmpdir, option):
     print("Processing option", option)
