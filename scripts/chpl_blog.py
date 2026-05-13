@@ -10,7 +10,6 @@ import watchdog.events
 import watchdog.observers
 import subprocess
 import shutil
-import contextlib
 from pathlib import Path
 from common import compute_options
 import chpl2md
@@ -32,11 +31,9 @@ def create_output_dir_for(file):
 def generate_markdown(file, file_output_dir, options):
     base_name = os.path.basename(file).removesuffix(".chpl")
     with open(f"{file_output_dir}/index.md", "w") as f:
-        with contextlib.redirect_stdout(f):
-            chpl2md.main_args(chapelfiles=[file], code=False, code_path=f"code/{base_name}.chpl", options=options)
+        chpl2md.main_args(chapelfiles=[file], code=False, code_path=f"code/{base_name}.chpl", options=options, out=f)
     with open(f"{file_output_dir}/code/{base_name}.chpl", "w") as f:
-        with contextlib.redirect_stdout(f):
-            chpl2md.main_args(chapelfiles=[file], code=True, code_path=None, options=options)
+        chpl2md.main_args(chapelfiles=[file], code=True, code_path=None, options=options, out=f)
 
 def generate_chunks_for_option(file, file_output_dir, tmpdir, option):
     print("Processing option", option)

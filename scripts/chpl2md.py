@@ -206,12 +206,13 @@ def write(mdoutput, output):
 
 def main_args(**kwargs):
     """Driver function - convert each file to md and write to output"""
+    out = kwargs.get('out', sys.stdout)
     for chapelfile in kwargs['chapelfiles']:
         with open(chapelfile, 'r', encoding='utf-8') as handle:
             pieces = to_pieces(handle, False)
             mdoutput = (gen_code if kwargs['code'] else gen_md)(pieces, chapelfile, **kwargs)
 
-        sys.stdout.write(mdoutput)
+        out.write(mdoutput)
 
 def main():
     # Parse arguments and cast them into a dictionary
