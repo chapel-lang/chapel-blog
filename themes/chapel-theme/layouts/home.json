@@ -1,0 +1,28 @@
+[
+  {{- $first := true -}}
+  {{- range (where (where .Site.Pages.ByDate.Reverse "Section" "posts") ".Kind" "!=" "section") -}}
+  {{- if $first }}{{ $first = false }}{{ else }},{{ end }}
+  {
+    "title": {{ .Title | jsonify }},
+    "date": {{ .Date | jsonify }},
+    "url": {{ printf "https://chapel-lang.org/blog%s" .RelPermalink | jsonify }},
+    {{ if .Params.featured }} "featured": true, {{ end }}
+    {{ if .Params.hide_from_news }} "hide_from_news_": true, {{ end }}
+    "description": {{ .Summary | transform.HTMLUnescape | jsonify }},
+    {{- with partial "_funcs/get-page-images" . }}
+      {{- range . | first 1 }}
+        "image": {{ printf "https://chapel-lang.org/blog%s" .RelPermalink | jsonify }},
+      {{- end }}
+    {{- end }}
+    "authors": [
+      {{- range $idx, $author := .GetTerms "authors" -}}
+      {{ if $idx }},{{ end }}
+      {
+        "name": {{ $author.Title | jsonify }},
+        "url": {{ printf "https://chapel-lang.org/blog%s" $author.RelPermalink | jsonify }}
+      }
+      {{- end }}
+    ]
+  }
+  {{- end }}
+]
