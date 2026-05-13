@@ -10,6 +10,7 @@ import watchdog.events
 import watchdog.observers
 import subprocess
 import shutil
+import concurrent.futures
 from pathlib import Path
 from common import compute_options
 import chpl2md
@@ -185,8 +186,8 @@ args = process_args()
 options = get_hugo_options(args)
 
 print("Creating initial Markdown and chunks for all files")
-for file in glob.glob(input_dir + "/*.chpl"):
-    process_file(file)
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    executor.map(process_file, glob.glob(input_dir + "/*.chpl"))
 
 if args.command == 'build':
     print("Deleting Hugo output folder before re-generating")
