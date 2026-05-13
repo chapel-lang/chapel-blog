@@ -29,14 +29,14 @@ def create_output_dir_for(file):
     pathlib.Path(file_output_dir + "/code").mkdir(parents=True, exist_ok=True)
     return file_output_dir
 
-def generate_markdown(file, file_output_dir):
+def generate_markdown(file, file_output_dir, options):
     base_name = os.path.basename(file).removesuffix(".chpl")
     with open(f"{file_output_dir}/index.md", "w") as f:
         with contextlib.redirect_stdout(f):
-            chpl2md.main_args(chapelfiles=[file], code=False, code_path=f"code/{base_name}.chpl")
+            chpl2md.main_args(chapelfiles=[file], code=False, code_path=f"code/{base_name}.chpl", options=options)
     with open(f"{file_output_dir}/code/{base_name}.chpl", "w") as f:
         with contextlib.redirect_stdout(f):
-            chpl2md.main_args(chapelfiles=[file], code=True, code_path=None)
+            chpl2md.main_args(chapelfiles=[file], code=True, code_path=None, options=options)
 
 def generate_chunks_for_option(file, file_output_dir, tmpdir, option):
     print("Processing option", option)
@@ -75,21 +75,22 @@ def generate_chunks_for_option(file, file_output_dir, tmpdir, option):
         with open(chunk_path, "w") as chunkfile:
             chunkfile.write(chunk)
 
-def generate_chunks(file, file_output_dir):
+def generate_chunks(file, file_output_dir, options):
     with tempfile.TemporaryDirectory() as tmpdir:
-        for option in compute_options(file):
+        for option in options:
             generate_chunks_for_option(file, file_output_dir, tmpdir, option)
 
 def process_file(file):
-    print("Options:", compute_options(file))
+    options = compute_options(file)
+    print("Options:", options)
     print("Creating directory for", file)
     file_output_dir = create_output_dir_for(file)
     # we only generate external markdown for the link command, so no need for chunks
     if not args.fast and args.command != 'link':
         print("Generating chunks for", file)
-        generate_chunks(file, file_output_dir)
+        generate_chunks(file, file_output_dir, options)
     print("Generating Markdown for", file)
-    generate_markdown(file, file_output_dir)
+    generate_markdown(file, file_output_dir, options)
 
 class ChapelFileHandler(watchdog.events.FileSystemEventHandler):
     def on_created(self, event):

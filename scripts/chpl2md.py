@@ -112,7 +112,7 @@ def extract_line_anchors(lines, line_no):
 
 def gen_md(pieces, chapelfile, **kwargs):
     output = []
-    good_options = compute_options(chapelfile)
+    good_options = kwargs.get('options') or compute_options(chapelfile)
     front_matter = []
 
     first_code_idx = -1
