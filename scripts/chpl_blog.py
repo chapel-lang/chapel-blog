@@ -10,12 +10,13 @@ import watchdog.events
 import watchdog.observers
 import subprocess
 import shutil
+import concurrent.futures
 from pathlib import Path
 from common import compute_options
+import chpl2md
 
 input_dir = 'chpl-src'
 output_dir = "content-gen/posts"
-convert_script = os.path.dirname(__file__) + "/chpl2md.py"
 
 print("Deleting generated content folder {}".format(output_dir))
 shutil.rmtree(output_dir, ignore_errors=True)
@@ -28,12 +29,12 @@ def create_output_dir_for(file):
     pathlib.Path(file_output_dir + "/code").mkdir(parents=True, exist_ok=True)
     return file_output_dir
 
-def generate_markdown(file, file_output_dir):
+def generate_markdown(file, file_output_dir, options):
     base_name = os.path.basename(file).removesuffix(".chpl")
-    command = "{} {} --code-path=code/{}.chpl > {}/index.md".format(convert_script, file, base_name, file_output_dir)
-    os.system(command)
-    command = "{} --code {} > {}/code/{}.chpl".format(convert_script, file, file_output_dir, base_name)
-    os.system(command)
+    with open(f"{file_output_dir}/index.md", "w") as f:
+        chpl2md.main_args(chapelfiles=[file], code=False, code_path=f"code/{base_name}.chpl", options=options, out=f)
+    with open(f"{file_output_dir}/code/{base_name}.chpl", "w") as f:
+        chpl2md.main_args(chapelfiles=[file], code=True, code_path=None, options=options, out=f)
 
 def generate_chunks_for_option(file, file_output_dir, tmpdir, option):
     print("Processing option", option)
@@ -72,21 +73,22 @@ def generate_chunks_for_option(file, file_output_dir, tmpdir, option):
         with open(chunk_path, "w") as chunkfile:
             chunkfile.write(chunk)
 
-def generate_chunks(file, file_output_dir):
+def generate_chunks(file, file_output_dir, options):
     with tempfile.TemporaryDirectory() as tmpdir:
-        for option in compute_options(file):
+        for option in options:
             generate_chunks_for_option(file, file_output_dir, tmpdir, option)
 
 def process_file(file):
-    print("Options:", compute_options(file))
+    options = compute_options(file)
+    print("Options:", options)
     print("Creating directory for", file)
     file_output_dir = create_output_dir_for(file)
     # we only generate external markdown for the link command, so no need for chunks
     if not args.fast and args.command != 'link':
         print("Generating chunks for", file)
-        generate_chunks(file, file_output_dir)
+        generate_chunks(file, file_output_dir, options)
     print("Generating Markdown for", file)
-    generate_markdown(file, file_output_dir)
+    generate_markdown(file, file_output_dir, options)
 
 class ChapelFileHandler(watchdog.events.FileSystemEventHandler):
     def on_created(self, event):
@@ -184,8 +186,8 @@ args = process_args()
 options = get_hugo_options(args)
 
 print("Creating initial Markdown and chunks for all files")
-for file in glob.glob(input_dir + "/*.chpl"):
-    process_file(file)
+with concurrent.futures.ThreadPoolExecutor() as executor:
+    executor.map(process_file, glob.glob(input_dir + "/*.chpl"))
 
 if args.command == 'build':
     print("Deleting Hugo output folder before re-generating")

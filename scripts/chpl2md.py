@@ -112,7 +112,7 @@ def extract_line_anchors(lines, line_no):
 
 def gen_md(pieces, chapelfile, **kwargs):
     output = []
-    good_options = compute_options(chapelfile)
+    good_options = kwargs.get('options') or compute_options(chapelfile)
     front_matter = []
 
     first_code_idx = -1
@@ -206,12 +206,13 @@ def write(mdoutput, output):
 
 def main_args(**kwargs):
     """Driver function - convert each file to md and write to output"""
+    out = kwargs.get('out', sys.stdout)
     for chapelfile in kwargs['chapelfiles']:
         with open(chapelfile, 'r', encoding='utf-8') as handle:
             pieces = to_pieces(handle, False)
             mdoutput = (gen_code if kwargs['code'] else gen_md)(pieces, chapelfile, **kwargs)
 
-        sys.stdout.write(mdoutput)
+        out.write(mdoutput)
 
 def main():
     # Parse arguments and cast them into a dictionary
