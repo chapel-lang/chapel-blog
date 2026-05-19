@@ -14,8 +14,9 @@
         "image": {{ printf "blog%s" .RelPermalink | jsonify }},
       {{- end }}
     {{- end }}
+    {{- with .GetTerms "authors" }}
     "authors": [
-      {{- range $idx, $author := .GetTerms "authors" -}}
+      {{- range $idx, $author := . -}}
       {{ if $idx }},{{ end }}
       {
         "name": {{ $author.Title | jsonify }},
@@ -23,6 +24,7 @@
       }
       {{- end }}
     ]
+    {{- end }}
   }
   {{- end }}
 ]
