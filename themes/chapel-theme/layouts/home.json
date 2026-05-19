@@ -6,8 +6,8 @@
     "title": {{ .Title | jsonify }},
     "date": {{ .Date | jsonify }},
     "url": {{ printf "blog%s" .RelPermalink | jsonify }},
-    {{ if .Params.featured }} "featured": true, {{ end }}
-    {{ if .Params.hidden_from_front_page_news }} "hidden_from_front_page_news": true, {{ end }}
+    {{ if .Params.featured -}} "featured": true, {{- end }}
+    {{ if .Params.hidden_from_front_page_news -}} "hidden_from_front_page_news": true, {{- end }}
     "description": {{ .Summary | transform.HTMLUnescape | jsonify }},
     {{- with partial "_funcs/get-page-images" . }}
       {{- range . | first 1 }}
