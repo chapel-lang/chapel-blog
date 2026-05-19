@@ -6,6 +6,7 @@ summary: "A report on developing MCP-based integrations for the Chapel programmi
 authors: ["Daniel Fedorin"]
 featured: true
 weight: 28
+images: ["conwaygif.gif"]
 ---
 
 Developer tooling built on Large Language Models (LLMs) is a popular, if
