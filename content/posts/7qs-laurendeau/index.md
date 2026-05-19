@@ -7,6 +7,7 @@ series: ["7 Questions for Chapel Users"]
 summary: "An interview with CHAMPS PI and Professor of Mechanical Engineering, Éric Laurendeau"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "laurendeau.jpg"
+images: ["laurendeau.jpg"]
 ---
 
 
