@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.2/dist/katex.min.css" integrity="sha384-bYdxxUwYipFNohQlHt0bjN/LCpueqWz13HufFEV1SUatKs1cm4L6fFgCi1jT643X" crossorigin="anonymous">
     {{- end }}
     {{ range .AlternativeOutputFormats -}}
+    {{ if eq .Name "json" }}{{ continue }}{{ end -}}
     <link rel="{{ .Rel }}" type="{{ .MediaType.Type | html }}" href="{{ .Permalink | safeURL }}">
     {{ end -}}
     {{ $style := resources.Get "scss/style.scss" | css.Sass | resources.Minify }}
