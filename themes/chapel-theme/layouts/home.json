@@ -1,0 +1,32 @@
+{{- define "main" -}}
+[
+  {{- $first := true -}}
+  {{- range (where (where .Site.Pages.ByDate.Reverse "Section" "posts") ".Kind" "!=" "section") -}}
+  {{- if $first }}{{ $first = false }}{{ else }},{{ end }}
+  {
+    "title": {{ .Title | jsonify }},
+    "date": {{ .Date | jsonify }},
+    "url": {{ if .Params.externalURL }}{{ .Params.externalURL | jsonify }}{{ else }}{{ printf "blog%s" .RelPermalink | jsonify }}{{ end }},
+    {{ if .Params.featured -}} "featured": true, {{- end }}
+    {{ if .Params.hidden_from_front_page_news -}} "hidden_from_front_page_news": true, {{- end }}
+    {{- with partial "_funcs/get-page-images" . }}
+      {{- range . | first 1 }}
+        "image": {{ printf "blog%s" .RelPermalink | jsonify }},
+      {{- end }}
+    {{- end }}
+    {{- with .GetTerms "authors" }}
+    "authors": [
+      {{- range $idx, $author := . -}}
+      {{ if $idx }},{{ end }}
+      {
+        "name": {{ $author.Title | jsonify }},
+        "url": {{ printf "blog%s" $author.RelPermalink | jsonify }}
+      }
+      {{- end }}
+    ],
+    {{- end }}
+    "description": {{ .Summary | transform.HTMLUnescape | jsonify }}
+  }
+  {{- end }}
+]
+{{- end }}

@@ -7,6 +7,7 @@ series: ["7 Questions for Chapel Users"]
 summary: "An interview with Bill Reus about the creation of Arkouda, a Python library supporting interactive data analysis on HPC systems"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "reus.jpg"
+images: ["reus.jpg"]
 featured: True
 weight: 15
 ---

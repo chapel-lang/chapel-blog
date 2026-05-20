@@ -7,6 +7,7 @@ series: ["7 Questions for Chapel Users"]
 summary: "An interview with Dr. Akihiro Hayashi about his trailblazing work targeting GPUs with Chapel"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "akihiro.jpeg"
+images: ["akihiro.jpeg"]
 ---
 
 In this edition of our [7 Questions for Chapel Users]({{< relref

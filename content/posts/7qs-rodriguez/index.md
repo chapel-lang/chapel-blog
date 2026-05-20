@@ -8,6 +8,7 @@ summary: "An interview with Dr. Oliver Alvarado Rodriguez about his use
 of Chapel in writing graph analytics computations"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "Oliver.jpg"
+images: ["Oliver.jpg"]
 ---
 
 Welcome to the first interview in our [7 Questions for Chapel

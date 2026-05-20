@@ -6,6 +6,7 @@ tags: ["Editorial", "Archival Posts / Reprints", "Language Comparison", "Perform
 series: ["10 Myths About Scalable Parallel Programming Languages Redux"]
 summary: "The sixth archival post from the 2012 IEEE TCSC blog series, with a current reflection on it"
 authors: ["Brad Chamberlain"]
+images: ["NasMgLineCounts.jpg"]
 ---
 
 ### Background

@@ -10,6 +10,7 @@ summary: "An interview with Computer Science Professor David Bader about his use
 of Arkouda for graph analytics"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "bader.jpg"
+images: ["bader.jpg"]
 ---
 
 In this installment of our [7 Questions for Chapel

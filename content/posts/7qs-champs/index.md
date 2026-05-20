@@ -6,6 +6,7 @@ series: ["7 Questions for Chapel Users"]
 summary: "An interview with graduate students at Polytechnique Montréal about their experiences doing Computational Fluid Dynamics in Chapel"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "maxime-karim-baptiste.jpg"
+images: ["maxime-karim-baptiste.jpg"]
 ---
 
 For this, the tenth interview in our [7 Questions for Chapel

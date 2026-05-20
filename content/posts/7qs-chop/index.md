@@ -7,6 +7,7 @@ series: ["7 Questions for Chapel Users"]
 summary: "An interview with the two principal developers of ChOp, the Chapel-based Optimization Project"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "tiago-guillaume.jpg"
+images: ["tiago-guillaume.jpg"]
 ---
 
 This installment of our [7 Questions for Chapel Users]({{<relref

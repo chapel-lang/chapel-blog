@@ -41,3 +41,6 @@ theme = 'chapel-theme'
   tag = "tags"
   series = "series"
   author = "authors"
+
+[outputs]
+home = ["html", "rss", "json"]
