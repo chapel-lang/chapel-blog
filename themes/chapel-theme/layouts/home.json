@@ -1,3 +1,4 @@
+{{- define "main" -}}
 [
   {{- $first := true -}}
   {{- range (where (where .Site.Pages.ByDate.Reverse "Section" "posts") ".Kind" "!=" "section") -}}
@@ -28,3 +29,4 @@
   }
   {{- end }}
 ]
+{{- end }}

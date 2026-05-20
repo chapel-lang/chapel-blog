@@ -42,11 +42,5 @@ theme = 'chapel-theme'
   series = "series"
   author = "authors"
 
-[outputFormats]
-  [outputFormats.Json]
-    name = "json"
-    mediaType = "application/json"
-    isHTML = false
-
 [outputs]
 home = ["html", "rss", "json"]
