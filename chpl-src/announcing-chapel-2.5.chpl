@@ -3,6 +3,7 @@
 // summary: "Highlights from the June 2025 release of Chapel 2.5"
 // tags: ["Searching / Sorting", "Performance", "Language Features", "Chapel 2.0", "Debugging", "Tools", "Dyno"]
 // series: ["Release Announcements"]
+// images: ["thumbnail.jpg"]
 // date: 2025-06-12
 /*
 
