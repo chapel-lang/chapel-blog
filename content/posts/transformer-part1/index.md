@@ -6,6 +6,7 @@ tags: ["User Experiences", "Language Comparison", "AI/ML", "Vectorization", "Per
 summary: "An implementation of a transformer using Chapel, comparing to C++ and PyTorch"
 authors: ["Thitrin Sastarasadhit"]
 series: ["Transformers From Scratch in Chapel and C++"]
+images: ["each-backward.png"]
 ---
 
 ### Introduction

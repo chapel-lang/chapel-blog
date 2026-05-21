@@ -6,6 +6,7 @@ tags: ["User Experiences", "Language Comparison", "AI/ML", "Performance", "Bench
 summary: "Comparison of transformers in Chapel, C++, and PyTorch focusing on multi-threaded CPUs"
 authors: ["Thitrin Sastarasadhit"]
 series: ["Transformers From Scratch in Chapel and C++"]
+images: ["speedup-total.png"]
 ---
 
 ### Introduction

@@ -8,6 +8,7 @@ summary: "An interview with Dr. Marjan Asgari about her use
 of Chapel for hydrological research"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "asgari.jpg"
+images: ["asgari.jpg"]
 ---
 
 Welcome to the [7 Questions for Chapel Users]({{< relref

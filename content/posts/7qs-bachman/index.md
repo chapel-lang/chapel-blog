@@ -8,6 +8,7 @@ summary: "An interview with oceanographer Scott Bachman, focusing on his work to
 authors: ["Brad Chamberlain", "Engin Kayraklioglu"]
 featured: true
 interviewee_photo: "bachman.jpg"
+images: ["bachman.jpg"]
 weight: 14
 ---
 

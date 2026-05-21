@@ -7,6 +7,7 @@ series: ["7 Questions for Chapel Users"]
 summary: "An interview with Professor of Environmental Engineering Nelson Luís Dias about his use of Chapel in analyzing Atmospheric Turbulence"
 authors: ["Engin Kayraklioglu", "Brad Chamberlain"]
 interviewee_photo: "dias.jpg"
+images: ["dias.jpg"]
 ---
 
 In this edition of our [Seven Questions for Chapel
