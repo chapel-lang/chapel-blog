@@ -7,6 +7,7 @@ summary: "This summary of Brad's HIPS 2025 keynote looks at how HPC programming 
 authors: ["Brad Chamberlain"]
 featured: true
 weight: 15
+hidden_from_front_page_news: true
 ---
 
 Last summer, I had the opportunity to give the keynote at [HIPS
