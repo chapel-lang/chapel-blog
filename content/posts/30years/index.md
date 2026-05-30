@@ -805,20 +805,23 @@ than our current count of zero.
 
 ### For More Information
 
-On the Chapel website, you can browse the slides from the
-[HIPS](https://chapel-lang.org/presentations/ChamberlainHIPS2025-presented.pdf)
-and
-[CLSAC](https://chapel-lang.org/presentations/Chamberlain-CLSAC2025-presented.pdf)
-talks that this article was based upon.  If you'd like to read more
-about why I think Chapel is well-positioned to be a broadly adopted
-HPC language despite all the challenges around doing so, check out my
+Since this article was published, I gave a 15-minute talk version of
+it at PNW PLSE 2026, which you can [watch
+online](https://youtu.be/xb45unGdc6s?si=0ksT37OTWQ_1_H2Y).  You can
+also browse the slides from the original [HIPS
+keynote](https://chapel-lang.org/presentations/ChamberlainHIPS2025-presented.pdf)
+and [CLSAC lightning
+talk](https://chapel-lang.org/presentations/Chamberlain-CLSAC2025-presented.pdf)
+that this article was based upon.  If you'd like to read more about
+why I think Chapel is well-positioned to be a broadly adopted HPC
+language despite all the challenges around doing so, check out my
 [10 Myths About Scalable Parallel Programming Languages
 (Redux)]({{<relref
 10-myths-about-scalable-parallel-programming-languages-redux>}})
 series on this blog, or jump to the [final article's
 summary]({{<relref "10myths-part8#summary">}}) to get the takeaways
-and pick an entry point that's attractive to you.  And, if you'd like
-to discuss this topic more, I'm always interested in good
+and pick an entry point that's attractive to you.  Finally, if you'd
+like to discuss this topic more, I'm always interested in good
 conversations on it.
 
 ---
@@ -836,3 +839,4 @@ opportunity to create and present this talk in its original form.
   | Date         | Change                                                      |
   |:-------------|:------------------------------------------------------------|
   | Apr 16, 2026 | Added a new details section and a few sidenotes to try and clarify a few things in response to questions from early readers. |
+  | May 30, 2026 | Updated the "For More Information" section to point to a recorded talk version of this article that followed its publication. |
