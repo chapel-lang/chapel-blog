@@ -782,7 +782,7 @@ proc explore(
 
 */
 
-iter nextPositions(pos, elevs, minTo, nextPathLen) {
+iter nextPositions(pos, elevs, ref minTo, nextPathLen) {
   // try moving in each direction
   label checkingMoves for move in ((1, 0), (-1, 0), (0, 1), (0, -1)) {
     const next = pos + move;
@@ -917,6 +917,7 @@ writeln(findShortestPath(elevations, start, end));
 {{< changetable >}}
   | Date         | Change                                                      |
   |:-------------|:----------------------------------------------------------------------------------|
-  | Feb 5, 2023  | Updated `findShortestPath()` to return the value stored in the `atomic` |
+  | Feb 5, 2023  | Updated `findShortestPath()` to return the value stored in the `atomic` |
+  | Jun 9, 2026  | Updated `findShortestPath()` to use an explicit `ref` intent on the modified array argument `minTo`, which has been required since ~version 1.32, but not properly flagged by the compiler in this case until 2.9 |
 
 */
