@@ -635,6 +635,7 @@
       [[[13,11],[13,19]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.readLine"],
       [[[18,22],[18,32]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.startsWith"],
       [[[20,39],[20,43]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.size"],
+      [[[21,21],[21,29]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"],
       [[[23,23],[23,33]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.startsWith"],
       [[[23,51],[23,61]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.startsWith"],
       [[[24,38],[24,47]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string.partition"],
@@ -1095,6 +1096,41 @@
       [[[11,1],[11,11]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.fillRandom"],
       [[[12,1],[12,11]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.fillRandom"],
       [[[18,1],[18,8]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.8/code/mapDebug.chpl": {
+    "references": [
+      [[[1,5],[1,8]],"https://chapel-lang.org/docs/modules/standard/Map.html"],
+      [[[9,10],[9,13]],"https://chapel-lang.org/docs/modules/standard/Map.html#Map.map"],
+      [[[9,14],[9,20]],"https://chapel-lang.org/docs/language/spec/strings.html#String.string"],
+      [[[14,3],[14,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.8/code/distance.chpl": {
+    "references": [
+      [[[1,5],[1,9]],"https://chapel-lang.org/docs/modules/standard/List.html"],
+      [[[2,5],[2,11]],"https://chapel-lang.org/docs/modules/standard/Random.html"],
+      [[[4,14],[4,26]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.randomStream"],
+      [[[11,10],[11,14]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.sqrt"],
+      [[[11,10],[11,14]],"https://chapel-lang.org/docs/modules/standard/Math.html#Math.sqrt"],
+      [[[14,15],[14,19]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list"],
+      [[[16,12],[16,20]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.pushBack"],
+      [[[16,34],[16,38]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.randomStream.next"],
+      [[[17,34],[17,38]],"https://chapel-lang.org/docs/modules/standard/Random.html#Random.randomStream.next"],
+      [[[18,3],[18,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writeln"],
+      [[[19,23],[19,27]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.size"],
+      [[[20,25],[20,29]],"https://chapel-lang.org/docs/modules/standard/List.html#List.list.size"],
+      [[[23,7],[23,13]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.writef"]
+    ]
+  },
+  "public/posts/announcing-chapel-2.8/code/converter.chpl": {
+    "references": [
+      [[[1,5],[1,7]],"https://chapel-lang.org/docs/modules/standard/IO.html"],
+      [[[3,13],[3,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.file"],
+      [[[4,11],[4,17]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.file.writer"],
+      [[[6,3],[6,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileWriter.writeln"],
+      [[[7,3],[7,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileWriter.writeln"],
+      [[[15,3],[15,10]],"https://chapel-lang.org/docs/modules/standard/IO.html#IO.fileWriter.writeln"]
     ]
   }
 }
