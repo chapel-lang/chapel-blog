@@ -49,8 +49,8 @@ TODO: Mason above or below?
 
   * A parallel implementation of [`scan`
     expressions](https://chapel-lang.org/docs/2.9/language/spec/data-parallelism.html#scan-expressions)
-    for array-like expressions like `myArray: int`, `myArray +
-    myArray2`, or `[i in 1..n] i`
+    for array-like expressions such as `myArray: int`, `sin(myArray)`,
+    or `[i in 1..n] i`
 
   * Support for LLVM 22 as the default compiler back-end, LLDB 22 for
     debugging, and CUDA 13 for NVIDIA GPUs
@@ -107,8 +107,8 @@ TODO: Mason above or below?
   ``none``.  This feature also requires the runtime and programs to be
   built using position-independent code (PIC), so be sure you've built
   your runtime with ``CHPL_LIB_PIC=pic`` set, and to also use it when
-  compiling your programs.  Examples like the one shown here won't
-  work correctly otherwise.
+  compiling your programs (or use `--lib-pic=pic`).  Examples like the
+  one shown here won't work correctly otherwise.
 
   {{</details>}}
 
@@ -147,55 +147,73 @@ TODO: Mason above or below?
   communication.
 
 
-  ### Chapel Language Server and Linter
-
+  ### Editing Improvements due to CLS
   [Since our 2.0 release]({{< relref
   "announcing-chapel-2.0#rich-tooling-support" >}}), Chapel has
   provided two key tools that enable users to write code more
   productively: the [Chapel Language Server
-  (CLS)](https://chapel-lang.org/docs/2.8/tools/chpl-language-server/chpl-language-server.html)
-  and the [`chplcheck`
-  linter](https://chapel-lang.org/docs/2.8/tools/chplcheck/chplcheck.html).
-  This 2.8 release includes several improvements to both of these
-  tools.
+  (CLS)](https://chapel-lang.org/docs/2.9/tools/chpl-language-server/chpl-language-server.html)
+  and the [`chplcheck`](https://chapel-lang.org/docs/2.9/tools/chplcheck/chplcheck.html) linter.
+  This 2.9 release includes several improvements to both these
+  tools, where we'll focus on CLS here.
+  As in Chapel 2.8, the biggest improvements to the language server
+  have been made in the experimental [resolution-based
+  features](https://chapel-lang.org/docs/tools/chpl-language-server/chpl-language-server.html#experimental-resolver-features).
 
-  #### Editing, Resolution, and Inlays
+  #### Error Improvements
 
-  When it comes to the language server, the biggest improvements have once
-  again been made to the experimental
-  [resolution-based features](https://chapel-lang.org/docs/tools/chpl-language-server/chpl-language-server.html#experimental-resolver-features).
-  The first among these improvements has been made by exposing more
-  compiler information to the language server, specifically related to error
-  messages. The language server can now better interpret several common error
-  messages, and to display them to the user in a more helpful way. For example,
-  take the following file:
+  The first case we'll cover improves the quality of compiler errors
+  within the editor.  This is the result of exposing more information
+  about error messages to the language server, permitting it to better
+  interpret several common error messages and display them to the
+  user in a more helpful way. For example, consider the following
+  file, in which the user has made several mistakes, as noted in
+  the comments:
 
   {{< file_download_min fname="bad-calls.chpl" lang="chapel" >}}
 
-  Prior to Chapel 2.9, the error message would highlight the entire problematic
-  expression, often spanning the entire line. Now, the exact argument that causes a function
-  call to fail to resolve is highlighted. Similarly, in the `use IO` statement,
-  the problematic fragment (attempting to rename a variable in an `except` clause)
-  is highlighted specifically.
+  Prior to Chapel 2.9, the editor would highlight the entire
+  problematic context for such errors, often spanning the entire line:
 
-  {{< foldtable >}}
-  | Before | After |
-  |--------|------|
-  |{{< figure src="error-info-before.png" alt="Error message before; entire lines of code are highlighted">}}|{{< figure src="error-info-after.png" alt="Error message before; highlighted info is more precise">}}|
+  {{< figure src="error-info-before.png" alt="Error message before; entire lines of code are highlighted">}}
 
-  In Chapel 2.9, the CLS has also seen improvements to its ability to collect
-  generic function instantiations across multiple files in a project. In
-  the following example, the a generic function defined in module `A` shows
-  instantiations stemming from generic calls in a module `B`:
+  Now, the error is highlighted much more precisely.  In the `use`
+  statement, the problematic fragment that attempted to rename an
+  identifier in an `except` clause is specifically highlighted.  And
+  so is the exact argument that caused a call to fail to resolve:
 
-  {{< figure class="fullwide" src="across-files.png" caption="Instantiations (on the left) shown from calls in a different module (on the right)" alt="Instantiations (on the left) shown from calls in a different module (on the right)">}}
+  {{< figure src="error-info-after.png" alt="Error message before; highlighted info is more precise">}}
 
-  Another long-awaited resolution-based feature, and the last one we will call
-  out in this release announcement, is the ability to infer and display return
-  types for functions. In the following program, the CLS is shown inferring
-  the return type of a concrete function (`foo`), a common return type for
-  a generic function (`bar`), and a per-instantiation return type for
-  another generic function (`baz`):
+  #### Generic Instantiation Inlays
+
+  In Chapel 2.9, the CLS has also seen improvements to its ability to
+  collect generic instantiations across multiple files in a
+  project. In the following example, the generic procedure `foo()`
+  defined in module `A` displays instantiations stemming from calls
+  made in a separate file and module `B`:
+
+  {{< file_download_min fname="A.chpl" lang="chapel" >}}
+  {{< file_download_min fname="B.chpl" lang="chapel" >}}
+
+  {{< figure class="fullwide" src="across-files.png" alt="Instantiations (on the left) shown from calls in a different module (on the right)">}}
+
+  In addition, the CLS now displays inlays for declarations within
+  generic procedures whose types are independent of the instantiating
+  arguments.  For example, if `foo()` above contained the declaration
+  `var message = "hi";`, it would be a string regardless of the values
+  of generic arguments `t` and `p`, so would be rendered as such in
+  the editor.
+
+  #### Inferred Return/Yield Types
+
+  Another long-awaited editor improvement, and the last one we'll call
+  out in this release announcement, is the ability to infer and
+  display return types for procedures (and yield types for
+  iterators). In the following program, the CLS is shown inferring the
+  return type of a concrete function (`foo`), an
+  instantiation-independent return type for a generic function
+  (`bar`), and an instantiation-specific return type for another
+  generic function (`baz`):
 
   {{< file_download_min fname="return.chpl" lang="chapel" >}}
 
@@ -217,18 +235,9 @@ TODO: Mason above or below?
 
 
 
-short
-=====
-* RHEL EX RPMs
-* LLVM/LLDB 22
-* parallel scans
-* tools improvements
-
 long
 ====
 
-* Dynamic Loading
-* Daniel CLS
 * Mason
   - pkg manager
 * unions
