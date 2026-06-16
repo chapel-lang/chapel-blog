@@ -1,0 +1,7 @@
+#!/bin/bash
+
+chpl=$3
+
+# If this command-line changes, the copy of it in announcing-chapel-2.9.chpl
+# should as well
+$chpl Library.chpl --library --dynamic --no-builtin-runtime
