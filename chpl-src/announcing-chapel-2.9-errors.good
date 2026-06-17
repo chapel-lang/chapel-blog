@@ -1,0 +1,2 @@
+45
+announcing-chapel-2.9.chpl:266: error: halt reached - illegal union access: attempted to access field 'x' but 'y' is currently active

@@ -1,0 +1,12 @@
+45
+myU is: (y = 45)
+The active field is #1
+y is active: 45
+y is 45
+In bar, y is: 45
+false
+true
+false
+true
+Using my overload, (y = 45) == (x = 45) => true
+Using my overload, (y = 45) != (x = 45) => false
