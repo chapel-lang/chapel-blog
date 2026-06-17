@@ -35,7 +35,12 @@
   Other notable highlights of Chapel 2.9 that aren't covered by this
   article include:
 
-TODO: Mason above or below?
+  * Significant ergonomic improvements to Mason, Chapel's package
+    manager, as well as a new [web-based package
+    browser](https://chapel-lang.org/packages/) (use it to find newly
+    released packages since Chapel 2.8: `Base64`, `Crypto`, `CVL`
+    (Chpl Vector Library), `Dyno`, `Log`, `Parquet`, `Pathlib`,
+    `SciChap`, `TemplateStrings`, and `TerminalColors`).
 
   * Ergonomic improvements to other tools, such as the
     [`chplcheck`](https://chapel-lang.org/docs/2.9/tools/chplcheck/chplcheck.html)
@@ -130,7 +135,7 @@ TODO: Mason above or below?
   procedure from the library and calls into it, causing our greeting
   message to be printed once per locale in an arbitrary order:
 
-  ```
+  ```terminal
   Hello from locale 1
   Hello from locale 0
   Hello from locale 3
@@ -220,6 +225,220 @@ TODO: Mason above or below?
   {{< figure src="return-type-inlays.png" caption="CLS inferring return types for concrete and generic functions" alt="return-type-inlays.png">}}
 
 
+  ### Union Type Improvements
+
+  Though Chapel has long supported union types, they have
+  unfortunately been stuck in a half-baked state for years.  Motivated
+  by a recent user request, they took a big leap forward in
+  Chapel 2.8, perhaps reaching a 4/5-baked state. ☺
+
+
+  #### Union Basics
+
+  Introducing some of the features added in this release, let's start
+  with a basic union declaration that declares three fields, `x`, `y`,
+  and `z`, where the former two are integers and the third is a `real`
+  floating point value.
+
+*/
+
+  union u {
+    var x: int;
+    var y: int;
+    var z: real;
+  }
+
+/*
+
+  Chapel's unions carry the concept of an _active field_, such that
+  when a value is stored in a given field, only that field may be read
+  until another field is written.  For example, if we store into `y`,
+  we can read from `y`, but not from `x` or `z`:
+
+*/
+
+  config const testErrors = false;
+
+  var myU, myU2: u;
+  myU.y = 45;
+  writeln(myU.y);    // prints '45'
+  if testErrors {
+    writeln(myU.x);  // error: halt reached - illegal union access: attempted
+                     // to access field 'x' but 'y' is currently active
+    writeln(myU.z);  // error: halt reached - illegal union access: attempted
+                     // to access field 'z' but 'y' is currently active
+  }
+
+/*
+
+  Similarly, if the union is written out, the active field is
+  displayed.  For example,
+
+*/
+
+  writeln("myU is: ", myU);
+
+/*
+
+  produces:
+
+  ```terminal
+  myU is: (y = 45)
+  ```  
+
+  And that's about where Chapel's support for unions has been stuck
+  for many years.  It was a classic chicken-and-egg problem in which
+  Chapel users weren't using unions because they weren't very capable,
+  but they also weren't being improved because users {{< sidenote
+  "right" "weren't using them" >}}In addition, we were probably
+  letting the quest for the perfect design be the enemy of one that
+  would've been good enough.{{</sidenote>}}
+
+
+  #### Active Field Queries
+
+  In Chapel 2.9, we broke this cycle where a key element was
+  introducing the ability to query which field is active in a given
+  union, using 0-based numbering of its fields.  For example, if we
+  were to write:
+
+*/
+
+  writeln("The active field is #", myU.getActiveIndex());
+
+/*
+
+  we'd see:
+
+  ```terminal
+  The active field is #1
+  ```
+
+  From there, safe code can be written to choose between the active
+  fields using conditionals, or patterns like:
+
+*/
+
+  select myU.getActiveIndex() {
+    when 0 do writeln("x is active: ", myU.x);
+    when 1 do writeln("y is active: ", myU.y);
+    when 2 do writeln("z is active: ", myU.z);
+    otherwise do halt("got an unexpected index");
+  }
+
+/*
+
+  Chapel 2.9 also introduces a stylized way of performing a `select`
+  directly on a `union` expression to determine its active field.  You
+  can read about this feature in the [language
+  specification](https://chapel-lang.org/docs/2.9/language/spec/unions.html#union-pattern-matching),
+  but please note that the current syntax is subject to change and an
+  active area of discussion at the time of the release.
+
+  #### Active Field Visitors
+
+  Another way of identifying active fields is to use a visitor pattern
+  in which a procedure is supplied for each field, taking that field's
+  name and type as arguments,  For example, the following call:
+
+*/
+
+  myU.visit(proc(x: int)  { writeln("x is ", x); },
+            proc(y: int)  { writeln("y is ", y); },
+            proc(z: real) { writeln("z is ", z); });
+
+/*
+
+  results in:
+
+  ```terminal
+   y is 45
+   ```
+
+  Note that while anonymous procedures are used above, traditional
+  declared procedures can be used as well.  For example:
+
+*/
+
+  myU.visit(foo, bar, baz);
+
+  proc foo(x: int) { writeln("In foo, x is: ", x); }
+  proc bar(y: int) { writeln("In bar, y is: ", y); }
+  proc baz(z: real) { writeln("In baz, z is: ", z); }
+
+/*
+
+  would generate:
+
+  ```terminal
+  In bar, y is: 45
+  ```
+
+
+   #### Comparison Operators
+
+   In addition, Chapel now provides default comparison operators
+   between unions of the same type, which check that the same field is
+   active in both values and that the stored values are equal.  As an
+   example:
+
+*/
+
+  myU2.y = 78;
+  writeln(myU == myU2);  // false, since the active fields aren't equal
+  myU2.y = 45;
+  writeln(myU == myU2);  // true, since the same fields are active and equal
+  myU2.x = 45;
+  writeln(myU == myU2);  // false, since different fields are active
+  writeln(myU != myU2);  // true, since different fields are active
+
+/*
+
+  produces:
+
+  ```terminal
+  false
+  true
+  false
+  true
+  ```
+
+  As with default comparison operators on records, these defaults can
+  be overridden by a user.  For example, the following overloads
+  consider two of our union values to be equal if each has one of `x`
+  or `y` set and the values match:
+
+*/
+
+  { // open a new scope to limit these overloads to the contained code
+    operator u.==(a: u, b: u) {
+      const aIdx = a.getActiveIndex(),
+            bIdx = b.getActiveIndex();
+
+      if aIdx == 0 && bIdx == 1 {
+        return a.x == b.y;
+      } else if aIdx == 1 && bIdx == 0 {
+        return a.y == b.x;
+      }
+      return false;
+    }
+
+    operator u.!=(a: u, b: u) {
+      return !(a == b);
+    }
+
+    writeln("Using my overload, ", myU, " == ", myU2, " => ", myU == myU2);
+    writeln("Using my overload, ", myU, " != ", myU2, " => ", myU != myU2);
+  }
+
+/*
+
+  To read more about unions in Chapel, please see their [chapter in
+  the language
+  specification](https://chapel-lang.org/docs/2.9/language/spec/unions.html),
+  and be sure to share your feedback with us!
+
+
   ### For More Information
 
   If you have questions about Chapel 2.9 or any of its new features,
@@ -232,12 +451,3 @@ TODO: Mason above or below?
   language, libraries, implementation, and tools more useful to you.
 
 */
-
-
-
-long
-====
-
-* Mason
-  - pkg manager
-* unions
