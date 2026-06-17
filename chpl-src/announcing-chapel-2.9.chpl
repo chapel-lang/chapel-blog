@@ -7,42 +7,39 @@
 /*
 
   The Chapel developer community is happy to announce the release of
-  Chapel 2.9!  As with other recent versions,
-
-
-  release was improvements to Chapel's tools ecosystem.  As always,
-  you can [download and install](https://chapel-lang.org/download/)
-  this new version in a {{<sidenote "right" "variety of formats">}}Please
-  note that some formats may not yet be available at time of
-  publication...{{</sidenote>}}, including Spack, Homebrew, various
+  Chapel 2.9!  This summer release has a particular focus on
+  addressing user-requested features and bugs, as well as continuing
+  our recent focus on improving Chapel tools.  As always, you can
+  [download and install](https://chapel-lang.org/download/) the new
+  release in a {{<sidenote "right" "variety of formats">}}Please note
+  that some formats may not yet be available at time of
+  publication.{{</sidenote>}}, including Spack, Homebrew, various
   Linux package managers, Docker, and source tarballs.
 
-  This article summarizes several of Chapel 2.9's highlights,
-  including:
+  This article summarizes some of Chapel 2.9's highlights, including:
 
-  * 
+  * Initial support for [dynamically loading Chapel
+    libraries](#dynamically-loaded-parallel-libraries) that
+    make use of parallelism and distributed-memory features
 
-  * 
+  * Further improvements to editing Chapel code through [enhancements
+    to the Chapel Language Server](#editor-improvements-due-to-cls)
 
-  * 
+  * Significant improvements to Chapel's [union
+    types](#union-type-improvements), to start making up for many
+    years or neglect
 
-  * 
-
-  * 
-
-  * 
-
-  Other notable highlights of Chapel 2.9 that aren't covered by this
+  Other notable highlights of Chapel 2.9 that aren't covered in this
   article include:
 
   * Significant ergonomic improvements to Mason, Chapel's package
     manager, as well as a new [web-based package
-    browser](https://chapel-lang.org/packages/) (use it to find newly
+    browser](https://chapel-lang.org/packages/)—use it to find newly
     released packages since Chapel 2.8: `Base64`, `Crypto`, `CVL`
     (Chpl Vector Library), `Dyno`, `Log`, `Parquet`, `Pathlib`,
-    `SciChap`, `TemplateStrings`, and `TerminalColors`).
+    `SciChap`, `TemplateStrings`, and `TerminalColors`
 
-  * Ergonomic improvements to other tools, such as the
+  * Additional enhancements to other tools, such as the
     [`chplcheck`](https://chapel-lang.org/docs/2.9/tools/chplcheck/chplcheck.html)
     linter,
     [`chpldoc`](https://chapel-lang.org/docs/2.9/tools/chpldoc/chpldoc.html)
@@ -52,35 +49,37 @@
     [`c2chapel`](https://chapel-lang.org/docs/2.9/tools/c2chapel/c2chapel.html)
     tool for interoperating with C
 
-  * A parallel implementation of [`scan`
-    expressions](https://chapel-lang.org/docs/2.9/language/spec/data-parallelism.html#scan-expressions)
-    for array-like expressions such as `myArray: int`, `sin(myArray)`,
-    or `[i in 1..n] i`
+  * A parallel implementation of
+    [`scan`](https://chapel-lang.org/docs/2.9/language/spec/data-parallelism.html#scan-expressions)
+    expressions for array-like expressions such as<br> `myArray: int`,
+    `sin(myArray)`, or `[i in 1..n] i`
 
   * Support for LLVM 22 as the default compiler back-end, LLDB 22 for
-    debugging, and CUDA 13 for NVIDIA GPUs
+    debugging, and CUDA 13 for NVIDIA GPUs
 
-  * Newly released Red Hat Enterprise Linux RPMs [on HPE Cray EX
-    systems](https://chapel-lang.org/download/#hpe)
+  * Newly released Red Hat Enterprise Linux (RHEL) RPMs [on HPE Cray
+    EX systems](https://chapel-lang.org/download/#hpe)
 
-  For a far more complete list of improvements in Chapel 2.9, see its
-  entries in
-  [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.9/CHANGES.md).
-  And a big thanks to [everyone who
+  * The resolution of 26 user issues, including all 11 that were
+    opened since Chapel 2.8
+
+  For a far more complete list of improvements in Chapel 2.9, see the
+  [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.9/CHANGES.md)
+  file.  And a big thanks to [everyone who
   contributed](https://github.com/chapel-lang/chapel/blob/release/2.9/CONTRIBUTORS.md)
   to Chapel 2.9!
 
 
-  ### Dynamic Loading of Parallel Chapel Libraries
+  ### Dynamically Loaded Parallel Libraries
 
   Chapel 2.5 and 2.6 [introduced a new `DynamicLoading`
   module](https://chapel-lang.org/blog/posts/announcing-chapel-2.6/#dynamic-loading-support)
   that supports loading and calling into dynamic libraries from
   Chapel.  Up until now, this feature could only handle libraries that
-  were written in C or that used C-like features.  Notably,
-  dynamically loaded Chapel libraries could only use simple C-like
-  features rather than any of Chapel's productive features for
-  parallelism or distributed memory programming.
+  were written in C or that were sufficiently C-like.  Notably,
+  dynamically loaded Chapel libraries were not able to use the
+  language's features for parallelism or distributed memory
+  programming.
 
   Chapel 2.9 removes this limitation by adding prototypical support
   for dynamically loading Chapel libraries that use parallelism and/or
@@ -98,8 +97,8 @@
 
   {{< file_download fname="Library.chpl" lang="chapel" >}}
 
-  By compiling the program with the following command-line, we tell
-  the `chpl` compiler to create a dynamic library from it:
+  By compiling the program with the following command-line, we
+  instruct the `chpl` compiler to create a dynamic library from it:
 
   ```console
   $ chpl Library.chpl --library --dynamic --no-builtin-runtime
@@ -107,13 +106,13 @@
 
   {{<details summary="**(Trying this at home?  Be sure to read this first.**\)">}}
 
-  At present, distributed Chapel libraries like the one shown here
-  aren't supported for ``CHPL_COMM=ofi``, only ``gasnet`` and
-  ``none``.  This feature also requires the runtime and programs to be
-  built using position-independent code (PIC), so be sure you've built
-  your runtime with ``CHPL_LIB_PIC=pic`` set, and to also use it when
-  compiling your programs (or use `--lib-pic=pic`).  Examples like the
-  one shown here won't work correctly otherwise.
+  At present, distributed Chapel libraries like the one demonstrated
+  here aren't supported for ``CHPL_COMM=ofi``, only ``gasnet`` and
+  ``none``.  This feature also requires the runtime to be built using
+  position-independent code (PIC), so be sure you've built your
+  runtime with ``CHPL_LIB_PIC=pic`` set, and to also use it when
+  compiling your programs (or, equivalently, use `--lib-pic=pic`).
+  Examples like the one shown here won't work correctly otherwise.
 
   {{</details>}}
 
@@ -122,7 +121,7 @@
 
   {{< file_download fname="Executable.chpl" lang="chapel" >}}
 
-  We then compile the program, again saying not to bundle the runtime:
+  We then compile the program, once again saying not to bundle the runtime:
 
   ```console
   $ chpl Executable.chpl --no-builtin-runtime
@@ -131,9 +130,10 @@
   When executed on multiple locales (e.g., ``-nl 4``), the main
   program starts by loading a shared copy of the runtime when
   execution begins.  Next, it loads the user's dynamic library, which
-  shares the same copy of the runtime.  It then retrieves the `test1`
-  procedure from the library and calls into it, causing our greeting
-  message to be printed once per locale in an arbitrary order:
+  will share the same copy of the runtime.  It then retrieves the
+  `test1` procedure from the library and calls into it, causing our
+  greeting message to be printed once per locale, in an arbitrary
+  order due to the parallelism:
 
   ```terminal
   Hello from locale 1
@@ -142,17 +142,17 @@
   Hello from locale 2
   ```
 
-  This feature is still in its early days, and you may encounter bugs
+  This feature is still in its early days, so you may encounter bugs
   that break the loaded program or prevent you from running it.  If
-  you do, please consider filing any bugs you encounter as [issues on
-  the Chapel GitHub
+  you do, please file any bugs you encounter as [issues on the Chapel
+  GitHub
   repo](https://github.com/chapel-lang/chapel/issues/new/choose).  In
   the meantime, we will be working to address known limitations,
   harden the implementation, and eventually port it to support OFI
   communication.
 
 
-  ### Editing Improvements due to CLS
+  ### Editor Improvements due to CLS
   [Since our 2.0 release]({{< relref
   "announcing-chapel-2.0#rich-tooling-support" >}}), Chapel has
   provided two key tools that enable users to write code more
@@ -169,60 +169,73 @@
 
   The first case we'll cover improves the quality of compiler errors
   within the editor.  This is the result of exposing more information
-  about error messages to the language server, permitting it to better
-  interpret several common error messages and display them to the
-  user in a more helpful way. For example, consider the following
-  file, in which the user has made several mistakes, as noted in
-  the comments:
+  about errors to the language server, permitting it to better
+  interpret several common error messages and display them to the user
+  in a more helpful way. For example, consider the following file, in
+  which the user has made several mistakes, as noted in the comments:
 
   {{< file_download_min fname="bad-calls.chpl" lang="chapel" >}}
 
   Prior to Chapel 2.9, the editor would highlight the entire
-  problematic context for such errors, often spanning the entire line:
+  problematic context for such errors, often spanning the complete line:
 
   {{< figure src="error-info-before.png" alt="Error message before; entire lines of code are highlighted">}}
 
   Now, the error is highlighted much more precisely.  In the `use`
   statement, the problematic fragment that attempted to rename an
-  identifier in an `except` clause is specifically highlighted.  And
-  so is the exact argument that caused a call to fail to resolve:
+  identifier in an `except` clause is specifically highlighted.
+  Similarly, the editor highlights the specific arguments that caused
+  the resolution failures for the calls to `foo()`.
 
   {{< figure src="error-info-after.png" alt="Error message before; highlighted info is more precise">}}
 
+  Having pinpointed the source of the error, users can then use their
+  editors' standard features for viewing the error messages (e.g.,
+  hovering over the error) to see additional information about the
+  cause of the errors.  In addition to the highlighting improvements
+  described here, many error messages have also improved in clarity
+  and detail since Chapel 2.8.
+
+
   #### Generic Instantiation Inlays
 
-  In Chapel 2.9, the CLS has also seen improvements to its ability to
-  collect generic instantiations across multiple files in a
-  project. In the following example, the generic procedure `foo()`
-  defined in module `A` displays instantiations stemming from calls
-  made in a separate file and module `B`:
+  In Chapel 2.9, the rendering of generic procedures has also been
+  improved in CLS.  For example, it can now display generic
+  instantiations collected across the multiple files of a project.  In
+  the following program, the generic procedure `foo()` defined in
+  module `A` displays instantiations stemming from calls made in a
+  separate file and module, `B`:
 
   {{< file_download_min fname="A.chpl" lang="chapel" >}}
   {{< file_download_min fname="B.chpl" lang="chapel" >}}
 
   {{< figure class="fullwide" src="across-files.png" alt="Instantiations (on the left) shown from calls in a different module (on the right)">}}
 
-  In addition, the CLS now displays inlays for declarations within
-  generic procedures whose types are independent of the instantiating
+  In addition, CLS now displays inlays for declarations within generic
+  procedures whose types are independent of the instantiating
   arguments.  For example, if `foo()` above contained the declaration
-  `var message = "hi";`, it would be a string regardless of the values
-  of generic arguments `t` and `p`, so would be rendered as such in
-  the editor.
+  `var message = "hi";`, its inlay would label it as being a string
+  regardless of the values of generic arguments `t` and `p`.
+
 
   #### Inferred Return/Yield Types
 
   Another long-awaited editor improvement, and the last one we'll call
   out in this release announcement, is the ability to infer and
-  display return types for procedures (and yield types for
-  iterators). In the following program, the CLS is shown inferring the
-  return type of a concrete function (`foo`), an
-  instantiation-independent return type for a generic function
-  (`bar`), and an instantiation-specific return type for another
-  generic function (`baz`):
+  display return types for procedures (as well as yield types for
+  iterators). In the following program, CLS is shown inferring the
+  return type of a concrete procedure (`foo`), the
+  instantiation-independent return type of a generic procedure
+  (`bar`), and an instantiation-specific return type for a second
+  generic procedure (`baz`):
 
   {{< file_download_min fname="return.chpl" lang="chapel" >}}
 
-  {{< figure src="return-type-inlays.png" caption="CLS inferring return types for concrete and generic functions" alt="return-type-inlays.png">}}
+  {{< figure src="return-type-inlays.png">}}
+
+  That wraps up some highlights for CLS in Chapel 2.9, but see the
+  [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.9/CHANGES.md)
+  file for additional improvements.
 
 
   ### Union Type Improvements
@@ -230,15 +243,16 @@
   Though Chapel has long supported union types, they have
   unfortunately been stuck in a half-baked state for years.  Motivated
   by a recent user request, they took a big leap forward in
-  Chapel 2.8, perhaps reaching a 4/5-baked state. ☺
+  Chapel 2.8.
 
 
   #### Union Basics
 
-  Introducing some of the features added in this release, let's start
-  with a basic union declaration that declares three fields, `x`, `y`,
-  and `z`, where the former two are integers and the third is a `real`
-  floating point value.
+  To introduce some of the new features added in this release, let's
+  start with a review of the basics.  The following union declaration
+  in Chapel declares a type with three fields, `x`, `y`, and `z`,
+  where the former two are integers and the third is a `real` floating
+  point value.
 
 */
 
@@ -250,10 +264,12 @@
 
 /*
 
-  Chapel's unions carry the concept of an _active field_, such that
-  when a value is stored in a given field, only that field may be read
-  until another field is written.  For example, if we store into `y`,
-  we can read from `y`, but not from `x` or `z`:
+  At any given time, only one of these fields can be actively storing
+  a value.  This is known as the union's _active field_, and Chapel
+  ensures that when a value is stored in a given field, only that
+  field may be read until some other field is written and becomes the
+  new active field.  For example, if we store into `y`, we can read
+  from `y`, but not from `x` or `z`:
 
 */
 
@@ -286,18 +302,18 @@
   myU is: (y = 45)
   ```  
 
-  And that's about where Chapel's support for unions has been stuck
-  for many years.  It was a classic chicken-and-egg problem in which
+  And that's about where Chapel's support for unions has stood for
+  many years.  It was a classic chicken-and-egg problem in which
   Chapel users weren't using unions because they weren't very capable,
-  but they also weren't being improved because users {{< sidenote
+  and we had trouble prioritizing them because users {{< sidenote
   "right" "weren't using them" >}}In addition, we were probably
   letting the quest for the perfect design be the enemy of one that
-  would've been good enough.{{</sidenote>}}
+  might have been good enough.{{</sidenote>}}
 
 
   #### Active Field Queries
 
-  In Chapel 2.9, we broke this cycle where a key element was
+  In Chapel 2.9, we broke this vicious cycle, where a key element was
   introducing the ability to query which field is active in a given
   union, using 0-based numbering of its fields.  For example, if we
   were to write:
@@ -315,16 +331,19 @@
   ```
 
   From there, safe code can be written to choose between the active
-  fields using conditionals, or patterns like:
+  fields.  For example, consider the following conditional:
 
 */
 
-  select myU.getActiveIndex() {
-    when 0 do writeln("x is active: ", myU.x);
-    when 1 do writeln("y is active: ", myU.y);
-    when 2 do writeln("z is active: ", myU.z);
-    otherwise do halt("got an unexpected index");
-  }
+    const fieldIdx = myU.getActiveIndex();
+    if  fieldIdx == 0 then
+      writeln("x is active: ", myU.x);
+    else if fieldIdx == 1 then
+      writeln("y is active: ", myU.y);
+    else if fieldIdx == 2 then
+      writeln("z is active: ", myU.z);
+    else
+      halt("got an unexpected index");
 
 /*
 
@@ -377,10 +396,10 @@
 
    #### Comparison Operators
 
-   In addition, Chapel now provides default comparison operators
-   between unions of the same type, which check that the same field is
-   active in both values and that the stored values are equal.  As an
-   example:
+   Chapel also now provides default comparison operators between
+   unions of the same type.  Two unions are considered to be equal if
+   they both have the same active field and the values stored in those
+   fields are equal.  As an example:
 
 */
 
@@ -394,15 +413,6 @@
 
 /*
 
-  produces:
-
-  ```terminal
-  false
-  true
-  false
-  true
-  ```
-
   As with default comparison operators on records, these defaults can
   be overridden by a user.  For example, the following overloads
   consider two of our union values to be equal if each has one of `x`
@@ -410,7 +420,7 @@
 
 */
 
-  { // open a new scope to limit these overloads to the contained code
+  {  // open a new scope to limit these overloads to the code within
     operator u.==(a: u, b: u) {
       const aIdx = a.getActiveIndex(),
             bIdx = b.getActiveIndex();
@@ -432,6 +442,15 @@
   }
 
 /*
+
+  Running this example generates:
+
+  ```terminal
+  Using my overload, (y = 45) == (x = 45) => true
+  Using my overload, (y = 45) != (x = 45) => false
+  ```
+
+  since our records meet the custom definition of equality.
 
   To read more about unions in Chapel, please see their [chapter in
   the language
