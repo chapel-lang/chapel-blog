@@ -26,8 +26,8 @@
     to the Chapel Language Server](#editor-improvements-due-to-cls)
 
   * Significant improvements to Chapel's [union
-    types](#union-type-improvements), to start making up for many
-    years or neglect
+    types](#union-type-improvements), in terms of capabilities
+    and ease-of-use
 
   Other notable highlights of Chapel 2.9 that aren't covered in this
   article include:
