@@ -3,10 +3,10 @@ proc foo(x: int) {
 }
 
 proc bar(x) {
-  return 42;
+  return x:int;
 }
-bar (x = "hello");
-bar (x = 42.0);
+bar(x = "42");
+bar(x = 42.0);
 
-proc baz(x: string) do return x;
+proc baz(x) do return x;
 baz(x = "lol");

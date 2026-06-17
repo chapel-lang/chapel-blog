@@ -201,10 +201,10 @@
 
   In Chapel 2.9, the rendering of generic procedures has also been
   improved in CLS.  For example, it can now display generic
-  instantiations collected across the multiple files of a project.  In
-  the following program, the generic procedure `foo()` defined in
-  module `A` displays instantiations stemming from calls made in a
-  separate file and module, `B`:
+  instantiations collected across the multiple files that make up a
+  project.  In the following program, the generic procedure `foo()`
+  defined in module `A` displays instantiations stemming from calls
+  made in a separate file and module, `B`:
 
   {{< file_download_min fname="A.chpl" lang="chapel" >}}
   {{< file_download_min fname="B.chpl" lang="chapel" >}}
@@ -212,26 +212,30 @@
   {{< figure class="fullwide" src="across-files.png" alt="Instantiations (on the left) shown from calls in a different module (on the right)">}}
 
   In addition, CLS now displays inlays for declarations within generic
-  procedures whose types are independent of the instantiating
-  arguments.  For example, if `foo()` above contained the declaration
-  `var message = "hi";`, its inlay would label it as being a string
-  regardless of the values of generic arguments `t` and `p`.
+  procedures whose types are independent of the instantiating context.
+  For example, in `foo()` above, note that even in this generic view,
+  `lhs` and `rhs` are annotated as having type `bool` since they will
+  have those types regardless of the type `t` and value `p` that the
+  procedure is instantiated with.  Note that the return type is
+  similarly inferred, which leads to our final CLS highlight:
 
 
   #### Inferred Return/Yield Types
 
-  Another long-awaited editor improvement, and the last one we'll call
-  out in this release announcement, is the ability to infer and
+  Another long-awaited editor improvement is the ability to infer and
   display return types for procedures (as well as yield types for
   iterators). In the following program, CLS is shown inferring the
-  return type of a concrete procedure (`foo`), the
-  instantiation-independent return type of a generic procedure
-  (`bar`), and an instantiation-specific return type for a second
-  generic procedure (`baz`):
+  return type of a concrete procedure (`foo`), the {{<sidenote "right"
+  "instantiation-independent return type">}}The previous section's
+  example demonstrated this as well, by inferring that `foo()` returns
+  a `bool` regardless of arguments `t` and `p`).{{</sidenote>}} of a
+  generic procedure (`bar`), and an instantiation-specific return type
+  for a second generic procedure (`baz`):
 
   {{< file_download_min fname="return.chpl" lang="chapel" >}}
 
   {{< figure src="return-type-inlays.png">}}
+
 
   That wraps up some highlights for CLS in Chapel 2.9, but see the
   [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.9/CHANGES.md)
