@@ -135,7 +135,7 @@
   greeting message to be printed once per locale, in an arbitrary
   order due to the parallelism:
 
-  ```terminal
+  ```console
   Hello from locale 1
   Hello from locale 0
   Hello from locale 3
@@ -163,7 +163,7 @@
   tools, where we'll focus on CLS here.
   As in Chapel 2.8, the biggest improvements to the language server
   have been made in the experimental [resolution-based
-  features](https://chapel-lang.org/docs/tools/chpl-language-server/chpl-language-server.html#experimental-resolver-features).
+  features](https://chapel-lang.org/docs/2.9/tools/chpl-language-server/chpl-language-server.html#experimental-resolver-features).
 
   #### Error Improvements
 
@@ -238,7 +238,7 @@
 
 
   That wraps up some highlights for CLS in Chapel 2.9, but see the
-  [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.9/CHANGES.md)
+  [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.9/CHANGES.md#chpl-language-server-cls--vscode--editor-improvements)
   file for additional improvements.
 
 
@@ -302,7 +302,7 @@
 
   produces:
 
-  ```terminal
+  ```console
   myU is: (y = 45)
   ```  
 
@@ -330,7 +330,7 @@
 
   we'd see:
 
-  ```terminal
+  ```console
   The active field is #1
   ```
 
@@ -374,7 +374,7 @@
 
   results in:
 
-  ```terminal
+  ```console
    y is 45
    ```
 
@@ -393,7 +393,7 @@
 
   would generate:
 
-  ```terminal
+  ```console
   In bar, y is: 45
   ```
 
@@ -450,7 +450,7 @@
   Since our records meet the custom definition of equality, running
   this example generates:
 
-  ```terminal
+  ```console
   Using my overload, (y = 45) == (x = 45) => true
   Using my overload, (y = 45) != (x = 45) => false
   ```
