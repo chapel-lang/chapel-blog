@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-"../../../../scripts/sub_test_content.py" "$@"
+"../../../scripts/sub_test_content.py" "$@"
