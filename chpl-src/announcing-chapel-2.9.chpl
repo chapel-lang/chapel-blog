@@ -1,7 +1,7 @@
 // Announcing Chapel 2.9!
 // authors: ["David Longnecker", "Daniel Fedorin", "Brad Chamberlain"]
 // summary: "Highlights from the June 2026 release of Chapel 2.9"
-// tags: []
+// tags: ["Libraries", "Tools", "Language Features", "Mason"]
 // series: ["Release Announcements"]
 // date: 2026-06-18
 /*
@@ -23,7 +23,7 @@
     make use of parallelism and distributed-memory features
 
   * Further improvements to editing Chapel code through [enhancements
-    to the Chapel Language Server](#editor-improvements-due-to-cls)
+    to the Chapel Language Server (CLS)](#editor-improvements-due-to-cls)
 
   * Significant improvements to Chapel's [union
     types](#union-type-improvements), in terms of capabilities
@@ -161,7 +161,7 @@
   and the [`chplcheck`](https://chapel-lang.org/docs/2.9/tools/chplcheck/chplcheck.html) linter.
   This 2.9 release includes several improvements to both these
   tools, where we'll focus on CLS here.
-  As in Chapel 2.8, the biggest improvements to the language server
+  As in Chapel 2.8, the biggest improvements to the language server
   have been made in the experimental [resolution-based
   features](https://chapel-lang.org/docs/tools/chpl-language-server/chpl-language-server.html#experimental-resolver-features).
 
@@ -247,7 +247,7 @@
   Though Chapel has long supported union types, they have
   unfortunately been stuck in a half-baked state for years.  Motivated
   by a recent user request, they took a big leap forward in
-  Chapel 2.8.
+  Chapel 2.9.
 
 
   #### Union Basics
@@ -309,8 +309,8 @@
   And that's about where Chapel's support for unions has stood for
   many years.  It was a classic chicken-and-egg problem in which
   Chapel users weren't using unions because they weren't very capable,
-  and we had trouble prioritizing them because users {{< sidenote
-  "right" "weren't using them" >}}In addition, we were probably
+  and we had trouble prioritizing them because nobody {{< sidenote
+  "right" "was using them" >}}In addition, we were probably
   letting the quest for the perfect design be the enemy of one that
   might have been good enough.{{</sidenote>}}
 
@@ -356,13 +356,13 @@
   can read about this feature in the [language
   specification](https://chapel-lang.org/docs/2.9/language/spec/unions.html#union-pattern-matching),
   but please note that the current syntax is subject to change and an
-  active area of discussion at the time of the release.
+  active area of discussion at the time of this release.
 
   #### Active Field Visitors
 
   Another way of identifying active fields is to use a visitor pattern
   in which a procedure is supplied for each field, taking that field's
-  name and type as arguments,  For example, the following call:
+  name and type as its argument,  For example, the following call:
 
 */
 
@@ -419,8 +419,8 @@
 
   As with default comparison operators on records, these defaults can
   be overridden by a user.  For example, the following overloads
-  consider two of our union values to be equal if each has one of `x`
-  or `y` set and the values match:
+  consider two of our union values to be equal if `x` is active in
+  one, `y` is active in the other, and their values match:
 
 */
 
@@ -447,14 +447,13 @@
 
 /*
 
-  Running this example generates:
+  Since our records meet the custom definition of equality, running
+  this example generates:
 
   ```terminal
   Using my overload, (y = 45) == (x = 45) => true
   Using my overload, (y = 45) != (x = 45) => false
   ```
-
-  since our records meet the custom definition of equality.
 
   To read more about unions in Chapel, please see their [chapter in
   the language
