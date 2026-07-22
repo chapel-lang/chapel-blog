@@ -358,7 +358,7 @@ srun python generate_data.py \
 
 Now calling `sbatch generate_data.sbatch` and waiting for the tasks to complete, we've generated our 1 trillion rows split across 1 million files, each containing 1 million rows of data.
 
-Now, I put Arkouda and Dask up against our full data.
+I then put Arkouda and Dask up against our full data.
 
 With each 1 million row file being about 2.4 megabytes and there being 1 million files, that totals around 2.4 terabytes of data. The `ak.argsort` in Arkouda uses temporary arrays to do its computation, so we'll need more memory than that. Since our compute nodes only have about 256 gigabytes of memory per node available to Arkouda, we'll need to start measuring at around 16 nodes and beyond to ensure we have enough memory for computation.
 
