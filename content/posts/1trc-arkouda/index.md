@@ -60,7 +60,8 @@ As a Python programmer, I felt Arkouda's syntax familiar, similar to other libra
 ```py
 import dask.dataframe as dd
 
-SCRATCH_DIR = ".../dask-scratch"  # Modify to your desired directory accordingly for file spilling
+# Modify to your desired directory accordingly for file spilling
+SCRATCH_DIR = ".../dask-scratch"
 
 cluster = SLURMCluster(
     cores=128,
