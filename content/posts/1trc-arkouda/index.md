@@ -55,7 +55,7 @@ print(
 )
 ```
 
-As a Python programmer, I felt Arkouda's syntax familiar, similar to other libraries like NumPy or Pandas. I then calculated the statistics grouped by station. My reference Dask implementation adapted from [Coiled's Dask solution](https://docs.coiled.io/blog/1trc.html#trc-with-dask) is as follows. I modifed their code to work on my local Slurm cluster, then scaled it accordingly to the number of nodes I'd be using.
+As a Python programmer, I felt Arkouda's syntax to be familiar, similar to other libraries like NumPy or Pandas. I then calculated the statistics grouped by station. My reference Dask implementation adapted from [Coiled's Dask solution](https://docs.coiled.io/blog/1trc.html#trc-with-dask) is as follows. I modifed their code to work on my local Slurm cluster, then scaled it accordingly to the number of nodes I'd be using.
 
 ```py
 import dask.dataframe as dd
