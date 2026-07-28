@@ -4,7 +4,6 @@ import os
 import sys
 import subprocess
 import re
-import io
 import concurrent.futures
 from packaging import version
 
@@ -42,10 +41,6 @@ def run_and_log(cmd):
     p.wait()
     return p.returncode
 
-# run 'sub_test' on a single file, with CHPL_ONETEST scoped to this file's own
-# subprocess environment (rather than mutating os.environ) so it is safe to call
-# from multiple threads. All output is captured and returned alongside the exit
-# code so the caller can emit it without interleaving concurrent runs.
 def run_sub_test_on_file(chpl_home_subtest, compiler, src_file):
     env = os.environ.copy()
     env["CHPL_ONETEST"] = os.path.basename(src_file)
@@ -58,16 +53,18 @@ def run_sub_test_on_file(chpl_home_subtest, compiler, src_file):
     )
     return p.returncode, p.stdout
 
-# determine how many worker threads to use for parallel sub_test runs.
-# returns 1 (serial) unless CHPL_PARALLEL_SUB_TEST is set: a positive integer
-# value selects that many workers, any other set value falls back to cpu count.
 def parallel_workers():
-    workers_env = os.environ.get("CHPL_PARALLEL_SUB_TEST")
-    if not workers_env:
-        return 1
-    if workers_env.isdigit() and int(workers_env) > 0:
-        return int(workers_env)
-    return os.cpu_count() or 1
+    workers_env = os.environ.get("CHPL_PARALLEL_SUB_TEST", "1")
+    try:
+        workers = int(workers_env)
+        if workers < 1:
+            raise ValueError
+        return workers
+    except ValueError:
+        print(
+            f"Invalid value for CHPL_PARALLEL_SUB_TEST: '{workers_env}'. Must be a positive integer."
+        )
+        exit(1)
 
 def run_valid_tests(version_validator, compiler):
     chpl_version = get_current_chpl_version(compiler)
@@ -91,29 +88,18 @@ def run_valid_tests(version_validator, compiler):
             if version_validator(src_file, chpl_version)
         ]
 
-        num_workers = min(parallel_workers(), len(valid_files))
+        num_workers = parallel_workers()
 
-        # opt-in parallel execution via CHPL_PARALLEL_SUB_TEST; capture each
-        # file's output and write it out in order so logs are not interleaved
-        if num_workers > 1:
-            with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
-                results = executor.map(
-                    lambda src_file: run_sub_test_on_file(
-                        chpl_home_subtest, sys.argv[1], src_file
-                    ),
-                    valid_files,
-                )
-                for returncode, output in results:
-                    sys.stdout.write(output)
-                    sys.stdout.flush()
-                    err = max(err, returncode)
-        else:
-            for src_file in valid_files:
-                # set the src_file as the single test file for 'sub_test' to run
-                os.environ["CHPL_ONETEST"] = os.path.basename(src_file)
-
-                # start $CHPL_HOME's 'sub_test' script on the selected file
-                #  the 'compiler' argument is passed on             \/
-                err = max(err, run_and_log([chpl_home_subtest, sys.argv[1]]))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
+            results = executor.map(
+                lambda src_file: run_sub_test_on_file(
+                    chpl_home_subtest, sys.argv[1], src_file
+                ),
+                valid_files,
+            )
+            for returncode, output in results:
+                sys.stdout.write(output)
+                sys.stdout.flush()
+                err = max(err, returncode)
 
         exit(err)
