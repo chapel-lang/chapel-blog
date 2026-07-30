@@ -91,6 +91,7 @@ def run_valid_tests(version_validator, compiler):
         num_workers = parallel_workers()
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
+            # forward on 'compiler' argument from sys.argv
             results = executor.map(
                 lambda src_file: run_sub_test_on_file(
                     chpl_home_subtest, sys.argv[1], src_file
