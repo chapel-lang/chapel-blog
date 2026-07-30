@@ -4,6 +4,7 @@ import os
 import sys
 import subprocess
 import re
+import concurrent.futures
 from packaging import version
 
 # get the current Chapel version at $CHPL_HOME
@@ -40,6 +41,31 @@ def run_and_log(cmd):
     p.wait()
     return p.returncode
 
+def run_sub_test_on_file(chpl_home_subtest, compiler, src_file):
+    env = os.environ.copy()
+    env["CHPL_ONETEST"] = os.path.basename(src_file)
+    p = subprocess.run(
+        [chpl_home_subtest, compiler],
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+    )
+    return p.returncode, p.stdout
+
+def parallel_workers():
+    workers_env = os.environ.get("CHPL_PARALLEL_SUB_TEST", "1")
+    try:
+        workers = int(workers_env)
+        if workers < 1:
+            raise ValueError
+        return workers
+    except ValueError:
+        print(
+            f"Invalid value for CHPL_PARALLEL_SUB_TEST: '{workers_env}'. Must be a positive integer."
+        )
+        exit(1)
+
 def run_valid_tests(version_validator, compiler):
     chpl_version = get_current_chpl_version(compiler)
     chpl_home_subtest = os.path.join(os.environ["CHPL_HOME"], "util", "test", "sub_test")
@@ -55,13 +81,26 @@ def run_valid_tests(version_validator, compiler):
         sys.stdout.write("[Filtering tests for chpl version: '{}']\n".format(chpl_version))
         sys.stdout.flush()
 
-        for src_file in chpl_files_in_dir("."):
-            if version_validator(src_file, chpl_version):
-                # set the src_file as the single test file for 'sub_test' to run
-                os.environ["CHPL_ONETEST"] = os.path.basename(src_file)
+        # select the files that satisfy the version constraint
+        valid_files = [
+            src_file
+            for src_file in chpl_files_in_dir(".")
+            if version_validator(src_file, chpl_version)
+        ]
 
-                # start $CHPL_HOME's 'sub_test' script on the selected file
-                #  the 'compiler' argument is passed on             \/
-                err = max(err, run_and_log([chpl_home_subtest, sys.argv[1]]))
+        num_workers = parallel_workers()
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
+            # forward on 'compiler' argument from sys.argv
+            results = executor.map(
+                lambda src_file: run_sub_test_on_file(
+                    chpl_home_subtest, sys.argv[1], src_file
+                ),
+                valid_files,
+            )
+            for returncode, output in results:
+                sys.stdout.write(output)
+                sys.stdout.flush()
+                err = max(err, returncode)
 
         exit(err)
