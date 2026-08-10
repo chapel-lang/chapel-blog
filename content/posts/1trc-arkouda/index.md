@@ -31,7 +31,7 @@ To validate the build, I then ran the Python test suite with `make test`, where 
 
 I describe the error in detail in [this GitHub issue](https://github.com/Bears-R-Us/arkouda/issues/5494). Essentially, a test named `test_export_hdf` fails due to mismatched columns, and this is caused by a higher-than-supported `hdf5` version `2.10.0`. I ended up resolving this by changing Arkouda's `hdf5>=1.12.2` dependency to `hdf5==1.14.6`.
 
-That said, this test failure didn't stricly block me from moving forward: I could've likely set it aside and used the server anyway since I wasn't planning on using `hdf5`.
+That said, this test failure didn't strictly block me from moving forward: I could've likely set it aside and used the server anyway since I wasn't planning on using `hdf5`.
 
 ### Ungrouped Min, Mean, and Max
 Now that I had the Arkouda server up and running, I was ready to test it out! I started with 1,000 rows of data spread across 2 Parquet files, and I used Arkouda to simply calculate the min, mean, and max of them with no grouping by stations yet, just to get a feel of what I was working with.  As a Python programmer, I felt Arkouda's syntax to be familiar, similar to other libraries like NumPy or Pandas:
@@ -57,7 +57,7 @@ print(
 )
 ```
 
-I then calculated the statistics grouped by station. My reference Dask implementation, adapted from [Coiled's Dask solution](https://docs.coiled.io/blog/1trc.html#trc-with-dask), was as follows. I modifed their code to work on my local Slurm cluster, then scaled it accordingly to the number of nodes I'd be using:
+I then calculated the statistics grouped by station. My reference Dask implementation, adapted from [Coiled's Dask solution](https://docs.coiled.io/blog/1trc.html#trc-with-dask), was as follows. I modified their code to work on my local Slurm cluster, then scaled it accordingly to the number of nodes I'd be using:
 
 ```py
 import dask.dataframe as dd
@@ -237,7 +237,7 @@ def generate_chunk(partition_idx, chunksize, std, lookup_df):
         {
             # Choose a random station from the lookup table for each row in our output
             "station": rng.integers(0, len(lookup_df) - 1, int(chunksize)),
-            # Generate a normal distibution around zero for each row in our output
+            # Generate a normal distribution around zero for each row in our output
             # Because the std is the same for every station we can adjust the mean for each row afterwards
             "measure": rng.normal(0, std, int(chunksize)),
         }
@@ -245,7 +245,7 @@ def generate_chunk(partition_idx, chunksize, std, lookup_df):
 
     # Offset each measurement by the station's mean value
     df.measure += df.station.map(lookup_df.mean_temp)
-    # Round the temprature to one decimal place
+    # Round the temperature to one decimal place
     df.measure = df.measure.round(decimals=1)
     # Convert the station index to the station name
     df.station = df.station.map(lookup_df.station)
