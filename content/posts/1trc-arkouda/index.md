@@ -15,7 +15,7 @@ With that, let's start setting up Arkouda! Arkouda uses a client-server model wh
 ### Installing Prerequisites
 
 Installation of Anaconda, Chapel, and Arkouda was mostly straightforward,
-following the [documentation](https://bears-r-us.github.io/arkouda/setup/MAC_INSTALL.html), aside from one issue: Installing Anaconda via Homebrew doesn't automatically give access to the `conda` command! Turns out I needed to add Anaconda to my `$PATH` manually with the following lines, which could be useful to add to the documentation:
+following the [documentation](https://bears-r-us.github.io/arkouda/setup/MAC_INSTALL.html), aside from one issue: Installing Anaconda via Homebrew doesn't automatically give access to the `conda` command! Turns out I needed to add Anaconda to my `$PATH` manually with the following lines, which I've updated the documentation to reflect:
 
 ```bash
 $ echo 'export PATH="/opt/homebrew/anaconda3/bin:$PATH"' >> ~/.zshrc
