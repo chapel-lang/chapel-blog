@@ -285,7 +285,7 @@ website.
 
 #### GitHub Codespaces
 
-The [Chapel template on GitHub](https://github.com/chapel-lang/chapel-hello-world)
+The [Chapel template on GitHub](https://github.com/chapel-lang/chapel-codespaces)
 includes a configuration file for [GitHub Codespaces](https://github.com/features/codespaces).
 This means that if you have a GitHub account, you can deploy a cloud-based
 Chapel development environment in just a couple of clicks. On the template's
