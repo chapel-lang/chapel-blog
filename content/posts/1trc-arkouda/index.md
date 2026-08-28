@@ -4,6 +4,8 @@ tags: [Benchmarks, I/O, Parallel I/O, Performance, Language Comparison, Arkouda]
 summary: "Benchmarking Arkouda against Dask on the 1 trillion row challenge"
 date: 2026-08-11
 authors: ["Eric Vo"]
+featured: true
+weight: 25
 ---
 
 How performant are different programming languages and libraries with data processing? The [1 billion row challenge](https://1brc.dev/) (1BRC) has become a popularized, fun way to test this. The task itself is simple: Calculate the min, mean, and max of 1 billion temperature measurements, grouped by weather station. We've talked about the billion row challenge on this blog before in [_Parallel Processing of a Billion Rows of Data in Chapel_](https://chapel-lang.org/blog/posts/1brc/). The recent [1 trillion row challenge](https://github.com/coiled/1trc) (1TRC) takes this a step further, extending the challenge to a trillion rows of data. To accommodate larger-scale data, the challenge also switches from using plain text files to spreading data across multiple compressed Apache Parquet files.
