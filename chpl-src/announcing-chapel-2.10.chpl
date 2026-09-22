@@ -228,58 +228,66 @@
   code bases.
 
 
-  ### Expanded GitHub Actions CI
+  ### Expanded GitHub Actions Testing
 
   For most of the Chapel project's history, its build, test, and
   release processes have primarily been run on internal company
-  resources, first at Cray and then at HPE. As 2.10 will be the last
-  release where most devs work on Chapel as their full-time role at
-  HPE for the forseeable future, these resources can no longer be
-  relied on. Besides the issue of continuity, build processes and
-  configurations living inside the firewall mean they are not open to
-  inspection by or contributions from the broader open-source
-  community.
+  resources, first at Cray Inc. and then more recently at HPE.  Since
+  Chapel 2.10 will be the last release [in the foreseeable future]({{<
+  relref "cff" >}}) where most developers work on Chapel as their
+  full-time role at HPE, we wanted to reduce our reliance on these
+  corporate resources going forward.  Beyond supporting project
+  continuity, moving these build processes and configurations outside
+  the firewall also has the benefit of opening them up to inspection
+  by, or contributions from, the broader open-source community.  This
+  effectively gives Chapel community developers access to testing
+  results that they used to have to rely on HPE developers to provide
+  manually.
 
   For these reasons, in the lead-up to Chapel 2.10 we've undertaken an
-  effort to move as much of our CI as possible into GitHub Actions,
-  running against the public chapel-lang/chapel repo. Configuration
-  files live in [the .github/workflows
-  folder](https://github.com/chapel-lang/chapel/tree/main/.github/workflows),
-  and are tracked in git like any other file in the project. We've
-  long had some basic, quick checks in GA, but it is now responsible
-  for more of our test coverage and longer-running processes. These
-  include but are not limited to:
+  effort to move as much of our CI as possible into GitHub Actions (GA),
+  running against the public
+  [chapel-lang/chapel](https://github.com/chapel-lang/chapel)
+  repository.  Configuration files live in the
+  [`.github/workflows`](https://github.com/chapel-lang/chapel/tree/main/.github/workflows)
+  folder, and are tracked in git like any other file in the
+  project. We've long had some basic, quick checks in GA, but it is
+  now responsible for more of our test coverage including
+  longer-running processes. These include, but are not limited to:
 
-  * Paratests running the full test suite on a few core configurations
+  * Parallel runs of the full test suite on a few core configurations
   * Docker image and Linux package builds
-  * Docs build and push
+  * Documentation builds and pushes
   * Several linting and formatting checks
-  * Tarball build and testing
+  * Tarball builds and testing
 
   Some of these checks run on each commit pushed to a PR ('Core'),
   some when a PR is merged ('Extended'), and some nightly on the main
-  branch ('Nightly'). The idea is to have the shortest-running checks
-  in the fastest feedback loop to catch many issues as quickly as
-  possible, then longer-running checks providing more coverage running
-  less frequently to not exhaust resources. The 'Extended' checks run
-  in the merge queue, a GitHub feature we've enabled which causes
-  merged PRs to be held in a queue and tested before automatically
-  proceeding with merge (or being kicked back to the user on
-  failure). 'Nightly' checks report their results to a [new, public
-  "Nightly Testing" category on the Chapel
-  Discourse](https://chapel.discourse.group/t/about-the-nightly-testing-category/51764),
-  where failures can be discussed and addressed by devs.
+  development branch ('Nightly'). The idea is to have the
+  shortest-running checks in the fastest feedback loop to catch many
+  issues as quickly as possible, then longer-running checks providing
+  more coverage running less frequently to avoid exhausting
+  resources. The 'Extended' checks run in the merge queue, a GitHub
+  feature that we've recently enabled which causes merged PRs to be
+  held in a queue and tested before automatically proceeding with the
+  merge.  In the case of a failure, such PRs are kicked back to the
+  user.  'Nightly' checks report their results to a new, public
+  [Nightly
+  Testing](https://chapel.discourse.group/t/about-the-nightly-testing-category/51764)
+  category in Chapel's Discourse community, where failures can be
+  discussed and addressed by developers.
 
   These changes are very new, and shift a lot of work previously done
-  in our internal daily "triage" of the previous night's runs to
-  earlier in the development process. They are intended to improve
-  developer productivity and the long-term maintainability of the
-  pproject, but may be an impediment in some cases as we work out the
-  kinks. Anyone with commit access to the repo is able to override
-  checks, so false positive failures won't prevent merging, and issues
-  (or PRs directly against workflow configurations) are welcome. Also
-  see the [new GitHub Actions section of the Contributor Info docs
-  page](https://chapel-lang.org/docs/2.10/developer/bestPractices/ContributorInfo.html#get-github-actions-tests-passing).
+  in our internal daily "triage" of the previous night's testing to an
+  earlier stage of the development process. They are intended to
+  improve developer productivity and the long-term maintainability of
+  the project, but may be an impediment in some cases as we work out
+  the kinks. Anyone with commit access to the repo is able to override
+  checks, so false positive failures won't prevent merging, and users
+  are welcome to file issues against the CI (as well as PRs against
+  workflow configurations). For more information, see the new [GitHub
+  Actions](https://chapel-lang.org/docs/2.10/developer/bestPractices/ContributorInfo.html#get-github-actions-tests-passing)
+  section of the Contributor Info documentation.
 
 
   ### For More Information
