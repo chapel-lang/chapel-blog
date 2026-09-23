@@ -195,8 +195,8 @@
   be modified.
 
   Note that the `otherwise` clause may be matched by unions without an
-  active field, such as default-initialized unions or values like `u0`
-  in the code above.  In this `union select` example, the `otherwise
+  active field, such as default-initialized union values like `u0` in
+  the code above.  In this `union select` example, the `otherwise
   clause was written defensively, to guard against the possibility
   that new fields are added to the union type later without adding
   support for them to this method.
@@ -222,10 +222,10 @@
 
   As a result of all the improvements to unions in this release and
   2.9, we now consider unions to be feature-complete in Chapel 2.10.
-  That said, we hope to receive feedback from users who make use of
-  unions to hear how they work in your codes and what additional
-  improvements or features might further improve productivity in your
-  code bases.
+  That said, we do not yet consider unions to be a stable language
+  feature, so hope to receive feedback from users to hear how they
+  work in your codes and what additional improvements or features
+  might further improve productivity in your code bases.
 
 
   ### Expanded GitHub Actions Testing
