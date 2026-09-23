@@ -228,6 +228,94 @@
   might further improve productivity in your code bases.
 
 
+  ### Call Stacks for Thrown Errors
+
+  Chapel 2.10 has some nice quaility of life improvements for error
+  handling.  Errors now track the call stack, allowing thrown a
+  `Error` object to report rich diagnostic information.  Take the
+  following example:
+
+*/
+
+  proc read1() {
+    use Parser;
+    var p = new parser("input.txt");
+    while p.hasMore() {
+      var o = p.next();
+      writeln(o);
+      writeln("====");
+    }
+  }
+
+/*
+
+  `p.next()` might throw a `ParseError` if the line format is
+  invalid. Prior to Chapel 2.10, this would result in a halt. The
+  error message would say where the message was thrown from (deep in
+  the internals of the `Parser` module) and where it was uncaught (the
+  line `var o = p.next();`). This lost all the information about the
+  call stack leading up to the error. Furthermore, if we tried to
+  catch that error and print a custom error message, we would lose
+  access to that line information.  In Chapel 2.10, by default errors
+  will now print a stack trace showing the call stack leading up to
+  the error.
+
+  ```
+  (name = Alfred, id = 10)
+  ====
+  (name = Bobby, id = 11)
+  ====
+  uncaught ParseError: Invalid line format: Candice12
+    Parser.chpl:36: thrown here
+    Parser.chpl:49: called from here
+    Parser.chpl:31: called from here
+    example.chpl:14: uncaught here
+  ```
+
+  This allows us to trace through the sequence of calls that led to
+  the error.
+
+  Also included is the ability to manually inspect the stack
+  trace. Code can catch the error to handle it gracefully, while still
+  having access to the detailed call stack information. The new
+  `.stacktrace()` iterator returns a sequence of `(file, linenum)`
+  tuples representing the call stack leading up to the error, starting
+  from the point where the error was thrown. The following example
+  rewrites the previous code to catch the error instead of halting and
+  keep trying to read the remaining lines.
+*/
+
+  proc read2() {
+    use Parser;
+    var p = new parser("input.txt");
+    while p.hasMore() {
+      try! {
+        var o = p.next();
+        writeln(o);
+      } catch pe: ParseError {
+        writeln("Parse error: ", pe.message());
+        writeln("Stacktrace");
+        for (file, linenum) in pe.stacktrace() {
+          writeln("  ", file, ":", linenum);
+        }
+      }
+      writeln("====");
+    }
+  }
+
+/*
+
+  This new feature gives users better information when writing and
+  debugging Chapel programs.
+
+*/
+
+  config const skipFailure = false;
+  if !skipFailure then read1();
+  read2();
+
+/*
+
   ### Expanded GitHub Actions Testing
 
   For most of the Chapel project's history, its build, test, and
