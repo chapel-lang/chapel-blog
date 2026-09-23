@@ -231,90 +231,72 @@
   ### Call Stacks for Thrown Errors
 
   Chapel 2.10 has some nice quaility of life improvements for error
-  handling.  Errors now track the call stack, allowing thrown a
-  `Error` object to report rich diagnostic information.  Take the
-  following example:
+  handling.  Error classes now track the call stack leading to the
+  error, permitting a thrown `Error` object to report rich diagnostic
+  information.  Consider the following example of using a `Parser`
+  helper module to parse a file:
 
-*/
+  {{< file_download_min fname="Parser.chpl" lang="chapel" >}}
 
-  proc read1() {
-    use Parser;
-    var p = new parser("input.txt");
-    while p.hasMore() {
-      var o = p.next();
-      writeln(o);
-      writeln("====");
-    }
-  }
+  {{< file_download fname="uncaught-error.chpl" lang="chapel" >}}
 
-/*
+  This call to `p.next()` will throw a `ParseError` if the input
+  file's line format is invalid, as on line 3 or 7 of the following
+  input file:
 
-  `p.next()` might throw a `ParseError` if the line format is
-  invalid. Prior to Chapel 2.10, this would result in a halt. The
-  error message would say where the message was thrown from (deep in
-  the internals of the `Parser` module) and where it was uncaught (the
-  line `var o = p.next();`). This lost all the information about the
-  call stack leading up to the error. Furthermore, if we tried to
-  catch that error and print a custom error message, we would lose
-  access to that line information.  In Chapel 2.10, by default errors
-  will now print a stack trace showing the call stack leading up to
-  the error.
+  {{< file_download fname="input.txt" lang="text" >}}
 
-  ```
+  Because this error is not caught by the code, it causes the program
+  to halt.  Prior to Chapel 2.10, the resulting error message would
+  say where the error was thrown and where it was uncaught:
+
+  ```console
   (name = Alfred, id = 10)
   ====
   (name = Bobby, id = 11)
   ====
   uncaught ParseError: Invalid line format: Candice12
     Parser.chpl:36: thrown here
-    Parser.chpl:49: called from here
-    Parser.chpl:31: called from here
-    example.chpl:14: uncaught here
+    uncaught-error.chpl:5: uncaught here
   ```
 
-  This allows us to trace through the sequence of calls that led to
-  the error.
+  However, all information about the call stack between those
+  endpoints was lost.
 
-  Also included is the ability to manually inspect the stack
-  trace. Code can catch the error to handle it gracefully, while still
-  having access to the detailed call stack information. The new
-  `.stacktrace()` iterator returns a sequence of `(file, linenum)`
-  tuples representing the call stack leading up to the error, starting
-  from the point where the error was thrown. The following example
-  rewrites the previous code to catch the error instead of halting and
-  keep trying to read the remaining lines.
-*/
+  As of Chapel 2.10, uncaught errors now print a stack trace by
+  default, showing the calls that led to the error:
 
-  proc read2() {
-    use Parser;
-    var p = new parser("input.txt");
-    while p.hasMore() {
-      try! {
-        var o = p.next();
-        writeln(o);
-      } catch pe: ParseError {
-        writeln("Parse error: ", pe.message());
-        writeln("Stacktrace");
-        for (file, linenum) in pe.stacktrace() {
-          writeln("  ", file, ":", linenum);
-        }
-      }
-      writeln("====");
-    }
-  }
+  {{< console fname="uncaught-error.good" >}}
 
-/*
+  This allows users to trace through the complete sequence of calls
+  that led to the error.
+
+
+  Furthermore, prior to Chapel 2.10, if a user tried to catch the
+  error and print a custom error message, they lost access to the line
+  information that Chapel printed by default.  Chapel 2.10 addresses
+  this by adding the ability to manually inspect the stack trace. As a
+  result, code can catch errors to handle them gracefully, without
+  losing access to call stack information.
+
+  This is done using a new `.stacktrace()` iterator supported on
+  `Error` classes that yields a sequence of `(file, linenum)` tuples
+  representing the call stack leading up to the error, starting from
+  the point where the error was thrown. The following example rewrites
+  the previous version to catch the error, print a custom error message
+  including the stack trace, and then continuing to read the remaining
+  lines rather than halting:
+
+  {{< file_download fname="caught-error.chpl" lang="chapel" >}}
+
+  Here is the output generated when running on the `input.txt` file
+  above:
+
+  {{< console fname="caught-error.good" >}}
 
   This new feature gives users better information when writing and
   debugging Chapel programs.
 
-*/
-
-  config const skipFailure = false;
-  if !skipFailure then read1();
-  read2();
-
-/*
 
   ### Expanded GitHub Actions Testing
 

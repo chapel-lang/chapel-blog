@@ -1,0 +1,30 @@
+(name = Alfred, id = 10)
+====
+(name = Bobby, id = 11)
+====
+Parse error: Invalid line format: Candice12
+Stacktrace
+  Parser.chpl:44
+  Parser.chpl:59
+  Parser.chpl:38
+  caught-error.chpl:6
+====
+(name = Danny, id = 13)
+====
+(name = Enice, id = 14)
+====
+(name = Frank, id = 15)
+====
+Parse error: Invalid ID format: "16"
+Stacktrace
+  Parser.chpl:52
+  Parser.chpl:60
+  Parser.chpl:38
+  caught-error.chpl:6
+====
+(name = Helly, id = 17)
+====
+(name = Issac, id = 18)
+====
+(name = Jessie, id = 19)
+====
