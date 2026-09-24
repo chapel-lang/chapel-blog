@@ -1,0 +1,9 @@
+(name = Alfred, id = 10)
+====
+(name = Bobby, id = 11)
+====
+uncaught ParseError: Invalid line format: Candice12
+  Parser.chpl:44: thrown here
+  Parser.chpl:59: called from here
+  Parser.chpl:38: called from here
+  uncaught-error.chpl:5: uncaught here
