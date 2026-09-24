@@ -4,7 +4,6 @@
 // tags: ["Libraries", "Tools", "Language Features", "Mason"]
 // series: ["Release Announcements"]
 // date: 2026-06-18
-// hidden_from_front_page_news: true
 /*
 
   The Chapel developer community is happy to announce the release of
