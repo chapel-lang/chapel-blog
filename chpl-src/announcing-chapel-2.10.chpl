@@ -48,7 +48,7 @@
   * The resolution of 7 user issues, including both that were opened
     over the summer since the release of Chapel 2.9
 
-  For a far more complete list of improvements in Chapel 2.10, see the
+  For a far more complete list of improvements in Chapel 2.10, see its
   [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.10/CHANGES.md)
   file.  And a big thanks to [everyone who
   contributed](https://github.com/chapel-lang/chapel/blob/release/2.10/CONTRIBUTORS.md)
@@ -59,7 +59,7 @@
 
   Chapel 2.10 continues the improvements to union types that we began
   in Chapel 2.9, bringing unions to a state where we consider them to
-  be complete and productive.  As mentioned in the [2.9 release
+  be complete and productive.  As mentioned in the [2.9 release
   announcement]({{< relref "announcing-chapel-2.9/#union-type-improvements" >}}), this work was motivated by recent user comments and
   requests.
 
@@ -69,9 +69,9 @@
   in Chapel 2.10 is vastly improved support for initializers.  In
   earlier versions of Chapel, unions only supported 0-argument
   initializers by default and user initializers were neither
-  particularly full-featured nor safe.  Chapel 2.10 brings support for
+  particularly full-featured nor safe.  Chapel 2.10 brings support for
   union initializers on par with records for both compiler- and
-  user-generated initializers.
+  user-defined cases.
 
   As an example, consider the following union type declaration:
 
@@ -88,11 +88,14 @@
 
   Previously, the compiler would only generate a 0-argument
   initializer for such a union type, providing the ability to create
-  `u` values in an inactive state.  As of Chapel 2.10, the compiler
-  also generates a 1-argument initializer per field that can be used
-  to initialize the corresponding field, making it active.  As an
-  example, the compiler-generated initializers for `u` above would
-  effectively look like this:
+  `u` values in an inactive state.  This required a distinct assignment
+  statement to populate the union with a value.
+
+  As of Chapel 2.10, the compiler also generates a 1-argument
+  initializer per field that can be used to initialize the
+  corresponding field, making it active.  As an example, the
+  compiler-generated initializers for `u` above would effectively look
+  like this:
 
   ```chapel
   proc u.init() {
@@ -116,7 +119,8 @@
   ```
 
   Given these compiler-generated initializers, users can create union
-  values with any active field (or none), as follows:
+  values with any active field (including no active field), as
+  follows:
 
 */
 
@@ -128,11 +132,12 @@
 
   writeln((u0, uw, ux, uy, uz));
 
+
 /*
 
   In addition, as you'd expect, for field types that are unambiguous,
-  a value may be passed in without using Chapel's argument-matching
-  syntax:
+  a value may be passed into the initializer without using Chapel's
+  argument-matching syntax:
 
 */
 
@@ -145,13 +150,13 @@
 
   User-defined initializers for unions have also been significantly
   improved in Chapel 2.10, primarily by resolving longstanding memory
-  safety bugs and overzealous compiler optimizations from earlier
+  safety bugs and overzealous compiler optimizations in earlier
   versions of Chapel.  As with records, user-defined union
   initializers can now initialize and assign fields, invoke sibling
   initializers using `[this.]init(...);`, and signal object completion
-  with `init this;`.  Union types also now correctly support
+  with `init this;`.  Union types also now correctly support
   `postinit()` calls.  As a result of these improvements, union value
-  construction can now be considered full-featured in Chapel.
+  construction is now considered full-featured in Chapel.
 
 
   #### Active Field Pattern Matching
@@ -184,19 +189,19 @@
 
 /*
 
-  Each `when` clause of a `union select` statement like the above
+  Each `when` clause of a `union select` statement like the one above
   checks to see whether the named field is active.  If it is, the
-  field's name serves as a reference to the field for the scope of the
-  clause.  This identifier serves as a `const ref` to the field for
-  union expressions that are immutable and a `ref` for those that can
-  be modified.
+  field's name serves as a reference to the field for the remainder of
+  the clause.  This identifier serves as a `const ref` to the field
+  for union expressions that are immutable and a `ref` for those that
+  can be modified.
 
   Note that the `otherwise` clause may be matched by unions without an
   active field, such as default-initialized union values like `u0` in
-  the code above.  In this `union select` example, the `otherwise
-  clause was written defensively, to guard against the possibility
-  that new fields are added to the union type later without adding
-  support for them to this method.
+  the code above.  In this `union select` example, the `otherwise`
+  clause was written defensively, to also guard against the possibility
+  that new fields are added to the union type in the future without
+  adding support for them in this method.
 
   The following demonstrates calls to this method and the resulting
   effects on the union values:
@@ -213,6 +218,11 @@
 
 /*
 
+  The output of the code segments above that initialize and double
+  union values is as follows:
+
+  {{< console fname="announcing-chapel-2.10.good" >}}
+
   Chapel 2.10 also adds support for traditional equality-based
   `select` statements on union expressions, leveraging the support for
   equality between union values added in Chapel 2.9.
@@ -221,7 +231,7 @@
   2.9, we now consider unions to be feature-complete in Chapel 2.10.
   That said, we do not yet consider unions to be a stable language
   feature, so hope to receive feedback from users to hear how they
-  work in your codes and what additional improvements or features
+  work in your programs and what additional improvements or features
   might further improve productivity in your code bases.
 
 
@@ -238,14 +248,16 @@
   {{< file_download fname="uncaught-error.chpl" lang="chapel" >}}
 
   This call to `p.next()` will throw a `ParseError` if the input
-  file's line format is invalid, as on line 3 or 7 of the following
+  file's line format is invalid, as on lines 3 or 7 of the following
   input file:
 
   {{< file_download fname="input.txt" lang="text" >}}
 
   Because this error is not caught by the code, it causes the program
   to halt.  Prior to Chapel 2.10, the resulting error message would
-  say where the error was thrown and where it was uncaught:
+  say where the error was thrown and where it was uncaught.  However,
+  all information about the call stack between those endpoints was
+  lost:
 
   ```console
   (name = Alfred, id = 10)
@@ -257,42 +269,41 @@
     uncaught-error.chpl:5: uncaught here
   ```
 
-  However, all information about the call stack between those
-  endpoints was lost.
-
-  As of Chapel 2.10, uncaught errors now print a stack trace by
-  default, showing the calls that led to the error:
+  As of Chapel 2.10, uncaught errors now print a complete stack trace
+  by default, showing the calls that led to the error:
 
   {{< console fname="uncaught-error.good" >}}
 
   This allows users to trace through the complete sequence of calls
-  that led to the error.
+  that led to the problem in their code.
 
 
-  Furthermore, prior to Chapel 2.10, if a user tried to catch the
-  error and print a custom error message, they lost access to the line
-  information that Chapel printed by default.  Chapel 2.10 addresses
-  this by adding the ability to manually inspect the stack trace. As a
-  result, code can catch errors to handle them gracefully, without
-  losing access to call stack information.
+  Furthermore, prior to Chapel 2.10, if a user tried to catch an error
+  in order to print a custom error message, they lost access to the
+  line information that Chapel would have printed by default.  Chapel
+  2.10 addresses this by adding the ability to manually inspect the
+  stack trace. As a result, code can catch errors to handle them
+  gracefully, without losing access to call stack information.
 
   This is done using a new `.stacktrace()` iterator supported on
   `Error` classes that yields a sequence of `(file, linenum)` tuples
   representing the call stack leading up to the error, starting from
-  the point where the error was thrown. The following example rewrites
-  the previous version to catch the error, print a custom error message
-  including the stack trace, and then continuing to read the remaining
+  the point where it was thrown. The following example rewrites the
+  previous one to catch the error, print a custom error message
+  including the stack trace, and then continue to read the remaining
   lines rather than halting:
 
   {{< file_download fname="caught-error.chpl" lang="chapel" >}}
 
-  Here is the output generated when running on the `input.txt` file
-  above:
+  Here is the output generated when running this version on the
+  `input.txt` file above.  Note the custom error messages, full stack
+  traces, and continuation of execution to handle subsequent lines,
+  both correct and incorrect:
 
   {{< console fname="caught-error.good" >}}
 
-  This new feature gives users better information when writing and
-  debugging Chapel programs.
+  This new capability gives users better error information when
+  writing and debugging Chapel programs.
 
 
   ### Expanded GitHub Actions Testing
@@ -305,16 +316,16 @@
   full-time role at HPE, we wanted to reduce our reliance on these
   corporate resources going forward.  Beyond supporting project
   continuity, moving these build processes and configurations outside
-  the firewall also has the benefit of opening them up to inspection
-  by, or contributions from, the broader open-source community.  This
-  effectively gives Chapel community developers access to testing
-  results that they used to have to rely on HPE developers to provide
-  manually.
+  the corporate firewall also has the benefit of opening them up to
+  inspection by, or contributions from, the broader open-source
+  community.  This effectively gives Chapel community developers
+  access to testing results that they previously had to rely on HPE
+  developers to provide manually.
 
   For these reasons, in the lead-up to Chapel 2.10 we've undertaken an
   effort to move as much of our CI as possible into GitHub Actions (GA),
   running against the public
-  [chapel-lang/chapel](https://github.com/chapel-lang/chapel)
+  [`chapel-lang/chapel`](https://github.com/chapel-lang/chapel)
   repository.  Configuration files live in the
   [`.github/workflows`](https://github.com/chapel-lang/chapel/tree/main/.github/workflows)
   folder, and are tracked in git like any other file in the
@@ -328,17 +339,17 @@
   * Several linting and formatting checks
   * Tarball builds and testing
 
-  Some of these checks run on each commit pushed to a PR ('Core'),
-  some when a PR is merged ('Extended'), and some nightly on the main
-  development branch ('Nightly'). The idea is to have the
-  shortest-running checks in the fastest feedback loop to catch many
-  issues as quickly as possible, then longer-running checks providing
-  more coverage running less frequently to avoid exhausting
-  resources. The 'Extended' checks run in the merge queue, a GitHub
-  feature that we've recently enabled which causes merged PRs to be
-  held in a queue and tested before automatically proceeding with the
-  merge.  In the case of a failure, such PRs are kicked back to the
-  user.  'Nightly' checks report their results to a new, public
+  Some of these checks run on each commit pushed to a pull request or
+  PR ('Core'), some when a PR is merged ('Extended'), and some nightly
+  on the main development branch ('Nightly'). The idea is to have the
+  shortest-running checks in the fastest feedback loop to catch issues
+  as quickly as possible, then longer-running checks providing more
+  coverage running less frequently to avoid exhausting resources. The
+  'Extended' checks run in the merge queue, a GitHub feature that
+  we've recently enabled, which causes merged PRs to be held in a
+  queue and tested before automatically proceeding with the merge.  In
+  the case of a failure, such PRs are kicked back into the user's
+  court.  'Nightly' checks report their results to a new, public
   [Nightly
   Testing](https://chapel.discourse.group/t/about-the-nightly-testing-category/51764)
   category in Chapel's Discourse community, where failures can be
@@ -350,11 +361,12 @@
   improve developer productivity and the long-term maintainability of
   the project, but may be an impediment in some cases as we work out
   the kinks. Anyone with commit access to the repo is able to override
-  checks, so false positive failures won't prevent merging, and users
-  are welcome to file issues against the CI (as well as PRs against
-  workflow configurations). For more information, see the new [GitHub
+  checks, so failures that are false positives won't necessarily
+  prevent merging.  Furthermore, users are welcome to file issues
+  against the CI, as well as PRs against workflow configurations. For
+  more information, see the new [GitHub
   Actions](https://chapel-lang.org/docs/2.10/developer/bestPractices/ContributorInfo.html#get-github-actions-tests-passing)
-  section of the Contributor Info documentation.
+  section of the 'Contributor Info' documentation.
 
 
   ### For More Information
