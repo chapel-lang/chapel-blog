@@ -1,61 +1,58 @@
 // Announcing Chapel 2.10!
-// authors: ["Anna Rift", "Jade Abraham", "Brad Chamberlain"]
+// authors: ["Jade Abraham", "Anna Rift", "Brad Chamberlain"]
 // summary: "Highlights from the September 2026 release of Chapel 2.10"
-// tags: ["Language Features"]
+// tags: ["Language Features", "DevOps"]
 // series: ["Release Announcements"]
 // date: 2026-09-24
 /*
 
   The Chapel developer community is pleased to announce the release of
-  Chapel 2.10!  This fall's release focuses on wrapping up some loose
-  threads from recent releases while also positioning Chapel testing
-  to be in a good state as we transition from having fully funded
-  dedicated staff members to entering more of a community open-source
-  development mode.  As always, you can [download and
-  install](https://chapel-lang.org/download/) the new release in a
-  {{<sidenote "right" "variety of formats">}}Please note that some
-  release formats may not yet be available at time of
+  Chapel 2.10!  This fall's release focuses on improvements to
+  language features as well as moving a lot of Chapel testing into the
+  public in support of open-source community developers.  As always,
+  you can [download and install](https://chapel-lang.org/download/)
+  the new release in a {{<sidenote "right" "variety of formats">}}Please 
+  note that some release formats may not yet be available at time of
   publication.{{</sidenote>}}, including Spack, Homebrew, various
   Linux package managers, Docker, and source tarballs.
 
   This article summarizes some of Chapel 2.10's highlights, including:
 
-  * Continued improvements to Chapel's [union
-    types](#union-type-improvements), bringing them to a complete and
-    usable state.
+  * Improvements to Chapel's [union types](#union-type-improvements),
+    bringing them to a complete and usable state
 
-  * Conversion of traditional Chapel testing from using HPE-internal
-    processes and resources to testing using GitHub Actions for better
-    access and visibility by community developers.
+  * New support for inspecting the stack traces of [thrown
+    errors](#call-stacks-for-thrown-errors), whether caught or not
 
-  * Improvements to thrown errors in terms of being able to inspect
-    their stack traces.
+  * Conversion of [Chapel testing](#expanded-github-actions-testing)
+    from using HPE-internal resources to GitHub Actions, providing
+    better access and visibility for community developers
 
   Other notable highlights of Chapel 2.10 that aren't covered in this
   article include:
 
   * The closing of many loopholes in which the Chapel compiler or its
     generated executables were relying on undefined behaviors in
-    C/C++.
+    C/C++
 
   * Ergonomic improvements and bug fixes when using the
     `DynamicLoading` module and dynamically loaded versions of the
-    runtime.
+    runtime
 
   * Improvements to the inlays displayed by `chpl-language-server`
-    (CLS)in VSCode and other editors.
+    (CLS) in VSCode and other editors
 
   * The addition of missing operators and queries on `imag` and
-    `complex` values.
+    `complex` values
 
   * The resolution of 7 user issues, including both that were opened
-    over the summer since the release of Chapel 2.9.
+    over the summer since the release of Chapel 2.9
 
   For a far more complete list of improvements in Chapel 2.10, see the
   [CHANGES.md](https://github.com/chapel-lang/chapel/blob/release/2.10/CHANGES.md)
   file.  And a big thanks to [everyone who
   contributed](https://github.com/chapel-lang/chapel/blob/release/2.10/CONTRIBUTORS.md)
-  to Chapel 2.10!
+  to version 2.10!
 
 
   ### Union Type Improvements
