@@ -237,7 +237,7 @@
 
   ### Call Stacks for Thrown Errors
 
-  Chapel 2.10 has some nice quaility of life improvements for error
+  Chapel 2.10 has some nice quality of life improvements for error
   handling.  Error classes now track the call stack leading to the
   error, permitting a thrown `Error` object to report rich diagnostic
   information.  Consider the following example of using a `Parser`
