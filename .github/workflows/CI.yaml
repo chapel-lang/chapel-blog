@@ -1,0 +1,18 @@
+name: Blog tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: chapel/chapel:nightly
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run blog tests
+        run: |
+          start_test --parallel 4 --parallel-sub_test 4 --allow-unsafe-parallel content/ chpl-src/
