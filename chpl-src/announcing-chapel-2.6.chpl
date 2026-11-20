@@ -4,6 +4,7 @@
 // tags: ["Interoperability", "Libraries", "Debugging", "Tools", "Dyno"]
 // series: ["Release Announcements"]
 // date: 2025-09-18
+// chplVersion: 2.10
 /*
 
   The Chapel community is pleased to announce the release of Chapel
